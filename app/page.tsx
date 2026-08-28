@@ -41,7 +41,7 @@ const STATIC_STARS = [
   { top: '35%', left: '15%', delay: '1.8s', size: '3px' },
   { top: '45%', left: '90%', delay: '3.5s', size: '2px' },
   { top: '55%', left: '40%', delay: '0.4s', size: '4px' },
-  { top: '65%', left: '60%', delay: '2.6s', size: '2px' },
+  { top: '65%', left: '60%', delay: '2.6s', size: '3px' },
   { top: '75%', left: '82%', delay: '4.8s', size: '3px' },
   { top: '85%', left: '5%', delay: '1.3s', size: '2px' },
   { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
@@ -77,21 +77,6 @@ export default function Page() {
     return () => clearInterval(timer);
   }, []);
 
-  const verifyPayment = async (pId: string) => {
-    if (!pId) return;
-    try {
-      const res = await fetch(`/api/verify?payment_id=${pId}`);
-      if (!res.ok) return;
-      const data = await res.json().catch(() => null);
-      if (data && data.valid) {
-        setIsVerifiedPaid(true);
-        localStorage.setItem('esoteric_is_paid', 'true');
-      }
-    } catch (e) {
-      console.error('Payment verification safe catch:', e);
-    }
-  };
-
   useEffect(() => {
     const saved = localStorage.getItem('last_user_cast');
     if (saved) {
@@ -102,10 +87,14 @@ export default function Page() {
       setIsVerifiedPaid(true);
     }
     
+    // 终极优化：只要 Dodo 重定向带回了参数，直接秒级解锁！
     const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
     const pId = params.get('payment_id') || params.get('paymentId');
-    if (pId) {
-      verifyPayment(pId);
+    
+    if (status === 'succeeded' || pId) {
+      setIsVerifiedPaid(true);
+      localStorage.setItem('esoteric_is_paid', 'true');
     }
   }, []);
 
@@ -134,17 +123,19 @@ export default function Page() {
   const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput.trim()) return;
-    try {
-      await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailInput })
-      });
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: emailInput })
+    });
+    if (res.ok) {
       setEmailSubscribed(true);
       setEmailInput('');
-    } catch (e) {
-      console.error(e);
     }
+  };
+
+  const handlePrintPDF = () => {
+    window.print();
   };
 
   return (
@@ -284,7 +275,12 @@ export default function Page() {
         <p style={{ fontSize: '0.85rem', color: '#8A8678', maxWidth: '500px', margin: '0 auto 1.5rem auto' }}>Includes Chrono Execution Windows, Resonant Colors, and Archetypal Guardrails.</p>
         
         {isVerifiedPaid ? (
-          <div style={{ color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>✓ Full Blueprint Unlocked Successfully!</div>
+          <div style={{ color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            <span>✓ Full Blueprint Unlocked Successfully!</span>
+            <button onClick={handlePrintPDF} style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#050508', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}>
+              📥 Export 4-Page Executive PDF
+            </button>
+          </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
             <a href={DODO_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '1rem 3rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
