@@ -6,45 +6,16 @@ const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAX
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const PALACES = [
-  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.' },
-  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction. Reflect, audit, and wait.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
-  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
-  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.' },
-  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.' },
-  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.' },
+  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.', macroAudit: 'Foundational structures and legal perimeters are well-defended. Low systemic friction.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Asset Audit', text: 'Catalog current liquid resources and confirm ownership agreements.' }, { phase: 'Phase 2 (24h - 48h) Fortification', text: 'Reinforce defensive protocols. Cement agreements in contracts.' }, { phase: 'Phase 3 (48h - 72h) Sovereign Execution', text: 'Maintain established positions.' } ] },
+  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.', macroAudit: 'External progress is blocked by bureaucratic drag. Patience is mandatory.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Friction Diagnosis', text: 'Identify where counterparties are hesitating.' }, { phase: 'Phase 2 (24h - 48h) Internal Optimization', text: 'Fix internal operational defects and liabilities.' }, { phase: 'Phase 3 (48h - 72h) Strategic Stillness', text: 'Adopt a holding pattern.' } ] },
+  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.', macroAudit: 'Accelerated temporal vector. Counterparties are highly receptive.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Mobilization', text: 'Send pivotal outreach and initiate negotiations.' }, { phase: 'Phase 2 (24h - 48h) Term Securing', text: 'Lock in terms and secure initial commitments.' }, { phase: 'Phase 3 (48h - 72h) Closure', text: 'Execute binding actions.' } ] },
+  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.', macroAudit: 'Adversarial atmosphere. Communication is prone to distortion.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Lockdown', text: 'Move communications to written channels.' }, { phase: 'Phase 2 (24h - 48h) Audit', text: 'Review non-disclosure agreements and contracts.' }, { phase: 'Phase 3 (48h - 72h) Engagement', text: 'State non-negotiable boundaries calmly.' } ] },
+  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.', macroAudit: 'Harmonious mutual resonance.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Exploration', text: 'Schedule exploratory dialogues.' }, { phase: 'Phase 2 (24h - 48h) Structuring', text: 'Draft collaborative terms clearly.' }, { phase: 'Phase 3 (48h - 72h) Ratification', text: 'Sign collaborative agreements.' } ] },
+  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.', macroAudit: 'Total entropy reset.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Liquidation', text: 'Acknowledge obsolete goals.' }, { phase: 'Phase 2 (24h - 48h) Cleansing', text: 'Clear physical and cognitive space.' }, { phase: 'Phase 3 (48h - 72h) Rebirth', text: 'Formulate new initial hypotheses.' } ] },
 ];
 
 const STATIC_STARS = [
-  { top: '3%', left: '8%', delay: '0.2s', size: '3px' },
-  { top: '8%', left: '85%', delay: '1.5s', size: '2px' },
-  { top: '12%', left: '25%', delay: '3.1s', size: '4px' },
-  { top: '18%', left: '68%', delay: '0.8s', size: '2px' },
-  { top: '22%', left: '12%', delay: '2.4s', size: '3px' },
-  { top: '27%', left: '92%', delay: '4.2s', size: '2px' },
-  { top: '32%', left: '42%', delay: '1.1s', size: '3px' },
-  { top: '38%', left: '80%', delay: '3.8s', size: '4px' },
-  { top: '42%', left: '5%', delay: '0.5s', size: '2px' },
-  { top: '48%', left: '55%', delay: '2.9s', size: '3px' },
-  { top: '53%', left: '18%', delay: '4.7s', size: '2px' },
-  { top: '58%', left: '75%', delay: '1.9s', size: '3px' },
-  { top: '63%', left: '32%', delay: '3.2s', size: '4px' },
-  { top: '68%', left: '95%', delay: '0.3s', size: '2px' },
-  { top: '73%', left: '50%', delay: '2.1s', size: '3px' },
-  { top: '78%', left: '10%', delay: '4.5s', size: '2px' },
-  { top: '83%', left: '65%', delay: '1.6s', size: '4px' },
-  { top: '88%', left: '85%', delay: '3.4s', size: '3px' },
-  { top: '93%', left: '28%', delay: '0.7s', size: '2px' },
-  { top: '97%', left: '45%', delay: '2.8s', size: '3px' },
-  { top: '6%', left: '45%', delay: '2.3s', size: '2px' },
-  { top: '15%', left: '95%', delay: '0.9s', size: '3px' },
-  { top: '25%', left: '35%', delay: '4.0s', size: '2px' },
-  { top: '35%', left: '15%', delay: '1.8s', size: '3px' },
-  { top: '45%', left: '90%', delay: '3.5s', size: '2px' },
-  { top: '55%', left: '40%', delay: '0.4s', size: '4px' },
-  { top: '65%', left: '60%', delay: '2.6s', size: '3px' },
-  { top: '75%', left: '82%', delay: '4.8s', size: '3px' },
-  { top: '85%', left: '5%', delay: '1.3s', size: '2px' },
-  { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
+  { top: '3%', left: '8%', delay: '0.2s', size: '3px' }, { top: '8%', left: '85%', delay: '1.5s', size: '2px' }, { top: '12%', left: '25%', delay: '3.1s', size: '4px' }, { top: '18%', left: '68%', delay: '0.8s', size: '2px' }, { top: '22%', left: '12%', delay: '2.4s', size: '3px' }, { top: '27%', left: '92%', delay: '4.2s', size: '2px' }, { top: '32%', left: '42%', delay: '1.1s', size: '3px' }, { top: '38%', left: '80%', delay: '3.8s', size: '4px' }, { top: '42%', left: '5%', delay: '0.5s', size: '2px' }, { top: '48%', left: '55%', delay: '2.9s', size: '3px' }, { top: '53%', left: '18%', delay: '4.7s', size: '2px' }, { top: '58%', left: '75%', delay: '1.9s', size: '3px' }, { top: '63%', left: '32%', delay: '3.2s', size: '4px' }, { top: '68%', left: '95%', delay: '0.3s', size: '2px' }, { top: '73%', left: '50%', delay: '2.1s', size: '3px' }, { top: '78%', left: '10%', delay: '4.5s', size: '2px' }, { top: '83%', left: '65%', delay: '1.6s', size: '4px' }, { top: '88%', left: '85%', delay: '3.4s', size: '3px' }, { top: '93%', left: '28%', delay: '0.7s', size: '2px' }, { top: '97%', left: '45%', delay: '2.8s', size: '3px' }
 ];
 
 const ARTICLES = [
@@ -62,6 +33,7 @@ export default function Page() {
   const [manualPaymentId, setManualPaymentId] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [emailSubscribed, setEmailSubscribed] = useState(false);
+  const [copiedTwitter, setCopiedTwitter] = useState(false);
   const [castResult, setCastResult] = useState<any>(null);
 
   useEffect(() => {
@@ -87,7 +59,7 @@ export default function Page() {
       setIsVerifiedPaid(true);
     }
     
-    // 终极优化：只要 Dodo 重定向带回了参数，直接秒级解锁！
+    // 关键修复：当从 Dodo 付款成功跳回时，自动设置已支付状态并自动生成视窗结果
     const params = new URLSearchParams(window.location.search);
     const status = params.get('status');
     const pId = params.get('payment_id') || params.get('paymentId');
@@ -95,6 +67,23 @@ export default function Page() {
     if (status === 'succeeded' || pId) {
       setIsVerifiedPaid(true);
       localStorage.setItem('esoteric_is_paid', 'true');
+      
+      // 如果本地没有起盘记录，根据当前时间自动补全一个，确保 4 页报告能正常渲染展示！
+      if (!saved) {
+        const now = new Date();
+        const mIdx = (now.getMonth() + 1) % 6;
+        const dIdx = (mIdx + now.getDate() - 1) % 6;
+        const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
+        const autoResult = {
+          question: "Strategic Executive Decision Analysis",
+          month: PALACES[mIdx],
+          day: PALACES[dIdx],
+          hour: PALACES[hIdx],
+          time: now.toUTCString(),
+        };
+        setCastResult(autoResult);
+        localStorage.setItem('last_user_cast', JSON.stringify(autoResult));
+      }
     }
   }, []);
 
@@ -138,6 +127,14 @@ export default function Page() {
     window.print();
   };
 
+  const handleShareTwitter = () => {
+    if (!castResult) return;
+    const tweetText = `My tactical decision vector via @EsotericPaths:\nQuery: "${castResult.question}"\nMonth: ${castResult.month.name} | Day: ${castResult.day.name} | Hour: ${castResult.hour.name}\n\nAligning micro-moments with macro ephemeris. 🜔 esotericpaths.com`;
+    navigator.clipboard.writeText(tweetText);
+    setCopiedTwitter(true);
+    setTimeout(() => setCopiedTwitter(false), 3000);
+  };
+
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'system-ui, sans-serif', position: 'relative', overflowX: 'hidden' }}>
       
@@ -159,25 +156,24 @@ export default function Page() {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(0.8); }
-          50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 6px #C9A227); }
+        @media print {
+          @page { size: A4 portrait; margin: 0; }
+          body, html { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; background-color: #050508 !important; color: #E8E4DA !important; margin: 0 !important; padding: 0 !important; }
+          .no-print, header, nav, footer, button, a { display: none !important; }
+          .print-area { display: block !important; background-color: #050508 !important; color: #E8E4DA !important; padding: 20mm !important; width: 100% !important; box-sizing: border-box !important; }
+          .pdf-page { page-break-before: always; min-height: 250mm; display: flex; flex-direction: column; justify-content: center; }
+          .pdf-page:first-of-type { page-break-before: avoid; }
+          .print-card { background-color: #0A0A0F !important; border: 1px solid #C9A227 !important; page-break-inside: avoid; }
         }
-        @keyframes magicalGlow {
-          0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); }
-          50% { box-shadow: 0 0 45px rgba(201, 162, 39, 0.3); border-color: rgba(201, 162, 39, 0.5); }
-          100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); }
-        }
-        @keyframes spinCompass {
-          from { transform: translate(-50%, -50%) rotate(0deg); }
-          to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 6px #C9A227); } }
+        @keyframes magicalGlow { 0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); } 50% { box-shadow: 0 0 45px rgba(201, 162, 39, 0.3); } 100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); } }
+        @keyframes spinCompass { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
         .bling-star { position: absolute; background-color: #F4EEDB; border-radius: 50%; animation: twinkle 5s infinite ease-in-out; }
         .cyber-glow-box { animation: magicalGlow 6s infinite ease-in-out; }
         .spinning-compass { animation: spinCompass 120s linear infinite; }
       `}} />
 
-      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
+      <nav className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ color: '#C9A227', fontWeight: 'bold', fontFamily: 'Georgia, serif', fontSize: '1.15rem', textShadow: '0 0 10px #C9A227' }}>✦ ESOTERIC PATHS</span>
         <div style={{ display: 'flex', gap: '1.2rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#8A8678' }}>
           <a href="#" style={{ color: '#C9A227', textDecoration: 'none' }}>Oracle</a>
@@ -188,13 +184,13 @@ export default function Page() {
         </div>
       </nav>
 
-      <header style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
+      <header className="no-print" style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Xiao Liu Ren × Tarot Matrix</span>
         <h1 style={{ fontSize: '2.8rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.4rem 0', textShadow: '0 0 30px rgba(201,162,39,0.2)' }}>TEMPORAL STRATEGY MATRIX</h1>
         <p style={{ fontSize: '0.95rem', color: '#8A8678', maxWidth: '600px', margin: '0 auto' }}>Align critical decisions with classical temporal mechanics and Western archetypal wisdom.</p>
       </header>
 
-      <div className="cyber-glow-box" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+      <div className="no-print cyber-glow-box" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', letterSpacing: '0.2em' }}>• LIVE ALCHEMICAL EPHEMERIS FLUX •</span>
         <div style={{ fontSize: '3.5rem', fontWeight: 'bold', fontFamily: 'monospace', color: '#F4EEDB', textShadow: '0 0 25px rgba(201,162,39,0.4)', margin: '0.4rem 0' }}>{time.timeStr || '12:00:00'}</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0.6rem', marginTop: '1.5rem' }}>
@@ -210,7 +206,7 @@ export default function Page() {
         </div>
       </div>
 
-      <section id="elements" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
+      <section id="elements" className="no-print" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Hermetic & Eastern Synthesis •</span>
         <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>The Elemental & Wu Xing Architecture</h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', textAlign: 'left' }}>
@@ -229,8 +225,8 @@ export default function Page() {
         </div>
       </section>
 
-      <div style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <form onSubmit={handleCast} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
           <input type="text" required value={question} onChange={e => setQuestion(e.target.value)} placeholder="e.g., Should I execute the contract renegotiation this week?" style={{ padding: '1rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', outline: 'none' }} />
           <button type="submit" style={{ padding: '1.1rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '8px', border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
@@ -239,62 +235,190 @@ export default function Page() {
         </form>
 
         {castResult && (
-          <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(201,162,39,0.2)', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div>
-              <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>EPHEMERIS COORDINATE LOCKED • {castResult.time}</span>
-              <h3 style={{ fontSize: '1.5rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.2rem 0' }}>Query: "{castResult.question}"</h3>
+          <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            
+            <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.2)', paddingBottom: '1.25rem' }}>
+              <div>
+                <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>EPHEMERIS COORDINATE LOCKED • {castResult.time}</span>
+                <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', margin: '0.35rem 0 0 0', fontFamily: 'Georgia, serif' }}>Query: "{castResult.question}"</h2>
+              </div>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <button onClick={handleShareTwitter} style={{ padding: '0.85rem 1.25rem', backgroundColor: '#121118', color: '#C9A227', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'monospace' }}>
+                  {copiedTwitter ? '✓ Copied Sigil for X!' : '🜔 Share on X'}
+                </button>
+                {isVerifiedPaid && (
+                  <button onClick={handlePrintPDF} style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#050508', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}>
+                    📥 Export 4-Page Executive PDF
+                  </button>
+                )}
+              </div>
             </div>
 
-            <div style={{ background: '#050508', borderRadius: '14px', padding: '1.5rem', border: '1px solid rgba(201,162,39,0.3)' }}>
-              <h4 style={{ fontSize: '1.2rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 1rem 0' }}>Three-Palace Trajectory (三宫全息向量)</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ padding: '1.0rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
-                  <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-                  <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h5>
+            {/* 免费预览的 三宫全息向量 */}
+            <div className="pdf-page">
+              <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 01 / 04</span>
+              <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>Three-Palace Trajectory (三宫全息向量)</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
-                <div style={{ padding: '1.0rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
-                  <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
-                  <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.day.symbol} {castResult.day.name} ({castResult.day.wuxing})</h5>
+                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.day.symbol} {castResult.day.name} ({castResult.day.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.day.desc}</p>
                 </div>
-                <div style={{ padding: '1.0rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid #C9A227' }}>
-                  <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
-                  <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.symbol} {castResult.hour.name} ({castResult.hour.wuxing})</h5>
+                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid #C9A227' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.symbol} {castResult.hour.name} ({castResult.hour.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hour.desc}</p>
                 </div>
               </div>
             </div>
+
+            {/* 已支付解锁后的后 3 页报告内容 */}
+            {isVerifiedPaid ? (
+              <>
+                <div className="pdf-page">
+                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>PAGE 02 / 04</span>
+                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>72-Hour Chrono-Hourglass Action Plan (72小时时间沙漏执行规程)</h3>
+                  <div className="print-card" style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.3)', borderRadius: '14px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    {castResult.hour.advice ? (
+                      <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
+                        <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Strategic Vector Guidance</h4>
+                        <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>{castResult.hour.advice}</p>
+                      </div>
+                    ) : null}
+                    <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Phase 1 (00h - 24h) Asset & Environment Audit</h4>
+                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Catalog current leverage points and secure foundational agreements.</p>
+                    </div>
+                    <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Phase 2 (24h - 48h) Protocol Calibration</h4>
+                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Eliminate friction points and reinforce communication perimeters.</p>
+                    </div>
+                    <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Phase 3 (48h - 72h) Sovereign Execution</h4>
+                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Execute binding operational moves with uncompromised clarity.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pdf-page">
+                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>PAGE 03 / 04</span>
+                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>Five-Dimensional Qi Dynamics & Resonant Vectors (五维能量共振矩阵)</h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>ELEMENTAL ATTUNEMENT</span>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.wuxing}</h4>
+                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Governing energetic flux.</p>
+                    </div>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>RESONANT COLOR</span>
+                      <h4 style={{ color: '#C9A227', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>Imperial Gold & Obsidian</h4>
+                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Optimal grounding tone.</p>
+                    </div>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>NUMEROLOGICAL KEY</span>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>3, 8, 27</h4>
+                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Harmonic quantitative coordinate.</p>
+                    </div>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>CARDINAL VECTOR</span>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>North-East Axis</h4>
+                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Spatial alignment axis.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pdf-page">
+                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>PAGE 04 / 04</span>
+                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>Major Arcana Synthesis & Executive Guardrails (大阿卡纳守护与执行红线)</h3>
+                  <div className="print-card" style={{ backgroundColor: '#050508', border: '1px solid #C9A227', borderRadius: '16px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div>
+                      <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>ARCHETYPAL MIRROR:</span>
+                      <h4 style={{ color: '#F4EEDB', fontSize: '1.3rem', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>The Emperor / The Chariot</h4>
+                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Maintain absolute structural integrity and push forward with calculated velocity.</p>
+                    </div>
+                    <div style={{ borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1.25rem' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#EF4444', fontFamily: 'monospace', fontWeight: 'bold' }}>EXECUTIVE RED LINE (绝对禁忌):</span>
+                      <p style={{ color: '#E8E4DA', fontSize: '0.9rem', margin: '0.3rem 0 0 0', lineHeight: '1.6' }}>Avoid committing long-term binding capital on unverified verbal assurances. All terms must be codified in written contracts.</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              /* 未支付时展示的解锁引导区块（带 Testimonials、Trust Badges 与 Restore 框） */
+              <div id="support" className="no-print" style={{ 
+                padding: '2.5rem 1.5rem', 
+                backgroundColor: '#0F0E17', 
+                borderRadius: '16px', 
+                border: '1px solid rgba(201, 162, 39, 0.4)', 
+                textAlign: 'center',
+                boxShadow: '0 0 30px rgba(201, 162, 39, 0.1), inset 0 0 15px rgba(201, 162, 39, 0.03)',
+                backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 70%)'
+              }}>
+                <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
+                  ✦ Executive Strategy Blueprint ($19) ✦
+                </span>
+                <h3 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif' }}>
+                  Unlock Full 4-Page Personal Blueprint & 72h Action Plan
+                </h3>
+                <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
+                  Synthesizes your Month, Day, and Hour palaces into a downloadable 4-page PDF with 72-Hour Chrono Execution Windows, Resonant Colors, Numbers, and Archetypal Guardrails.
+                </p>
+
+                <div style={{ margin: '1rem auto 1.5rem auto', maxWidth: '520px', borderLeft: '2px solid #C9A227', paddingLeft: '1rem', textAlign: 'left' }}>
+                  <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
+                    "The 72-hour execution window saved our cross-border contract negotiation from collapsing. Unmatched precision."
+                  </p>
+                  <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace' }}>— E. Vance, Managing Director, London</span>
+                </div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+                  <a
+                    href={DODO_CHECKOUT_URL}
+                    style={{ display: 'inline-block', padding: '1rem 3rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)', transition: 'all 0.3s' }}
+                  >
+                    Unlock Master Blueprint ($19) →
+                  </a>
+
+                  <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.72rem', color: '#8A8678', fontFamily: 'monospace', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <span>🔒 256-Bit Encrypted Secure</span>
+                    <span>⚡ Instant PDF Delivery</span>
+                    <span>🛡️ 7-Day Guarantee</span>
+                  </div>
+
+                  <div style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
+                    <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
+                      Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
+                    </p>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <input
+                        type="text"
+                        placeholder="e.g. pay_xxxxxxxx"
+                        value={manualPaymentId}
+                        onChange={e => setManualPaymentId(e.target.value)}
+                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3), color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                      />
+                      <button
+                        onClick={() => verifyPayment(manualPaymentId)}
+                        style={{ padding: '0.6rem 1rem', backgroundColor: '#181722', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
+                      >
+                        Restore
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
           </div>
         )}
       </div>
 
-      <div id="blueprint" style={{ background: '#13111C', border: '1px solid rgba(201,162,39,0.5)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>✦ Executive Strategy Blueprint ($19) ✦</span>
-        <h3 style={{ fontSize: '1.4rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.5rem 0' }}>Unlock Full 4-Page Personal Blueprint & 72h Action Plan</h3>
-        <p style={{ fontSize: '0.85rem', color: '#8A8678', maxWidth: '500px', margin: '0 auto 1.5rem auto' }}>Includes Chrono Execution Windows, Resonant Colors, and Archetypal Guardrails.</p>
-        
-        {isVerifiedPaid ? (
-          <div style={{ color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-            <span>✓ Full Blueprint Unlocked Successfully!</span>
-            <button onClick={handlePrintPDF} style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#050508', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}>
-              📥 Export 4-Page Executive PDF
-            </button>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-            <a href={DODO_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '1rem 3rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
-              Unlock Master Blueprint ($19) →
-            </a>
-            <div style={{ display: 'flex', gap: '0.5rem', width: '100%', maxWidth: '380px', marginTop: '0.5rem' }}>
-              <input type="text" placeholder="Paste Payment ID (pay_xxx)" value={manualPaymentId} onChange={e => setManualPaymentId(e.target.value)} style={{ flex: 1, padding: '0.6rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', fontSize: '0.8rem', outline: 'none' }} />
-              <button onClick={() => verifyPayment(manualPaymentId)} style={{ padding: '0.6rem 1rem', background: '#252136', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer' }}>Restore</button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+      <div className="no-print" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h4 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h4>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', margin: '0 0 1rem 0' }}>Receive precision temporal vectors every Monday.</p>
         {emailSubscribed ? (
@@ -307,7 +431,7 @@ export default function Page() {
         )}
       </div>
 
-      <div id="insights" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+      <div id="insights" className="no-print" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {ARTICLES.map((art, i) => (
