@@ -6,12 +6,12 @@ const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAX
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const PALACES = [
-  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, favors steady preservation over expansion.' },
-  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Entanglement & delay. Audit internally, do not force progress.' },
-  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Rapid joy & velocity. Immediate closing and execution favored.' },
-  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Conflict & friction. Maintain written records and strict boundaries.' },
-  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Gentle luck & synergy. Collaborative progress and mutual benefit.' },
-  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'The void & reset. Release obsolete assumptions from ground zero.' },
+  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.' },
+  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
+  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
+  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.' },
+  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.' },
+  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.' },
 ];
 
 const STATIC_STARS = [
@@ -84,7 +84,7 @@ export default function Page() {
     if (data.valid) {
       setIsVerifiedPaid(true);
       localStorage.setItem('esoteric_is_paid', 'true');
-      alert('🎉 Verified! 4-page blueprint unlocked.');
+      alert('🎉 Verified! Full 4-page blueprint unlocked.');
     } else {
       alert('❌ Payment not found.');
     }
@@ -222,7 +222,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 起盘表单 */}
+      {/* 起盘表单与高价值预览卡片 */}
       <div style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <form onSubmit={handleCast} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
@@ -233,9 +233,33 @@ export default function Page() {
         </form>
 
         {castResult && (
-          <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(201,162,39,0.2)', paddingTop: '1.5rem' }}>
-            <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB' }}>Query: "{castResult.question}"</h3>
-            <p style={{ fontSize: '0.9rem', color: '#CDC8BC' }}><b>Vector:</b> {castResult.month.symbol} {castResult.month.name} ➔ {castResult.day.symbol} {castResult.day.name} ➔ {castResult.hour.symbol} {castResult.hour.name}</p>
+          <div style={{ marginTop: '2rem', borderTop: '1px solid rgba(201,162,39,0.2)', paddingTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div>
+              <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>EPHEMERIS COORDINATE LOCKED • {castResult.time}</span>
+              <h3 style={{ fontSize: '1.5rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.2rem 0' }}>Query: "{castResult.question}"</h3>
+            </div>
+
+            {/* 恢复高价值的 三宫全息向量预览卡片 */}
+            <div style={{ background: '#050508', borderRadius: '14px', padding: '1.5rem', border: '1px solid rgba(201,162,39,0.3)' }}>
+              <h4 style={{ fontSize: '1.2rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 1rem 0' }}>Three-Palace Trajectory (三宫全息向量)</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ padding: '1rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
+                  <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
+                  <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h5>
+                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
+                </div>
+                <div style={{ padding: '1rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
+                  <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
+                  <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.day.symbol} {castResult.day.name} ({castResult.day.wuxing})</h5>
+                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.day.desc}</p>
+                </div>
+                <div style={{ padding: '1rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid #C9A227' }}>
+                  <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
+                  <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.symbol} {castResult.hour.name} ({castResult.hour.wuxing})</h5>
+                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hour.desc}</p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -289,7 +313,7 @@ export default function Page() {
       </div>
 
       {/* 底部 Support 锚点 */}
-      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: '2' }}>
+      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
 
