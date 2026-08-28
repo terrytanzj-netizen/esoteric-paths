@@ -255,10 +255,9 @@ function OracleHomeContent() {
   };
 
   useEffect(() => {
-    const saved = localStorage.getItem('last_user_cast');
-    if (saved) {
-      setCastResult(JSON.parse(saved));
-    }
+    // 每次进入页面，默认只清空旧的残留输入，保证每次测试或真实使用都是干净的
+    localStorage.removeItem('last_user_cast');
+
     const alreadyPaid = localStorage.getItem('esoteric_is_paid');
     if (alreadyPaid === 'true') {
       setIsVerifiedPaid(true);
@@ -269,7 +268,6 @@ function OracleHomeContent() {
     }
   }, [paymentIdFromUrl]);
 
-  // 充满仪式感的动态仪式加载阶段
   const handleCast = (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
@@ -300,7 +298,6 @@ function OracleHomeContent() {
       };
 
       setCastResult(newResult);
-      localStorage.setItem('last_user_cast', JSON.stringify(newResult));
       setIsCasting(false);
       setCastStep('');
     }, 2100);
@@ -314,10 +311,10 @@ function OracleHomeContent() {
     <div style={{ 
       maxWidth: '960px', 
       margin: '0 auto', 
-      padding: '3rem 1.5rem', 
+      padding: '2rem 1.5rem 4rem 1.5rem', 
       display: 'flex', 
       flexDirection: 'column', 
-      gap: '3.5rem',
+      gap: '3rem',
       backgroundColor: '#0E0E14',
       minHeight: '100vh',
       color: '#E8E4DA',
@@ -344,7 +341,7 @@ function OracleHomeContent() {
             margin: 0 !important;
             padding: 0 !important;
           }
-          .no-print, header, footer, button, a { display: none !important; }
+          .no-print, header, nav, footer, button, a { display: none !important; }
           .print-area { 
             display: block !important; 
             background-color: #0E0E14 !important; 
@@ -381,14 +378,36 @@ function OracleHomeContent() {
         }
       `}} />
 
+      {/* 顶部的古典智库导航栏 (Header Navigation) */}
+      <nav className="no-print" style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottom: '1px solid rgba(201, 162, 39, 0.2)',
+        paddingBottom: '1rem',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <span style={{ color: '#C9A227', fontSize: '1.2rem' }}>✦</span>
+          <span style={{ fontFamily: 'Georgia, serif', fontWeight: 'bold', letterSpacing: '0.05em', color: '#F4EEDB', fontSize: '1.1rem' }}>
+            ESOTERIC PATHS
+          </span>
+        </div>
+        <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.85rem', fontFamily: 'monospace' }}>
+          <a href="#" style={{ color: '#C9A227', textDecoration: 'none' }}>• Oracle Engine</a>
+          <a href="#knowledge-base" style={{ color: '#8A8678', textDecoration: 'none' }}>Knowledge Base</a>
+        </div>
+      </nav>
+
       <header className="no-print" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-        <span style={{ fontSize: '0.8rem', letterSpacing: '0.2em', color: '#C9A227', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
-          ✦ Deterministic Horary Oracle • Xiao Liu Ren × Tarot ✦
+        <span style={{ fontSize: '0.75rem', letterSpacing: '0.2em', color: '#C9A227', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem', fontFamily: 'monospace' }}>
+          Deterministic Horary Oracle • Xiao Liu Ren × Tarot
         </span>
-        <h1 style={{ fontSize: '3rem', color: '#F4EEDB', margin: '0 0 0.75rem 0', fontFamily: 'Georgia, serif', letterSpacing: '0.08em', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>
-          ESOTERIC PATHS
+        <h1 style={{ fontSize: '2.6rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif', letterSpacing: '0.06em', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>
+          TEMPORAL STRATEGY MATRIX
         </h1>
-        <p style={{ fontSize: '1rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto', maxWidth: '650px' }}>
+        <p style={{ fontSize: '0.95rem', color: '#8A8678', lineHeight: '1.5', margin: '0 auto', maxWidth: '600px' }}>
           Align your critical crossroads decisions with classical Chinese temporal mechanics and Western archetypal wisdom.
         </p>
       </header>
@@ -398,33 +417,33 @@ function OracleHomeContent() {
         backgroundColor: '#15131F',
         border: '1px solid rgba(201, 162, 39, 0.4)',
         borderRadius: '24px',
-        padding: '2.5rem 2rem',
+        padding: '2.2rem 2rem',
         boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(201, 162, 39, 0.04)',
         textAlign: 'center',
         position: 'relative',
         zIndex: 1
       }}>
-        <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>
+        <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>
           • Live Alchemical Ephemeris Flux •
         </span>
 
-        <div style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#F4EEDB', fontFamily: 'monospace', letterSpacing: '0.08em', textShadow: '0 0 20px rgba(201, 162, 39, 0.35)', margin: '0.5rem 0' }}>
+        <div style={{ fontSize: '3.2rem', fontWeight: 'bold', color: '#F4EEDB', fontFamily: 'monospace', letterSpacing: '0.08em', textShadow: '0 0 20px rgba(201, 162, 39, 0.35)', margin: '0.4rem 0' }}>
           {time.timeStr || '12:00:00'}
         </div>
 
-        <div style={{ fontSize: '0.9rem', color: '#8A8678', fontFamily: 'monospace', marginBottom: '2rem' }}>
+        <div style={{ fontSize: '0.85rem', color: '#8A8678', fontFamily: 'monospace', marginBottom: '1.8rem' }}>
           {time.dateStr || 'Synchronizing Cosmic Coordinates...'}
         </div>
 
-        {/* 六宫轮盘展示（附带神秘学符号） */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.75rem', marginTop: '1rem' }}>
+        {/* 六宫轮盘展示 */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.75rem', marginTop: '1rem' }}>
           {PALACES.map((p, idx) => {
             const isActive = time.palaceIdx === idx;
             return (
               <div
                 key={p.id}
                 style={{
-                  padding: '1.1rem 0.5rem',
+                  padding: '1rem 0.5rem',
                   borderRadius: '12px',
                   backgroundColor: isActive ? 'rgba(201, 162, 39, 0.2)' : '#0E0E14',
                   border: isActive ? '1px solid #C9A227' : '1px solid rgba(201, 162, 39, 0.12)',
@@ -436,13 +455,13 @@ function OracleHomeContent() {
                 {isActive && (
                   <span style={{ position: 'absolute', top: '-5px', right: '-5px', width: '10px', height: '10px', backgroundColor: '#C9A227', borderRadius: '50%', boxShadow: '0 0 8px #C9A227' }} />
                 )}
-                <div style={{ fontSize: '1.2rem', color: isActive ? '#C9A227' : '#5C584E', marginBottom: '0.2rem' }}>
+                <div style={{ fontSize: '1.1rem', color: isActive ? '#C9A227' : '#5C584E', marginBottom: '0.2rem' }}>
                   {p.symbol}
                 </div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 'bold', color: isActive ? '#F4EEDB' : '#8A8678', fontFamily: 'Georgia, serif' }}>
+                <div style={{ fontSize: '0.85rem', fontWeight: 'bold', color: isActive ? '#F4EEDB' : '#8A8678', fontFamily: 'Georgia, serif' }}>
                   {p.name.split(' ')[0]}
                 </div>
-                <div style={{ fontSize: '0.7rem', color: isActive ? '#C9A227' : '#5C584E', fontFamily: 'monospace', marginTop: '0.3rem' }}>
+                <div style={{ fontSize: '0.65rem', color: isActive ? '#C9A227' : '#5C584E', fontFamily: 'monospace', marginTop: '0.2rem' }}>
                   {isActive ? '● Active Vector' : p.wuxing.split(' ')[0]}
                 </div>
               </div>
@@ -668,7 +687,7 @@ function OracleHomeContent() {
         )}
 
         {/* 底部 10 篇高权重 SEO 文章专栏 */}
-        <div className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
+        <div id="knowledge-base" className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
           <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
             • Esoteric Knowledge Base •
           </span>
