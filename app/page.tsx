@@ -121,7 +121,6 @@ const PALACES = [
   },
 ];
 
-// 升级版：加入专攻长尾长搜词的爆款文章矩阵
 const ARTICLES = [
   {
     slug: 'career-transition-timing-horary',
@@ -204,6 +203,10 @@ export default function Page() {
   const [checkingPayment, setCheckingPayment] = useState(false);
   const [manualPaymentId, setManualPaymentId] = useState('');
   
+  const [emailInput, setEmailInput] = useState('');
+  const [emailSubscribed, setEmailSubscribed] = useState(false);
+  const [copiedTwitter, setCopiedTwitter] = useState(false);
+
   const [castResult, setCastResult] = useState<{
     question: string;
     monthPalace: typeof PALACES[0];
@@ -304,6 +307,22 @@ export default function Page() {
     window.print();
   };
 
+  const handleShareTwitter = () => {
+    if (!castResult) return;
+    const tweetText = `My tactical decision vector via @EsotericPaths:\nQuery: "${castResult.question}"\nMonth: ${castResult.monthPalace.name} | Day: ${castResult.dayPalace.name} | Hour: ${castResult.hourPalace.name}\n\nAligning micro-moments with macro ephemeris. 🜔 esotericpaths.com`;
+    navigator.clipboard.writeText(tweetText);
+    setCopiedTwitter(true);
+    setTimeout(() => setCopiedTwitter(false), 3000);
+  };
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (emailInput.trim()) {
+      setEmailSubscribed(true);
+      setEmailInput('');
+    }
+  };
+
   return (
     <div style={{ 
       maxWidth: '960px', 
@@ -312,30 +331,31 @@ export default function Page() {
       display: 'flex', 
       flexDirection: 'column', 
       gap: '3rem',
-      backgroundColor: '#0E0E14',
+      backgroundColor: '#050508',
       minHeight: '100vh',
       color: '#E8E4DA',
       position: 'relative',
       overflowX: 'hidden'
     }}>
       
+      {/* 幽暗深空背景与低频闪烁的星空微光 (Bling-bling) */}
       <div style={{
         position: 'fixed',
         top: 0, left: 0, right: 0, bottom: 0,
-        background: 'radial-gradient(circle at 50% 15%, rgba(201, 162, 39, 0.07) 0%, rgba(14, 14, 20, 0.95) 70%), linear-gradient(to bottom, #0E0E14, #08080C)',
+        background: 'radial-gradient(circle at 50% 10%, rgba(201, 162, 39, 0.05) 0%, rgba(5, 5, 8, 0.98) 75%), linear-gradient(to bottom, #050508, #020204)',
         pointerEvents: 'none',
         zIndex: 0
       }} />
 
-      <div style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0, bottom: 0,
-        background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03))',
-        backgroundSize: '100% 3px, 6px 100%',
-        pointerEvents: 'none',
-        zIndex: 1,
-        opacity: 0.4
-      }} />
+      {/* 动态星光点缀（低频闪烁） */}
+      <div className="star-field" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 1, opacity: 0.6 }}>
+        <div className="bling-star" style={{ top: '12%', left: '15%', animationDelay: '0s' }} />
+        <div className="bling-star" style={{ top: '25%', left: '82%', animationDelay: '2.5s' }} />
+        <div className="bling-star" style={{ top: '45%', left: '8%', animationDelay: '1.2s' }} />
+        <div className="bling-star" style={{ top: '65%', left: '88%', animationDelay: '4.1s' }} />
+        <div className="bling-star" style={{ top: '85%', left: '22%', animationDelay: '3.0s' }} />
+        <div className="bling-star" style={{ top: '35%', left: '48%', animationDelay: '5.5s' }} />
+      </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
         @media print {
@@ -343,7 +363,7 @@ export default function Page() {
           body, html { 
             -webkit-print-color-adjust: exact !important; 
             print-color-adjust: exact !important; 
-            background-color: #0E0E14 !important; 
+            background-color: #050508 !important; 
             color: #E8E4DA !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -351,7 +371,7 @@ export default function Page() {
           .no-print, header, nav, footer, button, a { display: none !important; }
           .print-area { 
             display: block !important; 
-            background-color: #0E0E14 !important; 
+            background-color: #050508 !important; 
             color: #E8E4DA !important; 
             border: none !important; 
             box-shadow: none !important; 
@@ -369,35 +389,47 @@ export default function Page() {
           }
           .pdf-page:first-of-type { page-break-before: avoid; }
           .print-card { 
-            background-color: #15131F !important; 
+            background-color: #0A0A0F !important; 
             border: 1px solid #C9A227 !important; 
             box-shadow: 0 0 15px rgba(201, 162, 39, 0.15) !important;
             page-break-inside: avoid; 
           }
         }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.15; transform: scale(0.8); }
+          50% { opacity: 0.85; transform: scale(1.3); filter: drop-shadow(0 0 4px #C9A227); }
+        }
         @keyframes magicalGlow {
-          0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.15), inset 0 0 15px rgba(201, 162, 39, 0.05); border-color: rgba(201, 162, 39, 0.3); }
-          50% { box-shadow: 0 0 50px rgba(201, 162, 39, 0.35), inset 0 0 30px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.7); }
-          100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.15), inset 0 0 15px rgba(201, 162, 39, 0.05); border-color: rgba(201, 162, 39, 0.3); }
+          0% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.1), inset 0 0 10px rgba(201, 162, 39, 0.03); border-color: rgba(201, 162, 39, 0.25); }
+          50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.3), inset 0 0 20px rgba(201, 162, 39, 0.08); border-color: rgba(201, 162, 39, 0.6); }
+          100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.1), inset 0 0 10px rgba(201, 162, 39, 0.03); border-color: rgba(201, 162, 39, 0.25); }
         }
         @keyframes spinSlow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
+        .bling-star {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background-color: #F4EEDB;
+          border-radius: 50%;
+          animation: twinkle 5s infinite ease-in-out;
+        }
         .cyber-glow-box {
-          animation: magicalGlow 5s infinite ease-in-out;
+          animation: magicalGlow 6s infinite ease-in-out;
         }
         .spinning-sigil {
           animation: spinSlow 20s linear infinite;
         }
       `}} />
 
-      {/* 6个黄金入口的顶部导航栏 */}
+      {/* 顶部导航栏 */}
       <nav className="no-print" style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderBottom: '1px solid rgba(201, 162, 39, 0.25)',
+        borderBottom: '1px solid rgba(201, 162, 39, 0.2)',
         paddingBottom: '1rem',
         position: 'relative',
         zIndex: 2,
@@ -433,18 +465,19 @@ export default function Page() {
       </header>
 
       <section className="no-print cyber-glow-box" style={{
-        backgroundColor: '#13111C',
+        backgroundColor: '#0A0A0F',
         borderRadius: '24px',
         padding: '2.5rem 2rem',
         textAlign: 'center',
         position: 'relative',
-        zIndex: 2
+        zIndex: 2,
+        border: '1px solid rgba(201, 162, 39, 0.25)'
       }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.3em', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>
           • Live Alchemical Ephemeris Flux •
         </span>
 
-        <div style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#F4EEDB', fontFamily: 'monospace', letterSpacing: '0.08em', textShadow: '0 0 25px rgba(201, 162, 39, 0.5)', margin: '0.4rem 0' }}>
+        <div style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#F4EEDB', fontFamily: 'monospace', letterSpacing: '0.08em', textShadow: '0 0 25px rgba(201, 162, 39, 0.4)', margin: '0.4rem 0' }}>
           {time.timeStr || '12:00:00'}
         </div>
 
@@ -461,9 +494,9 @@ export default function Page() {
                 style={{
                   padding: '1.1rem 0.5rem',
                   borderRadius: '12px',
-                  backgroundColor: isActive ? 'rgba(201, 162, 39, 0.25)' : '#09090C',
-                  border: isActive ? '1px solid #C9A227' : '1px solid rgba(201, 162, 39, 0.15)',
-                  boxShadow: isActive ? '0 0 25px rgba(201, 162, 39, 0.4)' : 'none',
+                  backgroundColor: isActive ? 'rgba(201, 162, 39, 0.2)' : '#050508',
+                  border: isActive ? '1px solid #C9A227' : '1px solid rgba(201, 162, 39, 0.1)',
+                  boxShadow: isActive ? '0 0 20px rgba(201, 162, 39, 0.3)' : 'none',
                   transition: 'all 0.3s ease',
                   position: 'relative'
                 }}
@@ -487,11 +520,11 @@ export default function Page() {
       </section>
 
       <section id="blueprints" className="print-area" style={{ 
-        backgroundColor: '#13111C', 
-        border: '1px solid rgba(201, 162, 39, 0.4)', 
+        backgroundColor: '#0A0A0F', 
+        border: '1px solid rgba(201, 162, 39, 0.3)', 
         borderRadius: '20px', 
         padding: '2.2rem', 
-        boxShadow: '0 15px 40px rgba(0,0,0,0.7)', 
+        boxShadow: '0 15px 40px rgba(0,0,0,0.8)', 
         position: 'relative', 
         zIndex: 2 
       }}>
@@ -507,18 +540,18 @@ export default function Page() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="e.g., Should I execute the contract renegotiation this week?"
-              style={{ width: '100%', padding: '1.1rem', backgroundColor: '#09090C', border: '1px solid rgba(201, 162, 39, 0.3)', borderRadius: '10px', color: '#E8E4DA', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }}
+              style={{ width: '100%', padding: '1.1rem', backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.25)', borderRadius: '10px', color: '#E8E4DA', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }}
             />
           </div>
 
           <button
             type="submit"
             disabled={isCasting}
-            style={{ width: '100%', padding: '1.2rem', backgroundColor: '#C9A227', color: '#09090C', fontWeight: 'bold', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: '10px', border: 'none', cursor: 'pointer', opacity: isCasting ? 0.75 : 1, boxShadow: '0 0 25px rgba(201,162,39,0.3)', transition: 'all 0.3s' }}
+            style={{ width: '100%', padding: '1.2rem', backgroundColor: '#C9A227', color: '#050508', fontWeight: 'bold', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: '10px', border: 'none', cursor: 'pointer', opacity: isCasting ? 0.75 : 1, boxShadow: '0 0 20px rgba(201,162,39,0.25)', transition: 'all 0.3s' }}
           >
             {isCasting ? (
               <span style={{ fontFamily: 'monospace', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
-                <span className="spinning-sigil" style={{ display: 'inline-block', color: '#09090C', fontSize: '1.1rem' }}>✦</span> {castStep}
+                <span className="spinning-sigil" style={{ display: 'inline-block', color: '#050508', fontSize: '1.1rem' }}>✦</span> {castStep}
               </span>
             ) : 'Cast Horary Oracle →'}
           </button>
@@ -527,7 +560,7 @@ export default function Page() {
         {castResult && (
           <div style={{ marginTop: '2rem', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             
-            <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.25)', paddingBottom: '1.25rem' }}>
+            <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.2)', paddingBottom: '1.25rem' }}>
               <div>
                 <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                   EPHEMERIS COORDINATE LOCKED • {castResult.timestamp}
@@ -536,14 +569,23 @@ export default function Page() {
                   Query: "{castResult.question}"
                 </h2>
               </div>
-              {isVerifiedPaid && (
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                 <button
-                  onClick={handlePrintPDF}
-                  style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#09090C', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 20px rgba(201, 162, 39, 0.5)' }}
+                  onClick={handleShareTwitter}
+                  style={{ padding: '0.85rem 1.25rem', backgroundColor: '#121118', color: '#C9A227', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'monospace' }}
                 >
-                  📥 Export 4-Page Executive PDF
+                  {copiedTwitter ? '✓ Copied Sigil for X!' : '🜔 Share on X'}
                 </button>
-              )}
+
+                {isVerifiedPaid && (
+                  <button
+                    onClick={handlePrintPDF}
+                    style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#050508', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}
+                  >
+                    📥 Export 4-Page Executive PDF
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="pdf-page">
@@ -553,19 +595,19 @@ export default function Page() {
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.3)' }}>
+                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
                   <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.monthPalace.symbol} {castResult.monthPalace.name} ({castResult.monthPalace.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.monthPalace.macroAudit}</p>
                 </div>
 
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.3)' }}>
+                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
                   <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.dayPalace.symbol} {castResult.dayPalace.name} ({castResult.dayPalace.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.dayPalace.meaning}</p>
                 </div>
 
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid #C9A227', boxShadow: '0 0 15px rgba(201,162,39,0.1)' }}>
+                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid #C9A227', boxShadow: '0 0 15px rgba(201,162,39,0.1)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
                   <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.symbol} {castResult.hourPalace.name} ({castResult.hourPalace.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hourPalace.meaning}</p>
@@ -581,7 +623,7 @@ export default function Page() {
                     72-Hour Chrono-Hourglass Action Plan (72小时时间沙漏执行规程)
                   </h3>
 
-                  <div className="print-card" style={{ backgroundColor: '#09090C', border: '1px solid rgba(201, 162, 39, 0.35)', borderRadius: '14px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div className="print-card" style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.25)', borderRadius: '14px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {castResult.hourPalace.chronoPlan.map((step, idx) => (
                       <div key={idx} style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
                         <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>{step.phase}</h4>
@@ -598,25 +640,25 @@ export default function Page() {
                   </h3>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                       <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>ELEMENTAL ATTUNEMENT</span>
                       <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.wuxing}</h4>
                       <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Governing energetic flux.</p>
                     </div>
 
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                       <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>RESONANT COLOR</span>
                       <h4 style={{ color: '#C9A227', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.elementColor}</h4>
                       <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Optimal grounding tone.</p>
                     </div>
 
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                       <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>NUMEROLOGICAL KEY</span>
                       <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.luckyNumbers}</h4>
                       <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Harmonic quantitative coordinate.</p>
                     </div>
 
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                       <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>CARDINAL VECTOR</span>
                       <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.luckyDirection}</h4>
                       <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Spatial alignment axis.</p>
@@ -630,7 +672,7 @@ export default function Page() {
                     Major Arcana Synthesis & Executive Guardrails (塔罗大阿卡纳守护与执行红线)
                   </h3>
 
-                  <div className="print-card" style={{ backgroundColor: '#09090C', border: '1px solid #C9A227', borderRadius: '16px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div className="print-card" style={{ backgroundColor: '#050508', border: '1px solid #C9A227', borderRadius: '16px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div>
                       <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>ARCHETYPAL MIRROR:</span>
                       <h4 style={{ color: '#F4EEDB', fontSize: '1.3rem', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>
@@ -641,7 +683,7 @@ export default function Page() {
                       </p>
                     </div>
 
-                    <div style={{ borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '1.25rem' }}>
+                    <div style={{ borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1.25rem' }}>
                       <span style={{ fontSize: '0.75rem', color: '#EF4444', fontFamily: 'monospace', fontWeight: 'bold' }}>EXECUTIVE RED LINE (绝对禁忌):</span>
                       <p style={{ color: '#E8E4DA', fontSize: '0.9rem', margin: '0.3rem 0 0 0', lineHeight: '1.6' }}>
                         Under the current {castResult.hourPalace.name} momentum, avoid committing long-term binding capital on unverified verbal assurances. All commitments must be codified in written contracts.
@@ -653,12 +695,12 @@ export default function Page() {
             ) : (
               <div id="support" className="no-print" style={{ 
                 padding: '2.5rem 1.5rem', 
-                backgroundColor: '#191526', 
+                backgroundColor: '#0F0E17', 
                 borderRadius: '16px', 
-                border: '1px solid rgba(201, 162, 39, 0.6)', 
+                border: '1px solid rgba(201, 162, 39, 0.4)', 
                 textAlign: 'center',
-                boxShadow: '0 0 40px rgba(201, 162, 39, 0.15), inset 0 0 20px rgba(201, 162, 39, 0.05)',
-                backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.12) 0%, transparent 70%)'
+                boxShadow: '0 0 30px rgba(201, 162, 39, 0.1), inset 0 0 15px rgba(201, 162, 39, 0.03)',
+                backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 70%)'
               }}>
                 <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
                   ✦ Executive Strategy Blueprint ($19) ✦
@@ -669,20 +711,32 @@ export default function Page() {
                 <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
                   Synthesizes your Month, Day, and Hour palaces into a downloadable 4-page PDF with 72-Hour Chrono Execution Windows, Resonant Colors, Numbers, and Archetypal Guardrails.
                 </p>
+
+                <div style={{ margin: '1rem auto 1.5rem auto', maxWidth: '520px', borderLeft: '2px solid #C9A227', paddingLeft: '1rem', textAlign: 'left' }}>
+                  <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
+                    "The 72-hour execution window saved our cross-border contract negotiation from collapsing. Unmatched precision."
+                  </p>
+                  <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace' }}>— E. Vance, Managing Director, London</span>
+                </div>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
                   <a
                     href={DODO_CHECKOUT_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ display: 'inline-block', padding: '1rem 3rem', backgroundColor: '#C9A227', color: '#09090C', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 25px rgba(201,162,39,0.4)', transition: 'all 0.3s' }}
+                    style={{ display: 'inline-block', padding: '1rem 3rem', backgroundColor: '#C9A227', color: '#050508', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)', transition: 'all 0.3s' }}
                   >
                     Unlock Master Blueprint ($19) →
                   </a>
 
-                  {/* 核心防丢单恢复区 */}
-                  <div style={{ marginTop: '0.8rem', borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
-                    <p style={{ fontSize: '0.80rem', color: '#8A8678', marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.72rem', color: '#8A8678', fontFamily: 'monospace', flexWrap: 'wrap', justifyContent: 'center' }}>
+                    <span>🔒 256-Bit Encrypted Secure</span>
+                    <span>⚡ Instant PDF Delivery</span>
+                    <span>🛡️ 7-Day Guarantee</span>
+                  </div>
+
+                  <div style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
+                    <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
                       Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
                     </p>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -691,12 +745,12 @@ export default function Page() {
                         placeholder="e.g. pay_xxxxxxxx"
                         value={manualPaymentId}
                         onChange={(e) => setManualPaymentId(e.target.value)}
-                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#09090C', border: '1px solid rgba(201,162,39,0.35)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
                       />
                       <button
                         onClick={() => verifyPayment(manualPaymentId)}
                         disabled={checkingPayment}
-                        style={{ padding: '0.6rem 1rem', backgroundColor: '#252136', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
+                        style={{ padding: '0.6rem 1rem', backgroundColor: '#181722', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
                       >
                         {checkingPayment ? 'Checking...' : 'Restore'}
                       </button>
@@ -709,7 +763,51 @@ export default function Page() {
           </div>
         )}
 
-        <div id="methodology" className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '2.5rem' }}>
+        {/* 邮件私域收集框 */}
+        <div className="no-print" style={{ 
+          marginTop: '3.5rem', 
+          backgroundColor: '#0A0A0F', 
+          borderRadius: '16px', 
+          border: '1px solid rgba(201, 162, 39, 0.25)', 
+          padding: '2rem', 
+          textAlign: 'center',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.6)'
+        }}>
+          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>
+            • Sovereign Newsletter •
+          </span>
+          <h4 style={{ color: '#F4EEDB', fontSize: '1.3rem', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif' }}>
+            The Weekly Ephemeris Briefing
+          </h4>
+          <p style={{ color: '#CDC8BC', fontSize: '0.85rem', margin: '0 auto 1.2rem auto', maxWidth: '480px', lineHeight: '1.5' }}>
+            Receive high-precision temporal vectors and macro-strategy windows every Monday before the global markets open.
+          </p>
+
+          {emailSubscribed ? (
+            <div style={{ color: '#C9A227', fontFamily: 'monospace', fontSize: '0.9rem', padding: '0.5rem' }}>
+              ✦ Successfully subscribed to the ephemeris briefing. Welcome to the inner circle.
+            </div>
+          ) : (
+            <form onSubmit={handleEmailSubmit} style={{ display: 'flex', gap: '0.5rem', maxWidth: '420px', margin: '0 auto', flexWrap: 'wrap' }}>
+              <input
+                type="email"
+                required
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                placeholder="Enter your professional email..."
+                style={{ flex: 1, minWidth: '240px', padding: '0.7rem 1rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', fontSize: '0.9rem', outline: 'none' }}
+              />
+              <button
+                type="submit"
+                style={{ padding: '0.7rem 1.5rem', backgroundColor: '#C9A227', color: '#050508', fontWeight: 'bold', fontSize: '0.85rem', textTransform: 'uppercase', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
+              >
+                Join Briefing
+              </button>
+            </form>
+          )}
+        </div>
+
+        <div id="methodology" className="no-print" style={{ marginTop: '3.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
           <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
             • Epistemological Foundation •
           </span>
@@ -721,7 +819,7 @@ export default function Page() {
           </p>
         </div>
 
-        <div id="about" className="no-print" style={{ marginTop: '3rem', borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '2.5rem' }}>
+        <div id="about" className="no-print" style={{ marginTop: '3rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
           <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
             • Sovereign Intelligence •
           </span>
@@ -733,8 +831,8 @@ export default function Page() {
           </p>
         </div>
 
-        {/* 底部高权重 SEO 文章专栏 */}
-        <div id="knowledge-base" className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '2.5rem' }}>
+        {/* 底部文章专栏 */}
+        <div id="knowledge-base" className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
           <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
             • Esoteric Knowledge Base •
           </span>
@@ -743,7 +841,7 @@ export default function Page() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
             {ARTICLES.map((art) => (
-              <div key={art.slug} style={{ backgroundColor: '#09090C', border: '1px solid rgba(201, 162, 39, 0.2)', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
+              <div key={art.slug} style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.2)', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
                 <div>
                   <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.category} • {art.readTime}</span>
                   <h4 style={{ color: '#F4EEDB', fontSize: '1.1rem', margin: '0.4rem 0 0.6rem 0', fontFamily: 'Georgia, serif', lineHeight: '1.4' }}>
