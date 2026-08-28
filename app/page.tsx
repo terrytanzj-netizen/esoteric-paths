@@ -121,7 +121,6 @@ const PALACES = [
   },
 ];
 
-// SSR 安全的 40 颗布林布林星空坐标分布
 const STATIC_STARS = [
   { top: '3%', left: '8%', delay: '0.2s', size: '3px' },
   { top: '8%', left: '85%', delay: '1.5s', size: '2px' },
@@ -597,7 +596,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 新增：四大元素与东方五行宇宙矩阵区块（完美填补背景和空间） */}
+      {/* 四大元素与东方五行宇宙矩阵区块 */}
       <section id="elements" className="no-print" style={{
         backgroundColor: '#0A0A0F',
         border: '1px solid rgba(201, 162, 39, 0.25)',
@@ -615,7 +614,6 @@ export default function Page() {
         </h3>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', textAlign: 'left' }}>
-          {/* 西方四大元素 */}
           <div style={{ backgroundColor: '#050508', padding: '1.2rem', borderRadius: '12px', border: '1px solid rgba(201,162,39,0.15)' }}>
             <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>WESTERN HERMETIC ELEMENTS</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
@@ -626,7 +624,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* 东方五行矩阵 */}
           <div style={{ backgroundColor: '#050508', padding: '1.2rem', borderRadius: '12px', border: '1px solid rgba(201,162,39,0.15)' }}>
             <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>EASTERN WU XING MATRIX</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
@@ -867,7 +864,7 @@ export default function Page() {
                         placeholder="e.g. pay_xxxxxxxx"
                         value={manualPaymentId}
                         onChange={(e) => setManualPaymentId(e.target.value)}
-                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3), color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
                       />
                       <button
                         onClick={() => verifyPayment(manualPaymentId)}
@@ -917,7 +914,7 @@ export default function Page() {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 placeholder="Enter your professional email..."
-                style={{ flex: 1, minWidth: '240px', padding: '0.7rem 1rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', fontSize: '0.9rem', outline: 'none' }}
+                style={{ flex: '1', minWidth: '240px', padding: '0.7rem 1rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', fontSize: '0.9rem', outline: 'none' }}
               />
               <button
                 type="submit"
