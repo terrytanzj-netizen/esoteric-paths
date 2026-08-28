@@ -121,6 +121,40 @@ const PALACES = [
   },
 ];
 
+// SSR 安全的 40 颗布林布林星空坐标分布
+const STATIC_STARS = [
+  { top: '3%', left: '8%', delay: '0.2s', size: '3px' },
+  { top: '8%', left: '85%', delay: '1.5s', size: '2px' },
+  { top: '12%', left: '25%', delay: '3.1s', size: '4px' },
+  { top: '18%', left: '68%', delay: '0.8s', size: '2px' },
+  { top: '22%', left: '12%', delay: '2.4s', size: '3px' },
+  { top: '27%', left: '92%', delay: '4.2s', size: '2px' },
+  { top: '32%', left: '42%', delay: '1.1s', size: '3px' },
+  { top: '38%', left: '80%', delay: '3.8s', size: '4px' },
+  { top: '42%', left: '5%', delay: '0.5s', size: '2px' },
+  { top: '48%', left: '55%', delay: '2.9s', size: '3px' },
+  { top: '53%', left: '18%', delay: '4.7s', size: '2px' },
+  { top: '58%', left: '75%', delay: '1.9s', size: '3px' },
+  { top: '63%', left: '32%', delay: '3.2s', size: '4px' },
+  { top: '68%', left: '95%', delay: '0.3s', size: '2px' },
+  { top: '73%', left: '50%', delay: '2.1s', size: '3px' },
+  { top: '78%', left: '10%', delay: '4.5s', size: '2px' },
+  { top: '83%', left: '65%', delay: '1.6s', size: '4px' },
+  { top: '88%', left: '85%', delay: '3.4s', size: '3px' },
+  { top: '93%', left: '28%', delay: '0.7s', size: '2px' },
+  { top: '97%', left: '45%', delay: '2.8s', size: '3px' },
+  { top: '6%', left: '45%', delay: '2.3s', size: '2px' },
+  { top: '15%', left: '95%', delay: '0.9s', size: '3px' },
+  { top: '25%', left: '35%', delay: '4.0s', size: '2px' },
+  { top: '35%', left: '15%', delay: '1.8s', size: '3px' },
+  { top: '45%', left: '90%', delay: '3.5s', size: '2px' },
+  { top: '55%', left: '40%', delay: '0.4s', size: '4px' },
+  { top: '65%', left: '60%', delay: '2.6s', size: '2px' },
+  { top: '75%', left: '82%', delay: '4.8s', size: '3px' },
+  { top: '85%', left: '5%', delay: '1.3s', size: '2px' },
+  { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
+];
+
 const ARTICLES = [
   {
     slug: 'career-transition-timing-horary',
@@ -338,23 +372,61 @@ export default function Page() {
       overflowX: 'hidden'
     }}>
       
-      {/* 幽暗深空背景与低频闪烁的星空微光 (Bling-bling) */}
+      {/* 幽暗深空底色 */}
       <div style={{
         position: 'fixed',
         top: 0, left: 0, right: 0, bottom: 0,
-        background: 'radial-gradient(circle at 50% 10%, rgba(201, 162, 39, 0.05) 0%, rgba(5, 5, 8, 0.98) 75%), linear-gradient(to bottom, #050508, #020204)',
+        background: 'radial-gradient(circle at 50% 15%, rgba(201, 162, 39, 0.08) 0%, rgba(5, 5, 8, 0.98) 75%), linear-gradient(to bottom, #050508, #020204)',
         pointerEvents: 'none',
         zIndex: 0
       }} />
 
-      {/* 动态星光点缀（低频闪烁） */}
-      <div className="star-field" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 1, opacity: 0.6 }}>
-        <div className="bling-star" style={{ top: '12%', left: '15%', animationDelay: '0s' }} />
-        <div className="bling-star" style={{ top: '25%', left: '82%', animationDelay: '2.5s' }} />
-        <div className="bling-star" style={{ top: '45%', left: '8%', animationDelay: '1.2s' }} />
-        <div className="bling-star" style={{ top: '65%', left: '88%', animationDelay: '4.1s' }} />
-        <div className="bling-star" style={{ top: '85%', left: '22%', animationDelay: '3.0s' }} />
-        <div className="bling-star" style={{ top: '35%', left: '48%', animationDelay: '5.5s' }} />
+      {/* 背景动态旋转的古典占星炼金术罗盘水印 */}
+      <div className="spinning-compass" style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '700px',
+        height: '700px',
+        border: '1px dashed rgba(201, 162, 39, 0.1)',
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: 0,
+        opacity: 0.35,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{
+          width: '580px',
+          height: '580px',
+          border: '1px solid rgba(201, 162, 39, 0.08)',
+          borderRadius: '50%',
+          position: 'relative'
+        }}>
+          <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', color: '#C9A227', fontSize: '0.8rem', fontFamily: 'monospace' }}>N</div>
+          <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', color: '#C9A227', fontSize: '0.8rem', fontFamily: 'monospace' }}>S</div>
+          <div style={{ position: 'absolute', top: '50%', left: 0, transform: 'translateY(-50%)', color: '#C9A227', fontSize: '0.8rem', fontFamily: 'monospace' }}>W</div>
+          <div style={{ position: 'absolute', top: '50%', right: 0, transform: 'translateY(-50%)', color: '#C9A227', fontSize: '0.8rem', fontFamily: 'monospace' }}>E</div>
+        </div>
+      </div>
+
+      {/* 40颗布林布林闪烁星空 */}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 1 }}>
+        {STATIC_STARS.map((star, i) => (
+          <div
+            key={i}
+            className="bling-star"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: star.size,
+              height: star.size,
+              animationDelay: star.delay,
+            }}
+          />
+        ))}
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
@@ -396,13 +468,17 @@ export default function Page() {
           }
         }
         @keyframes twinkle {
-          0%, 100% { opacity: 0.15; transform: scale(0.8); }
-          50% { opacity: 0.85; transform: scale(1.3); filter: drop-shadow(0 0 4px #C9A227); }
+          0%, 100% { opacity: 0.2; transform: scale(0.8); }
+          50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 6px #C9A227); }
         }
         @keyframes magicalGlow {
-          0% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.1), inset 0 0 10px rgba(201, 162, 39, 0.03); border-color: rgba(201, 162, 39, 0.25); }
-          50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.3), inset 0 0 20px rgba(201, 162, 39, 0.08); border-color: rgba(201, 162, 39, 0.6); }
-          100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.1), inset 0 0 10px rgba(201, 162, 39, 0.03); border-color: rgba(201, 162, 39, 0.25); }
+          0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12), inset 0 0 15px rgba(201, 162, 39, 0.03); border-color: rgba(201, 162, 39, 0.25); }
+          50% { box-shadow: 0 0 50px rgba(201, 162, 39, 0.35), inset 0 0 30px rgba(201, 162, 39, 0.1); border-color: rgba(201, 162, 39, 0.6); }
+          100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12), inset 0 0 15px rgba(201, 162, 39, 0.03); border-color: rgba(201, 162, 39, 0.25); }
+        }
+        @keyframes spinCompass {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(360deg); }
         }
         @keyframes spinSlow {
           from { transform: rotate(0deg); }
@@ -410,8 +486,6 @@ export default function Page() {
         }
         .bling-star {
           position: absolute;
-          width: 3px;
-          height: 3px;
           background-color: #F4EEDB;
           border-radius: 50%;
           animation: twinkle 5s infinite ease-in-out;
@@ -419,12 +493,15 @@ export default function Page() {
         .cyber-glow-box {
           animation: magicalGlow 6s infinite ease-in-out;
         }
+        .spinning-compass {
+          animation: spinCompass 120s linear infinite;
+        }
         .spinning-sigil {
           animation: spinSlow 20s linear infinite;
         }
       `}} />
 
-      {/* 顶部导航栏 */}
+      {/* 6个黄金入口的顶部导航栏 */}
       <nav className="no-print" style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -444,10 +521,10 @@ export default function Page() {
         </div>
         <div style={{ display: 'flex', gap: '1.2rem', fontSize: '0.8rem', fontFamily: 'monospace', flexWrap: 'wrap' }}>
           <a href="#" style={{ color: '#C9A227', textDecoration: 'none', textShadow: '0 0 8px rgba(201,162,39,0.4)' }}>Oracle Engine</a>
+          <a href="#elements" style={{ color: '#8A8678', textDecoration: 'none' }}>Cosmic Matrix</a>
           <a href="#methodology" style={{ color: '#8A8678', textDecoration: 'none' }}>Methodology</a>
           <a href="#blueprints" style={{ color: '#8A8678', textDecoration: 'none' }}>Blueprints</a>
           <a href="#knowledge-base" style={{ color: '#8A8678', textDecoration: 'none' }}>Knowledge Base</a>
-          <a href="#about" style={{ color: '#8A8678', textDecoration: 'none' }}>About</a>
           <a href="#support" style={{ color: '#8A8678', textDecoration: 'none' }}>Support</a>
         </div>
       </nav>
@@ -464,6 +541,7 @@ export default function Page() {
         </p>
       </header>
 
+      {/* 宇宙时钟 */}
       <section className="no-print cyber-glow-box" style={{
         backgroundColor: '#0A0A0F',
         borderRadius: '24px',
@@ -519,6 +597,50 @@ export default function Page() {
         </div>
       </section>
 
+      {/* 新增：四大元素与东方五行宇宙矩阵区块（完美填补背景和空间） */}
+      <section id="elements" className="no-print" style={{
+        backgroundColor: '#0A0A0F',
+        border: '1px solid rgba(201, 162, 39, 0.25)',
+        borderRadius: '20px',
+        padding: '2rem',
+        position: 'relative',
+        zIndex: 2,
+        textAlign: 'center'
+      }}>
+        <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>
+          • Hermetic & Eastern Synthesis •
+        </span>
+        <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>
+          The Elemental & Wu Xing Architecture
+        </h3>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', textAlign: 'left' }}>
+          {/* 西方四大元素 */}
+          <div style={{ backgroundColor: '#050508', padding: '1.2rem', borderRadius: '12px', border: '1px solid rgba(201,162,39,0.15)' }}>
+            <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>WESTERN HERMETIC ELEMENTS</span>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
+              <div>🜂 Fire (Ignis)</div>
+              <div>🜄 Water (Aqua)</div>
+              <div>🜁 Air (Aer)</div>
+              <div>🜃 Earth (Terra)</div>
+            </div>
+          </div>
+
+          {/* 东方五行矩阵 */}
+          <div style={{ backgroundColor: '#050508', padding: '1.2rem', borderRadius: '12px', border: '1px solid rgba(201,162,39,0.15)' }}>
+            <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>EASTERN WU XING MATRIX</span>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
+              <div>木 Wood (Da An)</div>
+              <div>火 Fire (Su Xi)</div>
+              <div>土 Earth (Kong Wang)</div>
+              <div>金 Metal (Chi Kou)</div>
+              <div style={{ gridColumn: 'span 2' }}>水 Water (Liu Lian / Xiao Ji)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 起盘与蓝图区域 */}
       <section id="blueprints" className="print-area" style={{ 
         backgroundColor: '#0A0A0F', 
         border: '1px solid rgba(201, 162, 39, 0.3)', 
@@ -745,7 +867,7 @@ export default function Page() {
                         placeholder="e.g. pay_xxxxxxxx"
                         value={manualPaymentId}
                         onChange={(e) => setManualPaymentId(e.target.value)}
-                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3), color: '#FFF', borderRadius: '6px', outline: 'none' }}
                       />
                       <button
                         onClick={() => verifyPayment(manualPaymentId)}
