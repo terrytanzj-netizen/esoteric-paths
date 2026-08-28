@@ -78,23 +78,6 @@ export default function Page() {
     return () => clearInterval(timer);
   }, []);
 
-  const verifyPayment = async (pId: string) => {
-    if (!pId) return;
-    try {
-      const res = await fetch(`/api/verify?payment_id=${pId}`);
-      const data = await res.json();
-      if (data.valid) {
-        setIsVerifiedPaid(true);
-        localStorage.setItem('esoteric_is_paid', 'true');
-        alert('🎉 Verified! Full 4-page blueprint is unlocked.');
-      } else {
-        alert('❌ Payment not found.');
-      }
-    } catch (e) {
-      console.error('Payment verification failed:', e);
-    }
-  };
-
   useEffect(() => {
     const saved = localStorage.getItem('last_user_cast');
     if (saved) {
@@ -130,6 +113,23 @@ export default function Page() {
       }
     }
   }, []);
+
+  const verifyPayment = async (pId: string) => {
+    if (!pId) return;
+    try {
+      const res = await fetch(`/api/verify?payment_id=${pId}`);
+      const data = await res.json();
+      if (data.valid) {
+        setIsVerifiedPaid(true);
+        localStorage.setItem('esoteric_is_paid', 'true');
+        alert('🎉 Verified! Full 4-page blueprint is unlocked.');
+      } else {
+        alert('❌ Payment not found.');
+      }
+    } catch (e) {
+      console.error('Payment verification failed:', e);
+    }
+  };
 
   const handleCast = (e: React.FormEvent) => {
     e.preventDefault();
@@ -487,7 +487,7 @@ export default function Page() {
         </div>
       </div>
 
-      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
+      <footer id="support" style={{ textAlign: 'center', fontFamily: 'monospace', fontSize: '0.75rem', color: '#5C584E', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
 
