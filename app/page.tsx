@@ -79,16 +79,37 @@ export default function Page() {
 
   const verifyPayment = async (pId: string) => {
     if (!pId) return;
-    const res = await fetch(`/api/verify?payment_id=${pId}`);
-    const data = await res.json();
-    if (data.valid) {
-      setIsVerifiedPaid(true);
-      localStorage.setItem('esoteric_is_paid', 'true');
-      alert('🎉 Verified! Full 4-page blueprint unlocked.');
-    } else {
-      alert('❌ Payment not found.');
+    try {
+      const res = await fetch(`/api/verify?payment_id=${pId}`);
+      const data = await res.json();
+      if (data.valid) {
+        setIsVerifiedPaid(true);
+        localStorage.setItem('esoteric_is_paid', 'true');
+        alert('🎉 Verified! Full 4-page blueprint unlocked.');
+      } else {
+        alert('❌ Payment not found or not completed.');
+      }
+    } catch (e) {
+      console.error('Payment verification failed:', e);
     }
   };
+
+  useEffect(() => {
+    const saved = localStorage.getItem('last_user_cast');
+    if (saved) {
+      setCastResult(JSON.parse(saved));
+    }
+    const alreadyPaid = localStorage.getItem('esoteric_is_paid');
+    if (alreadyPaid === 'true') {
+      setIsVerifiedPaid(true);
+    }
+    
+    const params = new URLSearchParams(window.location.search);
+    const pId = params.get('payment_id') || params.get('paymentId');
+    if (pId) {
+      verifyPayment(pId);
+    }
+  }, []);
 
   const handleCast = (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,13 +120,15 @@ export default function Page() {
       const mIdx = (now.getMonth() + 1) % 6;
       const dIdx = (mIdx + now.getDate() - 1) % 6;
       const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
-      setCastResult({
+      const newResult = {
         question,
         month: PALACES[mIdx],
         day: PALACES[dIdx],
         hour: PALACES[hIdx],
         time: now.toUTCString(),
-      });
+      };
+      setCastResult(newResult);
+      localStorage.setItem('last_user_cast', JSON.stringify(newResult));
       setIsCasting(false);
     }, 1200);
   };
@@ -234,17 +257,17 @@ export default function Page() {
             <div style={{ background: '#050508', borderRadius: '14px', padding: '1.5rem', border: '1px solid rgba(201,162,39,0.3)' }}>
               <h4 style={{ fontSize: '1.2rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 1rem 0' }}>Three-Palace Trajectory (三宫全息向量)</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ padding: '1rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
+                <div style={{ padding: '1.0rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
                   <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
                   <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h5>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
-                <div style={{ padding: '1rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
+                <div style={{ padding: '1.0rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.2)' }}>
                   <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
                   <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.day.symbol} {castResult.day.name} ({castResult.day.wuxing})</h5>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.day.desc}</p>
                 </div>
-                <div style={{ padding: '1rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid #C9A227' }}>
+                <div style={{ padding: '1.0rem', background: '#0A0A0F', borderRadius: '10px', border: '1px solid #C9A227' }}>
                   <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
                   <h5 style={{ fontSize: '1.1rem', color: '#F4EEDB', margin: '0.2rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.symbol} {castResult.hour.name} ({castResult.hour.wuxing})</h5>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hour.desc}</p>
@@ -264,7 +287,7 @@ export default function Page() {
           <div style={{ color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>✓ Full Blueprint Unlocked Successfully!</div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-            <a href={DODO_CHECKOUT_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', padding: '1rem 3rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
+            <a href={DODO_CHECKOUT_URL} style={{ display: 'inline-block', padding: '1rem 3rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
               Unlock Master Blueprint ($19) →
             </a>
             <div style={{ display: 'flex', gap: '0.5rem', width: '100%', maxWidth: '380px', marginTop: '0.5rem' }}>
