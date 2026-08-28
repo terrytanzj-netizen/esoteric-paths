@@ -8,10 +8,10 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 const PALACES = [
   { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.' },
   { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction. Reflect, audit, and wait.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
-  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity where immediate closing is favored.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
-  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback. Strong defensive boundaries are mandatory.', advice: 'Maintain written records. Avoid verbal arguments and reinforce operational security.' },
-  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through aligned partnerships.', advice: 'Engage in collaborative discussions, team synergy, and relationship building.' },
-  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle reset. Avoid committing major funds.', advice: 'Let go of obsolete assumptions. Treat this moment as a clean-slate reboot.' },
+  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
+  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.' },
+  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.' },
+  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.' },
 ];
 
 const STATIC_STARS = [
@@ -81,23 +81,21 @@ export default function Page() {
     if (!pId) return;
     try {
       const res = await fetch(`/api/verify?payment_id=${pId}`);
-      const data = await res.json();
-      if (data.valid) {
+      if (!res.ok) return;
+      const data = await res.json().catch(() => null);
+      if (data && data.valid) {
         setIsVerifiedPaid(true);
         localStorage.setItem('esoteric_is_paid', 'true');
-        alert('🎉 Verified! Full 4-page blueprint is unlocked.');
-      } else {
-        alert('❌ Payment not found.');
       }
     } catch (e) {
-      console.error('Payment verification failed:', e);
+      console.error('Payment verification safe catch:', e);
     }
   };
 
   useEffect(() => {
     const saved = localStorage.getItem('last_user_cast');
     if (saved) {
-      setCastResult(JSON.parse(saved));
+      try { setCastResult(JSON.parse(saved)); } catch (e) {}
     }
     const alreadyPaid = localStorage.getItem('esoteric_is_paid');
     if (alreadyPaid === 'true') {
@@ -136,14 +134,16 @@ export default function Page() {
   const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput.trim()) return;
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: emailInput })
-    });
-    if (res.ok) {
+    try {
+      await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailInput })
+      });
       setEmailSubscribed(true);
       setEmailInput('');
+    } catch (e) {
+      console.error(e);
     }
   };
 
