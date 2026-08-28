@@ -7,11 +7,11 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const PALACES = [
   { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.' },
-  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
-  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
-  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.' },
-  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.' },
-  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.' },
+  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction. Reflect, audit, and wait.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
+  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity where immediate closing is favored.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
+  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback. Strong defensive boundaries are mandatory.', advice: 'Maintain written records. Avoid verbal arguments and reinforce operational security.' },
+  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through aligned partnerships.', advice: 'Engage in collaborative discussions, team synergy, and relationship building.' },
+  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle reset. Avoid committing major funds.', advice: 'Let go of obsolete assumptions. Treat this moment as a clean-slate reboot.' },
 ];
 
 const STATIC_STARS = [
@@ -41,7 +41,7 @@ const STATIC_STARS = [
   { top: '35%', left: '15%', delay: '1.8s', size: '3px' },
   { top: '45%', left: '90%', delay: '3.5s', size: '2px' },
   { top: '55%', left: '40%', delay: '0.4s', size: '4px' },
-  { top: '65%', left: '60%', delay: '2.6s', size: '3px' },
+  { top: '65%', left: '60%', delay: '2.6s', size: '2px' },
   { top: '75%', left: '82%', delay: '4.8s', size: '3px' },
   { top: '85%', left: '5%', delay: '1.3s', size: '2px' },
   { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
@@ -81,22 +81,23 @@ export default function Page() {
     if (!pId) return;
     try {
       const res = await fetch(`/api/verify?payment_id=${pId}`);
-      if (!res.ok) return;
       const data = await res.json();
       if (data.valid) {
         setIsVerifiedPaid(true);
         localStorage.setItem('esoteric_is_paid', 'true');
+        alert('🎉 Verified! Full 4-page blueprint is unlocked.');
+      } else {
+        alert('❌ Payment not found.');
       }
     } catch (e) {
-      console.error('Payment verification exception:', e);
+      console.error('Payment verification failed:', e);
     }
   };
 
   useEffect(() => {
-    // 恢复起盘缓存，防止页面重定向回来后数据丢失
     const saved = localStorage.getItem('last_user_cast');
     if (saved) {
-      try { setCastResult(JSON.parse(saved)); } catch (e) {}
+      setCastResult(JSON.parse(saved));
     }
     const alreadyPaid = localStorage.getItem('esoteric_is_paid');
     if (alreadyPaid === 'true') {
@@ -135,18 +136,14 @@ export default function Page() {
   const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput.trim()) return;
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailInput })
-      });
-      if (res.ok) {
-        setEmailSubscribed(true);
-        setEmailInput('');
-      }
-    } catch (e) {
-      console.error(e);
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: emailInput })
+    });
+    if (res.ok) {
+      setEmailSubscribed(true);
+      setEmailInput('');
     }
   };
 
@@ -245,8 +242,8 @@ export default function Page() {
         <form onSubmit={handleCast} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
           <input type="text" required value={question} onChange={e => setQuestion(e.target.value)} placeholder="e.g., Should I execute the contract renegotiation this week?" style={{ padding: '1rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', outline: 'none' }} />
-          <button type="submit" disabled={isCasting} style={{ padding: '1.1rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '8px', border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
-            {isCasting ? 'Aligning Celestial Coordinates...' : 'Cast Horary Oracle →'}
+          <button type="submit" style={{ padding: '1.1rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '8px', border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
+            Cast Horary Oracle →
           </button>
         </form>
 
@@ -295,7 +292,7 @@ export default function Page() {
             </a>
             <div style={{ display: 'flex', gap: '0.5rem', width: '100%', maxWidth: '380px', marginTop: '0.5rem' }}>
               <input type="text" placeholder="Paste Payment ID (pay_xxx)" value={manualPaymentId} onChange={e => setManualPaymentId(e.target.value)} style={{ flex: 1, padding: '0.6rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', fontSize: '0.8rem', outline: 'none' }} />
-              <button onClick={() => verifyPayment(manualPaymentId)} style={{ padding: '0.6rem 1rem', background: '#252136', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer' }}>Test / Restore</button>
+              <button onClick={() => verifyPayment(manualPaymentId)} style={{ padding: '0.6rem 1rem', background: '#252136', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer' }}>Restore</button>
             </div>
           </div>
         )}
@@ -319,7 +316,7 @@ export default function Page() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {ARTICLES.map((art, i) => (
             <div key={i} style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem' }}>
-              <span style={{ fontSize: '0.65rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.readTime}</i>
+              <span style={{ fontSize: '0.65rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.readTime}</span>
               <h4 style={{ fontSize: '0.95rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
             </div>
           ))}
