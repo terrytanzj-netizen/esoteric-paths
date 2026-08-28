@@ -141,4 +141,49 @@ export const ARTICLES = [
     slug: 'horary-divination-psychological-bias',
     category: 'Methodology',
     title: 'What is Horary Divination? Navigating Uncertainty Without Psychological Bias',
-    excerpt: 'How the moment of inquiry acts as a holographic snapshot of universal
+    excerpt: 'How the moment of inquiry acts as a holographic snapshot of universal probability fields.',
+    readTime: '5 min read'
+  },
+  {
+    slug: 'da-an-great-stability-guide',
+    category: 'Palace Decodes',
+    title: 'Da An (大安) Decoded: Strategic Preservation Over Aggressive Expansion in Volatile Markets',
+    excerpt: 'Deep-dive into the Wood-aligned sovereign state of Da An and its protective Tarot archetypal mirrors.',
+    readTime: '5 min read'
+  },
+  {
+    slug: 'surviving-liu-lian-drag',
+    category: 'Palace Decodes',
+    title: 'Surviving the Drag: How to Master Liu Lian (留连) Periods Without Burning Out',
+    excerpt: 'Turning systemic delays and bureaucratic friction into internal operational audits.',
+    readTime: '6 min read'
+  },
+  {
+    slug: 'physics-of-velocity-su-xi',
+    category: 'Palace Decodes',
+    title: 'The Physics of Velocity: Harnessing Su Xi (速喜) for High-Stakes Negotiations',
+    excerpt: 'Leveraging high-velocity Fire dynamics to close critical agreements before momentum dissipates.',
+    readTime: '4 min read'
+  },
+  {
+    slug: 'navigating-chi-kou-frictions',
+    category: 'Palace Decodes',
+    title: 'Navigating Toxic Resistance: Tactical Communication Under Chi Kou (赤口) Frictions',
+    excerpt: 'Establishing ironclad written perimeters in adversarial, conflict-prone environments.',
+    readTime: '5 min read'
+  },
+  {
+    slug: 'art-of-alliance-xiao-ji',
+    category: 'Palace Decodes',
+    title: 'The Art of Alliance: Scaling Synergies Through Xiao Ji (小吉)',
+    excerpt: 'Unlocking mutual resonance and collaborative multi-party frameworks.',
+    readTime: '4 min read'
+  },
+  {
+    slug: 'tabula-rasa-kong-wang',
+    category: 'Palace Decodes',
+    title: 'The Tabula Rasa Effect: Rebuilding from Zero in Kong Wang (空亡) Cycles',
+    excerpt: 'Treating total systemic resets and deadweight termination as primordial rebirth.',
+    readTime: '6 min read'
+  },
+];
