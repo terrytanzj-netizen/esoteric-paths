@@ -62,6 +62,7 @@ export default function Page() {
   const [manualPaymentId, setManualPaymentId] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [emailSubscribed, setEmailSubscribed] = useState(false);
+  const [copiedTwitter, setCopiedTwitter] = useState(false);
   const [castResult, setCastResult] = useState<any>(null);
 
   useEffect(() => {
@@ -478,7 +479,7 @@ export default function Page() {
         <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {ARTICLES.map((art, i) => (
-            <div key={i} style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem' }}>
+            <div key[i] style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem' }}>
               <span style={{ fontSize: '0.65rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.readTime}</span>
               <h4 style={{ fontSize: '0.95rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
             </div>
@@ -486,7 +487,7 @@ export default function Page() {
         </div>
       </div>
 
-      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: '2' }}>
+      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
 
