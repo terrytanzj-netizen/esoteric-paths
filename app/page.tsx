@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1";
 
@@ -195,10 +194,7 @@ const ARTICLES = [
   },
 ];
 
-function OracleHomeContent() {
-  const searchParams = useSearchParams();
-  const paymentIdFromUrl = searchParams.get('payment_id') || searchParams.get('paymentId');
-
+export default function Page() {
   const [time, setTime] = useState({ timeStr: '', dateStr: '', palaceIdx: 0 });
   const [question, setQuestion] = useState('');
   const [isCasting, setIsCasting] = useState(false);
@@ -260,10 +256,14 @@ function OracleHomeContent() {
     if (alreadyPaid === 'true') {
       setIsVerifiedPaid(true);
     }
-    if (paymentIdFromUrl) {
-      verifyPayment(paymentIdFromUrl);
+    
+    // 自动检测网址链接里有没有支付回调带回来的参数
+    const params = new URLSearchParams(window.location.search);
+    const pId = params.get('payment_id') || params.get('paymentId');
+    if (pId) {
+      verifyPayment(pId);
     }
-  }, [paymentIdFromUrl]);
+  }, []);
 
   const handleCast = (e: React.FormEvent) => {
     e.preventDefault();
