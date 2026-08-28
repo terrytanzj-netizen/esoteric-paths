@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1";
 
+// 💡 提示：把这里的链接换成你在 formspree.io 免费注册后得到的表单 ID 链接，就能实时收邮件了！
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORMSPREE_ID";
+
 const PALACES = [
   {
     id: 'daan',
@@ -236,8 +239,6 @@ export default function Page() {
   const [checkingPayment, setCheckingPayment] = useState(false);
   const [manualPaymentId, setManualPaymentId] = useState('');
   
-  const [emailInput, setEmailInput] = useState('');
-  const [emailSubscribed, setEmailSubscribed] = useState(false);
   const [copiedTwitter, setCopiedTwitter] = useState(false);
 
   const [castResult, setCastResult] = useState<{
@@ -348,14 +349,6 @@ export default function Page() {
     setTimeout(() => setCopiedTwitter(false), 3000);
   };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (emailInput.trim()) {
-      setEmailSubscribed(true);
-      setEmailInput('');
-    }
-  };
-
   return (
     <div style={{ 
       maxWidth: '960px', 
@@ -371,7 +364,6 @@ export default function Page() {
       overflowX: 'hidden'
     }}>
       
-      {/* 幽暗深空底色 */}
       <div style={{
         position: 'fixed',
         top: 0, left: 0, right: 0, bottom: 0,
@@ -380,7 +372,6 @@ export default function Page() {
         zIndex: 0
       }} />
 
-      {/* 背景动态旋转的古典占星炼金术罗盘水印 */}
       <div className="spinning-compass" style={{
         position: 'fixed',
         top: '50%',
@@ -411,7 +402,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* 40颗布林布林闪烁星空 */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 1 }}>
         {STATIC_STARS.map((star, i) => (
           <div
@@ -927,8 +917,8 @@ export default function Page() {
         </div>
 
         <div id="methodology" className="no-print" style={{ marginTop: '3.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
-          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
-            • Epistemological Foundation •
+          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' ›
+          • Epistemological Foundation •
           </span>
           <h3 style={{ fontSize: '1.8rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1rem 0' }}>
             The Synthesis of Horary Architecture
