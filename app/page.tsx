@@ -3,9 +3,7 @@
 import React, { useState, useEffect } from 'react';
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1";
-
-// 💡 提示：把这里的链接换成你在 formspree.io 免费注册后得到的表单 ID 链接，就能实时收邮件了！
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORMSPREE_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const PALACES = [
   {
@@ -239,6 +237,9 @@ export default function Page() {
   const [checkingPayment, setCheckingPayment] = useState(false);
   const [manualPaymentId, setManualPaymentId] = useState('');
   
+  const [emailInput, setEmailInput] = useState('');
+  const [emailSubscribed, setEmailSubscribed] = useState(false);
+  const [emailSubmitting, setEmailSubmitting] = useState(false);
   const [copiedTwitter, setCopiedTwitter] = useState(false);
 
   const [castResult, setCastResult] = useState<{
@@ -347,6 +348,35 @@ export default function Page() {
     navigator.clipboard.writeText(tweetText);
     setCopiedTwitter(true);
     setTimeout(() => setCopiedTwitter(false), 3000);
+  };
+
+  // 真实连接 Formspree 异步提交邮箱
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!emailInput.trim()) return;
+
+    setEmailSubmitting(true);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: emailInput })
+      });
+
+      if (response.ok) {
+        setEmailSubscribed(true);
+        setEmailInput('');
+      } else {
+        alert('Subscription failed. Please try again later.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Network error. Please try again.');
+    } finally {
+      setEmailSubmitting(false);
+    }
   };
 
   return (
@@ -848,6 +878,7 @@ export default function Page() {
                     <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
                       Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
                     </p>
+                    <div style={{ display: 'flex', gap: '0.5rem' -->
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input
                         type="text"
@@ -910,15 +941,15 @@ export default function Page() {
                 type="submit"
                 style={{ padding: '0.7rem 1.5rem', backgroundColor: '#C9A227', color: '#050508', fontWeight: 'bold', fontSize: '0.85rem', textTransform: 'uppercase', borderRadius: '8px', border: 'none', cursor: 'pointer' }}
               >
-                Join Briefing
+                {emailSubmitting ? 'Joining...' : 'Join Briefing'}
               </button>
             </form>
           )}
         </div>
 
         <div id="methodology" className="no-print" style={{ marginTop: '3.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
-          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' ›
-          • Epistemological Foundation •
+          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
+            • Epistemological Foundation •
           </span>
           <h3 style={{ fontSize: '1.8rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1rem 0' }}>
             The Synthesis of Horary Architecture
@@ -950,7 +981,7 @@ export default function Page() {
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
             {ARTICLES.map((art) => (
-              <div key={art.slug} style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.2)', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
+              <div key={art.slug} style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.2)', dirname: 'ltr', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
                 <div>
                   <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.category} • {art.readTime}</span>
                   <h4 style={{ color: '#F4EEDB', fontSize: '1.1rem', margin: '0.4rem 0 0.6rem 0', fontFamily: 'Georgia, serif', lineHeight: '1.4' }}>
