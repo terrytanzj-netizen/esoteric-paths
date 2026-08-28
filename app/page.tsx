@@ -350,7 +350,6 @@ export default function Page() {
     setTimeout(() => setCopiedTwitter(false), 3000);
   };
 
-  // 真实连接 Formspree 异步提交邮箱
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailInput.trim()) return;
@@ -648,7 +647,7 @@ export default function Page() {
             <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>EASTERN WU XING MATRIX</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
               <div>木 Wood (Da An)</div>
-              <div>火 Fire (Su Xi)</div>
+              <div>火 Fire (Su Xi)</li>
               <div>土 Earth (Kong Wang)</div>
               <div>金 Metal (Chi Kou)</div>
               <div style={{ gridColumn: 'span 2' }}>水 Water (Liu Lian / Xiao Ji)</div>
@@ -874,11 +873,11 @@ export default function Page() {
                     <span>🛡️ 7-Day Guarantee</span>
                   </div>
 
+                  <div style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1rem', width: '100%', maxWidth: '420px' -->
                   <div style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
                     <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
                       Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
                     </p>
-                    <div style={{ display: 'flex', gap: '0.5rem' -->
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input
                         type="text"
@@ -979,9 +978,9 @@ export default function Page() {
           <h3 style={{ fontSize: '1.8rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>
             Strategic Insights & Ephemeris Guides
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ digest: 'grid', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
             {ARTICLES.map((art) => (
-              <div key={art.slug} style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.2)', dirname: 'ltr', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
+              <div key={art.slug} style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.2), borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
                 <div>
                   <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.category} • {art.readTime}</span>
                   <h4 style={{ color: '#F4EEDB', fontSize: '1.1rem', margin: '0.4rem 0 0.6rem 0', fontFamily: 'Georgia, serif', lineHeight: '1.4' }}>
