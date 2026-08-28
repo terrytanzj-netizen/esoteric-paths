@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1";
@@ -195,7 +195,7 @@ const ARTICLES = [
   },
 ];
 
-function OracleHomeContent() {
+export default function OracleHomeContent() {
   const searchParams = useSearchParams();
   const paymentIdFromUrl = searchParams.get('payment_id') || searchParams.get('paymentId');
 
@@ -255,14 +255,11 @@ function OracleHomeContent() {
   };
 
   useEffect(() => {
-    // 每次进入页面，默认只清空旧的残留输入，保证每次测试或真实使用都是干净的
     localStorage.removeItem('last_user_cast');
-
     const alreadyPaid = localStorage.getItem('esoteric_is_paid');
     if (alreadyPaid === 'true') {
       setIsVerifiedPaid(true);
     }
-
     if (paymentIdFromUrl) {
       verifyPayment(paymentIdFromUrl);
     }
@@ -308,421 +305,440 @@ function OracleHomeContent() {
   };
 
   return (
-    <div style={{ 
-      maxWidth: '960px', 
-      margin: '0 auto', 
-      padding: '2rem 1.5rem 4rem 1.5rem', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      gap: '3rem',
-      backgroundColor: '#0E0E14',
-      minHeight: '100vh',
-      color: '#E8E4DA',
-      position: 'relative'
-    }}>
-      
-      {/* 动态星尘粒子背景装饰 */}
-      <div style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0, bottom: 0,
-        backgroundImage: 'radial-gradient(circle at 50% 20%, rgba(201, 162, 39, 0.04) 0%, transparent 60%), radial-gradient(circle at 10% 80%, rgba(80, 50, 150, 0.03) 0%, transparent 50%)',
-        pointerEvents: 'none',
-        zIndex: 0
-      }} />
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media print {
-          @page { size: A4 portrait; margin: 0; }
-          body, html { 
-            -webkit-print-color-adjust: exact !important; 
-            print-color-adjust: exact !important; 
-            background-color: #0E0E14 !important; 
-            color: #E8E4DA !important;
-            margin: 0 !important;
-            padding: 0 !important;
-          }
-          .no-print, header, nav, footer, button, a { display: none !important; }
-          .print-area { 
-            display: block !important; 
-            background-color: #0E0E14 !important; 
-            color: #E8E4DA !important; 
-            border: none !important; 
-            box-shadow: none !important; 
-            padding: 20mm !important;
-            margin: 0 !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-          }
-          .pdf-page { 
-            page-break-before: always; 
-            min-height: 250mm; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-          }
-          .pdf-page:first-of-type { page-break-before: avoid; }
-          .print-card { 
-            background-color: #15131F !important; 
-            border: 1px solid #C9A227 !important; 
-            box-shadow: 0 0 15px rgba(201, 162, 39, 0.15) !important;
-            page-break-inside: avoid; 
-          }
-        }
-        @keyframes pulseGlow {
-          0% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.2); }
-          50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.4); }
-          100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.2); }
-        }
-        .alchemical-glow {
-          animation: pulseGlow 4s infinite ease-in-out;
-        }
-      `}} />
-
-      {/* 顶部的古典智库导航栏 (Header Navigation) */}
-      <nav className="no-print" style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderBottom: '1px solid rgba(201, 162, 39, 0.2)',
-        paddingBottom: '1rem',
+    <Suspense fallback={<div style={{ padding: '4rem', textAlign: 'center', color: '#C9A227', fontFamily: 'monospace' }}>Synchronizing Ephemeris...</div>}>
+      <div style={{ 
+        maxWidth: '960px', 
+        margin: '0 auto', 
+        padding: '2rem 1.5rem 4rem 1.5rem', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: '3rem',
+        backgroundColor: '#0E0E14',
+        minHeight: '100vh',
+        color: '#E8E4DA',
         position: 'relative',
-        zIndex: 1
+        overflowX: 'hidden'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-          <span style={{ color: '#C9A227', fontSize: '1.2rem' }}>✦</span>
-          <span style={{ fontFamily: 'Georgia, serif', fontWeight: 'bold', letterSpacing: '0.05em', color: '#F4EEDB', fontSize: '1.1rem' }}>
-            ESOTERIC PATHS
-          </span>
-        </div>
-        <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.85rem', fontFamily: 'monospace' }}>
-          <a href="#" style={{ color: '#C9A227', textDecoration: 'none' }}>• Oracle Engine</a>
-          <a href="#knowledge-base" style={{ color: '#8A8678', textDecoration: 'none' }}>Knowledge Base</a>
-        </div>
-      </nav>
-
-      <header className="no-print" style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-        <span style={{ fontSize: '0.75rem', letterSpacing: '0.2em', color: '#C9A227', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem', fontFamily: 'monospace' }}>
-          Deterministic Horary Oracle • Xiao Liu Ren × Tarot
-        </span>
-        <h1 style={{ fontSize: '2.6rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif', letterSpacing: '0.06em', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>
-          TEMPORAL STRATEGY MATRIX
-        </h1>
-        <p style={{ fontSize: '0.95rem', color: '#8A8678', lineHeight: '1.5', margin: '0 auto', maxWidth: '600px' }}>
-          Align your critical crossroads decisions with classical Chinese temporal mechanics and Western archetypal wisdom.
-        </p>
-      </header>
-
-      {/* 带有古典炼金术纹理的宇宙时钟仪表盘 */}
-      <section className="no-print alchemical-glow" style={{
-        backgroundColor: '#15131F',
-        border: '1px solid rgba(201, 162, 39, 0.4)',
-        borderRadius: '24px',
-        padding: '2.2rem 2rem',
-        boxShadow: '0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(201, 162, 39, 0.04)',
-        textAlign: 'center',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>
-          • Live Alchemical Ephemeris Flux •
-        </span>
-
-        <div style={{ fontSize: '3.2rem', fontWeight: 'bold', color: '#F4EEDB', fontFamily: 'monospace', letterSpacing: '0.08em', textShadow: '0 0 20px rgba(201, 162, 39, 0.35)', margin: '0.4rem 0' }}>
-          {time.timeStr || '12:00:00'}
-        </div>
-
-        <div style={{ fontSize: '0.85rem', color: '#8A8678', fontFamily: 'monospace', marginBottom: '1.8rem' }}>
-          {time.dateStr || 'Synchronizing Cosmic Coordinates...'}
-        </div>
-
-        {/* 六宫轮盘展示 */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.75rem', marginTop: '1rem' }}>
-          {PALACES.map((p, idx) => {
-            const isActive = time.palaceIdx === idx;
-            return (
-              <div
-                key={p.id}
-                style={{
-                  padding: '1rem 0.5rem',
-                  borderRadius: '12px',
-                  backgroundColor: isActive ? 'rgba(201, 162, 39, 0.2)' : '#0E0E14',
-                  border: isActive ? '1px solid #C9A227' : '1px solid rgba(201, 162, 39, 0.12)',
-                  boxShadow: isActive ? '0 0 20px rgba(201, 162, 39, 0.3)' : 'none',
-                  transition: 'all 0.3s ease',
-                  position: 'relative'
-                }}
-              >
-                {isActive && (
-                  <span style={{ position: 'absolute', top: '-5px', right: '-5px', width: '10px', height: '10px', backgroundColor: '#C9A227', borderRadius: '50%', boxShadow: '0 0 8px #C9A227' }} />
-                )}
-                <div style={{ fontSize: '1.1rem', color: isActive ? '#C9A227' : '#5C584E', marginBottom: '0.2rem' }}>
-                  {p.symbol}
-                </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 'bold', color: isActive ? '#F4EEDB' : '#8A8678', fontFamily: 'Georgia, serif' }}>
-                  {p.name.split(' ')[0]}
-                </div>
-                <div style={{ fontSize: '0.65rem', color: isActive ? '#C9A227' : '#5C584E', fontFamily: 'monospace', marginTop: '0.2rem' }}>
-                  {isActive ? '● Active Vector' : p.wuxing.split(' ')[0]}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 起盘与蓝图区域 */}
-      <section className="print-area" style={{ backgroundColor: '#15131F', border: '1px solid rgba(201, 162, 39, 0.35)', borderRadius: '20px', padding: '2rem', boxShadow: '0 12px 35px rgba(0,0,0,0.5)', position: 'relative', zIndex: 1 }}>
         
-        <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          <div>
-            <label style={{ display: 'block', fontSize: '0.8rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.6rem', fontFamily: 'monospace' }}>
-              Inquire Your Decision / Timing Crossroads
-            </label>
-            <input
-              type="text"
-              required
-              value={question}
-              onChange={(e) => setQuestion(e.target.value)}
-              placeholder="e.g., Should I execute the contract renegotiation this week?"
-              style={{ width: '100%', padding: '1rem', backgroundColor: '#0E0E14', border: '1px solid rgba(201, 162, 39, 0.25)', borderRadius: '10px', color: '#E8E4DA', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }}
-            />
+        {/* 赛博神秘学动态光效与星尘背景 */}
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'radial-gradient(circle at 50% 15%, rgba(201, 162, 39, 0.07) 0%, rgba(14, 14, 20, 0.95) 70%), linear-gradient(to bottom, #0E0E14, #08080C)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} />
+
+        {/* 动态扫描线视觉特效 */}
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03))',
+          backgroundSize: '100% 3px, 6px 100%',
+          pointerEvents: 'none',
+          zIndex: 1,
+          opacity: 0.4
+        }} />
+
+        <style dangerouslySetInnerHTML={{ __html: `
+          @media print {
+            @page { size: A4 portrait; margin: 0; }
+            body, html { 
+              -webkit-print-color-adjust: exact !important; 
+              print-color-adjust: exact !important; 
+              background-color: #0E0E14 !important; 
+              color: #E8E4DA !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
+            .no-print, header, nav, footer, button, a { display: none !important; }
+            .print-area { 
+              display: block !important; 
+              background-color: #0E0E14 !important; 
+              color: #E8E4DA !important; 
+              border: none !important; 
+              box-shadow: none !important; 
+              padding: 20mm !important;
+              margin: 0 !important;
+              width: 100% !important;
+              box-sizing: border-box !important;
+            }
+            .pdf-page { 
+              page-break-before: always; 
+              min-height: 250mm; 
+              display: flex; 
+              flex-direction: column; 
+              justify-content: center;
+            }
+            .pdf-page:first-of-type { page-break-before: avoid; }
+            .print-card { 
+              background-color: #15131F !important; 
+              border: 1px solid #C9A227 !important; 
+              box-shadow: 0 0 15px rgba(201, 162, 39, 0.15) !important;
+              page-break-inside: avoid; 
+            }
+          }
+          @keyframes magicalGlow {
+            0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.15), inset 0 0 15px rgba(201, 162, 39, 0.05); border-color: rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(201, 162, 39, 0.35), inset 0 0 30px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.7); }
+            100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.15), inset 0 0 15px rgba(201, 162, 39, 0.05); border-color: rgba(201, 162, 39, 0.3); }
+          }
+          @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          .cyber-glow-box {
+            animation: magicalGlow 5s infinite ease-in-out;
+          }
+          .spinning-sigil {
+            animation: spinSlow 20s linear infinite;
+          }
+        `}} />
+
+        {/* 顶部导航栏 */}
+        <nav className="no-print" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px solid rgba(201, 162, 39, 0.25)',
+          paddingBottom: '1rem',
+          position: 'relative',
+          zIndex: 2
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <span style={{ color: '#C9A227', fontSize: '1.2rem', textShadow: '0 0 10px #C9A227' }}>✦</span>
+            <span style={{ fontFamily: 'Georgia, serif', fontWeight: 'bold', letterSpacing: '0.08em', color: '#F4EEDB', fontSize: '1.15rem' }}>
+              ESOTERIC PATHS
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.85rem', fontFamily: 'monospace' }}>
+            <a href="#" style={{ color: '#C9A227', textDecoration: 'none', textShadow: '0 0 8px rgba(201,162,39,0.4)' }}>• Oracle Engine</a>
+            <a href="#knowledge-base" style={{ color: '#8A8678', textDecoration: 'none' }}>Knowledge Base</a>
+          </div>
+        </nav>
+
+        <header className="no-print" style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
+          <span style={{ fontSize: '0.75rem', letterSpacing: '0.25em', color: '#C9A227', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem', fontFamily: 'monospace' }}>
+            Deterministic Horary Oracle • Xiao Liu Ren × Tarot
+          </span>
+          <h1 style={{ fontSize: '2.8rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif', letterSpacing: '0.08em', textShadow: '0 0 35px rgba(201, 162, 39, 0.3)' }}>
+            TEMPORAL STRATEGY MATRIX
+          </h1>
+          <p style={{ fontSize: '0.95rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto', maxWidth: '620px' }}>
+            Align your critical crossroads decisions with classical Chinese temporal mechanics and Western archetypal wisdom.
+          </p>
+        </header>
+
+        {/* 带有赛博魔法呼吸灯效的宇宙时钟 */}
+        <section className="no-print cyber-glow-box" style={{
+          backgroundColor: '#13111C',
+          borderRadius: '24px',
+          padding: '2.5rem 2rem',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 2
+        }}>
+          <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.3em', fontFamily: 'monospace', display: 'block', marginBottom: '0.5rem' }}>
+            • Live Alchemical Ephemeris Flux •
+          </span>
+
+          <div style={{ fontSize: '3.5rem', fontWeight: 'bold', color: '#F4EEDB', fontFamily: 'monospace', letterSpacing: '0.08em', textShadow: '0 0 25px rgba(201, 162, 39, 0.5)', margin: '0.4rem 0' }}>
+            {time.timeStr || '12:00:00'}
           </div>
 
-          <button
-            type="submit"
-            disabled={isCasting}
-            style={{ width: '100%', padding: '1.1rem', backgroundColor: '#C9A227', color: '#0E0E14', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.1em', borderRadius: '10px', border: 'none', cursor: 'pointer', opacity: isCasting ? 0.7 : 1, transition: 'all 0.3s' }}
-          >
-            {isCasting ? (
-              <span style={{ fontFamily: 'monospace', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                <span style={{ animation: 'spin 1s linear infinite' }}>✧</span> {castStep}
-              </span>
-            ) : 'Cast Horary Oracle →'}
-          </button>
-        </form>
+          <div style={{ fontSize: '0.85rem', color: '#8A8678', fontFamily: 'monospace', marginBottom: '2rem' }}>
+            {time.dateStr || 'Synchronizing Cosmic Coordinates...'}
+          </div>
 
-        {castResult && (
-          <div style={{ marginTop: '2rem', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            
-            <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.2)', paddingBottom: '1.25rem' }}>
-              <div>
-                <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  EPHEMERIS COORDINATE LOCKED • {castResult.timestamp}
-                </span>
-                <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', margin: '0.35rem 0 0 0', fontFamily: 'Georgia, serif' }}>
-                  Query: "{castResult.question}"
-                </h2>
-              </div>
-              {isVerifiedPaid && (
-                <button
-                  onClick={handlePrintPDF}
-                  style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#0E0E14', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}
+          {/* 六宫轮盘 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.75rem', marginTop: '1rem' }}>
+            {PALACES.map((p, idx) => {
+              const isActive = time.palaceIdx === idx;
+              return (
+                <div
+                  key={p.id}
+                  style={{
+                    padding: '1.1rem 0.5rem',
+                    borderRadius: '12px',
+                    backgroundColor: isActive ? 'rgba(201, 162, 39, 0.25)' : '#09090C',
+                    border: isActive ? '1px solid #C9A227' : '1px solid rgba(201, 162, 39, 0.15)',
+                    boxShadow: isActive ? '0 0 25px rgba(201, 162, 39, 0.4)' : 'none',
+                    transition: 'all 0.3s ease',
+                    position: 'relative'
+                  }}
                 >
-                  📥 Export 4-Page Executive PDF
-                </button>
+                  {isActive && (
+                    <span style={{ position: 'absolute', top: '-5px', right: '-5px', width: '10px', height: '10px', backgroundColor: '#C9A227', borderRadius: '50%', boxShadow: '0 0 10px #C9A227' }} />
+                  )}
+                  <div style={{ fontSize: '1.2rem', color: isActive ? '#C9A227' : '#5C584E', marginBottom: '0.2rem', textShadow: isActive ? '0 0 10px #C9A227' : 'none' }}>
+                    {p.symbol}
+                  </div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 'bold', color: isActive ? '#F4EEDB' : '#8A8678', fontFamily: 'Georgia, serif' }}>
+                    {p.name.split(' ')[0]}
+                  </div>
+                  <div style={{ fontSize: '0.65rem', color: isActive ? '#C9A227' : '#5C584E', fontFamily: 'monospace', marginTop: '0.3rem' }}>
+                    {isActive ? '● Active Vector' : p.wuxing.split(' ')[0]}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 起盘与蓝图区域 */}
+        <section className="print-area" style={{ 
+          backgroundColor: '#13111C', 
+          border: '1px solid rgba(201, 162, 39, 0.4)', 
+          borderRadius: '20px', 
+          padding: '2.2rem', 
+          boxShadow: '0 15px 40px rgba(0,0,0,0.7)', 
+          position: 'relative', 
+          zIndex: 2 
+        }}>
+          
+          <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.8rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.6rem', fontFamily: 'monospace' }}>
+                Inquire Your Decision / Timing Crossroads
+              </label>
+              <input
+                type="text"
+                required
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="e.g., Should I execute the contract renegotiation this week?"
+                style={{ width: '100%', padding: '1.1rem', backgroundColor: '#09090C', border: '1px solid rgba(201, 162, 39, 0.3)', borderRadius: '10px', color: '#E8E4DA', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isCasting}
+              style={{ width: '100%', padding: '1.2rem', backgroundColor: '#C9A227', color: '#09090C', fontWeight: 'bold', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '0.12em', borderRadius: '10px', border: 'none', cursor: 'pointer', opacity: isCasting ? 0.75 : 1, boxShadow: '0 0 25px rgba(201,162,39,0.3)', transition: 'all 0.3s' }}
+            >
+              {isCasting ? (
+                <span style={{ fontFamily: 'monospace', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}>
+                  <span className="spinning-sigil" style={{ display: 'inline-block', color: '#09090C', fontSize: '1.1rem' }}>✦</span> {castStep}
+                </span>
+              ) : 'Cast Horary Oracle →'}
+            </button>
+          </form>
+
+          {castResult && (
+            <div style={{ marginTop: '2rem', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              
+              <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.25)', paddingBottom: '1.25rem' }}>
+                <div>
+                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                    EPHEMERIS COORDINATE LOCKED • {castResult.timestamp}
+                  </span>
+                  <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', margin: '0.35rem 0 0 0', fontFamily: 'Georgia, serif' }}>
+                    Query: "{castResult.question}"
+                  </h2>
+                </div>
+                {isVerifiedPaid && (
+                  <button
+                    onClick={handlePrintPDF}
+                    style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#09090C', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 20px rgba(201, 162, 39, 0.5)' }}
+                  >
+                    📥 Export 4-Page Executive PDF
+                  </button>
+                )}
+              </div>
+
+              <div className="pdf-page">
+                <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 01 / 04</span>
+                <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
+                  Three-Palace Trajectory (三宫全息向量)
+                </h3>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.3)' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
+                    <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.monthPalace.symbol} {castResult.monthPalace.name} ({castResult.monthPalace.wuxing})</h4>
+                    <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.monthPalace.macroAudit}</p>
+                  </div>
+
+                  <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.3)' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
+                    <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.dayPalace.symbol} {castResult.dayPalace.name} ({castResult.dayPalace.wuxing})</h4>
+                    <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.dayPalace.meaning}</p>
+                  </div>
+
+                  <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid #C9A227', boxShadow: '0 0 15px rgba(201,162,39,0.1)' }}>
+                    <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
+                    <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.symbol} {castResult.hourPalace.name} ({castResult.hourPalace.wuxing})</h4>
+                    <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hourPalace.meaning}</p>
+                  </div>
+                </div>
+              </div>
+
+              {isVerifiedPaid ? (
+                <>
+                  <div className="pdf-page">
+                    <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 02 / 04</span>
+                    <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
+                      72-Hour Chrono-Hourglass Action Plan (72小时时间沙漏执行规程)
+                    </h3>
+
+                    <div className="print-card" style={{ backgroundColor: '#09090C', border: '1px solid rgba(201, 162, 39, 0.35)', borderRadius: '14px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5net' }}>
+                      {castResult.hourPalace.chronoPlan.map((step, idx) => (
+                        <div key={idx} style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
+                          <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>{step.phase}</h4>
+                          <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>{step.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pdf-page">
+                    <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 03 / 04</span>
+                    <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
+                      Five-Dimensional Qi Dynamics & Resonant Vectors (五维能量共振矩阵)
+                    </h3>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+                      <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>ELEMENTAL ATTUNEMENT</span>
+                        <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.wuxing}</h4>
+                        <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Governing energetic flux.</p>
+                      </div>
+
+                      <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>RESONANT COLOR</span>
+                        <h4 style={{ color: '#C9A227', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.elementColor}</h4>
+                        <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Optimal grounding tone.</p>
+                      </div>
+
+                      <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>NUMEROLOGICAL KEY</span>
+                        <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.luckyNumbers}</h4>
+                        <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Harmonic quantitative coordinate.</p>
+                      </div>
+
+                      <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#09090C', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>CARDINAL VECTOR</span>
+                        <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.luckyDirection}</h4>
+                        <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Spatial alignment axis.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pdf-page">
+                    <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 04 / 04</span>
+                    <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
+                      Major Arcana Synthesis & Executive Guardrails (塔罗大阿卡纳守护与执行红线)
+                    </h3>
+
+                    <div className="print-card" style={{ backgroundColor: '#09090C', border: '1px solid #C9A227', borderRadius: '16px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>ARCHETYPAL MIRROR:</span>
+                        <h4 style={{ color: '#F4EEDB', fontSize: '1.3rem', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>
+                          {castResult.hourPalace.tarot}
+                        </h4>
+                        <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>
+                          {castResult.hourPalace.advice}
+                        </p>
+                      </div>
+
+                      <div style={{ borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '1.25rem' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#EF4444', fontFamily: 'monospace', fontWeight: 'bold' }}>EXECUTIVE RED LINE (绝对禁忌):</span>
+                        <p style={{ color: '#E8E4DA', fontSize: '0.9rem', margin: '0.3rem 0 0 0', lineHeight: '1.6' }}>
+                          Under the current {castResult.hourPalace.name} momentum, avoid committing long-term binding capital on unverified verbal assurances. All commitments must be codified in written contracts.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="no-print" style={{ 
+                  padding: '2.5rem 1.5rem', 
+                  backgroundColor: '#191526', 
+                  borderRadius: '16px', 
+                  border: '1px solid rgba(201, 162, 39, 0.6)', 
+                  textAlign: 'center',
+                  boxShadow: '0 0 40px rgba(201, 162, 39, 0.15), inset 0 0 20px rgba(201, 162, 39, 0.05)',
+                  backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.12) 0%, transparent 70%)'
+                }}>
+                  <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
+                    ✦ Executive Strategy Blueprint ($19) ✦
+                  </span>
+                  <h3 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif' }}>
+                    Unlock Full 4-Page Personal Blueprint & 72h Action Plan
+                  </h3>
+                  <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
+                    Synthesizes your Month, Day, and Hour palaces into a downloadable 4-page PDF with 72-Hour Chrono Execution Windows, Resonant Colors, Numbers, and Archetypal Guardrails.
+                  </p>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+                    <a
+                      href={DODO_CHECKOUT_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'inline-block', padding: '1rem 3rem', backgroundColor: '#C9A227', color: '#09090C', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 25px rgba(201,162,39,0.4)', transition: 'all 0.3s' }}
+                    >
+                      Unlock Master Blueprint ($19) →
+                    </a>
+
+                    {/* 核心防丢单恢复区 */}
+                    <div style={{ marginTop: '0.8rem', borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
+                      <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
+                        Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
+                      </p>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <input
+                          type="text"
+                          placeholder="e.g. pay_xxxxxxxx"
+                          value={manualPaymentId}
+                          onChange={(e) => setManualPaymentId(e.target.value)}
+                          style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#09090C', border: '1px solid rgba(201,162,39,0.35)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                        />
+                        <button
+                          onClick={() => verifyPayment(manualPaymentId)}
+                          disabled={checkingPayment}
+                          style={{ padding: '0.6rem 1rem', backgroundColor: '#252136', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
+                        >
+                          {checkingPayment ? 'Checking...' : 'Restore'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               )}
             </div>
+          )}
 
-            <div className="pdf-page">
-              <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 01 / 04</span>
-              <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
-                Three-Palace Trajectory (三宫全息向量)
-              </h3>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.monthPalace.symbol} {castResult.monthPalace.name} ({castResult.monthPalace.wuxing})</h4>
-                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.monthPalace.macroAudit}</p>
-                </div>
-
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.25)' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.dayPalace.symbol} {castResult.dayPalace.name} ({castResult.dayPalace.wuxing})</h4>
-                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.dayPalace.meaning}</p>
-                </div>
-
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid #C9A227' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.symbol} {castResult.hourPalace.name} ({castResult.hourPalace.wuxing})</h4>
-                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hourPalace.meaning}</p>
-                </div>
-              </div>
-            </div>
-
-            {isVerifiedPaid ? (
-              <>
-                <div className="pdf-page">
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 02 / 04</span>
-                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
-                    72-Hour Chrono-Hourglass Action Plan (72小时时间沙漏执行规程)
-                  </h3>
-
-                  <div className="print-card" style={{ backgroundColor: '#0E0E14', border: '1px solid rgba(201, 162, 39, 0.3)', borderRadius: '14px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    {castResult.hourPalace.chronoPlan.map((step, idx) => (
-                      <div key={idx} style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
-                        <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>{step.phase}</h4>
-                        <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>{step.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pdf-page">
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 03 / 04</span>
-                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
-                    Five-Dimensional Qi Dynamics & Resonant Vectors (五维能量共振矩阵)
-                  </h3>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>ELEMENTAL ATTUNEMENT</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.wuxing}</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Governing energetic flux.</p>
-                    </div>
-
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>RESONANT COLOR</span>
-                      <h4 style={{ color: '#C9A227', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.elementColor}</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Optimal grounding tone.</p>
-                    </div>
-
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>NUMEROLOGICAL KEY</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.luckyNumbers}</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Harmonic quantitative coordinate.</p>
-                    </div>
-
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#0E0E14', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>CARDINAL VECTOR</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hourPalace.luckyDirection}</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Spatial alignment axis.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pdf-page">
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 04 / 04</span>
-                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>
-                    Major Arcana Synthesis & Executive Guardrails (塔罗大阿卡纳守护与执行红线)
-                  </h3>
-
-                  <div className="print-card" style={{ backgroundColor: '#0E0E14', border: '1px solid #C9A227', borderRadius: '16px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <div>
-                      <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>ARCHETYPAL MIRROR:</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.3rem', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>
-                        {castResult.hourPalace.tarot}
-                      </h4>
-                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>
-                        {castResult.hourPalace.advice}
-                      </p>
-                    </div>
-
-                    <div style={{ borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1.25rem' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#EF4444', fontFamily: 'monospace', fontWeight: 'bold' }}>EXECUTIVE RED LINE (绝对禁忌):</span>
-                      <p style={{ color: '#E8E4DA', fontSize: '0.9rem', margin: '0.3rem 0 0 0', lineHeight: '1.6' }}>
-                        Under the current {castResult.hourPalace.name} momentum, avoid committing long-term binding capital on unverified verbal assurances. All commitments must be codified in written contracts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="no-print" style={{ 
-                padding: '2.5rem 1.5rem', 
-                backgroundColor: '#1A1730', 
-                borderRadius: '16px', 
-                border: '1px solid rgba(201, 162, 39, 0.5)', 
-                textAlign: 'center',
-                boxShadow: '0 0 30px rgba(201, 162, 39, 0.1)',
-                backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 70%)'
-              }}>
-                <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
-                  ✦ Executive Strategy Blueprint ($19) ✦
-                </span>
-                <h3 style={{ fontSize: '1.4rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif' }}>
-                  Unlock Full 4-Page Personal Blueprint & 72h Action Plan
-                </h3>
-                <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
-                  Synthesizes your Month, Day, and Hour palaces into a downloadable 4-page PDF with 72-Hour Chrono Execution Windows, Resonant Colors, Numbers, and Archetypal Guardrails.
-                </p>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-                  <a
-                    href={DODO_CHECKOUT_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ display: 'inline-block', padding: '0.95rem 2.75rem', backgroundColor: '#C9A227', color: '#0E0E14', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}
-                  >
-                    Unlock Master Blueprint ($19) →
-                  </a>
-
-                  {/* 核心防丢单恢复区 */}
-                  <div style={{ marginTop: '0.8rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
-                    <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
-                      Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
+          {/* 底部 10 篇高权重 SEO 文章专栏 */}
+          <div id="knowledge-base" className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.25)', paddingTop: '2.5rem' }}>
+            <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
+              • Esoteric Knowledge Base •
+            </span>
+            <h3 style={{ fontSize: '1.8rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>
+              Strategic Insights & Ephemeris Guides
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+              {ARTICLES.map((art) => (
+                <div key={art.slug} style={{ backgroundColor: '#09090C', border: '1px solid rgba(201, 162, 39, 0.2)', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem', transition: 'border-color 0.3s' }}>
+                  <div>
+                    <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.category} • {art.readTime}</span>
+                    <h4 style={{ color: '#F4EEDB', fontSize: '1.1rem', margin: '0.4rem 0 0.6rem 0', fontFamily: 'Georgia, serif', lineHeight: '1.4' }}>
+                      {art.title}
+                    </h4>
+                    <p style={{ color: '#CDC8BC', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
+                      {art.excerpt}
                     </p>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <input
-                        type="text"
-                        placeholder="e.g. pay_xxxxxxxx"
-                        value={manualPaymentId}
-                        onChange={(e) => setManualPaymentId(e.target.value)}
-                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#0E0E14', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
-                      />
-                      <button
-                        onClick={() => verifyPayment(manualPaymentId)}
-                        disabled={checkingPayment}
-                        style={{ padding: '0.6rem 1rem', backgroundColor: '#332E48', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
-                      >
-                        {checkingPayment ? 'Checking...' : 'Restore'}
-                      </button>
-                    </div>
                   </div>
+                  <span style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>
+                    Read Article →
+                  </span>
                 </div>
-
-              </div>
-            )}
+              ))}
+            </div>
           </div>
-        )}
 
-        {/* 底部 10 篇高权重 SEO 文章专栏 */}
-        <div id="knowledge-base" className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
-          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
-            • Esoteric Knowledge Base •
-          </span>
-          <h3 style={{ fontSize: '1.8rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>
-            Strategic Insights & Ephemeris Guides
-          </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
-            {ARTICLES.map((art) => (
-              <div key={art.slug} style={{ backgroundColor: '#0E0E14', border: '1px solid rgba(201, 162, 39, 0.2)', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem' }}>
-                <div>
-                  <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.category} • {art.readTime}</span>
-                  <h4 style={{ color: '#F4EEDB', fontSize: '1.1rem', margin: '0.4rem 0 0.6rem 0', fontFamily: 'Georgia, serif', lineHeight: '1.4' }}>
-                    {art.title}
-                  </h4>
-                  <p style={{ color: '#CDC8BC', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
-                    {art.excerpt}
-                  </p>
-                </div>
-                <span style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>
-                  Read Article →
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      </section>
-    </div>
-  );
-}
-
-export default function OracleHomeContent() {
-  return (
-    <Suspense fallback={<div style={{ padding: '4rem', textAlign: 'center', color: '#C9A227', fontFamily: 'monospace' }}>Synchronizing Ephemeris...</div>}>
-      <OracleHomeContent />
+        </section>
+      </div>
     </Suspense>
   );
 }
