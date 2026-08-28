@@ -6,16 +6,45 @@ const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAX
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const PALACES = [
-  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.', macroAudit: 'Foundational structures and legal perimeters are well-defended. Low systemic friction.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Asset Audit', text: 'Catalog current liquid resources and confirm ownership agreements.' }, { phase: 'Phase 2 (24h - 48h) Fortification', text: 'Reinforce defensive protocols. Cement agreements in contracts.' }, { phase: 'Phase 3 (48h - 72h) Sovereign Execution', text: 'Maintain established positions.' } ] },
-  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.', macroAudit: 'External progress is blocked by bureaucratic drag. Patience is mandatory.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Friction Diagnosis', text: 'Identify where counterparties are hesitating.' }, { phase: 'Phase 2 (24h - 48h) Internal Optimization', text: 'Fix internal operational defects and liabilities.' }, { phase: 'Phase 3 (48h - 72h) Strategic Stillness', text: 'Adopt a holding pattern.' } ] },
-  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.', macroAudit: 'Accelerated temporal vector. Counterparties are highly receptive.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Mobilization', text: 'Send pivotal outreach and initiate negotiations.' }, { phase: 'Phase 2 (24h - 48h) Term Securing', text: 'Lock in terms and secure initial commitments.' }, { phase: 'Phase 3 (48h - 72h) Closure', text: 'Execute binding actions.' } ] },
-  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.', macroAudit: 'Adversarial atmosphere. Communication is prone to distortion.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Lockdown', text: 'Move communications to written channels.' }, { phase: 'Phase 2 (24h - 48h) Audit', text: 'Review non-disclosure agreements and contracts.' }, { phase: 'Phase 3 (48h - 72h) Engagement', text: 'State non-negotiable boundaries calmly.' } ] },
-  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.', macroAudit: 'Harmonious mutual resonance.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Exploration', text: 'Schedule exploratory dialogues.' }, { phase: 'Phase 2 (24h - 48h) Structuring', text: 'Draft collaborative terms clearly.' }, { phase: 'Phase 3 (48h - 72h) Ratification', text: 'Sign collaborative agreements.' } ] },
-  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.', macroAudit: 'Total entropy reset.', chronoPlan: [ { phase: 'Phase 1 (00h - 24h) Liquidation', text: 'Acknowledge obsolete goals.' }, { phase: 'Phase 2 (24h - 48h) Cleansing', text: 'Clear physical and cognitive space.' }, { phase: 'Phase 3 (48h - 72h) Rebirth', text: 'Formulate new initial hypotheses.' } ] },
+  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.' },
+  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction. Reflect, audit, and wait.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
+  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
+  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.' },
+  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.' },
+  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.' },
 ];
 
 const STATIC_STARS = [
-  { top: '3%', left: '8%', delay: '0.2s', size: '3px' }, { top: '8%', left: '85%', delay: '1.5s', size: '2px' }, { top: '12%', left: '25%', delay: '3.1s', size: '4px' }, { top: '18%', left: '68%', delay: '0.8s', size: '2px' }, { top: '22%', left: '12%', delay: '2.4s', size: '3px' }, { top: '27%', left: '92%', delay: '4.2s', size: '2px' }, { top: '32%', left: '42%', delay: '1.1s', size: '3px' }, { top: '38%', left: '80%', delay: '3.8s', size: '4px' }, { top: '42%', left: '5%', delay: '0.5s', size: '2px' }, { top: '48%', left: '55%', delay: '2.9s', size: '3px' }, { top: '53%', left: '18%', delay: '4.7s', size: '2px' }, { top: '58%', left: '75%', delay: '1.9s', size: '3px' }, { top: '63%', left: '32%', delay: '3.2s', size: '4px' }, { top: '68%', left: '95%', delay: '0.3s', size: '2px' }, { top: '73%', left: '50%', delay: '2.1s', size: '3px' }, { top: '78%', left: '10%', delay: '4.5s', size: '2px' }, { top: '83%', left: '65%', delay: '1.6s', size: '4px' }, { top: '88%', left: '85%', delay: '3.4s', size: '3px' }, { top: '93%', left: '28%', delay: '0.7s', size: '2px' }, { top: '97%', left: '45%', delay: '2.8s', size: '3px' }
+  { top: '3%', left: '8%', delay: '0.2s', size: '3px' },
+  { top: '8%', left: '85%', delay: '1.5s', size: '2px' },
+  { top: '12%', left: '25%', delay: '3.1s', size: '4px' },
+  { top: '18%', left: '68%', delay: '0.8s', size: '2px' },
+  { top: '22%', left: '12%', delay: '2.4s', size: '3px' },
+  { top: '27%', left: '92%', delay: '4.2s', size: '2px' },
+  { top: '32%', left: '42%', delay: '1.1s', size: '3px' },
+  { top: '38%', left: '80%', delay: '3.8s', size: '4px' },
+  { top: '42%', left: '5%', delay: '0.5s', size: '2px' },
+  { top: '48%', left: '55%', delay: '2.9s', size: '3px' },
+  { top: '53%', left: '18%', delay: '4.7s', size: '2px' },
+  { top: '58%', left: '75%', delay: '1.9s', size: '3px' },
+  { top: '63%', left: '32%', delay: '3.2s', size: '4px' },
+  { top: '68%', left: '95%', delay: '0.3s', size: '2px' },
+  { top: '73%', left: '50%', delay: '2.1s', size: '3px' },
+  { top: '78%', left: '10%', delay: '4.5s', size: '2px' },
+  { top: '83%', left: '65%', delay: '1.6s', size: '4px' },
+  { top: '88%', left: '85%', delay: '3.4s', size: '3px' },
+  { top: '93%', left: '28%', delay: '0.7s', size: '2px' },
+  { top: '97%', left: '45%', delay: '2.8s', size: '3px' },
+  { top: '6%', left: '45%', delay: '2.3s', size: '2px' },
+  { top: '15%', left: '95%', delay: '0.9s', size: '3px' },
+  { top: '25%', left: '35%', delay: '4.0s', size: '2px' },
+  { top: '35%', left: '15%', delay: '1.8s', size: '3px' },
+  { top: '45%', left: '90%', delay: '3.5s', size: '2px' },
+  { top: '55%', left: '40%', delay: '0.4s', size: '4px' },
+  { top: '65%', left: '60%', delay: '2.6s', size: '3px' },
+  { top: '75%', left: '82%', delay: '4.8s', size: '3px' },
+  { top: '85%', left: '5%', delay: '1.3s', size: '2px' },
+  { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
 ];
 
 const ARTICLES = [
@@ -33,7 +62,6 @@ export default function Page() {
   const [manualPaymentId, setManualPaymentId] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [emailSubscribed, setEmailSubscribed] = useState(false);
-  const [copiedTwitter, setCopiedTwitter] = useState(false);
   const [castResult, setCastResult] = useState<any>(null);
 
   useEffect(() => {
@@ -49,6 +77,23 @@ export default function Page() {
     return () => clearInterval(timer);
   }, []);
 
+  const verifyPayment = async (pId: string) => {
+    if (!pId) return;
+    try {
+      const res = await fetch(`/api/verify?payment_id=${pId}`);
+      const data = await res.json();
+      if (data.valid) {
+        setIsVerifiedPaid(true);
+        localStorage.setItem('esoteric_is_paid', 'true');
+        alert('🎉 Verified! Full 4-page blueprint is unlocked.');
+      } else {
+        alert('❌ Payment not found.');
+      }
+    } catch (e) {
+      console.error('Payment verification failed:', e);
+    }
+  };
+
   useEffect(() => {
     const saved = localStorage.getItem('last_user_cast');
     if (saved) {
@@ -59,7 +104,6 @@ export default function Page() {
       setIsVerifiedPaid(true);
     }
     
-    // 关键修复：当从 Dodo 付款成功跳回时，自动设置已支付状态并自动生成视窗结果
     const params = new URLSearchParams(window.location.search);
     const status = params.get('status');
     const pId = params.get('payment_id') || params.get('paymentId');
@@ -68,7 +112,6 @@ export default function Page() {
       setIsVerifiedPaid(true);
       localStorage.setItem('esoteric_is_paid', 'true');
       
-      // 如果本地没有起盘记录，根据当前时间自动补全一个，确保 4 页报告能正常渲染展示！
       if (!saved) {
         const now = new Date();
         const mIdx = (now.getMonth() + 1) % 6;
@@ -166,7 +209,7 @@ export default function Page() {
           .print-card { background-color: #0A0A0F !important; border: 1px solid #C9A227 !important; page-break-inside: avoid; }
         }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 6px #C9A227); } }
-        @keyframes magicalGlow { 0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); } 50% { box-shadow: 0 0 45px rgba(201, 162, 39, 0.3); } 100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); } }
+        @keyframes magicalGlow { 0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); } 50% { box-shadow: 0 0 45px rgba(201, 162, 39, 0.3); border-color: rgba(201, 162, 39, 0.5); } 100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); } }
         @keyframes spinCompass { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
         .bling-star { position: absolute; background-color: #F4EEDB; border-radius: 50%; animation: twinkle 5s infinite ease-in-out; }
         .cyber-glow-box { animation: magicalGlow 6s infinite ease-in-out; }
@@ -443,7 +486,7 @@ export default function Page() {
         </div>
       </div>
 
-      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
+      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: '2' }}>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
 
