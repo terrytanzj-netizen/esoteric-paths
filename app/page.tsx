@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1";
+const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https://www.esotericpaths.com%2F";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const PALACES = [
@@ -127,10 +127,8 @@ export default function Page() {
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'system-ui, sans-serif', position: 'relative', overflowX: 'hidden' }}>
       
-      {/* 幽暗深空底色 */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 15%, rgba(201, 162, 39, 0.08) 0%, rgba(5, 5, 8, 0.98) 75%), linear-gradient(to bottom, #050508, #020204)', pointerEvents: 'none', zIndex: 0 }} />
 
-      {/* 旋转占星罗盘水印 */}
       <div className="spinning-compass" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '650px', height: '650px', border: '1px dashed rgba(201, 162, 39, 0.1)', borderRadius: '50%', pointerEvents: 'none', zIndex: 0, opacity: 0.3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ width: '530px', height: '530px', border: '1px solid rgba(201, 162, 39, 0.08)', borderRadius: '50%', position: 'relative' }}>
           <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', color: '#C9A227', fontSize: '0.75rem', fontFamily: 'monospace' }}>N</div>
@@ -140,7 +138,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* 40颗闪烁星星 */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none', zIndex: 1 }}>
         {STATIC_STARS.map((star, i) => (
           <div key={i} className="bling-star" style={{ top: star.top, left: star.left, width: star.size, height: star.size, animationDelay: star.delay }} />
@@ -166,7 +163,6 @@ export default function Page() {
         .spinning-compass { animation: spinCompass 120s linear infinite; }
       `}} />
 
-      {/* 顶部导航 */}
       <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ color: '#C9A227', fontWeight: 'bold', fontFamily: 'Georgia, serif', fontSize: '1.15rem', textShadow: '0 0 10px #C9A227' }}>✦ ESOTERIC PATHS</span>
         <div style={{ display: 'flex', gap: '1.2rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#8A8678' }}>
@@ -178,14 +174,12 @@ export default function Page() {
         </div>
       </nav>
 
-      {/* 头部介绍 */}
       <header style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Xiao Liu Ren × Tarot Matrix</span>
         <h1 style={{ fontSize: '2.8rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.4rem 0', textShadow: '0 0 30px rgba(201,162,39,0.2)' }}>TEMPORAL STRATEGY MATRIX</h1>
         <p style={{ fontSize: '0.95rem', color: '#8A8678', maxWidth: '600px', margin: '0 auto' }}>Align critical decisions with classical temporal mechanics and Western archetypal wisdom.</p>
       </header>
 
-      {/* 宇宙时钟 */}
       <div className="cyber-glow-box" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', letterSpacing: '0.2em' }}>• LIVE ALCHEMICAL EPHEMERIS FLUX •</span>
         <div style={{ fontSize: '3.5rem', fontWeight: 'bold', fontFamily: 'monospace', color: '#F4EEDB', textShadow: '0 0 25px rgba(201,162,39,0.4)', margin: '0.4rem 0' }}>{time.timeStr || '12:00:00'}</div>
@@ -202,7 +196,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* 四大元素与五行矩阵区块 */}
       <section id="elements" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Hermetic & Eastern Synthesis •</span>
         <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>The Elemental & Wu Xing Architecture</h3>
@@ -222,7 +215,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* 起盘表单与高价值预览卡片 */}
       <div style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <form onSubmit={handleCast} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
@@ -239,7 +231,6 @@ export default function Page() {
               <h3 style={{ fontSize: '1.5rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.2rem 0' }}>Query: "{castResult.question}"</h3>
             </div>
 
-            {/* 恢复高价值的 三宫全息向量预览卡片 */}
             <div style={{ background: '#050508', borderRadius: '14px', padding: '1.5rem', border: '1px solid rgba(201,162,39,0.3)' }}>
               <h4 style={{ fontSize: '1.2rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 1rem 0' }}>Three-Palace Trajectory (三宫全息向量)</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -264,7 +255,6 @@ export default function Page() {
         )}
       </div>
 
-      {/* 付费蓝图与解锁区 */}
       <div id="blueprint" style={{ background: '#13111C', border: '1px solid rgba(201,162,39,0.5)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>✦ Executive Strategy Blueprint ($19) ✦</span>
         <h3 style={{ fontSize: '1.4rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.5rem 0' }}>Unlock Full 4-Page Personal Blueprint & 72h Action Plan</h3>
@@ -285,7 +275,6 @@ export default function Page() {
         )}
       </div>
 
-      {/* 邮件简报订阅 */}
       <div style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h4 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h4>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', margin: '0 0 1rem 0' }}>Receive precision temporal vectors every Monday.</p>
@@ -299,7 +288,6 @@ export default function Page() {
         )}
       </div>
 
-      {/* 知识库文章预览 */}
       <div id="insights" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -312,7 +300,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* 底部 Support 锚点 */}
       <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
