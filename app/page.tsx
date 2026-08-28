@@ -116,6 +116,80 @@ const PALACES = [
   },
 ];
 
+// 前期精选的 10 篇高阶埃索特里吉与时间战略文章
+const ARTICLES = [
+  {
+    slug: 'ontology-of-time-crisis-decisions',
+    category: 'Philosophy & Methodology',
+    title: 'The Ontology of Time: Why Ancient Chinese Horary Systems Outperform Western Chronometry',
+    excerpt: 'Comparing linear Chronos with qualitative Kairos to understand how ephemeral coordinates govern structural reality.',
+    readTime: '7 min read'
+  },
+  {
+    slug: 'xiao-liu-ren-vs-tarot-timing',
+    category: 'Synthesis & Archetypes',
+    title: 'Xiao Liu Ren vs. Western Tarot: Bridging Eastern Temporal Mechanics with Jungian Archetypes',
+    excerpt: 'An ontological bridge between Western archetypal mirrors and Chinese horary coordinate mechanics.',
+    readTime: '6 min read'
+  },
+  {
+    slug: 'horary-divination-psychological-bias',
+    category: 'Methodology',
+    title: 'What is Horary Divination? Navigating Uncertainty Without Psychological Bias',
+    excerpt: 'How the moment of inquiry acts as a holographic snapshot of universal probability fields.',
+    readTime: '5 min read'
+  },
+  {
+    slug: 'da-an-great-stability-guide',
+    category: 'Palace Decodes',
+    title: 'Da An (大安) Decoded: Strategic Preservation Over Aggressive Expansion in Volatile Markets',
+    excerpt: 'Deep-dive into the Wood-aligned sovereign state of Da An and its protective Tarot archetypal mirrors.',
+    readTime: '5 min read'
+  },
+  {
+    slug: 'surviving-liu-lian-drag',
+    category: 'Palace Decodes',
+    title: 'Surviving the Drag: How to Master Liu Lian (留连) Periods Without Burning Out',
+    excerpt: 'Turning systemic delays and bureaucratic friction into internal operational audits.',
+    readTime: '6 min read'
+  },
+  {
+    slug: 'physics-of-velocity-su-xi',
+    category: 'Palace Decodes',
+    title: 'The Physics of Velocity: Harnessing Su Xi (速喜) for High-Stakes Negotiations',
+    excerpt: 'Leveraging high-velocity Fire dynamics to close critical agreements before momentum dissipates.',
+    readTime: '4 min read'
+  },
+  {
+    slug: 'navigating-chi-kou-frictions',
+    category: 'Palace Decodes',
+    title: 'Navigating Toxic Resistance: Tactical Communication Under Chi Kou (赤口) Frictions',
+    excerpt: 'Establishing ironclad written perimeters in adversarial, conflict-prone environments.',
+    readTime: '5 min read'
+  },
+  {
+    slug: 'art-of-alliance-xiao-ji',
+    category: 'Palace Decodes',
+    title: 'The Art of Alliance: Scaling Synergies Through Xiao Ji (小吉)',
+    excerpt: 'Unlocking mutual resonance and collaborative multi-party frameworks.',
+    readTime: '4 min read'
+  },
+  {
+    slug: 'tabula-rasa-kong-wang',
+    category: 'Palace Decodes',
+    title: 'The Tabula Rasa Effect: Rebuilding from Zero in Kong Wang (空亡) Cycles',
+    excerpt: 'Treating total systemic resets and deadweight termination as primordial rebirth.',
+    readTime: '6 min read'
+  },
+  {
+    slug: '72-hour-executive-blueprint',
+    category: 'Executive Protocols',
+    title: 'The 72-Hour Executive Blueprint: Translating Ephemeris Coordinates into Real-World Action',
+    excerpt: 'A master guide on turning abstract horary hexagrams into strict 3-day tactical execution phases.',
+    readTime: '8 min read'
+  },
+];
+
 function OracleHomeContent() {
   const searchParams = useSearchParams();
   const paymentIdFromUrl = searchParams.get('payment_id') || searchParams.get('paymentId');
@@ -526,12 +600,41 @@ function OracleHomeContent() {
             )}
           </div>
         )}
+
+        {/* 底部文章专栏区域：10篇高权重SEO文章 */}
+        <div className="no-print" style={{ marginTop: '4rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '2.5rem' }}>
+          <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em', display: 'block', marginBottom: '0.5rem' }}>
+            • Esoteric Knowledge Base •
+          </span>
+          <h3 style={{ fontSize: '1.8rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>
+            Strategic Insights & Ephemeris Guides
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+            {ARTICLES.map((art) => (
+              <div key={art.slug} style={{ backgroundColor: '#0E0E14', border: '1px solid rgba(201, 162, 39, 0.2)', borderRadius: '14px', padding: '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem' }}>
+                <div>
+                  <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.category} • {art.readTime}</span>
+                  <h4 style={{ color: '#F4EEDB', fontSize: '1.1rem', margin: '0.4rem 0 0.6rem 0', fontFamily: 'Georgia, serif', lineHeight: '1.4' }}>
+                    {art.title}
+                  </h4>
+                  <p style={{ color: '#CDC8BC', fontSize: '0.85rem', margin: 0, lineHeight: '1.5' }}>
+                    {art.excerpt}
+                  </p>
+                </div>
+                <span style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>
+                  Read Article →
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </section>
     </div>
   );
 }
 
-export default function HomePage() {
+export default function OracleHomeContent() {
   return (
     <Suspense fallback={<div style={{ padding: '4rem', textAlign: 'center', color: '#C9A227', fontFamily: 'monospace' }}>Synchronizing Ephemeris...</div>}>
       <OracleHomeContent />
