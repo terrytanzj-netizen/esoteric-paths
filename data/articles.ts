@@ -250,6 +250,41 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
     ],
   },
 
+  'chinese-name-for-business-guide': {
+    slug: 'chinese-name-for-business-guide',
+    lang: 'en',
+    title: 'How to Choose a Chinese Name for Business: A Guide for Foreign Executives',
+    readTime: '9 min read',
+    excerpt:
+      'Why a good Chinese name matters in boardrooms, how meaning differs from translation, and a simple protocol for choosing one that carries authority.',
+    sections: [
+      {
+        heading: 'A Name Is a Contract Before the Contract',
+        body: 'In Chinese business culture the exchange of names is not a pleasantry — it is the first clause of a relationship. A well-chosen Chinese name signals that you understand the local grammar of respect: that relationships precede transactions, and that a person who has taken the time to be named properly is more likely to take the time to honor commitments. The reverse is also true. A foreign executive who uses only a phonetic string of characters that happens to sound like the original English name is telling the room, without meaning to, that this market is an afterthought. If you are serious about doing business in China, a Chinese name is not optional decoration. It is operational infrastructure.',
+      },
+      {
+        heading: 'Translation Is Not a Name',
+        body: 'The most common mistake is to treat a Chinese name as a translation exercise. Alexander does not become 亚历山大 because that string carries no semantic weight — it is merely a sound map, and a clunky one at that. A real Chinese name compresses intention into two or three characters. Each character is a word with meaning, history and energetic association. The sound layer matters for pronunciation, but the meaning layer is what people remember. When someone reads your card, they are not asking "How close is this to his English name?" They are asking "What does this person want to be known for?" A Chinese name for business should answer that question before you open your mouth.',
+      },
+      {
+        heading: 'The Three-Layer Test',
+        body: 'Use three filters when evaluating any candidate name. First, the sound layer: can a Mandarin speaker pronounce it without twisting their tongue, and does it avoid embarrassing homophones? Second, the meaning layer: do the characters together express a direction — stability, vision, trust, prosperity — that matches your role? Third, the energy layer: in the Wu Xing framework, every character carries an elemental tendency. A name heavy on Water may suit negotiation and finance; a name heavy on Fire may suit sales and leadership. You do not need to believe in metaphysics to use this as a design constraint. You only need to recognize that the people around you may read the name through this lens.',
+      },
+      {
+        heading: 'Cultural Traps to Avoid',
+        body: 'Avoid characters that are beautiful in isolation but carry unwanted overtones. 凤 (phoenix) is majestic but traditionally feminine; a male executive using it without care can look comical. 龙 (dragon) is powerful but overused to the point of cliché in business cards. Avoid characters associated with death, separation or illness, even if their dictionary definitions look neutral. And be careful with homophones: a name that sounds like "to lose money" or "to be fired" will be noticed before you finish your introduction. The safest path is not to chase a lucky Chinese name by superstition, but to verify the name with at least two native speakers who understand the business context.',
+      },
+      {
+        heading: 'A Reusable Protocol',
+        body: 'Start by defining the single quality you want the name to broadcast. For a founder it might be vision; for a banker it might be trust; for a negotiator it might be steadiness. Then generate candidates using a Chinese name generator or a naming consultant, filtering by sound, meaning and energy. Test the top three with native Mandarin speakers, asking not "Do you like this?" but "What kind of person would have this name?" If their description matches your intended presence, you have a winner. Finally, check pronunciation across major Chinese dialects if your work spans Greater China. What works in Beijing may carry a different echo in Guangdong or Taiwan.',
+      },
+      {
+        heading: 'Generator, Consultant, or Both',
+        body: 'A Chinese name generator is useful for producing a first draft and for understanding the design space — which meanings are available, how pinyin maps to tone, and which combinations feel natural. It is a brainstorming tool, not a final arbiter. For a high-stakes role — a board member, a public spokesperson, someone whose name will appear on legal documents — hire a naming consultant or a cultural advisor to validate the final choice. The cost is trivial compared with the cost of a name that undermines trust in the first meeting. Think of the generator as the sketch and the consultant as the signature.',
+      },
+    ],
+  },
+
   /* ============================================================
      ZH — evidence-based register
      ============================================================ */
