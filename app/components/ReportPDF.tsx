@@ -65,7 +65,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
   const headingStyle: React.CSSProperties = {
     fontSize: '1.5rem',
     color: cream,
-    fontFamily: 'Georgia, serif',
+    fontFamily: 'var(--font-display)',
     margin: '0.25rem 0 1.5rem 0',
   };
 
@@ -82,6 +82,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <span style={pageTagStyle}>PAGE {String(pageNum).padStart(2, '0')} / 10</span>
       <h3 style={headingStyle}>{title}</h3>
       {children}
+      <div className="pdf-foot">✦ Esoteric Paths &nbsp;·&nbsp; Temporal Strategy Matrix &nbsp;·&nbsp; PAGE {String(pageNum).padStart(2, '0')} / 10</div>
     </div>
   );
 
@@ -90,8 +91,9 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       {/* PAGE 01 — COVER */}
       <div className="pdf-page" style={{ justifyContent: 'space-between' }}>
         <div>
+          <div style={{ textAlign: 'center', color: gold, letterSpacing: '0.5em', fontSize: '0.95rem', marginBottom: '1.2rem' }}>✦ &nbsp; 🜔 &nbsp; ✦</div>
           <span style={pageTagStyle}>CONFIDENTIAL EXECUTIVE ORACLE</span>
-          <h1 style={{ fontSize: '2.6rem', color: cream, fontFamily: 'Georgia, serif', margin: '0.6rem 0 1rem 0', lineHeight: 1.1 }}>
+          <h1 style={{ fontSize: '2.6rem', color: cream, fontFamily: 'var(--font-display)', margin: '0.6rem 0 1rem 0', lineHeight: 1.1 }}>
             Temporal Strategy Matrix
           </h1>
           <p style={{ fontSize: '1.05rem', color: parchment, margin: 0, maxWidth: '420px', lineHeight: 1.5 }}>
@@ -101,7 +103,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
 
         <div className="print-card" style={{ padding: '2rem', borderRadius: '16px', backgroundColor: '#050508', border: `1px solid ${gold}` }}>
           <span style={labelStyle}>Querent Query</span>
-          <p style={{ fontSize: '1.35rem', color: cream, fontFamily: 'Georgia, serif', margin: '0.5rem 0 1.5rem 0', lineHeight: 1.4 }}>
+          <p style={{ fontSize: '1.35rem', color: cream, fontFamily: 'var(--font-display)', margin: '0.5rem 0 1.5rem 0', lineHeight: 1.4 }}>
             “{question}”
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.85rem', color: parchment, fontFamily: 'monospace' }}>
@@ -139,17 +141,17 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
               <div>
                 <span style={labelStyle}>Month Palace</span>
-                <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>{month.name}</h4>
+                <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>{month.name}</h4>
                 <p style={{ color: parchment, fontSize: '0.8rem', margin: 0 }}>{month.desc}</p>
               </div>
               <div>
                 <span style={labelStyle}>Day Palace</span>
-                <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>{day.name}</h4>
+                <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>{day.name}</h4>
                 <p style={{ color: parchment, fontSize: '0.8rem', margin: 0 }}>{day.desc}</p>
               </div>
               <div>
                 <span style={labelStyle}>Hour Palace</span>
-                <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>{hour.name}</h4>
+                <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>{hour.name}</h4>
                 <p style={{ color: parchment, fontSize: '0.8rem', margin: 0 }}>{hour.desc}</p>
               </div>
             </div>
@@ -174,17 +176,17 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
             <span style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{month.symbol} {month.name} ({month.wuxing})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{month.symbol} {month.name} ({month.wuxing})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{month.desc}</p>
           </div>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
             <span style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{day.symbol} {day.name} ({day.wuxing})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{day.symbol} {day.name} ({day.wuxing})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{day.desc}</p>
           </div>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid #C9A227' }}>
             <span style={{ fontSize: '0.75rem', color: gold, fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{hour.symbol} {hour.name} ({hour.wuxing})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{hour.symbol} {hour.name} ({hour.wuxing})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{hour.desc}</p>
           </div>
         </div>
@@ -195,7 +197,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div className="print-card" style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.4)` }}>
             <span style={labelStyle}>Flow Diagnosis — {flow.transition}</span>
-            <p style={{ color: cream, fontSize: '1rem', lineHeight: 1.65, margin: '0.8rem 0 0 0', fontFamily: 'Georgia, serif' }}>
+            <p style={{ color: cream, fontSize: '1rem', lineHeight: 1.65, margin: '0.8rem 0 0 0', fontFamily: 'var(--font-display)' }}>
               {flow.narrative}
             </p>
           </div>
@@ -203,7 +205,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             <div className="print-card" style={cardStyle}>
               <span style={labelStyle}>Month → Day</span>
-              <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>
+              <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>
                 {month.name.split(' ')[0]} to {day.name.split(' ')[0]}
               </h4>
               <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.55, margin: 0 }}>
@@ -213,7 +215,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
             </div>
             <div className="print-card" style={cardStyle}>
               <span style={labelStyle}>Day → Hour</span>
-              <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>
+              <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>
                 {day.name.split(' ')[0]} to {hour.name.split(' ')[0]}
               </h4>
               <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.55, margin: 0 }}>
@@ -236,25 +238,25 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <PageWrap pageNum={5} title="72-Hour Chrono-Hourglass Action Plan (72小时执行规程)">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div className="print-card" style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.4)` }}>
-            <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0 0 0.5rem 0' }}>Strategic Theme</h4>
+            <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0 0 0.5rem 0' }}>Strategic Theme</h4>
             <p style={{ color: parchment, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>{plan.theme}</p>
           </div>
 
           <div className="print-card" style={{ ...cardStyle, borderLeft: `4px solid ${gold}`, borderColor: `rgba(201, 162, 39, 0.3)` }}>
             <span style={labelStyle}>Phase 1 — 00h to 24h</span>
-            <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>Asset & Environment Audit</h4>
+            <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>Asset & Environment Audit</h4>
             <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>{plan.phase1}</p>
           </div>
 
           <div className="print-card" style={{ ...cardStyle, borderLeft: `4px solid ${gold}`, borderColor: `rgba(201, 162, 39, 0.3)` }}>
             <span style={labelStyle}>Phase 2 — 24h to 48h</span>
-            <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>Protocol Calibration</h4>
+            <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>Protocol Calibration</h4>
             <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>{plan.phase2}</p>
           </div>
 
           <div className="print-card" style={{ ...cardStyle, borderLeft: `4px solid ${gold}`, borderColor: `rgba(201, 162, 39, 0.3)` }}>
             <span style={labelStyle}>Phase 3 — 48h to 72h</span>
-            <h4 style={{ color: cream, fontFamily: 'Georgia, serif', margin: '0.3rem 0' }}>Sovereign Execution</h4>
+            <h4 style={{ color: cream, fontFamily: 'var(--font-display)', margin: '0.3rem 0' }}>Sovereign Execution</h4>
             <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>{plan.phase3}</p>
           </div>
         </div>
@@ -265,42 +267,42 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Elemental Attunement</span>
-            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{vector.element}</h4>
+            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.element}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               Governs the energetic flux of this window. Dress, diet, and environment can be tuned toward this element to reduce friction.
             </p>
           </div>
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Resonant Color</span>
-            <h4 style={{ color: gold, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{vector.color}</h4>
+            <h4 style={{ color: gold, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.color}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               Optimal grounding tone for negotiations, documents, wardrobe, and visual anchors during the 72-hour window.
             </p>
           </div>
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Numerological Key</span>
-            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{vector.numbers}</h4>
+            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.numbers}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               Harmonic quantitative coordinates. Use for timing, pricing tiers, meeting counts, or iteration cycles.
             </p>
           </div>
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Cardinal Vector</span>
-            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{vector.direction}</h4>
+            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.direction}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               Spatial alignment axis. Favorable orientation for calls, desk position, or physical movement if relevant.
             </p>
           </div>
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Seasonal Resonance</span>
-            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{vector.season}</h4>
+            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.season}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               The energetic season currently active. Match your pace to the season: spring expands, winter waits, autumn cuts, summer strikes.
             </p>
           </div>
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Body Focus</span>
-            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{vector.bodyFocus}</h4>
+            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.bodyFocus}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               Correlated organ and tissue systems. Extra rest, hydration, or movement in these areas supports clearer decision-making.
             </p>
@@ -313,13 +315,13 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div className="print-card" style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.4)` }}>
             <span style={labelStyle}>Archetypal Mirror</span>
-            <h4 style={{ color: gold, fontSize: '1.5rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{tarot.pair}</h4>
+            <h4 style={{ color: gold, fontSize: '1.5rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{tarot.pair}</h4>
             <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>{tarot.reading}</p>
           </div>
 
           <div className="print-card" style={cardStyle}>
             <span style={labelStyle}>Jungian Posture</span>
-            <h4 style={{ color: cream, fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{tarot.jungianMirror}</h4>
+            <h4 style={{ color: cream, fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{tarot.jungianMirror}</h4>
             <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.6, margin: 0 }}>
               In analytical psychology, this is the dominant animus/anima signal for your question. It names the pattern of energy most capable of resolving the tension you described.
             </p>
@@ -337,7 +339,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div className="print-card" style={{ ...cardStyle, border: `1px solid #EF4444` }}>
             <span style={{ ...labelStyle, color: '#EF4444', fontWeight: 'bold' }}>Absolute Red Line</span>
-            <p style={{ color: cream, fontSize: '1rem', lineHeight: 1.65, margin: '0.8rem 0 0 0', fontFamily: 'Georgia, serif' }}>
+            <p style={{ color: cream, fontSize: '1rem', lineHeight: 1.65, margin: '0.8rem 0 0 0', fontFamily: 'var(--font-display)' }}>
               {guardrails.redLine}
             </p>
           </div>
@@ -415,8 +417,9 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       {/* PAGE 10 — BACK COVER */}
       <div className="pdf-page" style={{ justifyContent: 'center', textAlign: 'center' }}>
         <div>
+          <div style={{ color: gold, letterSpacing: '0.5em', fontSize: '0.95rem', marginBottom: '1.2rem' }}>✦ &nbsp; 🜔 &nbsp; ✦</div>
           <span style={pageTagStyle}>PAGE 10 / 10</span>
-          <h2 style={{ fontSize: '2rem', color: cream, fontFamily: 'Georgia, serif', margin: '1rem 0 1rem 0' }}>✦ Esoteric Paths</h2>
+          <h2 style={{ fontSize: '2rem', color: cream, fontFamily: 'var(--font-display)', margin: '1rem 0 1rem 0' }}>✦ Esoteric Paths</h2>
           <p style={{ color: parchment, fontSize: '0.95rem', maxWidth: '420px', margin: '0 auto 2rem auto', lineHeight: 1.6 }}>
             Deterministic Horary Infrastructure bridging classical Chinese temporal mechanics with Western archetypal psychology.
           </p>
