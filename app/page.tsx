@@ -77,7 +77,6 @@ const FAQ_ITEMS = [
   { q: 'What exactly do I get for $19?', a: 'A downloadable 10-page PDF: methodology, your three-palace trajectory, palace interaction narrative, a personalized 72-hour action plan, five-dimensional resonant vectors, Major Arcana synthesis, executive guardrails, and reference appendix.' },
   { q: 'Is this financial or legal advice?', a: 'No. Esoteric Paths is a decision-clarity instrument. All binding terms must be codified in written contracts.' },
   { q: 'How is my payment data handled?', a: 'Payments are processed by Dodo Payments (PCI-DSS compliant). We never store your card details.' },
-  { q: 'What is the 7-day guarantee?', a: 'If the blueprint does not meet expectations, request a full refund within 7 days — no questions asked.' },
 ];
 
 export default function Page() {
@@ -545,7 +544,6 @@ export default function Page() {
                   <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.72rem', color: '#8A8678', fontFamily: 'monospace', flexWrap: 'wrap', justifyContent: 'center' }}>
                     <span>🔒 256-Bit Encrypted Secure</span>
                     <span>⚡ Instant PDF Delivery</span>
-                    <span>🛡️ 7-Day Guarantee</span>
                   </div>
 
                   {(paymentStatus === 'needs-id' || paymentStatus === 'error' || paymentStatus === 'verifying') && (
