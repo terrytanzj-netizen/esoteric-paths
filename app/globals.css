@@ -1,1 +1,109 @@
+/* Esoteric Paths — global styles */
 
+/* Print layout for the 4-page executive blueprint */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body,
+  html {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #050508 !important;
+    color: #E8E4DA !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .no-print,
+  header,
+  nav,
+  footer,
+  button,
+  a {
+    display: none !important;
+  }
+
+  .print-area {
+    display: block !important;
+    background-color: #050508 !important;
+    color: #E8E4DA !important;
+    padding: 20mm !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pdf-page {
+    page-break-before: always;
+    min-height: 250mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pdf-page:first-of-type {
+    page-break-before: avoid;
+  }
+
+  .print-card {
+    background-color: #0A0A0F !important;
+    border: 1px solid #C9A227 !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* Animations */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.4);
+    filter: drop-shadow(0 0 6px #C9A227);
+  }
+}
+
+@keyframes magicalGlow {
+  0% {
+    box-shadow: 0 0 25px rgba(201, 162, 39, 0.12);
+    border-color: rgba(201, 162, 39, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(201, 162, 39, 0.3);
+    border-color: rgba(201, 162, 39, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(201, 162, 39, 0.12);
+    border-color: rgba(201, 162, 39, 0.25);
+  }
+}
+
+@keyframes spinCompass {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Utility classes */
+.bling-star {
+  position: absolute;
+  background-color: #F4EEDB;
+  border-radius: 50%;
+  animation: twinkle 5s infinite ease-in-out;
+}
+
+.cyber-glow-box {
+  animation: magicalGlow 6s infinite ease-in-out;
+}
+
+.spinning-compass {
+  animation: spinCompass 120s linear infinite;
+}
