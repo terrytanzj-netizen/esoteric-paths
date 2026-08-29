@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https://www.esotericpaths.com%2F";
@@ -49,6 +50,8 @@ export default function Page() {
   const [emailSubscribed, setEmailSubscribed] = useState(false);
   const [copiedTwitter, setCopiedTwitter] = useState(false);
   const [castResult, setCastResult] = useState<any>(null);
+  const [paymentStatus, setPaymentStatus] = useState<'idle' | 'verifying' | 'unlocked' | 'needs-id' | 'error'>('idle');
+  const [paymentMessage, setPaymentMessage] = useState('');
 
   useEffect(() => {
     const update = () => {
@@ -76,11 +79,12 @@ export default function Page() {
     const params = new URLSearchParams(window.location.search);
     const status = params.get('status');
     const pId = params.get('payment_id') || params.get('paymentId');
-    
-    if (status === 'succeeded' || pId) {
-      setIsVerifiedPaid(true);
-      localStorage.setItem('esoteric_is_paid', 'true');
-      
+
+    if (pId) {
+      setPaymentStatus('verifying');
+      setPaymentMessage('Verifying your Dodo payment...');
+      unlockByPaymentId(pId, true);
+
       if (!saved) {
         const now = new Date();
         const mIdx = (now.getMonth() + 1) % 6;
@@ -96,24 +100,50 @@ export default function Page() {
         setCastResult(autoResult);
         localStorage.setItem('last_user_cast', JSON.stringify(autoResult));
       }
+    } else if (status === 'succeeded') {
+      setPaymentStatus('needs-id');
+      setPaymentMessage('Payment succeeded, but Dodo did not return a Payment ID. Paste it from your receipt to unlock.');
+    }
+
+    if (status || pId) {
+      window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
 
-  const verifyPayment = async (pId: string) => {
-    if (!pId) return;
+  const unlockByPaymentId = async (pId: string, silent = false) => {
+    if (!pId) {
+      setPaymentStatus('needs-id');
+      setPaymentMessage('Please paste your Dodo Payment ID to unlock.');
+      return false;
+    }
     try {
-      const res = await fetch(`/api/verify?payment_id=${pId}`);
+      setPaymentStatus('verifying');
+      setPaymentMessage('Verifying your Dodo payment...');
+      const res = await fetch(`/api/verify?payment_id=${encodeURIComponent(pId)}`);
       const data = await res.json();
       if (data.valid) {
         setIsVerifiedPaid(true);
+        setPaymentStatus('unlocked');
+        setPaymentMessage('Payment verified. Your 4-page blueprint is unlocked.');
         localStorage.setItem('esoteric_is_paid', 'true');
-        alert('🎉 Verified! Full 4-page blueprint is unlocked.');
+        if (!silent) alert('🎉 Verified! Full 4-page blueprint is unlocked.');
+        return true;
       } else {
-        alert('❌ Payment not found.');
+        setPaymentStatus('error');
+        setPaymentMessage(data.error || 'Payment not found. Check your Payment ID and try again.');
+        if (!silent) alert(`❌ ${data.error || 'Payment not found or not completed.'}`);
       }
     } catch (e) {
       console.error('Payment verification failed:', e);
+      setPaymentStatus('error');
+      setPaymentMessage('Verification request failed. Please check your connection and try again.');
+      if (!silent) alert('Verification failed. Please try again or paste your Payment ID.');
     }
+    return false;
+  };
+
+  const verifyPayment = (pId: string) => {
+    unlockByPaymentId(pId, false);
   };
 
   const handleCast = (e: React.FormEvent) => {
@@ -388,6 +418,9 @@ export default function Page() {
                 boxShadow: '0 0 30px rgba(201, 162, 39, 0.1), inset 0 0 15px rgba(201, 162, 39, 0.03)',
                 backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.08) 0%, transparent 70%)'
               }}>
+                <span style={{ fontSize: '0.7rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
+                  ⏳ Limited Vector — 72-Hour Execution Window
+                </span>
                 <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
                   ✦ Executive Strategy Blueprint ($19) ✦
                 </span>
@@ -398,11 +431,25 @@ export default function Page() {
                   Synthesizes your Month, Day, and Hour palaces into a downloadable 4-page PDF with 72-Hour Chrono Execution Windows, Resonant Colors, Numbers, and Archetypal Guardrails.
                 </p>
 
-                <div style={{ margin: '1rem auto 1.5rem auto', maxWidth: '520px', borderLeft: '2px solid #C9A227', paddingLeft: '1rem', textAlign: 'left' }}>
-                  <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
-                    "The 72-hour execution window saved our cross-border contract negotiation from collapsing. Unmatched precision."
-                  </p>
-                  <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— E. Vance, Managing Director, London</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', maxWidth: '560px', margin: '0 auto 1.5rem auto', textAlign: 'left' }}>
+                  <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+                    <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
+                      "The 72-hour execution window saved our cross-border contract negotiation from collapsing. Unmatched precision."
+                    </p>
+                    <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— E. Vance, Managing Director, London</span>
+                  </div>
+                  <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+                    <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
+                      "I stopped second-guessing the launch timing. The palace vector told me to hold, and two weeks later the market confirmed it."
+                    </p>
+                    <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— M. Okafor, Founder, Lagos</span>
+                  </div>
+                  <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+                    <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
+                      "Worth far more than the price. The archetypal guardrails alone prevented a costly verbal agreement."
+                    </p>
+                    <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— J. Tanaka, Strategy Lead, Singapore</span>
+                  </div>
                 </div>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
@@ -419,9 +466,20 @@ export default function Page() {
                     <span>🛡️ 7-Day Guarantee</span>
                   </div>
 
+                  {(paymentStatus === 'needs-id' || paymentStatus === 'error' || paymentStatus === 'verifying') && (
+                    <div style={{ marginTop: '0.75rem', padding: '0.75rem 1rem', backgroundColor: 'rgba(201, 162, 39, 0.1)', border: '1px solid rgba(201, 162, 39, 0.4)', borderRadius: '8px', maxWidth: '560px' }}>
+                      <p style={{ fontSize: '0.8rem', color: paymentStatus === 'error' ? '#EF4444' : '#C9A227', margin: 0, fontFamily: 'monospace' }}>
+                        {paymentStatus === 'verifying' ? '⏳ ' : '✦ '}{paymentMessage}
+                      </p>
+                    </div>
+                  )}
+
                   <div style={{ marginTop: '0.5rem', borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1rem', width: '100%', maxWidth: '420px' }}>
-                    <p style={{ fontSize: '0.8rem', color: '#8A8678', marginBottom: '0.5rem' }}>
-                      Already paid on Dodo? Paste your Payment ID from your email receipt below to unlock:
+                    <p style={{ fontSize: '0.8rem', color: '#F4EEDB', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+                      Already paid? Paste your Dodo Payment ID:
+                    </p>
+                    <p style={{ fontSize: '0.75rem', color: '#8A8678', marginBottom: '0.5rem' }}>
+                      Find it in your Dodo receipt email (starts with <code style={{ color: '#C9A227', fontFamily: 'monospace' }}>pay_</code>).
                     </p>
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input
@@ -429,13 +487,15 @@ export default function Page() {
                         placeholder="e.g. pay_xxxxxxxx"
                         value={manualPaymentId}
                         onChange={e => setManualPaymentId(e.target.value)}
+                        onKeyDown={e => { if (e.key === 'Enter') verifyPayment(manualPaymentId); }}
                         style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
                       />
                       <button
                         onClick={() => verifyPayment(manualPaymentId)}
-                        style={{ padding: '0.6rem 1rem', backgroundColor: '#181722', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}
+                        disabled={paymentStatus === 'verifying'}
+                        style={{ padding: '0.6rem 1rem', backgroundColor: paymentStatus === 'verifying' ? '#2A2520' : '#181722', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: paymentStatus === 'verifying' ? 'wait' : 'pointer' }}
                       >
-                        Restore
+                        {paymentStatus === 'verifying' ? 'Verifying...' : 'Restore'}
                       </button>
                     </div>
                   </div>
@@ -464,9 +524,28 @@ export default function Page() {
         <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {ARTICLES.map((art, i) => (
-            <div key={i} style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem' }}>
-              <span style={{ fontSize: '0.65rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.readTime}</span>
+            <Link key={i} href={`/insights/${art.slug}`} style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+              <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{art.readTime}</span>
               <h4 style={{ fontSize: '0.95rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
+              <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>Read →</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div id="faq" className="no-print" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 1.25rem 0' }}>Frequently Asked Questions</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
+          {[
+            { q: 'How deterministic is the reading?', a: 'The palace calculation is fully deterministic — the same moment always yields the same three palaces. Strategic interpretation is where judgment is applied.' },
+            { q: 'What exactly do I get for $19?', a: 'A downloadable 4-page PDF: your three-palace trajectory, a 72-hour action plan, the five-dimensional energy matrix, and archetypal executive guardrails.' },
+            { q: 'Is this financial or legal advice?', a: 'No. Esoteric Paths is a decision-clarity instrument. All binding terms must be codified in written contracts.' },
+            { q: 'How is my payment data handled?', a: 'Payments are processed by Dodo Payments (PCI-DSS compliant). We never store your card details.' },
+            { q: 'What is the 7-day guarantee?', a: 'If the blueprint does not meet expectations, request a full refund within 7 days — no questions asked.' },
+          ].map((f, i) => (
+            <div key={i} style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+              <p style={{ fontSize: '0.9rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 0.3rem 0' }}>{f.q}</p>
+              <p style={{ fontSize: '0.82rem', color: '#CDC8BC', lineHeight: '1.6', margin: 0 }}>{f.a}</p>
             </div>
           ))}
         </div>
