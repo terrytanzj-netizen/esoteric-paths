@@ -330,8 +330,14 @@ export function getReportMeta(): ReportMeta {
 }
 
 export const ARTICLES = [
-  { slug: 'accept-job-offer-now-or-wait', title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
-  { slug: 'ontology-of-time-horary-vs-chronometry', title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
-  { slug: 'xiao-liu-ren-vs-tarot-archetypes', title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
-  { slug: 'da-an-strategic-preservation', title: 'Da An Decoded: Strategic Preservation in Volatile Markets', readTime: '5 min read' },
+  { slug: 'horse-mounted-oracle-origins-xiao-liu-ren', lang: 'en' as const, title: 'The Oracle at the Saddle: What Xiao Liu Ren Actually Is', readTime: '9 min read' },
+  { slug: 'kong-wang-emptiness-strategic-retreat', lang: 'en' as const, title: 'Kong Wang and the Strategic Uses of Emptiness', readTime: '9 min read' },
+  { slug: 'chi-kou-dispute-architecture-bad-faith', lang: 'en' as const, title: 'Chi Kou: The Palace of Dispute and the Case for Writing Things Down', readTime: '10 min read' },
+  { slug: 'liu-lian-discipline-of-staying', lang: 'en' as const, title: 'Liu Lian: The Discipline of Staying', readTime: '10 min read' },
+  { slug: 'accept-job-offer-now-or-wait', lang: 'en' as const, title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
+  { slug: 'ontology-of-time-horary-vs-chronometry', lang: 'en' as const, title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
+  { slug: 'xiao-liu-ren-vs-tarot-archetypes', lang: 'en' as const, title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
+  { slug: 'da-an-strategic-preservation', lang: 'en' as const, title: 'Da An Decoded: Strategic Preservation in Volatile Markets', readTime: '5 min read' },
+  { slug: 'zh-xiao-liu-ren-accuracy', lang: 'zh' as const, title: '小六壬到底准不准：确定性、有效性与决策工效', readTime: '12 分钟' },
+  { slug: 'zh-why-72-hours', lang: 'zh' as const, title: '为什么是 72 小时：一个决策窗口的时间心理学依据', readTime: '11 分钟' },
 ];
