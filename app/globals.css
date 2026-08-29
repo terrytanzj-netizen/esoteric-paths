@@ -1,98 +1,254 @@
-/* Esoteric Paths — global styles */
+/* Esoteric Paths — global styles & design system */
 
-/* Print layout for the 10-page executive blueprint */
-@media print {
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
-
-  body,
-  html {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    background-color: #050508 !important;
-    color: #E8E4DA !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .no-print,
-  header,
-  nav,
-  footer,
-  button,
-  a {
-    display: none !important;
-  }
-
-  .print-area {
-    display: block !important;
-    background-color: #050508 !important;
-    color: #E8E4DA !important;
-    padding: 20mm !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  .pdf-page {
-    page-break-before: always;
-    min-height: 250mm;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .pdf-page:first-of-type {
-    page-break-before: avoid;
-  }
-
-  .print-card {
-    background-color: #0A0A0F !important;
-    border: 1px solid #C9A227 !important;
-    page-break-inside: avoid;
-  }
+:root {
+  --bg: #050508;
+  --bg-elev: #0A0A0F;
+  --bg-elev-2: #0F0E17;
+  --gold: #C9A227;
+  --gold-soft: rgba(201, 162, 39, 0.4);
+  --gold-faint: rgba(201, 162, 39, 0.18);
+  --gold-line: rgba(201, 162, 39, 0.22);
+  --cream: #F4EEDB;
+  --parchment: #CDC8BC;
+  --muted: #8A8678;
+  --muted-bright: #A39E8F;
+  --danger: #EF4444;
+  --warn: #EAB308;
+  --font-display: 'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --maxw: 1040px;
 }
 
-/* Animations */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(201, 162, 39, 0.32);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Headings ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.es-hero-title {
+  font-size: 2.8rem;
+  line-height: 1.05;
+}
+
+/* ---------- Buttons ---------- */
+.es-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .22s cubic-bezier(.2, .7, .3, 1), box-shadow .22s ease, background-color .22s ease, border-color .22s ease, color .22s ease;
+}
+.es-btn:hover { transform: translateY(-2px); }
+.es-btn:active { transform: translateY(0) scale(.97); }
+.es-btn:disabled { cursor: wait; opacity: .7; transform: none; }
+
+.es-btn--gold {
+  background: var(--gold);
+  color: #050508;
+  box-shadow: 0 0 18px rgba(201, 162, 39, 0.28);
+}
+.es-btn--gold:hover { box-shadow: 0 0 30px rgba(201, 162, 39, 0.55); }
+
+.es-btn--ghost {
+  background: #121118;
+  color: var(--gold);
+  border: 1px solid var(--gold-soft);
+}
+.es-btn--ghost:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(201, 162, 39, 0.28);
+}
+
+/* ---------- Inputs ---------- */
+.es-input {
+  background: #050508;
+  color: #fff;
+  border: 1px solid var(--gold-faint);
+  border-radius: var(--radius-sm);
+  outline: none;
+  font-family: var(--font-body);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.es-input::placeholder { color: #6f6b5f; }
+.es-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.16), 0 0 18px rgba(201, 162, 39, 0.2);
+}
+
+/* ---------- Cards / lift ---------- */
+.es-lift {
+  transition: transform .25s cubic-bezier(.2, .7, .3, 1), box-shadow .25s ease, border-color .25s ease;
+}
+.es-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--gold-faint);
+}
+
+/* ---------- Nav ---------- */
+.es-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.es-nav-links {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.es-nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+.es-nav-link:hover {
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(201, 162, 39, 0.5);
+}
+
+.es-brand {
+  color: var(--gold);
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-shadow: 0 0 10px rgba(201, 162, 39, 0.55);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Grids ---------- */
+.es-palace-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.6rem;
+}
+.es-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.es-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.es-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ---------- Palace cells ---------- */
+.es-palace-cell {
+  padding: 0.9rem 0.4rem;
+  background: #050508;
+  border: 1px solid var(--gold-faint);
+  border-radius: 10px;
+  text-align: center;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.es-palace-cell.is-active {
+  background: rgba(201, 162, 39, 0.18);
+  border: 1px solid var(--gold);
+  animation: palacePulse 2.6s ease-in-out infinite;
+}
+
+/* ---------- Reveal on load ---------- */
+.reveal {
+  animation: fadeUp .85s cubic-bezier(.2, .7, .3, 1) both;
+}
+
+/* ---------- Ornamental divider ---------- */
+.es-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: var(--gold);
+  opacity: 0.7;
+  font-family: var(--font-mono);
+  letter-spacing: 0.4em;
+  margin-top: 1.1rem;
+  font-size: 0.8rem;
+}
+
+/* ---------- Casting loader ---------- */
+.es-casting { display: inline-flex; align-items: center; gap: 0.55rem; }
+.es-glyph-spin {
+  display: inline-block;
+  animation: glyphSpin 1.5s linear infinite;
+  font-size: 1.05rem;
+}
+
+/* ---------- Screen separation for report pages ---------- */
+.pdf-page { margin-bottom: 1.5rem; }
+
+/* ---------- Animations ---------- */
 @keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 0.95;
-    transform: scale(1.4);
-    filter: drop-shadow(0 0 6px #C9A227);
-  }
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 6px #C9A227); }
 }
 
 @keyframes magicalGlow {
-  0% {
-    box-shadow: 0 0 25px rgba(201, 162, 39, 0.12);
-    border-color: rgba(201, 162, 39, 0.25);
-  }
-  50% {
-    box-shadow: 0 0 45px rgba(201, 162, 39, 0.3);
-    border-color: rgba(201, 162, 39, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 25px rgba(201, 162, 39, 0.12);
-    border-color: rgba(201, 162, 39, 0.25);
-  }
+  0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); }
+  50% { box-shadow: 0 0 45px rgba(201, 162, 39, 0.3); border-color: rgba(201, 162, 39, 0.5); }
+  100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); }
 }
 
 @keyframes spinCompass {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Utility classes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes palacePulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(201, 162, 39, 0); }
+  50% { box-shadow: 0 0 22px rgba(201, 162, 39, 0.5); }
+}
+
+@keyframes glyphSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Utility classes (preserved) ---------- */
 .bling-star {
   position: absolute;
   background-color: #F4EEDB;
@@ -106,4 +262,99 @@
 
 .spinning-compass {
   animation: spinCompass 120s linear infinite;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .es-palace-grid { grid-template-columns: repeat(3, 1fr); }
+  .es-grid-2, .es-grid-3 { grid-template-columns: 1fr; }
+  .es-insights-grid { grid-template-columns: 1fr; }
+  .es-nav-links { gap: 0.8rem; font-size: 0.72rem; justify-content: center; width: 100%; }
+  .es-nav { justify-content: center; }
+  .es-nav .es-brand { width: 100%; text-align: center; }
+}
+
+@media (max-width: 560px) {
+  .es-hero-title { font-size: 2rem; }
+  .es-palace-grid { gap: 0.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { animation: none; }
+}
+
+/* ============ PRINT (10-page executive blueprint) ============ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body, html {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: #050508 !important;
+    color: #E8E4DA !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .no-print, header, nav, footer, button, a {
+    display: none !important;
+  }
+
+  .print-area {
+    display: block !important;
+    background-color: #050508 !important;
+    color: #E8E4DA !important;
+    padding: 18mm !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pdf-page {
+    page-break-before: always;
+    min-height: 250mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    border: 1px solid rgba(201, 162, 39, 0.16);
+    padding: 4mm 6mm 0;
+    box-sizing: border-box;
+  }
+
+  .pdf-page:first-of-type {
+    page-break-before: avoid;
+  }
+
+  .pdf-page h3 {
+    border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.4rem !important;
+  }
+
+  .pdf-foot {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201, 162, 39, 0.18);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: #8A8678;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .print-card {
+    background-color: #0A0A0F !important;
+    border: 1px solid #C9A227 !important;
+    page-break-inside: avoid;
+  }
 }
