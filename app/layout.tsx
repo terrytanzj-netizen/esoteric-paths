@@ -1,5 +1,6 @@
 import React from 'react';
 import './globals.css';
+import Script from 'next/script';
 
 export const metadata = {
   title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
@@ -38,6 +39,15 @@ export default function RootLayout({
       </head>
       <body style={{ backgroundColor: '#050508', color: '#E8E4DA', margin: 0, padding: 0, fontFamily: 'var(--font-body)' }}>
         {children}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-HR8ZF5L8JW" strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-HR8ZF5L8JW');
+          `}
+        </Script>
       </body>
     </html>
   );
