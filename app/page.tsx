@@ -51,6 +51,14 @@ const STATIC_STARS = [
   { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
 ];
 
+const FAQ_ITEMS = [
+  { q: 'How deterministic is the reading?', a: 'The palace calculation is fully deterministic — the same moment always yields the same three palaces. Strategic interpretation is where judgment is applied.' },
+  { q: 'What exactly do I get for $19?', a: 'A downloadable 10-page PDF: methodology, your three-palace trajectory, palace interaction narrative, a personalized 72-hour action plan, five-dimensional resonant vectors, Major Arcana synthesis, executive guardrails, and reference appendix.' },
+  { q: 'Is this financial or legal advice?', a: 'No. Esoteric Paths is a decision-clarity instrument. All binding terms must be codified in written contracts.' },
+  { q: 'How is my payment data handled?', a: 'Payments are processed by Dodo Payments (PCI-DSS compliant). We never store your card details.' },
+  { q: 'What is the 7-day guarantee?', a: 'If the blueprint does not meet expectations, request a full refund within 7 days — no questions asked.' },
+];
+
 export default function Page() {
   const [time, setTime] = useState({ timeStr: '', palaceIdx: 0 });
   const [question, setQuestion] = useState('');
@@ -59,7 +67,6 @@ export default function Page() {
   const [manualPaymentId, setManualPaymentId] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [emailSubscribed, setEmailSubscribed] = useState(false);
-  const [copiedTwitter, setCopiedTwitter] = useState(false);
   const [castResult, setCastResult] = useState<any>(null);
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'verifying' | 'unlocked' | 'needs-id' | 'error'>('idle');
   const [paymentMessage, setPaymentMessage] = useState('');
@@ -218,15 +225,43 @@ export default function Page() {
   };
 
   const handleShareTwitter = () => {
-    if (!isValidCastResult(castResult)) return;
-    const tweetText = `My tactical decision vector via @EsotericPaths:\nQuery: "${castResult.question}"\nMonth: ${castResult.month.name} | Day: ${castResult.day.name} | Hour: ${castResult.hour.name}\n\nAligning micro-moments with macro ephemeris. 🜔 esotericpaths.com`;
-    navigator.clipboard.writeText(tweetText);
-    setCopiedTwitter(true);
-    setTimeout(() => setCopiedTwitter(false), 3000);
+    const url = 'https://www.esotericpaths.com';
+    const text = isValidCastResult(castResult)
+      ? `My tactical decision vector via @EsotericPaths:\nQuery: "${castResult.question}"\nMonth: ${castResult.month.name} | Day: ${castResult.day.name} | Hour: ${castResult.hour.name}\n\nAligning micro-moments with macro ephemeris. 🜔`
+      : 'Aligning micro-moments with macro ephemeris through Xiao Liu Ren × Tarot. 🜔';
+    const intent = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(intent, '_blank', 'noopener,noreferrer');
+  };
+
+  const productLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Esoteric Paths — Temporal Strategy Matrix',
+    description: 'A deterministic Horary Oracle combining classical Chinese Xiao Liu Ren time mechanics with Western archetypal tarot, delivering a personalized 10-page strategic blueprint with a 72-hour execution window.',
+    brand: { '@type': 'Brand', name: 'Esoteric Paths' },
+    offers: {
+      '@type': 'Offer',
+      price: '19',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: 'https://www.esotericpaths.com',
+    },
+  };
+
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
   };
 
   return (
     <div className="es-root" style={{ maxWidth: '1040px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
       {paymentStatus !== 'idle' && (
         <div className="no-print" style={{
@@ -339,7 +374,7 @@ export default function Page() {
               </div>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <button onClick={handleShareTwitter} className="es-btn es-btn--ghost" style={{ padding: '0.85rem 1.25rem', fontSize: '0.8rem' }}>
-                  {copiedTwitter ? '✓ Copied Sigil for X!' : '🜔 Share on X'}
+                  🜔 Share on X
                 </button>
                 {isVerifiedPaid && (
                   <button onClick={handlePrintPDF} className="es-btn es-btn--gold" style={{ padding: '0.85rem 1.75rem', fontSize: '0.85rem' }}>
@@ -510,13 +545,7 @@ export default function Page() {
       <div id="faq" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 1.25rem 0' }}>Frequently Asked Questions</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
-          {[
-            { q: 'How deterministic is the reading?', a: 'The palace calculation is fully deterministic — the same moment always yields the same three palaces. Strategic interpretation is where judgment is applied.' },
-            { q: 'What exactly do I get for $19?', a: 'A downloadable 10-page PDF: methodology, your three-palace trajectory, palace interaction narrative, a personalized 72-hour action plan, five-dimensional resonant vectors, Major Arcana synthesis, executive guardrails, and reference appendix.' },
-            { q: 'Is this financial or legal advice?', a: 'No. Esoteric Paths is a decision-clarity instrument. All binding terms must be codified in written contracts.' },
-            { q: 'How is my payment data handled?', a: 'Payments are processed by Dodo Payments (PCI-DSS compliant). We never store your card details.' },
-            { q: 'What is the 7-day guarantee?', a: 'If the blueprint does not meet expectations, request a full refund within 7 days — no questions asked.' },
-          ].map((f, i) => (
+          {FAQ_ITEMS.map((f, i) => (
             <div key={i} style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
               <p style={{ fontSize: '0.9rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 0.3rem 0' }}>{f.q}</p>
               <p style={{ fontSize: '0.82rem', color: '#CDC8BC', lineHeight: '1.6', margin: 0 }}>{f.a}</p>
