@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
+
+const EN_ARTICLES = ARTICLES.filter((a) => a.lang === 'en');
+const ZH_ARTICLES = ARTICLES.filter((a) => a.lang === 'zh');
+const ZH_SERIF = "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', 'STSong', serif";
 import ReportPDF from './components/ReportPDF';
 
 function isValidCastResult(value: any): boolean {
@@ -530,13 +534,35 @@ export default function Page() {
       </div>
 
       <div id="insights" className="no-print reveal" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
-        <div className="es-insights-grid">
-          {ARTICLES.map((art, i) => (
+        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>Strategic Insights</h3>
+        <p style={{ fontSize: '0.8rem', color: '#8A8678', margin: '0 0 1.5rem 0', lineHeight: 1.6 }}>
+          Long-form essays on temporal strategy, classical horary method and the psychology of decision timing.
+        </p>
+
+        <div className="es-section-label" style={{ marginBottom: '0.85rem' }}>
+          <span>English</span>
+          <span className="es-section-count">{EN_ARTICLES.length} essays</span>
+        </div>
+        <div className="es-insights-grid" style={{ marginBottom: '2rem' }}>
+          {EN_ARTICLES.map((art, i) => (
             <Link key={i} href={`/insights/${art.slug}`} className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
               <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{art.readTime}</span>
-              <h4 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
+              <h4 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.35 }}>{art.title}</h4>
               <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>Read →</span>
+            </Link>
+          ))}
+        </div>
+
+        <div className="es-section-label" style={{ marginBottom: '0.85rem' }}>
+          <span>中文</span>
+          <span className="es-section-count">{ZH_ARTICLES.length} 篇</span>
+        </div>
+        <div className="es-insights-grid">
+          {ZH_ARTICLES.map((art, i) => (
+            <Link key={i} href={`/insights/${art.slug}`} className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
+              <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{art.readTime}</span>
+              <h4 style={{ fontSize: '0.95rem', fontFamily: ZH_SERIF, color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.55, letterSpacing: '0.01em' }}>{art.title}</h4>
+              <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>阅读 →</span>
             </Link>
           ))}
         </div>
