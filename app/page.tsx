@@ -3,20 +3,35 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
+import ReportPDF from './components/ReportPDF';
 
 const EN_ARTICLES = ARTICLES.filter((a) => a.lang === 'en');
 const ZH_ARTICLES = ARTICLES.filter((a) => a.lang === 'zh');
 const ZH_SERIF = "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', 'STSong', serif";
-import ReportPDF from './components/ReportPDF';
 
 function isValidCastResult(value: any): boolean {
-  if (!value || typeof value !== 'object') return false;
-  const required = ['question', 'month', 'day', 'hour', 'time'];
-  if (!required.every(k => typeof value[k] === 'object' || typeof value[k] === 'string')) return false;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  if (typeof value.question !== 'string' || typeof value.time !== 'string') return false;
   return ['month', 'day', 'hour'].every(k => {
     const p = value[k];
-    return p && typeof p === 'object' && typeof p.name === 'string' && typeof p.symbol === 'string';
+    if (!p || typeof p !== 'object' || Array.isArray(p)) return false;
+    return (
+      typeof p.name === 'string' &&
+      typeof p.symbol === 'string' &&
+      typeof p.wuxing === 'string' &&
+      typeof p.desc === 'string'
+    );
   });
+}
+
+function safeGet(key: string): string | null {
+  try { return localStorage.getItem(key); } catch { return null; }
+}
+function safeSet(key: string, value: string) {
+  try { localStorage.setItem(key, value); } catch {}
+}
+function safeRemove(key: string) {
+  try { localStorage.removeItem(key); } catch {}
 }
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https%3A%2F%2Fwww.esotericpaths.com%2F";
@@ -89,25 +104,24 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    let savedRaw: string | null = null;
     let savedResult: any = null;
-    try {
-      savedRaw = localStorage.getItem('last_user_cast');
-      if (savedRaw) {
+
+    const savedRaw = safeGet('last_user_cast');
+    if (savedRaw) {
+      try {
         const parsed = JSON.parse(savedRaw);
         if (isValidCastResult(parsed)) {
           savedResult = parsed;
           setCastResult(parsed);
         } else {
-          localStorage.removeItem('last_user_cast');
+          safeRemove('last_user_cast');
         }
+      } catch {
+        safeRemove('last_user_cast');
       }
-    } catch (e) {
-      localStorage.removeItem('last_user_cast');
     }
 
-    const alreadyPaid = localStorage.getItem('esoteric_is_paid');
-    if (alreadyPaid === 'true') {
+    if (safeGet('esoteric_is_paid') === 'true') {
       setIsVerifiedPaid(true);
     }
 
@@ -134,7 +148,7 @@ export default function Page() {
             time: now.toUTCString(),
           };
           setCastResult(autoResult);
-          localStorage.setItem('last_user_cast', JSON.stringify(autoResult));
+          safeSet('last_user_cast', JSON.stringify(autoResult));
         }
       } else if (status === 'succeeded') {
         setPaymentStatus('needs-id');
@@ -167,7 +181,7 @@ export default function Page() {
         setIsVerifiedPaid(true);
         setPaymentStatus('unlocked');
         setPaymentMessage('Payment verified. Your 10-page blueprint is unlocked.');
-        localStorage.setItem('esoteric_is_paid', 'true');
+        safeSet('esoteric_is_paid', 'true');
         if (!silent) alert('🎉 Verified! Full 10-page blueprint is unlocked.');
         return true;
       } else {
@@ -205,7 +219,7 @@ export default function Page() {
         time: now.toUTCString(),
       };
       setCastResult(newResult);
-      localStorage.setItem('last_user_cast', JSON.stringify(newResult));
+      safeSet('last_user_cast', JSON.stringify(newResult));
       setIsCasting(false);
     }, 1200);
   };
@@ -326,8 +340,8 @@ export default function Page() {
 
       <div className="no-print cyber-glow-box es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', letterSpacing: '0.2em' }}>• LIVE ALCHEMICAL EPHEMERIS FLUX •</span>
-        <div style={{ fontSize: '3.5rem', fontWeight: 'bold', fontFamily: 'monospace', color: '#F4EEDB', textShadow: '0 0 25px rgba(201,162,39,0.4)', margin: '0.4rem 0' }}>{time.timeStr || '12:00:00'}</div>
-        <div className="es-palace-grid" style={{ marginTop: '1.5rem' }}>
+        <div suppressHydrationWarning style={{ fontSize: '3.5rem', fontWeight: 'bold', fontFamily: 'monospace', color: '#F4EEDB', textShadow: '0 0 25px rgba(201,162,39,0.4)', margin: '0.4rem 0' }}>{time.timeStr || '12:00:00'}</div>
+        <div className="es-palace-grid" suppressHydrationWarning style={{ marginTop: '1.5rem' }}>
           {PALACES.map((p, idx) => {
             const active = time.palaceIdx === idx;
             return (
@@ -368,7 +382,7 @@ export default function Page() {
             </button>
           </form>
 
-        {castResult && (
+        {isValidCastResult(castResult) && (
           <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             
             <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.2)', paddingBottom: '1.25rem' }}>
@@ -415,7 +429,7 @@ export default function Page() {
             </div>
 
             {/* 已支付解锁后的完整 10 页报告 */}
-            {isVerifiedPaid ? (
+            {isVerifiedPaid && isValidCastResult(castResult) ? (
               <ReportPDF castResult={castResult} />
             ) : (
               /* 未支付时展示的解锁引导区块（带 Testimonials、Trust Badges 与 Restore 框） */
