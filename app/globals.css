@@ -1,6 +1,6 @@
 /* Esoteric Paths — global styles */
 
-/* Print layout for the 4-page executive blueprint */
+/* Print layout for the 10-page executive blueprint */
 @media print {
   @page {
     size: A4 portrait;
