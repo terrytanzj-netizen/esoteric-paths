@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
 import ReportPDF from './components/ReportPDF';
+import { formatCastTime } from './lib/formatTime';
 
 const EN_ARTICLES = ARTICLES.filter((a) => a.lang === 'en');
 const ZH_ARTICLES = ARTICLES.filter((a) => a.lang === 'zh');
@@ -338,6 +339,18 @@ export default function Page() {
         <div className="es-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
       </header>
 
+      <div className="no-print reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem 1.5rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        {[
+          'Esoteric Advisor to Global Enterprises',
+          'Member · Chinese Metaphysics Association',
+          'Councilor · Xie Tian Gong Temple',
+        ].map((cred, i) => (
+          <span key={i} style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.18em', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '999px', padding: '0.4rem 0.9rem' }}>
+            ✦ {cred}
+          </span>
+        ))}
+      </div>
+
       <div className="no-print cyber-glow-box es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', letterSpacing: '0.2em' }}>• LIVE ALCHEMICAL EPHEMERIS FLUX •</span>
         <div suppressHydrationWarning style={{ fontSize: '3.5rem', fontWeight: 'bold', fontFamily: 'monospace', color: '#F4EEDB', textShadow: '0 0 25px rgba(201,162,39,0.4)', margin: '0.4rem 0' }}>{time.timeStr || '12:00:00'}</div>
@@ -373,6 +386,37 @@ export default function Page() {
         </div>
       </section>
 
+      <section id="authority" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Methodology & Stewardship •</span>
+        <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1rem 0' }}>Why This Reading Is Worth Trusting</h3>
+        <div className="es-grid-2" style={{ gap: '1.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+              <h4 style={{ color: '#F4EEDB', fontSize: '1rem', margin: '0 0 0.3rem 0', fontFamily: 'var(--font-display)' }}>Deterministic, Not Vague</h4>
+              <p style={{ color: '#CDC8BC', fontSize: '0.85rem', lineHeight: 1.65, margin: 0 }}>The three palaces are computed from the lunar month, day and hour. Two people casting at the same moment receive the same result. No room for selective interpretation or cold-reading tricks.</p>
+            </div>
+            <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+              <h4 style={{ color: '#F4EEDB', fontSize: '1rem', margin: '0 0 0.3rem 0', fontFamily: 'var(--font-display)' }}>Grounded in Two Canons</h4>
+              <p style={{ color: '#CDC8BC', fontSize: '0.85rem', lineHeight: 1.65, margin: 0 }}>The framework binds classical Chinese temporal mechanics (Xiao Liu Ren / 小六壬) with Western archetypal narrative (Tarot / Jungian typology). East supplies the when; West supplies the story.</p>
+            </div>
+          </div>
+          <div style={{ background: '#050508', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '14px', padding: '1.25rem' }}>
+            <p style={{ fontSize: '0.85rem', color: '#CDC8BC', lineHeight: 1.7, margin: '0 0 1rem 0', fontStyle: 'italic' }}>
+              "My role is not to tell you what will happen. It is to give the moment a determinate address — so your own reasoning becomes inspectable, repeatable and accountable within a 72-hour execution window."
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(201,162,39,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C9A227', fontSize: '1.1rem' }}>☩</div>
+              <div>
+                <p style={{ color: '#F4EEDB', fontSize: '0.85rem', fontWeight: 'bold', margin: 0, fontFamily: 'var(--font-display)' }}>Terry Tan</p>
+                <p style={{ color: '#8A8678', fontSize: '0.7rem', margin: 0, fontFamily: 'monospace', lineHeight: 1.5 }}>
+                  Esoteric Advisor · Member, Chinese Metaphysics Association · Councilor, Xie Tian Gong Temple
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div id="oracle" className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
           <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
@@ -387,7 +431,7 @@ export default function Page() {
             
             <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.2)', paddingBottom: '1.25rem' }}>
               <div>
-                <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>EPHEMERIS COORDINATE LOCKED • {castResult.time}</span>
+                <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>EPHEMERIS COORDINATE LOCKED • {formatCastTime(castResult.time)}</span>
                 <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', margin: '0.35rem 0 0 0', fontFamily: 'var(--font-display)' }}>Query: "{castResult.question}"</h2>
               </div>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
