@@ -328,6 +328,7 @@ export default function Page() {
           <a className="es-nav-link" href="#elements">Matrix</a>
           <a className="es-nav-link" href="#blueprint">Blueprint</a>
           <a className="es-nav-link" href="#insights">Insights</a>
+          <Link className="es-nav-link" href="/tools/chinese-name">Tools</Link>
           <a className="es-nav-link" href="#support">Support</a>
         </div>
       </nav>
@@ -657,6 +658,19 @@ export default function Page() {
               <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>阅读 →</span>
             </Link>
           ))}
+        </div>
+
+        <div className="es-section-label" style={{ marginBottom: '0.85rem', marginTop: '2rem' }}>
+          <span>Free Tools</span>
+          <span className="es-section-count">1 tool</span>
+        </div>
+        <div className="es-insights-grid">
+          <Link href="/tools/chinese-name" className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.35)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
+            <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>FREE</span>
+            <h4 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.35 }}>Chinese Name Generator</h4>
+            <p style={{ fontSize: '0.75rem', color: '#CDC8BC', margin: '0 0 0.4rem 0', lineHeight: 1.5 }}>Get an authentic name with pinyin, meaning, element and palace affinity.</p>
+            <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>Try →</span>
+          </Link>
         </div>
       </div>
 
