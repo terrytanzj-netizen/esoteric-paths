@@ -14,7 +14,7 @@ function isValidCastResult(value: any): boolean {
   });
 }
 
-const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https://www.esotericpaths.com%2F";
+const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https%3A%2F%2Fwww.esotericpaths.com%2F";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
 const STATIC_STARS = [
@@ -127,6 +127,9 @@ export default function Page() {
       } else if (status === 'succeeded') {
         setPaymentStatus('needs-id');
         setPaymentMessage('Payment succeeded, but Dodo did not return a Payment ID. Paste it from your receipt to unlock.');
+      } else if (status === 'failed' || status === 'cancelled') {
+        setPaymentStatus('error');
+        setPaymentMessage(`Payment status from Dodo: ${status}. If you believe this is an error, paste your Payment ID below.`);
       }
 
       if (status || pId) {
@@ -223,7 +226,29 @@ export default function Page() {
 
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'system-ui, sans-serif', position: 'relative', overflowX: 'hidden' }}>
-      
+
+      {paymentStatus !== 'idle' && (
+        <div className="no-print" style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 10,
+          padding: '0.85rem 1rem',
+          marginBottom: '1rem',
+          borderRadius: '10px',
+          textAlign: 'center',
+          backgroundColor: paymentStatus === 'error' ? 'rgba(239, 68, 68, 0.12)' : paymentStatus === 'unlocked' ? 'rgba(34, 197, 94, 0.12)' : 'rgba(201, 162, 39, 0.12)',
+          border: `1px solid ${paymentStatus === 'error' ? '#EF4444' : paymentStatus === 'unlocked' ? '#22C55E' : '#C9A227'}`,
+        }}>
+          <p style={{ fontSize: '0.85rem', color: paymentStatus === 'error' ? '#EF4444' : paymentStatus === 'unlocked' ? '#22C55E' : '#C9A227', margin: 0, fontFamily: 'monospace' }}>
+            {paymentStatus === 'verifying' && '⏳ '}
+            {paymentStatus === 'unlocked' && '✅ '}
+            {paymentStatus === 'error' && '⚠️ '}
+            {paymentStatus === 'needs-id' && '✦ '}
+            {paymentMessage}
+          </p>
+        </div>
+      )}
+
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 15%, rgba(201, 162, 39, 0.08) 0%, rgba(5, 5, 8, 0.98) 75%), linear-gradient(to bottom, #050508, #020204)', pointerEvents: 'none', zIndex: 0 }} />
 
       <div className="spinning-compass" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '650px', height: '650px', border: '1px dashed rgba(201, 162, 39, 0.1)', borderRadius: '50%', pointerEvents: 'none', zIndex: 0, opacity: 0.3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
