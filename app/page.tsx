@@ -1,18 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { PALACES, ARTICLES } from '../data/content';
 
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https://www.esotericpaths.com%2F";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
-
-const PALACES = [
-  { id: 'daan', name: 'Da An (大安)', symbol: '☩', wuxing: 'Wood (木)', desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.', advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.' },
-  { id: 'liulian', name: 'Liu Lian (留连)', symbol: '☿', wuxing: 'Water (水)', desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction. Reflect, audit, and wait.', advice: 'Use this time for auditing and internal adjustments. Do not force progress.' },
-  { id: 'suxi', name: 'Su Xi (速喜)', symbol: '☉', wuxing: 'Fire (火)', desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.', advice: 'Strike while the iron is hot. Advance your key initiatives immediately.' },
-  { id: 'chikou', name: 'Chi Kou (赤口)', symbol: '☌', wuxing: 'Metal (金)', desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.', advice: 'Maintain written records. Avoid verbal arguments and reinforce security.' },
-  { id: 'xiaoji', name: 'Xiao Ji (小吉)', symbol: '♃', wuxing: 'Water (水)', desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.', advice: 'Engage in collaborative discussions and relationship building.' },
-  { id: 'kongwang', name: 'Kong Wang (空亡)', symbol: '♄', wuxing: 'Earth (土)', desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.', advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.' },
-];
 
 const STATIC_STARS = [
   { top: '3%', left: '8%', delay: '0.2s', size: '3px' },
@@ -45,13 +37,6 @@ const STATIC_STARS = [
   { top: '75%', left: '82%', delay: '4.8s', size: '3px' },
   { top: '85%', left: '5%', delay: '1.3s', size: '2px' },
   { top: '95%', left: '70%', delay: '3.1s', size: '3px' },
-];
-
-const ARTICLES = [
-  { title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
-  { title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
-  { title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
-  { title: 'Da An Decoded: Strategic Preservation in Volatile Markets', readTime: '5 min read' },
 ];
 
 export default function Page() {
@@ -444,7 +429,7 @@ export default function Page() {
                         placeholder="e.g. pay_xxxxxxxx"
                         value={manualPaymentId}
                         onChange={e => setManualPaymentId(e.target.value)}
-                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3), color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
                       />
                       <button
                         onClick={() => verifyPayment(manualPaymentId)}
@@ -469,7 +454,7 @@ export default function Page() {
           <div style={{ color: '#C9A227', fontFamily: 'monospace', fontSize: '0.85rem' }}>✦ Subscribed successfully!</div>
         ) : (
           <form onSubmit={handleEmail} style={{ display: 'flex', gap: '0.5rem', maxWidth: '400px', margin: '0 auto' }}>
-            <input type="email" required value={emailInput} onChange={e => setEmailInput(e.target.value)} placeholder="Your professional email..." style={{ flex: 1, padding: '0.7rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', fontSize: '0.85rem', outline: 'none' />
+            <input type="email" required value={emailInput} onChange={e => setEmailInput(e.target.value)} placeholder="Your professional email..." style={{ flex: 1, padding: '0.7rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', fontSize: '0.85rem', outline: 'none' }} />
             <button type="submit" style={{ padding: '0.7rem 1.4rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', borderRadius: '8px', border: 'none', cursor: 'pointer', fontSize: '0.85rem' }}>Join</button>
           </form>
         )}
@@ -479,7 +464,7 @@ export default function Page() {
         <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {ARTICLES.map((art, i) => (
-            <div key={i} style={{ style: 'background: #0A0A0F', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem' }}>
+            <div key={i} style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem' }}>
               <span style={{ fontSize: '0.65rem', color: '#8A8678', fontFamily: 'monospace' }}>{art.readTime}</span>
               <h4 style={{ fontSize: '0.95rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
             </div>
