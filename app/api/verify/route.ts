@@ -19,7 +19,10 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const res = await fetch(`https://api.dodopayments.com/payments/${paymentId}`, {
+    const baseUrl = apiKey.startsWith('sk_test') || apiKey.startsWith('test_')
+      ? 'https://test.dodopayments.com'
+      : 'https://live.dodopayments.com';
+    const res = await fetch(`${baseUrl}/payments/${paymentId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
