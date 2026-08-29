@@ -11,7 +11,11 @@ export async function GET(req: NextRequest) {
   const apiKey = process.env.DODO_PAYMENTS_API_KEY;
 
   if (!apiKey) {
-    return NextResponse.json({ valid: true, warning: 'API key not configured on server' });
+    console.error('[verify] DODO_PAYMENTS_API_KEY is not configured');
+    return NextResponse.json(
+      { valid: false, error: 'Server payment verification is not configured. Ask the site owner to set DODO_PAYMENTS_API_KEY in Vercel.' },
+      { status: 503 }
+    );
   }
 
   try {
@@ -21,20 +25,34 @@ export async function GET(req: NextRequest) {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
+      cache: 'no-store',
     });
 
     if (!res.ok) {
-      return NextResponse.json({ valid: false, error: 'Payment record not found' }, { status: 400 });
+      const body = await res.text().catch(() => '');
+      console.error(`[verify] Dodo API returned ${res.status} for ${paymentId}: ${body}`);
+      return NextResponse.json(
+        { valid: false, error: `Payment record not found (${res.status})` },
+        { status: 400 }
+      );
     }
 
     const data = await res.json();
+    const normalizedStatus = typeof data.status === 'string' ? data.status.toLowerCase() : '';
 
-    if (data.status === 'succeeded' || data.status === 'paid') {
+    if (normalizedStatus === 'succeeded' || normalizedStatus === 'paid' || normalizedStatus === 'requires_action') {
       return NextResponse.json({ valid: true, paymentId, status: data.status });
     }
 
-    return NextResponse.json({ valid: false, status: data.status }, { status: 403 });
+    return NextResponse.json(
+      { valid: false, status: data.status, error: `Payment status is ${data.status}` },
+      { status: 403 }
+    );
   } catch (err: any) {
-    return NextResponse.json({ valid: false, error: err.message }, { status: 500 });
+    console.error('[verify] exception:', err);
+    return NextResponse.json(
+      { valid: false, error: err.message || 'Verification request failed' },
+      { status: 500 }
+    );
   }
 }
