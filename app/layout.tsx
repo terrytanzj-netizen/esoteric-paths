@@ -1,6 +1,5 @@
 import React from 'react';
 import './globals.css';
-import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
@@ -39,7 +38,6 @@ export default function RootLayout({
       </head>
       <body style={{ backgroundColor: '#050508', color: '#E8E4DA', margin: 0, padding: 0, fontFamily: 'var(--font-body)' }}>
         {children}
-        <Analytics />
       </body>
     </html>
   );
