@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
+import ReportPDF from './components/ReportPDF';
 
 function isValidCastResult(value: any): boolean {
   if (!value || typeof value !== 'object') return false;
@@ -154,9 +155,9 @@ export default function Page() {
       if (data.valid) {
         setIsVerifiedPaid(true);
         setPaymentStatus('unlocked');
-        setPaymentMessage('Payment verified. Your 4-page blueprint is unlocked.');
+        setPaymentMessage('Payment verified. Your 10-page blueprint is unlocked.');
         localStorage.setItem('esoteric_is_paid', 'true');
-        if (!silent) alert('🎉 Verified! Full 4-page blueprint is unlocked.');
+        if (!silent) alert('🎉 Verified! Full 10-page blueprint is unlocked.');
         return true;
       } else {
         setPaymentStatus('error');
@@ -341,106 +342,39 @@ export default function Page() {
                 </button>
                 {isVerifiedPaid && (
                   <button onClick={handlePrintPDF} style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#050508', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}>
-                    📥 Export 4-Page Executive PDF
+                    📥 Export 10-Page Executive PDF
                   </button>
                 )}
               </div>
             </div>
 
-            {/* 免费预览的 三宫全息向量 */}
-            <div className="pdf-page">
-              <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>PAGE 01 / 04</span>
-              <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>Three-Palace Trajectory (三宫全息向量)</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
+            {/* 免费预览提示 */}
+            <div className="no-print" style={{ padding: '1.5rem', backgroundColor: '#0A0A0F', borderRadius: '16px', border: '1px solid rgba(201, 162, 39, 0.3)', marginBottom: '2rem' }}>
+              <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>FREE PREVIEW</span>
+              <h3 style={{ fontSize: '1.4rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1rem 0' }}>Your Three-Palace Trajectory</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
                   <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.day.symbol} {castResult.day.name} ({castResult.day.wuxing})</h4>
-                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.day.desc}</p>
+                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)', filter: 'blur(4px)', userSelect: 'none' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>• • • • • •</h4>
                 </div>
-                <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid #C9A227' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.symbol} {castResult.hour.name} ({castResult.hour.wuxing})</h4>
-                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.hour.desc}</p>
+                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)', filter: 'blur(4px)', userSelect: 'none' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>• • • • • •</h4>
                 </div>
               </div>
+              <p style={{ fontSize: '0.8rem', color: '#8A8678', marginTop: '1rem', lineHeight: 1.5 }}>
+                Unlock the full 10-page report to reveal your Day and Hour palaces, the 72-hour action plan, resonant vectors, tarot synthesis, and executive guardrails.
+              </p>
             </div>
 
-            {/* 已支付解锁后的后 3 页报告内容 */}
+            {/* 已支付解锁后的完整 10 页报告 */}
             {isVerifiedPaid ? (
-              <>
-                <div className="pdf-page">
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>PAGE 02 / 04</span>
-                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>72-Hour Chrono-Hourglass Action Plan (72小时时间沙漏执行规程)</h3>
-                  <div className="print-card" style={{ backgroundColor: '#050508', border: '1px solid rgba(201, 162, 39, 0.3)', borderRadius: '14px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    {castResult.hour.advice ? (
-                      <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
-                        <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Strategic Vector Guidance</h4>
-                        <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>{castResult.hour.advice}</p>
-                      </div>
-                    ) : null}
-                    <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Phase 1 (00h - 24h) Asset & Environment Audit</h4>
-                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Catalog current leverage points and secure foundational agreements.</p>
-                    </div>
-                    <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Phase 2 (24h - 48h) Protocol Calibration</h4>
-                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Eliminate friction points and reinforce communication perimeters.</p>
-                    </div>
-                    <div style={{ borderLeft: '3px solid #C9A227', paddingLeft: '1.25rem' }}>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.05rem', margin: '0 0 0.4rem 0', fontFamily: 'Georgia, serif' }}>Phase 3 (48h - 72h) Sovereign Execution</h4>
-                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Execute binding operational moves with uncompromised clarity.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pdf-page">
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>PAGE 03 / 04</span>
-                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>Five-Dimensional Qi Dynamics & Resonant Vectors (五维能量共振矩阵)</h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>ELEMENTAL ATTUNEMENT</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>{castResult.hour.wuxing}</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Governing energetic flux.</p>
-                    </div>
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>RESONANT COLOR</span>
-                      <h4 style={{ color: '#C9A227', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>Imperial Gold & Obsidian</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Optimal grounding tone.</p>
-                    </div>
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>NUMEROLOGICAL KEY</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>3, 8, 27</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Harmonic quantitative coordinate.</p>
-                    </div>
-                    <div className="print-card" style={{ padding: '1.5rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>CARDINAL VECTOR</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.2rem', margin: '0.4rem 0', fontFamily: 'Georgia, serif' }}>North-East Axis</h4>
-                      <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>Spatial alignment axis.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pdf-page">
-                  <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>PAGE 04 / 04</span>
-                  <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1.5rem 0' }}>Major Arcana Synthesis & Executive Guardrails (大阿卡纳守护与执行红线)</h3>
-                  <div className="print-card" style={{ backgroundColor: '#050508', border: '1px solid #C9A227', borderRadius: '16px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <div>
-                      <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace' }}>ARCHETYPAL MIRROR:</span>
-                      <h4 style={{ color: '#F4EEDB', fontSize: '1.3rem', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>The Emperor / The Chariot</h4>
-                      <p style={{ color: '#CDC8BC', fontSize: '0.9rem', margin: 0, lineHeight: '1.6' }}>Maintain absolute structural integrity and push forward with calculated velocity.</p>
-                    </div>
-                    <div style={{ borderTop: '1px solid rgba(201, 162, 39, 0.2)', paddingTop: '1.25rem' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#EF4444', fontFamily: 'monospace', fontWeight: 'bold' }}>EXECUTIVE RED LINE (绝对禁忌):</span>
-                      <p style={{ color: '#E8E4DA', fontSize: '0.9rem', margin: '0.3rem 0 0 0', lineHeight: '1.6' }}>Avoid committing long-term binding capital on unverified verbal assurances. All terms must be codified in written contracts.</p>
-                    </div>
-                  </div>
-                </div>
-              </>
+              <ReportPDF castResult={castResult} />
             ) : (
               /* 未支付时展示的解锁引导区块（带 Testimonials、Trust Badges 与 Restore 框） */
               <div id="support" className="no-print" style={{ 
@@ -459,10 +393,10 @@ export default function Page() {
                   ✦ Executive Strategy Blueprint ($19) ✦
                 </span>
                 <h3 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif' }}>
-                  Unlock Full 4-Page Personal Blueprint & 72h Action Plan
+                  Unlock Full 10-Page Personal Blueprint & 72h Action Plan
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
-                  Synthesizes your Month, Day, and Hour palaces into a downloadable 4-page PDF with 72-Hour Chrono Execution Windows, Resonant Colors, Numbers, and Archetypal Guardrails.
+                  Synthesizes your Month, Day, and Hour palaces into a downloadable 10-page PDF with Methodology, Palace Interactions, 72-Hour Chrono Execution Windows, Resonant Vectors, Major Arcana Synthesis, Executive Guardrails, and Reference Appendix.
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', maxWidth: '560px', margin: '0 auto 1.5rem auto', textAlign: 'left' }}>
@@ -572,7 +506,7 @@ export default function Page() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
           {[
             { q: 'How deterministic is the reading?', a: 'The palace calculation is fully deterministic — the same moment always yields the same three palaces. Strategic interpretation is where judgment is applied.' },
-            { q: 'What exactly do I get for $19?', a: 'A downloadable 4-page PDF: your three-palace trajectory, a 72-hour action plan, the five-dimensional energy matrix, and archetypal executive guardrails.' },
+            { q: 'What exactly do I get for $19?', a: 'A downloadable 10-page PDF: methodology, your three-palace trajectory, palace interaction narrative, a personalized 72-hour action plan, five-dimensional resonant vectors, Major Arcana synthesis, executive guardrails, and reference appendix.' },
             { q: 'Is this financial or legal advice?', a: 'No. Esoteric Paths is a decision-clarity instrument. All binding terms must be codified in written contracts.' },
             { q: 'How is my payment data handled?', a: 'Payments are processed by Dodo Payments (PCI-DSS compliant). We never store your card details.' },
             { q: 'What is the 7-day guarantee?', a: 'If the blueprint does not meet expectations, request a full refund within 7 days — no questions asked.' },
