@@ -77,16 +77,6 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Currency guard — the blueprint is a USD product.
-    const currency = typeof data.currency === 'string' ? data.currency.toLowerCase() : '';
-    if (currency && currency !== 'usd') {
-      console.warn(`[verify] payment ${paymentId} currency ${currency} mismatch`);
-      return NextResponse.json(
-        { valid: false, status: data.status, error: 'Payment currency mismatch.' },
-        { status: 403 }
-      );
-    }
-
     // Optional product guard (enable via DODO_PRODUCT_ID in Vercel). Discount
     // and free codes keep the same product_id, so they still unlock. Without it,
     // any succeeded / non-refunded USD payment on this Dodo account is accepted.
