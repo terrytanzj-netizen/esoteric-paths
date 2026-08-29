@@ -4,6 +4,16 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
 
+function isValidCastResult(value: any): boolean {
+  if (!value || typeof value !== 'object') return false;
+  const required = ['question', 'month', 'day', 'hour', 'time'];
+  if (!required.every(k => typeof value[k] === 'object' || typeof value[k] === 'string')) return false;
+  return ['month', 'day', 'hour'].every(k => {
+    const p = value[k];
+    return p && typeof p === 'object' && typeof p.name === 'string' && typeof p.symbol === 'string';
+  });
+}
+
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https://www.esotericpaths.com%2F";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
@@ -67,46 +77,63 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem('last_user_cast');
-    if (saved) {
-      try { setCastResult(JSON.parse(saved)); } catch (e) {}
+    let savedRaw: string | null = null;
+    let savedResult: any = null;
+    try {
+      savedRaw = localStorage.getItem('last_user_cast');
+      if (savedRaw) {
+        const parsed = JSON.parse(savedRaw);
+        if (isValidCastResult(parsed)) {
+          savedResult = parsed;
+          setCastResult(parsed);
+        } else {
+          localStorage.removeItem('last_user_cast');
+        }
+      }
+    } catch (e) {
+      localStorage.removeItem('last_user_cast');
     }
+
     const alreadyPaid = localStorage.getItem('esoteric_is_paid');
     if (alreadyPaid === 'true') {
       setIsVerifiedPaid(true);
     }
-    
-    const params = new URLSearchParams(window.location.search);
-    const status = params.get('status');
-    const pId = params.get('payment_id') || params.get('paymentId');
 
-    if (pId) {
-      setPaymentStatus('verifying');
-      setPaymentMessage('Verifying your Dodo payment...');
-      unlockByPaymentId(pId, true);
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get('status');
+      const pId = params.get('payment_id') || params.get('paymentId');
 
-      if (!saved) {
-        const now = new Date();
-        const mIdx = (now.getMonth() + 1) % 6;
-        const dIdx = (mIdx + now.getDate() - 1) % 6;
-        const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
-        const autoResult = {
-          question: "Strategic Executive Decision Analysis",
-          month: PALACES[mIdx],
-          day: PALACES[dIdx],
-          hour: PALACES[hIdx],
-          time: now.toUTCString(),
-        };
-        setCastResult(autoResult);
-        localStorage.setItem('last_user_cast', JSON.stringify(autoResult));
+      if (pId) {
+        setPaymentStatus('verifying');
+        setPaymentMessage('Verifying your Dodo payment...');
+        unlockByPaymentId(pId, true);
+
+        if (!savedResult) {
+          const now = new Date();
+          const mIdx = (now.getMonth() + 1) % 6;
+          const dIdx = (mIdx + now.getDate() - 1) % 6;
+          const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
+          const autoResult = {
+            question: "Strategic Executive Decision Analysis",
+            month: PALACES[mIdx],
+            day: PALACES[dIdx],
+            hour: PALACES[hIdx],
+            time: now.toUTCString(),
+          };
+          setCastResult(autoResult);
+          localStorage.setItem('last_user_cast', JSON.stringify(autoResult));
+        }
+      } else if (status === 'succeeded') {
+        setPaymentStatus('needs-id');
+        setPaymentMessage('Payment succeeded, but Dodo did not return a Payment ID. Paste it from your receipt to unlock.');
       }
-    } else if (status === 'succeeded') {
-      setPaymentStatus('needs-id');
-      setPaymentMessage('Payment succeeded, but Dodo did not return a Payment ID. Paste it from your receipt to unlock.');
-    }
 
-    if (status || pId) {
-      window.history.replaceState({}, document.title, window.location.pathname);
+      if (status || pId) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    } catch (e) {
+      console.error('Redirect handling failed:', e);
     }
   }, []);
 
@@ -187,7 +214,7 @@ export default function Page() {
   };
 
   const handleShareTwitter = () => {
-    if (!castResult) return;
+    if (!isValidCastResult(castResult)) return;
     const tweetText = `My tactical decision vector via @EsotericPaths:\nQuery: "${castResult.question}"\nMonth: ${castResult.month.name} | Day: ${castResult.day.name} | Hour: ${castResult.hour.name}\n\nAligning micro-moments with macro ephemeris. 🜔 esotericpaths.com`;
     navigator.clipboard.writeText(tweetText);
     setCopiedTwitter(true);
@@ -213,24 +240,6 @@ export default function Page() {
           <div key={i} className="bling-star" style={{ top: star.top, left: star.left, width: star.size, height: star.size, animationDelay: star.delay }} />
         ))}
       </div>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media print {
-          @page { size: A4 portrait; margin: 0; }
-          body, html { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; background-color: #050508 !important; color: #E8E4DA !important; margin: 0 !important; padding: 0 !important; }
-          .no-print, header, nav, footer, button, a { display: none !important; }
-          .print-area { display: block !important; background-color: #050508 !important; color: #E8E4DA !important; padding: 20mm !important; width: 100% !important; box-sizing: border-box !important; }
-          .pdf-page { page-break-before: always; min-height: 250mm; display: flex; flex-direction: column; justify-content: center; }
-          .pdf-page:first-of-type { page-break-before: avoid; }
-          .print-card { background-color: #0A0A0F !important; border: 1px solid #C9A227 !important; page-break-inside: avoid; }
-        }
-        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 0.95; transform: scale(1.4); filter: drop-shadow(0 0 6px #C9A227); } }
-        @keyframes magicalGlow { 0% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); } 50% { box-shadow: 0 0 45px rgba(201, 162, 39, 0.3); border-color: rgba(201, 162, 39, 0.5); } 100% { box-shadow: 0 0 25px rgba(201, 162, 39, 0.12); border-color: rgba(201, 162, 39, 0.25); } }
-        @keyframes spinCompass { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-        .bling-star { position: absolute; background-color: #F4EEDB; border-radius: 50%; animation: twinkle 5s infinite ease-in-out; }
-        .cyber-glow-box { animation: magicalGlow 6s infinite ease-in-out; }
-        .spinning-compass { animation: spinCompass 120s linear infinite; }
-      `}} />
 
       <nav className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ color: '#C9A227', fontWeight: 'bold', fontFamily: 'Georgia, serif', fontSize: '1.15rem', textShadow: '0 0 10px #C9A227' }}>✦ ESOTERIC PATHS</span>
