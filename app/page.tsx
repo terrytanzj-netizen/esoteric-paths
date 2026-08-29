@@ -226,7 +226,7 @@ export default function Page() {
   };
 
   return (
-    <div style={{ maxWidth: '960px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'system-ui, sans-serif', position: 'relative', overflowX: 'hidden' }}>
+    <div className="es-root" style={{ maxWidth: '1040px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
 
       {paymentStatus !== 'idle' && (
         <div className="no-print" style={{
@@ -267,43 +267,44 @@ export default function Page() {
         ))}
       </div>
 
-      <nav className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
-        <span style={{ color: '#C9A227', fontWeight: 'bold', fontFamily: 'Georgia, serif', fontSize: '1.15rem', textShadow: '0 0 10px #C9A227' }}>✦ ESOTERIC PATHS</span>
-        <div style={{ display: 'flex', gap: '1.2rem', fontSize: '0.8rem', fontFamily: 'monospace', color: '#8A8678' }}>
-          <a href="#" style={{ color: '#C9A227', textDecoration: 'none' }}>Oracle</a>
-          <a href="#elements" style={{ color: 'inherit', textDecoration: 'none' }}>Matrix</a>
-          <a href="#blueprint" style={{ color: 'inherit', textDecoration: 'none' }}>Blueprint</a>
-          <a href="#insights" style={{ color: 'inherit', textDecoration: 'none' }}>Insights</a>
-          <a href="#support" style={{ color: 'inherit', textDecoration: 'none' }}>Support</a>
+      <nav className="no-print es-nav" style={{ borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
+        <span className="es-brand">✦ ESOTERIC PATHS</span>
+        <div className="es-nav-links">
+          <a className="es-nav-link" href="#oracle" style={{ color: '#C9A227' }}>Oracle</a>
+          <a className="es-nav-link" href="#elements">Matrix</a>
+          <a className="es-nav-link" href="#blueprint">Blueprint</a>
+          <a className="es-nav-link" href="#insights">Insights</a>
+          <a className="es-nav-link" href="#support">Support</a>
         </div>
       </nav>
 
-      <header className="no-print" style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
+      <header className="no-print reveal" style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Xiao Liu Ren × Tarot Matrix</span>
-        <h1 style={{ fontSize: '2.8rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.4rem 0', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>TEMPORAL STRATEGY MATRIX</h1>
+        <h1 className="es-hero-title" style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.4rem 0', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>TEMPORAL STRATEGY MATRIX</h1>
         <p style={{ fontSize: '0.95rem', color: '#8A8678', maxWidth: '600px', margin: '0 auto' }}>Align critical decisions with classical temporal mechanics and Western archetypal wisdom.</p>
+        <div className="es-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
       </header>
 
-      <div className="no-print cyber-glow-box" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+      <div className="no-print cyber-glow-box es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', letterSpacing: '0.2em' }}>• LIVE ALCHEMICAL EPHEMERIS FLUX •</span>
         <div style={{ fontSize: '3.5rem', fontWeight: 'bold', fontFamily: 'monospace', color: '#F4EEDB', textShadow: '0 0 25px rgba(201,162,39,0.4)', margin: '0.4rem 0' }}>{time.timeStr || '12:00:00'}</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0.6rem', marginTop: '1.5rem' }}>
+        <div className="es-palace-grid" style={{ marginTop: '1.5rem' }}>
           {PALACES.map((p, idx) => {
             const active = time.palaceIdx === idx;
             return (
-              <div key={p.id} style={{ padding: '0.9rem 0.4rem', background: active ? 'rgba(201,162,39,0.2)' : '#050508', border: active ? '1px solid #C9A227' : '1px solid rgba(201,162,39,0.1)', borderRadius: '10px' }}>
+              <div key={p.id} className={`es-palace-cell${active ? ' is-active' : ''}`}>
                 <div style={{ color: active ? '#C9A227' : '#5C584E', fontSize: '1.1rem' }}>{p.symbol}</div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: active ? '#F4EEDB' : '#8A8678', fontFamily: 'Georgia, serif' }}>{p.name.split(' ')[0]}</div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: active ? '#F4EEDB' : '#8A8678', fontFamily: 'var(--font-display)' }}>{p.name.split(' ')[0]}</div>
               </div>
             );
           })}
         </div>
       </div>
 
-      <section id="elements" className="no-print" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
+      <section id="elements" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Hermetic & Eastern Synthesis •</span>
-        <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 1.5rem 0' }}>The Elemental & Wu Xing Architecture</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', textAlign: 'left' }}>
+        <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1.5rem 0' }}>The Elemental & Wu Xing Architecture</h3>
+        <div className="es-grid-2" style={{ textAlign: 'left' }}>
           <div style={{ background: '#050508', padding: '1rem', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.15)' }}>
             <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>WESTERN HERMETIC ELEMENTS</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontSize: '0.8rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
@@ -319,14 +320,14 @@ export default function Page() {
         </div>
       </section>
 
-      <div className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
-          <input type="text" required value={question} onChange={e => setQuestion(e.target.value)} placeholder="e.g., Should I execute the contract renegotiation this week?" style={{ padding: '1rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', outline: 'none' }} />
-          <button type="submit" style={{ padding: '1.1rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '8px', border: 'none', cursor: 'pointer', boxShadow: '0 0 20px rgba(201,162,39,0.3)' }}>
-            Cast Horary Oracle →
-          </button>
-        </form>
+      <div id="oracle" className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+          <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
+            <input type="text" required value={question} onChange={e => setQuestion(e.target.value)} placeholder="e.g., Should I execute the contract renegotiation this week?" className="es-input" style={{ padding: '1rem' }} />
+            <button type="submit" className="es-btn es-btn--gold" style={{ padding: '1.1rem', fontSize: '0.9rem' }} disabled={isCasting}>
+              {isCasting ? (<span className="es-casting"><span className="es-glyph-spin">☉</span> Consulting the spheres…</span>) : 'Cast Horary Oracle →'}
+            </button>
+          </form>
 
         {castResult && (
           <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -334,14 +335,14 @@ export default function Page() {
             <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderBottom: '1px solid rgba(201, 162, 39, 0.2)', paddingBottom: '1.25rem' }}>
               <div>
                 <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>EPHEMERIS COORDINATE LOCKED • {castResult.time}</span>
-                <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', margin: '0.35rem 0 0 0', fontFamily: 'Georgia, serif' }}>Query: "{castResult.question}"</h2>
+                <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', margin: '0.35rem 0 0 0', fontFamily: 'var(--font-display)' }}>Query: "{castResult.question}"</h2>
               </div>
-              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                <button onClick={handleShareTwitter} style={{ padding: '0.85rem 1.25rem', backgroundColor: '#121118', color: '#C9A227', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.8rem', cursor: 'pointer', fontFamily: 'monospace' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <button onClick={handleShareTwitter} className="es-btn es-btn--ghost" style={{ padding: '0.85rem 1.25rem', fontSize: '0.8rem' }}>
                   {copiedTwitter ? '✓ Copied Sigil for X!' : '🜔 Share on X'}
                 </button>
                 {isVerifiedPaid && (
-                  <button onClick={handlePrintPDF} style={{ padding: '0.85rem 1.75rem', backgroundColor: '#C9A227', color: '#050508', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 0 15px rgba(201, 162, 39, 0.4)' }}>
+                  <button onClick={handlePrintPDF} className="es-btn es-btn--gold" style={{ padding: '0.85rem 1.75rem', fontSize: '0.85rem' }}>
                     📥 Export 10-Page Executive PDF
                   </button>
                 )}
@@ -349,22 +350,24 @@ export default function Page() {
             </div>
 
             {/* 免费预览提示 */}
-            <div className="no-print" style={{ padding: '1.5rem', backgroundColor: '#0A0A0F', borderRadius: '16px', border: '1px solid rgba(201, 162, 39, 0.3)', marginBottom: '2rem' }}>
+            <div id="blueprint" className="no-print es-lift reveal" style={{ padding: '1.5rem', backgroundColor: '#0A0A0F', borderRadius: '16px', border: '1px solid rgba(201, 162, 39, 0.3)', marginBottom: '2rem' }}>
               <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>FREE PREVIEW</span>
-              <h3 style={{ fontSize: '1.4rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0.25rem 0 1rem 0' }}>Your Three-Palace Trajectory</h3>
+              <h3 style={{ fontSize: '1.4rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0.25rem 0 1rem 0' }}>Your Three-Palace Trajectory</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h4>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
-                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)', filter: 'blur(4px)', userSelect: 'none' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>• • • • • •</h4>
+                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE — locked</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.wuxing}</h4>
+                  <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The current pivot is veiled. Unlock to reveal the full reading.</p>
                 </div>
-                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)', filter: 'blur(4px)', userSelect: 'none' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'Georgia, serif' }}>• • • • • •</h4>
+                <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
+                  <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE — locked</span>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.wuxing}</h4>
+                  <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The decisive vector is veiled. Unlock to reveal the full reading.</p>
                 </div>
               </div>
               <p style={{ fontSize: '0.8rem', color: '#8A8678', marginTop: '1rem', lineHeight: 1.5 }}>
@@ -377,7 +380,7 @@ export default function Page() {
               <ReportPDF castResult={castResult} />
             ) : (
               /* 未支付时展示的解锁引导区块（带 Testimonials、Trust Badges 与 Restore 框） */
-              <div id="support" className="no-print" style={{ 
+              <div id="support" className="no-print es-lift reveal" style={{ 
                 padding: '2.5rem 1.5rem', 
                 backgroundColor: '#0F0E17', 
                 borderRadius: '16px', 
@@ -392,7 +395,7 @@ export default function Page() {
                 <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
                   ✦ Executive Strategy Blueprint ($19) ✦
                 </span>
-                <h3 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'Georgia, serif' }}>
+                <h3 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-display)' }}>
                   Unlock Full 10-Page Personal Blueprint & 72h Action Plan
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
@@ -423,7 +426,8 @@ export default function Page() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
                   <a
                     href={DODO_CHECKOUT_URL}
-                    style={{ display: 'inline-block', padding: '1rem 3rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', fontSize: '0.9rem', textTransform: 'uppercase', textDecoration: 'none', borderRadius: '8px', boxShadow: '0 0 20px rgba(201,162,39,0.3)', transition: 'all 0.3s' }}
+                    className="es-btn es-btn--gold"
+                    style={{ padding: '1rem 3rem', fontSize: '0.95rem' }}
                   >
                     Unlock Master Blueprint ($19) →
                   </a>
@@ -456,12 +460,14 @@ export default function Page() {
                         value={manualPaymentId}
                         onChange={e => setManualPaymentId(e.target.value)}
                         onKeyDown={e => { if (e.key === 'Enter') verifyPayment(manualPaymentId); }}
-                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', backgroundColor: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '6px', outline: 'none' }}
+                        className="es-input"
+                        style={{ flex: 1, padding: '0.6rem', fontSize: '0.85rem', borderRadius: '6px' }}
                       />
                       <button
                         onClick={() => verifyPayment(manualPaymentId)}
                         disabled={paymentStatus === 'verifying'}
-                        style={{ padding: '0.6rem 1rem', backgroundColor: paymentStatus === 'verifying' ? '#2A2520' : '#181722', color: '#C9A227', border: '1px solid #C9A227', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: paymentStatus === 'verifying' ? 'wait' : 'pointer' }}
+                        className="es-btn es-btn--ghost"
+                        style={{ padding: '0.6rem 1rem', fontSize: '0.85rem', borderRadius: '6px' }}
                       >
                         {paymentStatus === 'verifying' ? 'Verifying...' : 'Restore'}
                       </button>
@@ -475,34 +481,34 @@ export default function Page() {
         )}
       </div>
 
-      <div className="no-print" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h4 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h4>
+      <div className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        <h4 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h4>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', margin: '0 0 1rem 0' }}>Receive precision temporal vectors every Monday.</p>
         {emailSubscribed ? (
           <div style={{ color: '#C9A227', fontFamily: 'monospace', fontSize: '0.85rem' }}>✦ Subscribed successfully!</div>
         ) : (
           <form onSubmit={handleEmail} style={{ display: 'flex', gap: '0.5rem', maxWidth: '400px', margin: '0 auto' }}>
-            <input type="email" required value={emailInput} onChange={e => setEmailInput(e.target.value)} placeholder="Your professional email..." style={{ flex: 1, padding: '0.7rem', background: '#050508', border: '1px solid rgba(201,162,39,0.3)', color: '#FFF', borderRadius: '8px', fontSize: '0.85rem', outline: 'none' }} />
-            <button type="submit" style={{ padding: '0.7rem 1.4rem', background: '#C9A227', color: '#050508', fontWeight: 'bold', borderRadius: '8px', border: 'none', cursor: 'pointer', fontSize: '0.85rem' }}>Join</button>
+            <input type="email" required value={emailInput} onChange={e => setEmailInput(e.target.value)} placeholder="Your professional email..." className="es-input" style={{ flex: 1, padding: '0.7rem', fontSize: '0.85rem' }} />
+            <button type="submit" className="es-btn es-btn--gold" style={{ padding: '0.7rem 1.4rem', fontSize: '0.85rem' }}>Join</button>
           </form>
         )}
       </div>
 
-      <div id="insights" className="no-print" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+      <div id="insights" className="no-print reveal" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', marginBottom: '1rem' }}>Strategic Insights</h3>
+        <div className="es-insights-grid">
           {ARTICLES.map((art, i) => (
-            <Link key={i} href={`/insights/${art.slug}`} style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none', transition: 'border-color 0.2s' }}>
+            <Link key={i} href={`/insights/${art.slug}`} className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
               <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{art.readTime}</span>
-              <h4 style={{ fontSize: '0.95rem', fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
+              <h4 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0' }}>{art.title}</h4>
               <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>Read →</span>
             </Link>
           ))}
         </div>
       </div>
 
-      <div id="faq" className="no-print" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h3 style={{ fontFamily: 'Georgia, serif', color: '#F4EEDB', margin: '0 0 1.25rem 0' }}>Frequently Asked Questions</h3>
+      <div id="faq" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 1.25rem 0' }}>Frequently Asked Questions</h3>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
           {[
             { q: 'How deterministic is the reading?', a: 'The palace calculation is fully deterministic — the same moment always yields the same three palaces. Strategic interpretation is where judgment is applied.' },
@@ -512,14 +518,14 @@ export default function Page() {
             { q: 'What is the 7-day guarantee?', a: 'If the blueprint does not meet expectations, request a full refund within 7 days — no questions asked.' },
           ].map((f, i) => (
             <div key={i} style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
-              <p style={{ fontSize: '0.9rem', color: '#F4EEDB', fontFamily: 'Georgia, serif', margin: '0 0 0.3rem 0' }}>{f.q}</p>
+              <p style={{ fontSize: '0.9rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 0.3rem 0' }}>{f.q}</p>
               <p style={{ fontSize: '0.82rem', color: '#CDC8BC', lineHeight: '1.6', margin: 0 }}>{f.a}</p>
             </div>
           ))}
         </div>
       </div>
 
-      <footer id="support" style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
+      <footer style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
 
