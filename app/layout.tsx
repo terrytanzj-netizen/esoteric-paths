@@ -31,8 +31,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://www.esotericpaths.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
-      <body style={{ backgroundColor: '#0E0E14', color: '#E8E4DA', margin: 0, padding: 0, fontFamily: 'system-ui, sans-serif' }}>
+      <body style={{ backgroundColor: '#050508', color: '#E8E4DA', margin: 0, padding: 0, fontFamily: 'var(--font-body)' }}>
         {children}
         <Analytics />
       </body>
