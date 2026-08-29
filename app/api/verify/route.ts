@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Product price floor in minor currency units (cents). $19.00 = 1900.
-const PRODUCT_AMOUNT_MINOR = 1900;
+// Optional product guard. When set, only payments containing this product_id
+// unlock the blueprint. Discount/free codes preserve the product_id, so they
+// still pass. Leave empty to skip the product check (amount check is relaxed).
+const PRODUCT_ID = process.env.DODO_PRODUCT_ID || '';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -75,9 +77,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Amount / currency guard — must match the $19 product so a different
-    // (cheaper or unrelated) order cannot unlock the blueprint.
-    const amount = typeof data.amount === 'number' ? data.amount : NaN;
+    // Currency guard — the blueprint is a USD product.
     const currency = typeof data.currency === 'string' ? data.currency.toLowerCase() : '';
     if (currency && currency !== 'usd') {
       console.warn(`[verify] payment ${paymentId} currency ${currency} mismatch`);
@@ -86,13 +86,24 @@ export async function GET(req: NextRequest) {
         { status: 403 }
       );
     }
-    if (!Number.isNaN(amount) && amount < PRODUCT_AMOUNT_MINOR) {
-      console.warn(`[verify] payment ${paymentId} amount ${amount} below product price`);
-      return NextResponse.json(
-        { valid: false, status: data.status, error: 'Payment amount does not match the product.' },
-        { status: 403 }
-      );
+
+    // Optional product guard (enable via DODO_PRODUCT_ID in Vercel). Discount
+    // and free codes keep the same product_id, so they still unlock. Without it,
+    // any succeeded / non-refunded USD payment on this Dodo account is accepted.
+    if (PRODUCT_ID) {
+      const items = Array.isArray(data.products) ? (data.products as any[]) : [];
+      const hasProduct = items.some((p) => p && p.product_id === PRODUCT_ID);
+      if (!hasProduct) {
+        console.warn(`[verify] payment ${paymentId} missing product ${PRODUCT_ID}`);
+        return NextResponse.json(
+          { valid: false, status: data.status, error: 'Payment product mismatch.' },
+          { status: 403 }
+        );
+      }
     }
+    // NOTE: amount is intentionally NOT floored at $19 — discount/free codes
+    // legitimately yield lower amounts, and a real succeeded/non-refunded payment
+    // on this account is a valid purchase.
 
     return NextResponse.json({ valid: true, paymentId, status: data.status });
   } catch (err: any) {
