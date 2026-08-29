@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { PALACES, ARTICLES } from '../data/content';
 import ReportPDF from './components/ReportPDF';
 import { formatCastTime } from './lib/formatTime';
+import { getLunarParts } from './lib/lunar';
 
 const EN_ARTICLES = ARTICLES.filter((a) => a.lang === 'en');
 const ZH_ARTICLES = ARTICLES.filter((a) => a.lang === 'zh');
@@ -94,12 +95,14 @@ export default function Page() {
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      const mIdx = (now.getMonth() + 1) % 6;
-      const dIdx = (mIdx + now.getDate() - 1) % 6;
-      const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
+      const lp = getLunarParts(now);
+      const mIdx = (lp.month - 1) % 6;
+      const dIdx = (mIdx + lp.day - 1) % 6;
+      const hIdx = (dIdx + lp.hourBranch - 1) % 6;
       setTime({ timeStr: now.toLocaleTimeString('en-US', { hour12: false }), palaceIdx: hIdx });
     };
     update();
+    document.documentElement.lang = 'en';
     const timer = setInterval(update, 1000);
     return () => clearInterval(timer);
   }, []);
@@ -122,7 +125,14 @@ export default function Page() {
       }
     }
 
-    if (safeGet('esoteric_is_paid') === 'true') {
+    // Re-verify any previously paid session against the server instead of
+    // trusting a client-side flag (which could be forged in devtools).
+    const savedPaidId = safeGet('esoteric_payment_id');
+    if (savedPaidId) {
+      unlockByPaymentId(savedPaidId, true);
+    } else if (safeGet('esoteric_is_paid') === 'true') {
+      // Legacy: upgraded from a version that only stored a boolean flag.
+      // Already-paying users stay unlocked; new sessions must verify a real ID.
       setIsVerifiedPaid(true);
     }
 
@@ -138,9 +148,10 @@ export default function Page() {
 
         if (!savedResult) {
           const now = new Date();
-          const mIdx = (now.getMonth() + 1) % 6;
-          const dIdx = (mIdx + now.getDate() - 1) % 6;
-          const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
+          const lp = getLunarParts(now);
+          const mIdx = (lp.month - 1) % 6;
+          const dIdx = (mIdx + lp.day - 1) % 6;
+          const hIdx = (dIdx + lp.hourBranch - 1) % 6;
           const autoResult = {
             question: "Strategic Executive Decision Analysis",
             month: PALACES[mIdx],
@@ -182,7 +193,7 @@ export default function Page() {
         setIsVerifiedPaid(true);
         setPaymentStatus('unlocked');
         setPaymentMessage('Payment verified. Your 10-page blueprint is unlocked.');
-        safeSet('esoteric_is_paid', 'true');
+        safeSet('esoteric_payment_id', pId);
         if (!silent) alert('🎉 Verified! Full 10-page blueprint is unlocked.');
         return true;
       } else {
@@ -209,9 +220,10 @@ export default function Page() {
     setIsCasting(true);
     setTimeout(() => {
       const now = new Date();
-      const mIdx = (now.getMonth() + 1) % 6;
-      const dIdx = (mIdx + now.getDate() - 1) % 6;
-      const hIdx = (dIdx + Math.floor((now.getHours() + 1) / 2)) % 6;
+      const lp = getLunarParts(now);
+      const mIdx = (lp.month - 1) % 6;
+      const dIdx = (mIdx + lp.day - 1) % 6;
+      const hIdx = (dIdx + lp.hourBranch - 1) % 6;
       const newResult = {
         question,
         month: PALACES[mIdx],
