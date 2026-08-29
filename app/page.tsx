@@ -534,6 +534,40 @@ export default function Page() {
         )}
       </div>
 
+      {/* 独立的恢复入口：不依赖起课记录，任何未解锁的付费用户都能找回权限 */}
+      {!isVerifiedPaid && (
+        <div id="restore" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '16px', padding: '1.5rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+          <h4 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.35rem 0', fontSize: '1.05rem' }}>Already paid? Restore your access</h4>
+          <p style={{ fontSize: '0.8rem', color: '#8A8678', margin: '0 0 1rem 0', lineHeight: 1.6 }}>
+            Paste your Dodo Payment ID — it starts with <code style={{ color: '#C9A227', fontFamily: 'monospace' }}>pay_</code> and is in your receipt email. Access is restored instantly, no new purchase needed.
+          </p>
+          <div style={{ display: 'flex', gap: '0.5rem', maxWidth: '480px' }}>
+            <input
+              type="text"
+              placeholder="e.g. pay_xxxxxxxx"
+              value={manualPaymentId}
+              onChange={e => setManualPaymentId(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') verifyPayment(manualPaymentId); }}
+              className="es-input"
+              style={{ flex: 1, padding: '0.7rem', fontSize: '0.85rem', borderRadius: '8px' }}
+            />
+            <button
+              onClick={() => verifyPayment(manualPaymentId)}
+              disabled={paymentStatus === 'verifying'}
+              className="es-btn es-btn--gold"
+              style={{ padding: '0.7rem 1.25rem', fontSize: '0.85rem', borderRadius: '8px' }}
+            >
+              {paymentStatus === 'verifying' ? 'Verifying…' : 'Restore'}
+            </button>
+          </div>
+          {(paymentStatus === 'needs-id' || paymentStatus === 'error') && (
+            <p style={{ fontSize: '0.8rem', color: paymentStatus === 'error' ? '#EF4444' : '#C9A227', margin: '0.75rem 0 0 0', fontFamily: 'monospace' }}>
+              ✦ {paymentMessage}
+            </p>
+          )}
+        </div>
+      )}
+
       <div className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h4 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h4>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', margin: '0 0 1rem 0' }}>Receive precision temporal vectors every Monday.</p>
