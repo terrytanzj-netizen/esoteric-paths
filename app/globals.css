@@ -172,6 +172,48 @@ h1, h2, h3, h4 {
   gap: 1rem;
 }
 
+/* Section sub-heading used to split insights by language */
+.es-section-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  color: var(--gold);
+  font-family: monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gold-faint);
+}
+.es-section-count {
+  color: #5C584E;
+  letter-spacing: 0.1em;
+  text-transform: none;
+}
+
+/* ---------- Chinese (中文) typography ----------
+   Cinzel has no CJK glyphs, so zh articles swap the display face for a
+   serif CJK stack and open up the line box. Chinese text needs more
+   leading than Latin to stay readable at the same font size. */
+.es-zh {
+  --font-display: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', 'STSong', Georgia, serif;
+  --font-body: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+}
+.es-zh h1,
+.es-zh h2 {
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+.es-zh p {
+  line-height: 1.95;
+  letter-spacing: 0.02em;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+.es-zh p[style*='italic'] {
+  font-style: normal;
+}
+
 /* ---------- Palace cells ---------- */
 .es-palace-cell {
   padding: 0.9rem 0.4rem;
