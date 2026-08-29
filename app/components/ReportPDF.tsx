@@ -11,6 +11,7 @@ import {
   PALACES,
   WUXING_CYCLE,
 } from '../../data/content';
+import { formatCastTime } from '../lib/formatTime';
 
 interface ReportPDFProps {
   castResult: {
@@ -109,7 +110,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', fontSize: '0.85rem', color: parchment, fontFamily: 'monospace' }}>
             <div>
               <span style={{ color: muted, display: 'block' }}>CAST TIME</span>
-              {time}
+              {formatCastTime(time)}
             </div>
             <div>
               <span style={{ color: muted, display: 'block' }}>VALIDITY WINDOW</span>
