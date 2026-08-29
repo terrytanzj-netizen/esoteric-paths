@@ -334,6 +334,7 @@ export const ARTICLES = [
   { slug: 'kong-wang-emptiness-strategic-retreat', lang: 'en' as const, title: 'Kong Wang and the Strategic Uses of Emptiness', readTime: '9 min read' },
   { slug: 'chi-kou-dispute-architecture-bad-faith', lang: 'en' as const, title: 'Chi Kou: The Palace of Dispute and the Case for Writing Things Down', readTime: '10 min read' },
   { slug: 'liu-lian-discipline-of-staying', lang: 'en' as const, title: 'Liu Lian: The Discipline of Staying', readTime: '10 min read' },
+  { slug: 'chinese-name-for-business-guide', lang: 'en' as const, title: 'How to Choose a Chinese Name for Business', readTime: '9 min read' },
   { slug: 'accept-job-offer-now-or-wait', lang: 'en' as const, title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
   { slug: 'ontology-of-time-horary-vs-chronometry', lang: 'en' as const, title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
   { slug: 'xiao-liu-ren-vs-tarot-archetypes', lang: 'en' as const, title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
