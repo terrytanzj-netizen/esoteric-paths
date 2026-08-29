@@ -9,14 +9,20 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const article = ARTICLE_DETAILS[params.slug];
   if (!article) return { title: 'Esoteric Paths' };
+  const ogLocale = article.lang === 'zh' ? 'zh_CN' : 'en_US';
   return {
     title: `${article.title} | Esoteric Paths`,
     description: article.excerpt,
+    alternates: {
+      canonical: `https://www.esotericpaths.com/insights/${article.slug}`,
+      languages: { 'en-US': 'https://www.esotericpaths.com/' },
+    },
     openGraph: {
       title: `${article.title} | Esoteric Paths`,
       description: article.excerpt,
       url: `https://www.esotericpaths.com/insights/${article.slug}`,
       type: 'article',
+      locale: ogLocale,
       images: [{ url: '/og-image.png', width: 1200, height: 630, alt: article.title }],
     },
     twitter: {
@@ -32,11 +38,14 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const article = ARTICLE_DETAILS[params.slug];
   if (!article) notFound();
 
+  const isZh = article.lang === 'zh';
+
   const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
     description: article.excerpt,
+    inLanguage: isZh ? 'zh-CN' : 'en-US',
     author: { '@type': 'Organization', name: 'Esoteric Paths' },
     publisher: { '@type': 'Organization', name: 'Esoteric Paths' },
     datePublished: '2026-08-01',
@@ -44,10 +53,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   };
 
   return (
-    <div className="reveal" style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)' }}>
+    <div className={isZh ? 'reveal es-zh' : 'reveal'} style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <Link href="/" style={{ color: '#C9A227', textDecoration: 'none', fontSize: '0.8rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-        ← Back to Oracle
+        ← {isZh ? '返回起卦' : 'Back to Oracle'}
       </Link>
 
       <span style={{ display: 'block', fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', marginTop: '2rem' }}>
@@ -73,10 +82,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', marginBottom: '1rem' }}>
-          Want a personalized reading for your own decision?
+          {isZh ? '想针对你自己的决策做一次推演？' : 'Want a personalized reading for your own decision?'}
         </p>
         <Link href="/" className="es-btn es-btn--gold" style={{ padding: '0.85rem 2.2rem', fontSize: '0.85rem' }}>
-          Cast Your Oracle →
+          {isZh ? '起一课 →' : 'Cast Your Oracle →'}
         </Link>
       </div>
 
