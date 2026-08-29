@@ -17,8 +17,8 @@ export const PALACES: Palace[] = [
 ];
 
 export const ARTICLES = [
-  { title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
-  { title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
-  { title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
-  { title: 'Da An Decoded: Strategic Preservation in Volatile Markets', readTime: '5 min read' },
+  { slug: 'accept-job-offer-now-or-wait', title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
+  { slug: 'ontology-of-time-horary-vs-chronometry', title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
+  { slug: 'xiao-liu-ren-vs-tarot-archetypes', title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
+  { slug: 'da-an-strategic-preservation', title: 'Da An Decoded: Strategic Preservation in Volatile Markets', readTime: '5 min read' },
 ];
