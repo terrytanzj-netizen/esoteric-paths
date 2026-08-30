@@ -1,7 +1,23 @@
+import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LangSetter from './LangSetter';
 import { ARTICLE_DETAILS } from '../../../data/articles';
+
+function renderBody(body: string) {
+  const parts = body.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (match) {
+      return (
+        <Link key={i} href={match[2]} style={{ color: '#C9A227', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+          {match[1]}
+        </Link>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
 
 export function generateStaticParams() {
   return Object.keys(ARTICLE_DETAILS).map((slug) => ({ slug }));
@@ -16,7 +32,12 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
     description: article.excerpt,
     alternates: {
       canonical: `https://www.esotericpaths.com/insights/${article.slug}`,
-      languages: { 'en-US': 'https://www.esotericpaths.com/' },
+      // Point hreflang at the article itself, in its own language. Declaring
+      // every article as en-US and pointing at the home page was a wrong signal.
+      languages:
+        article.lang === 'zh'
+          ? { 'zh-CN': `https://www.esotericpaths.com/insights/${article.slug}` }
+          : { 'en-US': `https://www.esotericpaths.com/insights/${article.slug}` },
     },
     openGraph: {
       title: `${article.title} | Esoteric Paths`,
@@ -62,7 +83,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       </Link>
 
       <span style={{ display: 'block', fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', marginTop: '2rem' }}>
-        {article.readTime}
+        {isZh ? 'Esoteric Paths 研究组' : 'By Esoteric Paths Research'} · {article.readTime}
       </span>
       <h1 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.4rem 0 1rem 0', lineHeight: 1.2, textShadow: '0 0 24px rgba(201,162,39,0.18)' }}>
         {article.title}
@@ -77,9 +98,38 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             <h2 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.6rem 0' }}>
               {i + 1}. {section.heading}
             </h2>
-            <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: 0 }}>{section.body}</p>
+            <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: 0 }}>{renderBody(section.body)}</p>
           </section>
         ))}
+      </div>
+
+      <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)' }}>
+        <h3 style={{ fontSize: '1rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 1rem 0', letterSpacing: '0.05em' }}>
+          {isZh ? '相关阅读' : 'Related Readings'}
+        </h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+          {Object.values(ARTICLE_DETAILS)
+            .filter((a) => a.lang === article.lang && a.slug !== article.slug)
+            .slice(0, 3)
+            .map((a) => (
+              <Link
+                key={a.slug}
+                href={`/insights/${a.slug}`}
+                style={{
+                  display: 'block',
+                  padding: '1rem',
+                  border: '1px solid rgba(201,162,39,0.25)',
+                  borderRadius: '6px',
+                  textDecoration: 'none',
+                  color: '#E8E4DA',
+                  background: 'rgba(201,162,39,0.04)',
+                }}
+              >
+                <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-display)', lineHeight: 1.3, display: 'block' }}>{a.title}</span>
+                <span style={{ fontSize: '0.7rem', color: '#8A8678', marginTop: '0.5rem', display: 'block' }}>{a.readTime}</span>
+              </Link>
+            ))}
+        </div>
       </div>
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
