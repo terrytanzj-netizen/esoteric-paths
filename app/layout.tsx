@@ -33,8 +33,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://www.esotericpaths.com" />
+        {/* hreflang: the home page exists only in English, so it must not
+            advertise a zh version — pointing zh at this same URL is a
+            self-contradicting signal that confuses Google. */}
         <link rel="alternate" hrefLang="en" href="https://www.esotericpaths.com" />
-        <link rel="alternate" hrefLang="zh" href="https://www.esotericpaths.com" />
         <link rel="alternate" hrefLang="x-default" href="https://www.esotericpaths.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
