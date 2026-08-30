@@ -15,7 +15,9 @@ export async function GET(req: NextRequest) {
 
   // Basic shape check — Dodo payment IDs look like pay_xxx.
   // Rejects obvious junk before hitting the upstream API.
-  if (!/^pay_[A-Za-z0-9]+$/.test(paymentId)) {
+  // Underscores and hyphens are allowed: being too strict here would reject a
+  // genuine payment id and lock out a customer who has already paid.
+  if (!/^pay_[A-Za-z0-9_-]{4,}$/.test(paymentId)) {
     return NextResponse.json({ valid: false, error: 'Malformed payment_id' }, { status: 400 });
   }
 
@@ -33,14 +35,24 @@ export async function GET(req: NextRequest) {
     const baseUrl = apiKey.startsWith('sk_test') || apiKey.startsWith('test_')
       ? 'https://test.dodopayments.com'
       : 'https://live.dodopayments.com';
-    const res = await fetch(`${baseUrl}/payments/${paymentId}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
-    });
+    // Hard upstream timeout — never leave a paying customer spinning on
+    // "verifying" if Dodo hangs.
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    let res: Response;
+    try {
+      res = await fetch(`${baseUrl}/payments/${paymentId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store',
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeoutId);
+    }
 
     if (!res.ok) {
       const body = await res.text().catch(() => '');
@@ -97,6 +109,13 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ valid: true, paymentId, status: data.status });
   } catch (err: any) {
+    if (err?.name === 'AbortError') {
+      console.error('[verify] upstream timeout for', paymentId);
+      return NextResponse.json(
+        { valid: false, error: 'Payment verification timed out. Please try again.' },
+        { status: 504 }
+      );
+    }
     console.error('[verify] exception:', err);
     return NextResponse.json(
       { valid: false, error: err.message || 'Verification request failed' },
