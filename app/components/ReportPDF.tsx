@@ -3,6 +3,7 @@
 import {
   Palace,
   getPalaceFlow,
+  getOmenShiftLabel,
   getResonantVector,
   getTarotSynthesis,
   get72hPlan,
@@ -27,9 +28,18 @@ function isValidCastResult(value: any): value is ReportPDFProps['castResult'] {
   if (!value || typeof value !== 'object') return false;
   const required = ['question', 'month', 'day', 'hour', 'time'];
   if (!required.every(k => typeof value[k] === 'object' || typeof value[k] === 'string')) return false;
+  // `omen` is checked too: the report reads `hour.omen.label` on the cover, so a
+  // palace object missing it would throw while rendering a paid deliverable.
   return ['month', 'day', 'hour'].every(k => {
     const p = value[k];
-    return p && typeof p === 'object' && typeof p.name === 'string' && typeof p.symbol === 'string';
+    return (
+      p &&
+      typeof p === 'object' &&
+      typeof p.name === 'string' &&
+      typeof p.symbol === 'string' &&
+      !!p.omen &&
+      typeof p.omen.label === 'string'
+    );
   });
 }
 
@@ -121,8 +131,8 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
               {hour.name}
             </div>
             <div>
-              <span style={{ color: muted, display: 'block' }}>ELEMENTAL TIDE</span>
-              {hour.wuxing}
+              <span style={{ color: muted, display: 'block' }}>OMEN</span>
+              {hour.omen.label}
             </div>
           </div>
         </div>
@@ -136,7 +146,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <PageWrap pageNum={2} title="Methodology: The Three-Palace Horary Engine (三宫起课原理)">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-            Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries an elemental charge, a psychological posture, and a strategic directive. The Hour palace is the decisive vector—the active edge of the moment.
+            Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries its own omen quality — auspicious, delayed, or obstructed — together with a psychological posture and a strategic directive. The Hour palace is the decisive vector: the active edge of the moment, and the palace on which the matter lands.
           </p>
           <div className="print-card" style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.4)` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
@@ -160,9 +170,9 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           <div style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.2)` }}>
             <span style={labelStyle}>Your Cast Coordinates</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', marginTop: '0.8rem', fontSize: '0.85rem', color: parchment }}>
-              <div><strong style={{ color: gold }}>Month:</strong> {month.symbol} {month.name} — {month.wuxing}</div>
-              <div><strong style={{ color: gold }}>Day:</strong> {day.symbol} {day.name} — {day.wuxing}</div>
-              <div><strong style={{ color: gold }}>Hour:</strong> {hour.symbol} {hour.name} — {hour.wuxing}</div>
+              <div><strong style={{ color: gold }}>Month:</strong> {month.symbol} {month.name} — {month.omen.label}</div>
+              <div><strong style={{ color: gold }}>Day:</strong> {day.symbol} {day.name} — {day.omen.label}</div>
+              <div><strong style={{ color: gold }}>Hour:</strong> {hour.symbol} {hour.name} — {hour.omen.label}</div>
               <div><strong style={{ color: gold }}>Active Archetype:</strong> {hour.jungianArchetype}</div>
             </div>
           </div>
@@ -177,17 +187,17 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
             <span style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{month.symbol} {month.name} ({month.wuxing})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{month.symbol} {month.name} ({month.omen.label})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{month.desc}</p>
           </div>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
             <span style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{day.symbol} {day.name} ({day.wuxing})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{day.symbol} {day.name} ({day.omen.label})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{day.desc}</p>
           </div>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid #C9A227' }}>
             <span style={{ fontSize: '0.75rem', color: gold, fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{hour.symbol} {hour.name} ({hour.wuxing})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{hour.symbol} {hour.name} ({hour.omen.label})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{hour.desc}</p>
           </div>
         </div>
@@ -210,8 +220,8 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {month.name.split(' ')[0]} to {day.name.split(' ')[0]}
               </h4>
               <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.55, margin: 0 }}>
-                The macro origin ({month.wuxing}) meets the current pivot ({day.wuxing}).
-                {getWuxingRelationLabel(month, day)}
+                The macro origin reads {month.omen.label} on {month.name.split(' ')[0]}; the current pivot reads {day.omen.label} on {day.name.split(' ')[0]}.
+                {getOmenShiftLabel(month, day)}
               </p>
             </div>
             <div className="print-card" style={cardStyle}>
@@ -220,8 +230,8 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {day.name.split(' ')[0]} to {hour.name.split(' ')[0]}
               </h4>
               <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.55, margin: 0 }}>
-                The current pivot ({day.wuxing}) hands momentum to the decisive vector ({hour.wuxing}).
-                {getWuxingRelationLabel(day, hour)}
+                The current pivot hands momentum to the decisive vector, which reads {hour.omen.label} on {hour.name.split(' ')[0]}.
+                {getOmenShiftLabel(day, hour)}
               </p>
             </div>
           </div>
@@ -264,13 +274,13 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       </PageWrap>
 
       {/* PAGE 06 — FIVE-DIMENSIONAL QI DYNAMICS */}
-      <PageWrap pageNum={6} title="Five-Dimensional Qi Dynamics & Resonant Vectors (五维能量共振矩阵)">
+      <PageWrap pageNum={6} title="Sixfold Resonance Matrix (六维共振矩阵)">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
           <div className="print-card" style={cardStyle}>
-            <span style={labelStyle}>Elemental Attunement</span>
-            <h4 style={{ color: cream, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.element}</h4>
+            <span style={labelStyle}>Palace Omen</span>
+            <h4 style={{ color: gold, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.omenLabel}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
-              Governs the energetic flux of this window. Dress, diet, and environment can be tuned toward this element to reduce friction.
+              {vector.omenNote}
             </p>
           </div>
           <div className="print-card" style={cardStyle}>
@@ -369,7 +379,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       </PageWrap>
 
       {/* PAGE 09 — REFERENCE APPENDIX */}
-      <PageWrap pageNum={9} title="Reference Appendix: The Six Palaces & Wu Xing Cycle">
+      <PageWrap pageNum={9} title="Reference Appendix: The Six Palaces & Wu Xing">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="print-card" style={{ ...cardStyle, padding: '1rem' }}>
             <span style={labelStyle}>The Six Palaces at a Glance</span>
@@ -377,7 +387,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(201,162,39,0.3)' }}>
                   <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Palace</th>
-                  <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Element</th>
+                  <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Omen</th>
                   <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Core Directive</th>
                   <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Domain</th>
                 </tr>
@@ -386,7 +396,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {PALACES.map(p => (
                   <tr key={p.id} style={{ borderBottom: '1px solid rgba(201,162,39,0.1)' }}>
                     <td style={{ padding: '0.4rem 0', color: cream }}>{p.symbol} {p.name.split('(')[0]}</td>
-                    <td style={{ padding: '0.4rem 0' }}>{p.wuxing}</td>
+                    <td style={{ padding: '0.4rem 0', color: p.omen.quality === 'auspicious' ? gold : parchment }}>{p.omen.label}</td>
                     <td style={{ padding: '0.4rem 0' }}>{p.advice}</td>
                     <td style={{ padding: '0.4rem 0' }}>{p.domain.split(',')[0]}</td>
                   </tr>
@@ -396,7 +406,10 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           </div>
 
           <div className="print-card" style={{ ...cardStyle, padding: '1rem' }}>
-            <span style={labelStyle}>Wu Xing Interaction Cycle</span>
+            <span style={labelStyle}>Wu Xing — Cultural Reference Only</span>
+            <p style={{ color: muted, fontSize: '0.75rem', lineHeight: 1.55, margin: '0.5rem 0 0 0' }}>
+              Wu Xing (五行) is an independent cosmological framework. It is reproduced below for orientation only — the six-palace engine on the preceding pages does not derive from it. Which element each palace belongs to is disputed between schools, so this system judges palaces on their own omen quality instead.
+            </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginTop: '0.8rem', fontSize: '0.8rem', color: parchment }}>
               {Object.entries(WUXING_CYCLE).map(([el, rel]) => (
                 <div key={el}>
@@ -435,24 +448,3 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
   );
 }
 
-function getWuxingRelationLabel(from: Palace, to: Palace): string {
-  const r = getWuxingRelationName(from, to);
-  switch (r) {
-    case 'generates':
-      return ` This is a generating flow: ${from.wuxing} naturally nourishes ${to.wuxing}, indicating support, growth, and forward momentum.`;
-    case 'controls':
-      return ` This is a controlling relationship: ${from.wuxing} restrains ${to.wuxing}, suggesting the need for discipline, boundaries, and measured pressure.`;
-    case 'controlledBy':
-      return ` This is a counter-flow: ${to.wuxing} overwhelms ${from.wuxing}, indicating external resistance or the need to adapt rather than force.`;
-    default:
-      return ` Both palaces share the same element, amplifying the same signal and doubling down on the domain of ${from.domain.split(',')[0].toLowerCase()}.`;
-  }
-}
-
-function getWuxingRelationName(from: Palace, to: Palace): 'generates' | 'controls' | 'controlledBy' | 'same' {
-  if (from.wuxing === to.wuxing) return 'same';
-  const cycle = WUXING_CYCLE[from.wuxing];
-  if (cycle.generates === to.wuxing) return 'generates';
-  if (cycle.controls === to.wuxing) return 'controls';
-  return 'controlledBy';
-}
