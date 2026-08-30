@@ -16,7 +16,12 @@ function getHourBranch(hour: number): number {
 // the Gregorian calendar. This returns the lunar parts for a given moment.
 export function getLunarParts(date: Date): LunarParts {
   const lunar = Lunar.fromDate(date);
-  const month = lunar.getMonth(); // 1-12
+  // lunar-typescript returns a NEGATIVE month number for leap months
+  // (e.g. -4 for 闰四月). Abs() folds leap months onto their base month,
+  // which also keeps the downstream `(month - 1) % 6` non-negative — without
+  // this, a leap month would produce a negative palace index and read
+  // `undefined` out of the palaces array.
+  const month = Math.abs(lunar.getMonth()); // 1-12
   const day = lunar.getDay(); // 1-30
   return { month, day, hourBranch: getHourBranch(date.getHours()) };
 }
