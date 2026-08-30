@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { PALACES } from '../data/content';
+import { PALACES, Palace } from '../data/content';
 import { ARTICLE_DETAILS } from '../data/articles';
 import ReportPDF from './components/ReportPDF';
 import { formatCastTime } from './lib/formatTime';
@@ -19,19 +19,26 @@ const EN_ARTICLES = ALL_ARTICLES.filter((a) => a.lang === 'en');
 const ZH_ARTICLES = ALL_ARTICLES.filter((a) => a.lang === 'zh');
 const ZH_SERIF = "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', 'STSong', serif";
 
+// Accepts casts saved before the Wu Xing decoupling. Older records carry a
+// `wuxing` string but no `omen` object; as long as `id` matches a known palace
+// we re-hydrate the omen from PALACES below, so a paying customer never loses
+// a report simply because we shipped a model change.
 function isValidCastResult(value: any): boolean {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
   if (typeof value.question !== 'string' || typeof value.time !== 'string') return false;
   return ['month', 'day', 'hour'].every(k => {
     const p = value[k];
     if (!p || typeof p !== 'object' || Array.isArray(p)) return false;
-    return (
-      typeof p.name === 'string' &&
-      typeof p.symbol === 'string' &&
-      typeof p.wuxing === 'string' &&
-      typeof p.desc === 'string'
-    );
+    return typeof p.id === 'string' && PALACES.some(palace => palace.id === p.id);
   });
+}
+
+// Fill in any field a persisted cast is missing (notably `omen`, added when the
+// palaces were decoupled from Wu Xing) from the canonical PALACES table.
+function hydrateCastResult(value: any): any | null {
+  if (!isValidCastResult(value)) return null;
+  const fill = (p: any) => PALACES.find(palace => palace.id === p.id) as Palace;
+  return { ...value, month: fill(value.month), day: fill(value.day), hour: fill(value.hour) };
 }
 
 function safeGet(key: string): string | null {
@@ -121,9 +128,10 @@ export default function Page() {
     if (savedRaw) {
       try {
         const parsed = JSON.parse(savedRaw);
-        if (isValidCastResult(parsed)) {
-          savedResult = parsed;
-          setCastResult(parsed);
+        const hydrated = hydrateCastResult(parsed);
+        if (hydrated) {
+          savedResult = hydrated;
+          setCastResult(hydrated);
         } else {
           safeRemove('last_user_cast');
         }
@@ -391,20 +399,22 @@ export default function Page() {
       </div>
 
       <section id="elements" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
-        <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Hermetic & Eastern Synthesis •</span>
-        <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1.5rem 0' }}>The Elemental & Wu Xing Architecture</h3>
+        <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Engine & Cultural Roots •</span>
+        <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1.5rem 0' }}>Six Palaces — And Why We Don't Bind Them to Wu Xing</h3>
         <div className="es-grid-2" style={{ textAlign: 'left' }}>
           <div style={{ background: '#050508', padding: '1rem', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.15)' }}>
-            <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>WESTERN HERMETIC ELEMENTS</span>
+            <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>THE SIX PALACES — THE ENGINE</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontSize: '0.8rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
-              <div>🜂 Fire (Ignis)</div><div>🜄 Water (Aqua)</div><div>🜁 Air (Aer)</div><div>🜃 Earth (Terra)</div>
+              <div>大安 Auspicious</div><div>留连 Delayed</div><div>速喜 Auspicious</div><div>赤口 Obstructed</div><div>小吉 Auspicious</div><div>空亡 Obstructed</div>
             </div>
+            <p style={{ fontSize: '0.75rem', color: '#8A8678', margin: '0.7rem 0 0 0', lineHeight: 1.55 }}>Every reading is derived from these six omen qualities alone.</p>
           </div>
           <div style={{ background: '#050508', padding: '1.0rem', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.15)' }}>
-            <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>EASTERN WU XING MATRIX</span>
+            <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>WU XING MATRIX — REFERENCE ONLY</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontSize: '0.8rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
               <div>木 Wood</div><div>火 Fire</div><div>土 Earth</div><div>金 Metal</div><div style={{ gridColumn: 'span 2' }}>水 Water</div>
             </div>
+            <p style={{ fontSize: '0.75rem', color: '#8A8678', margin: '0.7rem 0 0 0', lineHeight: 1.55 }}>Wu Xing is reproduced for orientation. Which element a palace belongs to is disputed between schools, so we do not build on it.</p>
           </div>
         </div>
       </section>
@@ -479,17 +489,17 @@ export default function Page() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.wuxing})</h4>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.omen.label})</h4>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE — locked</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.wuxing}</h4>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.omen.label}</h4>
                   <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The current pivot is veiled. Unlock to reveal the full reading.</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE — locked</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.wuxing}</h4>
+                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.omen.label}</h4>
                   <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The decisive vector is veiled. Unlock to reveal the full reading.</p>
                 </div>
               </div>
