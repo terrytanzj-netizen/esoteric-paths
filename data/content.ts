@@ -1,9 +1,32 @@
+// The six palaces are judged on their OWN omen quality — the traditional
+// auspicious / delayed / obstructed reading that is the core of Xiao Liu Ren.
+//
+// They are deliberately NOT bound to Wu Xing (五行). Which element each palace
+// belongs to is contested between schools (Xiao Ji is called Wood by some and
+// Water by others), and deriving palace interactions from a Wu Xing
+// generating/controlling cycle imported that dispute straight into the product
+// — it produced self-contradictions such as two Water palaces pointing at two
+// different compass directions. Wu Xing is kept as standalone cultural
+// reference in the appendix only; nothing in the engine reads it.
+export type OmenQuality = 'auspicious' | 'delayed' | 'obstructed';
+
+export interface Omen {
+  quality: OmenQuality;
+  /** Momentum weight, -2 (blocked) .. +2 (flowing). Drives the flow diagnosis. */
+  charge: number;
+  /** Short bilingual label shown in the UI. */
+  label: string;
+  /** One-line traditional reading of this palace's fortune. */
+  note: string;
+}
+
 export interface Palace {
   id: string;
   name: string;
   symbol: string;
+  /** Cultural association only. NOT used by any calculation — see note above. */
   wuxing: string;
-  element: string;
+  omen: Omen;
   desc: string;
   advice: string;
   direction: string;
@@ -29,7 +52,12 @@ export const PALACES: Palace[] = [
     name: 'Da An (大安)',
     symbol: '☩',
     wuxing: 'Wood (木)',
-    element: 'Wood',
+    omen: {
+      quality: 'auspicious',
+      charge: 2,
+      label: 'Auspicious (吉)',
+      note: 'The palace of stillness and safety. Undertakings hold their ground; nothing is lost, but nothing moves quickly either. Favourable for defending a position, not for forcing one.',
+    },
     desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.',
     advice: 'Consolidate current resources. Hold strategic ground and avoid impulsive risks.',
     direction: 'East',
@@ -53,7 +81,12 @@ export const PALACES: Palace[] = [
     name: 'Liu Lian (留连)',
     symbol: '☿',
     wuxing: 'Water (水)',
-    element: 'Water',
+    omen: {
+      quality: 'delayed',
+      charge: -1,
+      label: 'Delayed (迟)',
+      note: 'The palace of entanglement. Affairs stall, repeat, or circle back unfinished. Not a verdict of failure — a verdict on timing. Pushing harder increases friction; waiting is the lever.',
+    },
     desc: 'Energy is dragged or sticky. Things are delayed; forcing external action creates friction. Reflect, audit, and wait.',
     advice: 'Use this time for auditing and internal adjustments. Do not force progress.',
     direction: 'North',
@@ -77,7 +110,12 @@ export const PALACES: Palace[] = [
     name: 'Su Xi (速喜)',
     symbol: '☉',
     wuxing: 'Fire (火)',
-    element: 'Fire',
+    omen: {
+      quality: 'auspicious',
+      charge: 2,
+      label: 'Auspicious (吉)',
+      note: 'The palace of immediate good news. Things arrive quickly — messages, people, approvals. Momentum is high but perishable: the window rewards speed over thoroughness.',
+    },
     desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.',
     advice: 'Strike while the iron is hot. Advance your key initiatives immediately.',
     direction: 'South',
@@ -101,7 +139,12 @@ export const PALACES: Palace[] = [
     name: 'Chi Kou (赤口)',
     symbol: '☌',
     wuxing: 'Metal (金)',
-    element: 'Metal',
+    omen: {
+      quality: 'obstructed',
+      charge: -2,
+      label: 'Obstructed (凶)',
+      note: 'The palace of dispute. Words become weapons — arguments, accusations, formal complaints. The traditional remedy is documentary, not verbal: put it in writing and stay out of the room.',
+    },
     desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.',
     advice: 'Maintain written records. Avoid verbal arguments and reinforce security.',
     direction: 'West',
@@ -125,7 +168,12 @@ export const PALACES: Palace[] = [
     name: 'Xiao Ji (小吉)',
     symbol: '♃',
     wuxing: 'Water (水)',
-    element: 'Water',
+    omen: {
+      quality: 'auspicious',
+      charge: 2,
+      label: 'Auspicious (吉)',
+      note: 'The palace of accord. Negotiations settle, partnerships form, goodwill converts into concrete gain. Best palace for anything requiring the other side to say yes.',
+    },
     desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.',
     advice: 'Engage in collaborative discussions and relationship building.',
     direction: 'North-West',
@@ -149,7 +197,12 @@ export const PALACES: Palace[] = [
     name: 'Kong Wang (空亡)',
     symbol: '♄',
     wuxing: 'Earth (土)',
-    element: 'Earth',
+    omen: {
+      quality: 'obstructed',
+      charge: -2,
+      label: 'Obstructed (凶)',
+      note: 'The palace of void. What is pursued does not materialise — lost causes, unanswered messages, evaporated intent. Read it as a reset, not a punishment: this path is empty, choose another.',
+    },
     desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.',
     advice: 'Let go of obsolete assumptions. Treat this as a clean-slate reboot.',
     direction: 'Center / Void',
@@ -170,6 +223,10 @@ export const PALACES: Palace[] = [
   },
 ];
 
+// Cultural reference only. Wu Xing (五行) is an independent cosmological
+// framework; the six-palace engine does NOT derive from it. This table exists
+// so the report appendix can explain the tradition a curious reader will have
+// heard of — it must never be fed back into getPalaceFlow or any other reading.
 export const WUXING_CYCLE: Record<string, { generates: string; controlledBy: string; controls: string }> = {
   'Wood (木)': { generates: 'Fire (火)', controlledBy: 'Metal (金)', controls: 'Earth (土)' },
   'Fire (火)': { generates: 'Earth (土)', controlledBy: 'Water (水)', controls: 'Metal (金)' },
@@ -184,62 +241,95 @@ export interface PalaceFlow {
   tone: 'accelerating' | 'stable' | 'friction' | 'reset' | 'harmonizing';
 }
 
-export function getWuxingRelation(from: Palace, to: Palace): 'generates' | 'controls' | 'controlledBy' | 'same' {
-  if (from.wuxing === to.wuxing) return 'same';
-  const cycle = WUXING_CYCLE[from.wuxing];
-  if (cycle.generates === to.wuxing) return 'generates';
-  if (cycle.controls === to.wuxing) return 'controls';
-  return 'controlledBy';
+export type OmenShift = 'rising' | 'falling' | 'holding';
+
+/**
+ * How the omen quality moves from one palace to the next, judged on the
+ * palaces' own charge values rather than on any Wu Xing cycle.
+ */
+export function getOmenShift(from: Palace, to: Palace): OmenShift {
+  const delta = to.omen.charge - from.omen.charge;
+  if (delta > 0) return 'rising';
+  if (delta < 0) return 'falling';
+  return 'holding';
+}
+
+/** Short clause describing a single palace-to-palace hand-off. */
+export function getOmenShiftLabel(from: Palace, to: Palace): string {
+  const shift = getOmenShift(from, to);
+  if (shift === 'rising') {
+    return ` The tide turns in your favour: the reading lifts from ${from.omen.label} toward ${to.omen.label}, so resistance encountered early is not the final word.`;
+  }
+  if (shift === 'falling') {
+    return ` The tide turns against you: the reading drops from ${from.omen.label} toward ${to.omen.label}, so early ease should not be mistaken for a settled outcome.`;
+  }
+  return ` The signal holds steady at ${to.omen.label}, confirming rather than changing what came before.`;
 }
 
 export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceFlow {
-  const m2d = getWuxingRelation(month, day);
-  const d2h = getWuxingRelation(day, hour);
+  const short = (p: Palace) => p.name.split(' ')[0];
+  const origin = month.omen.quality;
+  const pivot = day.omen.quality;
+  const outcome = hour.omen.quality;
 
-  if (m2d === 'generates' && d2h === 'generates') {
+  // All three coordinates landing on ONE palace is the rarest configuration
+  // the system produces — roughly 1 cast in 36. Nothing is qualified or mixed.
+  // Match on the palace itself, not merely on its omen quality: three
+  // DIFFERENT auspicious palaces is a strong reading, but it is not this.
+  if (month.id === day.id && day.id === hour.id) {
+    const all =
+      outcome === 'auspicious'
+        ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The reading is not qualified by any counter-current: ${hour.omen.note} Act with conviction and do not second-guess the window.`
+        : outcome === 'obstructed'
+          ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The system is not describing bad luck; it is describing a closed path: ${hour.omen.note} Take the signal seriously and redirect rather than persist.`
+          : `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. Nothing ripens inside 72 hours: ${hour.omen.note} Any move made now will need re-making later, so the efficient choice is to wait and re-cast.`;
+    return { transition: 'Uniform Signal', narrative: all, tone: outcome === 'auspicious' ? 'accelerating' : outcome === 'obstructed' ? 'reset' : 'stable' };
+  }
+
+  // The Hour palace is decisive — it is where the matter lands.
+  if (outcome === 'obstructed') {
     return {
-      transition: 'Momentum Chain',
-      narrative: `The macro origin (${month.name}) naturally feeds the current pivot (${day.name}), which in turn ignites the decisive vector (${hour.name}). This is a momentum chain: conditions are aligned to carry your intention forward with minimal resistance.`,
+      transition: 'Terminal Obstruction',
+      narrative: `The matter lands on ${short(hour)} (${hour.omen.label}) — ${hour.omen.note} Whatever the opening promised, the decisive vector closes against it. Treat this as a stop signal: contain exposure, put everything in writing, and re-cast after the window rather than pushing through it.`,
+      tone: 'friction',
+    };
+  }
+
+  if (outcome === 'delayed') {
+    return {
+      transition: 'Open Loop',
+      narrative: `The matter lands on ${short(hour)} (${hour.omen.label}) — ${hour.omen.note} Nothing resolves cleanly inside this window. That is not failure but unfinished business: use the 72 hours to gather position rather than to close, and expect the file to reopen.`,
+      tone: 'stable',
+    };
+  }
+
+  // Outcome is auspicious — describe how we got there.
+  if (origin === 'obstructed' || origin === 'delayed') {
+    return {
+      transition: 'Reversal',
+      narrative: `The opening reads ${month.omen.label} on ${short(month)}, yet the matter lands auspiciously on ${short(hour)}. This is a reversal: a poor start that does not predict a poor finish. The instinct to abandon early is the thing to resist here — the window improves as it runs.`,
       tone: 'accelerating',
     };
   }
-  if (m2d === 'controls' || d2h === 'controls') {
+
+  if (pivot === 'obstructed' || pivot === 'delayed') {
     return {
-      transition: 'Controlled Friction',
-      narrative: `A controlling relationship appears between your palaces—${m2d === 'controls' ? `${month.name} restrains ${day.name}` : `${day.name} restrains ${hour.name}`}. This is not a block; it is a brake. The system is asking you to slow down and verify before accelerating.`,
-      tone: 'friction',
+      transition: 'Late Breakthrough',
+      narrative: `A clean opening on ${short(month)} passes through a difficult middle on ${short(day)} (${day.omen.label}) before landing auspiciously on ${short(hour)}. Expect the obstruction to arrive mid-window and to be temporary. Do not renegotiate the whole plan because of it.`,
+      tone: 'accelerating',
     };
   }
-  if (m2d === 'controlledBy' || d2h === 'controlledBy') {
-    return {
-      transition: 'Counter-Current',
-      narrative: `The flow runs against you: ${m2d === 'controlledBy' ? `${day.name} dampens ${month.name}` : `${hour.name} dampens ${day.name}`}. External conditions or internal assumptions are draining your energy. Adaptation, not force, is the correct response.`,
-      tone: 'friction',
-    };
-  }
-  if (m2d === 'same' && d2h === 'same') {
-    return {
-      transition: 'Monochrome Signal',
-      narrative: `All three palaces share the same elemental current (${month.wuxing}). The message is unusually pure and concentrated: ${month.domain.toLowerCase()} dominates this window. Do not dilute the signal with unrelated moves.`,
-      tone: 'stable',
-    };
-  }
-  if (d2h === 'same') {
-    return {
-      transition: 'Pivot Lock',
-      narrative: `The current pivot and decisive vector resonate on the same frequency (${day.wuxing}). The immediate future confirms the present moment. Consistency and repetition of the same strategy will outperform variety.`,
-      tone: 'stable',
-    };
-  }
+
   return {
-    transition: 'Neutral Flux',
-    narrative: `The three palaces move through different elemental currents without strong generation or control. This is a neutral flux: outcomes depend more on your chosen actions than on the temporal tide. Maintain situational awareness.`,
-    tone: 'stable',
+    transition: 'Confirmed Ascent',
+    narrative: `The reading holds auspicious from ${short(month)} through ${short(day)} and lands on ${short(hour)}. Conditions support the undertaking at every stage. The risk here is not obstruction but complacency — a favourable window still expires in 72 hours.`,
+    tone: 'accelerating',
   };
 }
 
 export interface ResonantVector {
-  element: string;
+  omenLabel: string;
+  omenNote: string;
   color: string;
   numbers: string;
   direction: string;
@@ -249,7 +339,8 @@ export interface ResonantVector {
 
 export function getResonantVector(hour: Palace): ResonantVector {
   return {
-    element: hour.wuxing,
+    omenLabel: hour.omen.label,
+    omenNote: hour.omen.note,
     color: hour.color,
     numbers: hour.numbers,
     direction: hour.direction,
