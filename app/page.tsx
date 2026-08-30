@@ -54,6 +54,17 @@ function safeRemove(key: string) {
 const DODO_CHECKOUT_URL = "https://checkout.dodopayments.com/buy/pdt_0NmINnqaKAXo6oqUU50Jc?quantity=1&redirect_url=https%3A%2F%2Fwww.esotericpaths.com%2F";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeyykdv";
 
+// Fire a GA4 event. Analytics must never break the experience.
+function trackEvent(name: string, params?: Record<string, unknown>) {
+  try {
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', name, params || {});
+    }
+  } catch {
+    /* no-op */
+  }
+}
+
 const STATIC_STARS = [
   { top: '3%', left: '8%', delay: '0.2s', size: '3px' },
   { top: '8%', left: '85%', delay: '1.5s', size: '2px' },
@@ -210,6 +221,12 @@ export default function Page() {
       const data = await res.json();
       if (data.valid) {
         setIsVerifiedPaid(true);
+        trackEvent('purchase', {
+          transaction_id: pId,
+          value: 19,
+          currency: 'USD',
+          items: [{ item_id: 'master_blueprint', item_name: 'Master Blueprint' }],
+        });
         setPaymentStatus('unlocked');
         setPaymentMessage('Payment verified. Your 10-page blueprint is unlocked.');
         safeSet('esoteric_payment_id', pId);
@@ -251,6 +268,11 @@ export default function Page() {
         time: now.toUTCString(),
       };
       setCastResult(newResult);
+      trackEvent('cast_started', {
+        month_palace: newResult.month?.id,
+        day_palace: newResult.day?.id,
+        hour_palace: newResult.hour?.id,
+      });
       safeSet('last_user_cast', JSON.stringify(newResult));
       setIsCasting(false);
     }, 1200);
@@ -555,6 +577,7 @@ export default function Page() {
                     href={DODO_CHECKOUT_URL}
                     className="es-btn es-btn--gold"
                     style={{ padding: '1rem 3rem', fontSize: '0.95rem' }}
+                    onClick={() => trackEvent('begin_checkout', { value: 19, currency: 'USD', item_id: 'master_blueprint' })}
                   >
                     Unlock Master Blueprint ($19) →
                   </a>
