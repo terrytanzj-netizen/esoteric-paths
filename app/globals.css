@@ -351,6 +351,15 @@ h1, h2, h3, h4 {
     display: none !important;
   }
 
+  /* The on-screen compass is `position: fixed`, so Chrome re-renders it on
+     EVERY printed page — its N/S/W/E glyphs were showing up at the top of all
+     10 pages, and because a fixed box still participates in pagination it
+     pushed the trailing decoration onto an 11th, otherwise blank page. The
+     report has its own print design system; the compass adds nothing here. */
+  .spinning-compass {
+    display: none !important;
+  }
+
   .print-area {
     display: block !important;
     background-color: #050508 !important;
