@@ -3,10 +3,23 @@ import './globals.css';
 import Script from 'next/script';
 
 export const metadata = {
+  metadataBase: new URL('https://www.esotericpaths.com'),
   title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
   description: 'Deterministic Horary Oracle combining classical Chinese Xiao Liu Ren time mechanics with Western archetypal tarot for high-stakes business and life decisions.',
   keywords: ['Xiao Liu Ren', 'Horary Divination', 'Tarot Timing', 'Chinese Astrology', 'Business Decision Oracle', 'Jungian Archetypes'],
   authors: [{ name: 'Esoteric Paths' }],
+  // Declared through the metadata API rather than hand-written <link> tags in
+  // <head>: tags in the shared layout leak onto every route and CANNOT be
+  // overridden by a page's own metadata. That leaked a home-page canonical onto
+  // all 21 articles, making Google treat them as duplicates of the home page.
+  // Via the API, each route's `alternates` correctly replaces this.
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en': '/',
+      'x-default': '/',
+    },
+  },
   openGraph: {
     title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
     description: 'Align your critical crossroads decisions with classical Chinese temporal mechanics and Western archetypal wisdom.',
@@ -32,12 +45,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href="https://www.esotericpaths.com" />
-        {/* hreflang: the home page exists only in English, so it must not
-            advertise a zh version — pointing zh at this same URL is a
-            self-contradicting signal that confuses Google. */}
-        <link rel="alternate" hrefLang="en" href="https://www.esotericpaths.com" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.esotericpaths.com" />
+        {/* canonical / hreflang now come from the metadata API above so each
+            route can override them. Do not re-add them as raw <link> tags. */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
