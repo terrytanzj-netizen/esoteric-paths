@@ -2,13 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { PALACES, ARTICLES } from '../data/content';
+import { PALACES } from '../data/content';
+import { ARTICLE_DETAILS } from '../data/articles';
 import ReportPDF from './components/ReportPDF';
 import { formatCastTime } from './lib/formatTime';
 import { getLunarParts } from './lib/lunar';
 
-const EN_ARTICLES = ARTICLES.filter((a) => a.lang === 'en');
-const ZH_ARTICLES = ARTICLES.filter((a) => a.lang === 'zh');
+// Derive the home page essay list from ARTICLE_DETAILS — the same source the
+// article pages and sitemap read from. Reading data/content.ts here meant every
+// newly added essay silently failed to appear on the home page, and any slug
+// listed without a matching ARTICLE_DETAILS entry produced a 404 on click.
+const ALL_ARTICLES = Object.values(ARTICLE_DETAILS)
+  .map((a) => ({ slug: a.slug, lang: a.lang, title: a.title, readTime: a.readTime }))
+  .sort((a, b) => a.slug.localeCompare(b.slug));
+const EN_ARTICLES = ALL_ARTICLES.filter((a) => a.lang === 'en');
+const ZH_ARTICLES = ALL_ARTICLES.filter((a) => a.lang === 'zh');
 const ZH_SERIF = "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', 'STSong', serif";
 
 function isValidCastResult(value: any): boolean {
@@ -124,15 +132,19 @@ export default function Page() {
       }
     }
 
+    // A legacy `esoteric_is_paid` boolean flag used to unlock directly. That is
+    // forgeable in devtools, so it is no longer honoured — unlocking always
+    // requires a payment id that passes server-side verification. Clear any
+    // stale flag so it can never be resurrected.
+    if (safeGet('esoteric_is_paid')) {
+      safeRemove('esoteric_is_paid');
+    }
+
     // Re-verify any previously paid session against the server instead of
     // trusting a client-side flag (which could be forged in devtools).
     const savedPaidId = safeGet('esoteric_payment_id');
     if (savedPaidId) {
       unlockByPaymentId(savedPaidId, true);
-    } else if (safeGet('esoteric_is_paid') === 'true') {
-      // Legacy: upgraded from a version that only stored a boolean flag.
-      // Already-paying users stay unlocked; new sessions must verify a real ID.
-      setIsVerifiedPaid(true);
     }
 
     try {
@@ -353,9 +365,8 @@ export default function Page() {
 
       <div className="no-print reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem 1.5rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         {[
-          'Esoteric Advisor to Global Enterprises',
-          'Member · Chinese Metaphysics Association',
-          'Councilor · Xie Tian Gong Temple',
+          'Corporate Metaphysical Advisor',
+          'Practitioner · Chinese Horary Timing',
         ].map((cred, i) => (
           <span key={i} style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.18em', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '999px', padding: '0.4rem 0.9rem' }}>
             ✦ {cred}
@@ -421,12 +432,15 @@ export default function Page() {
               <div>
                 <p style={{ color: '#F4EEDB', fontSize: '0.85rem', fontWeight: 'bold', margin: 0, fontFamily: 'var(--font-display)' }}>Terry Tan</p>
                 <p style={{ color: '#8A8678', fontSize: '0.7rem', margin: 0, fontFamily: 'monospace', lineHeight: 1.5 }}>
-                  Esoteric Advisor · Member, Chinese Metaphysics Association · Councilor, Xie Tian Gong Temple
+                  Corporate Metaphysical Advisor
                 </p>
               </div>
             </div>
           </div>
         </div>
+        <p style={{ fontSize: '0.7rem', color: '#5C584E', fontFamily: 'monospace', lineHeight: 1.6, marginTop: '1.5rem', textAlign: 'center', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1rem' }}>
+          Credentials are listed in a personal capacity. Esoteric Paths is not endorsed by, affiliated with, or representing any temple, religious body, or association.
+        </p>
       </section>
 
       <div id="oracle" className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
@@ -511,24 +525,18 @@ export default function Page() {
                   Synthesizes your Month, Day, and Hour palaces into a downloadable 10-page PDF with Methodology, Palace Interactions, 72-Hour Chrono Execution Windows, Resonant Vectors, Major Arcana Synthesis, Executive Guardrails, and Reference Appendix.
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', maxWidth: '560px', margin: '0 auto 1.5rem auto', textAlign: 'left' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', maxWidth: '560px', margin: '0 auto 1.5rem auto', textAlign: 'left' }}>
                   <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
-                    <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
-                      "The 72-hour execution window saved our cross-border contract negotiation from collapsing. Unmatched precision."
-                    </p>
-                    <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— E. Vance, Managing Director, London</span>
+                    <p style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace', margin: '0 0 0.35rem 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>✦ Deterministic</p>
+                    <p style={{ fontSize: '0.78rem', color: '#CDC8BC', lineHeight: 1.5, margin: 0 }}>Same moment, same palaces. No randomness, no reshuffling, no vague generalities.</p>
                   </div>
                   <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
-                    <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
-                      "I stopped second-guessing the launch timing. The palace vector told me to hold, and two weeks later the market confirmed it."
-                    </p>
-                    <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— M. Okafor, Founder, Lagos</span>
+                    <p style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace', margin: '0 0 0.35rem 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>✦ Private</p>
+                    <p style={{ fontSize: '0.78rem', color: '#CDC8BC', lineHeight: 1.5, margin: 0 }}>No account required. Payment processed by Dodo Payments; we never see your card.</p>
                   </div>
                   <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
-                    <p style={{ fontSize: '0.8rem', color: '#CDC8BC', fontStyle: 'italic', margin: '0 0 0.3rem 0' }}>
-                      "Worth far more than the price. The archetypal guardrails alone prevented a costly verbal agreement."
-                    </p>
-                    <span style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace' }}>— J. Tanaka, Strategy Lead, Singapore</span>
+                    <p style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace', margin: '0 0 0.35rem 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>✦ Immediate</p>
+                    <p style={{ fontSize: '0.78rem', color: '#CDC8BC', lineHeight: 1.5, margin: 0 }}>The full 10-page blueprint unlocks the moment payment clears — no waiting, no email loop.</p>
                   </div>
                 </div>
                 
