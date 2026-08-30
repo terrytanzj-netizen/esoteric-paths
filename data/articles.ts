@@ -362,4 +362,362 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
     ],
   },
+
+  'xiao-liu-ren-for-founders': {
+    slug: 'xiao-liu-ren-for-founders',
+    lang: 'en',
+    title: 'Xiao Liu Ren for Founders: A Practical Guide',
+    readTime: '9 min read',
+    excerpt:
+      'A step-by-step protocol for using the three Xiao Liu Ren palaces to time founder decisions — fundraising, hiring, launches, and exits — without abandoning your models.',
+    sections: [
+      {
+        heading: 'The Timing Tax Founders Pay',
+        body: 'Founders rarely fail because they made the wrong call on the merits. They fail because they made the right call at the wrong moment, or the wrong call at a moment that looked safe. The cost of mistimed action is structural: a raise closed a week too early dilutes more than it funds; a hire made during a Chi Kou (赤口) stretch inherits friction that survives the onboarding; a launch pushed into a sticky window burns the only first impression you get. Xiao Liu Ren (小六壬) is not a replacement for your judgment — it is a temporal read on the moment your decision lands, and that read is the variable most founder tooling ignores.',
+      },
+      {
+        heading: 'What Xiao Liu Ren Is — and Is Not',
+        body: 'Xiao Liu Ren is a Chinese horary method attributed in folk tradition to Zhuge Liang and later systematized by Li Chunfeng of the Tang court. It is a trimmed descendant of Da Liu Ren (大六壬), one of the three cosmic board systems of classical Chinese statecraft. The calculation is fully deterministic: it indexes the lunar month, day, and double-hour of the inquiry and walks a cycle of six palaces. There is no intuition in the arithmetic and no entropy in the output — given the same moment, two people produce the same palaces. What that determinism gives you is not prophecy but a shared, defensible coordinate for a decision moment, in the same spirit that a Gantt chart is a shared coordinate for a sequence.',
+      },
+      {
+        heading: 'The Three Palaces: Month, Day, Hour',
+        body: 'A cast produces three palaces. The Month palace describes the macro origin of the situation — the employer, the market, the counterparty. The Day palace describes your current pivot — where you actually stand today. The Hour palace describes the immediate execution window — the next move and its texture. Da An (大安) at any level signals stability and a green light to preserve; Liu Lian (留连) signals drag and warns that forcing speed creates friction; Su Xi (速喜) signals velocity and favors swift, clean action; Kong Wang (空亡) signals dissolution and tells you to reset rather than push. The intersection of the three, not any single palace, is the signal.',
+      },
+      {
+        heading: 'A Founder\'s Casting Protocol',
+        body: 'Step one: name the decision in one sentence before you cast. "Should we close the seed round this week?" not "is everything okay?" Step two: cast at the moment of genuine inquiry, not after you have already decided. Step three: read Month as the deal\'s structural backing, Day as your readiness, Hour as the move\'s immediate texture. Step four: if two of three palaces favor advance and the terms are in writing, act inside the [72-hour window](/insights/72-hour-decision-window) Esoteric Paths caps after each cast — the cap exists because momentum decays, not because urgency is virtuous. Step five: if Liu Lian dominates or the only catalyst is a deadline someone else manufactured, wait.',
+      },
+      {
+        heading: 'Four Patterns That Repeat',
+        body: 'Fundraising: Da An at the Month level means the capital is real and the terms will hold; Su Xi means move now before the window closes; Chi Kou means a term will move after you sign — get it in writing first. Hiring: Liu Lian at the Day level means the candidate will drag on references or comp; Kong Wang means the role itself is dissolving and you should not fill it yet. Launch: Su Xi at the Hour level is the cleanest go; a launch landing on Kong Wang should be rescheduled, not heroically shipped. Exit or pivot: Kong Wang at the Month level is the palace telling you the original thesis has expired — that is data, not defeat.',
+      },
+      {
+        heading: 'Why This Complements Your Models',
+        body: 'Xiao Liu Ren answers a question your spreadsheet cannot: is this the moment? Your financial model governs what is feasible; horary governs when feasibility should be triggered. Treated as a filter rather than an oracle, it compresses ambiguity into one actionable signal — preserve, wait, advance, secure, collaborate, reset — that you can defend to a co-founder or a board. The Esoteric Paths matrix exists to make that synthesis reproducible rather than intuitive, the same way a forecast model makes a revenue call defensible rather than a hunch. Use it to time the trigger; keep your models for everything else.',
+      },
+    ],
+  },
+
+  'crypto-entry-timing-without-ta': {
+    slug: 'crypto-entry-timing-without-ta',
+    lang: 'en',
+    title: 'How to Time a Crypto Entry Without Technical Analysis',
+    readTime: '8 min read',
+    excerpt:
+      'Why TA tells you where price has been, but not whether this is your moment — and how a horary read adds the missing temporal filter.',
+    sections: [
+      {
+        heading: 'What TA Actually Measures',
+        body: 'Moving averages, RSI, and liquidation clusters describe where capital has already moved. They are rear-view mirrors with a slight lag, useful for structure, useless for the exact moment a specific operator should pull the trigger. The same chart can support long and short theses simultaneously; the difference is usually the trader\'s own timeline, which TA does not encode. If you are trying to decide whether to enter today rather than whether the setup exists, you need a temporal layer TA does not provide.',
+      },
+      {
+        heading: 'The Temporal Layer',
+        body: 'Horary systems treat the moment of inquiry as qualitatively loaded. In [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders), the Month palace reads the macro trend, the Day palace reads the current pivot, and the Hour palace reads the immediate execution window. A bullish chart with Kong Wang (空亡) at the Hour palace is a warning that the immediate window is hollow — the move may happen, but not cleanly for you. A bearish chart with Su Xi (速喜) can mark a short-term bounce worth scalping. The read is not against your indicators; it sits on top of them as a timing filter.',
+      },
+      {
+        heading: 'Four Crypto-Specific Patterns',
+        body: '(1) Pre-announcement entries: Da An at Month + Su Xi at Hour favors a quick, profitable entry before news volatility. (2) Breakout chasing: Liu Lian at Day means the breakout will re-test; do not FOMO in. (3) Dip buying: Kong Wang at Month means the dip is not a dip — it is the start of a larger reset; wait. (4) Exits: Chi Kou at Hour means slippage or exchange friction will eat the trade — reduce size or split orders.',
+      },
+      {
+        heading: 'How to Combine With TA',
+        body: 'Use TA to identify the setup, use the palace read to time the trigger. The rule is strict: no palace override without a setup, and no setup execution without a palace check when the decision is high-conviction. This keeps the method falsifiable — if the palace says wait and the trade runs without you, you have data on whether your TA edge was real or imagined.',
+      },
+      {
+        heading: 'Risk Management Still Wins',
+        body: 'No timing system replaces position sizing and stop losses. A horary read compresses ambiguity; it does not eliminate risk. Use it to decide whether today is the day, then size the trade as if the read were irrelevant. The traders who survive are the ones who manage the downside, not the ones who predict the top.',
+      },
+      {
+        heading: 'Why Founders and Funds Care',
+        body: 'For individual traders, this is an edge in timing. For DAO treasuries, venture funds, and founders holding treasury assets, it is a way to de-bias large moves. Treasury sales have market impact; timing them badly destroys months of runway. A reproducible [temporal read](/insights/ontology-of-time-horary-vs-chronometry) gives the operator a defensible reason to act or wait, which is often more valuable than the move itself.',
+      },
+    ],
+  },
+
+  'xiao-liu-ren-vs-i-ching': {
+    slug: 'xiao-liu-ren-vs-i-ching',
+    lang: 'en',
+    title: 'Xiao Liu Ren vs I Ching: Which Divination System for Business Decisions?',
+    readTime: '8 min read',
+    excerpt:
+      'Both systems answer "what is the shape of this moment?" — but they differ in speed, structure, and the kind of decisions they serve best.',
+    sections: [
+      {
+        heading: 'Two Chinese Time-Reading Systems',
+        body: 'The I Ching (Yijing, Book of Changes) is the older and broader system: sixty-four hexagrams built from yin and yang lines, capable of addressing philosophy, character, and long-term strategy. Xiao Liu Ren is a younger, trimmed method: six palaces cycling through lunar month, day, and hour, designed for fast, operational decisions. One is a cathedral; the other is a cockpit instrument. Both are valid; they serve different flight paths.',
+      },
+      {
+        heading: 'When to Use I Ching',
+        body: 'Use I Ching when the decision is large, ambiguous, and existential — should I pivot the company, should I take this partner, should I move to another market. The hexagrams give you a narrative arc: the present situation, the developing line, the future trend. It rewards slow contemplation and repeated readings over days. It is less useful when you need an answer in the next hour because a term sheet expires at midnight.',
+      },
+      {
+        heading: 'When to Use Xiao Liu Ren',
+        body: 'Use [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) when the question is operational and time-bound — should I sign today, should I launch this week, should I counter-offer now. The output is a three-palace vector (Month, Day, Hour) that compresses into a single actionable signal: preserve, wait, advance, secure, collaborate, reset. It is deterministic, fast, and meant to be consumed within a [72-hour execution window](/insights/72-hour-decision-window).',
+      },
+      {
+        heading: 'The Structural Difference',
+        body: 'I Ching readings are built from user-generated entropy — coins, yarrow stalks, or virtual throws. Xiao Liu Ren is calculated from the astronomical moment of inquiry. This makes I Ching more reflective of the questioner\'s internal state and Xiao Liu Ren more anchored to external timing. Neither is more "objective"; they answer different questions.',
+      },
+      {
+        heading: 'Can You Use Both?',
+        body: 'Yes, in sequence. Use I Ching for the strategic framing and Xiao Liu Ren for the operational trigger. A founder might cast I Ching on "should we enter the Asian market at all?" and Xiao Liu Ren on "should we sign the distributor agreement this Friday?" The first shapes the thesis; the second times the action. Treating them as competitors misses the point — they are different zoom levels of the same landscape.',
+      },
+      {
+        heading: 'Which One for Business?',
+        body: 'If you run a company, you need speed more than philosophy in most daily decisions. Xiao Liu Ren wins on throughput. Reserve I Ching for the rare, irreversible bets. The Esoteric Paths matrix uses Xiao Liu Ren as the operational engine precisely because founder decisions usually have a deadline.',
+      },
+    ],
+  },
+
+  '72-hour-decision-window': {
+    slug: '72-hour-decision-window',
+    lang: 'en',
+    title: 'The 72-Hour Decision Window: Why We Cap Action After a Cast',
+    readTime: '7 min read',
+    excerpt:
+      'The 72-hour decision window caps every action after a Xiao Liu Ren cast. It is not marketing — it is a forcing function borrowed from memory science, open-loop psychology, and reversible decision theory.',
+    sections: [
+      {
+        heading: 'The Decay Problem',
+        body: 'The 72-hour decision window exists because a decision made but not acted upon does not stay neutral. It loses emotional charge, gets overwritten by new information, and becomes vulnerable to negotiation drift. The palace read you received on Monday is not the same read by Thursday, because the situation has moved and you have moved. A cast without a deadline becomes a souvenir, not a strategy.',
+      },
+      {
+        heading: '0–24 Hours: Record Before Memory Fades',
+        body: 'Ebbinghaus\'s forgetting curve shows that un-rehearsed information decays fastest in the first day. The immediate task after a cast is not action — it is inscription. Write down the question, the palaces, and the executable next step in plain language. If you cannot state the action in one sentence, you do not yet have a decision. This written record protects the original signal from your later rationalizations.',
+      },
+      {
+        heading: '24–48 Hours: Convert Verbal Promises to Written Terms',
+        body: 'Zeigarnik\'s work on open tasks shows that incomplete commitments consume background cognitive resources until they are closed. The middle day is for closing loops that are reversible: confirming terms in writing, verifying assumptions, running small tests. These actions reduce uncertainty without committing irreversible resources. If a counterparty will not commit to writing during this window, that itself is a signal.',
+      },
+      {
+        heading: '48–72 Hours: Execute or Explicitly Defer',
+        body: 'Parkinson\'s law states that work expands to fill available time. Without a hard cap, deliberation becomes an infinite loop. The final 24 hours are for the irreversible core action. If conditions are not met, the decision is not "maybe later" — it is a deferred decision with a written next review date. Closing the loop, even by choosing not to act, frees the cognitive resources Zeigarnik identified.',
+      },
+      {
+        heading: 'Why Not Shorter or Longer?',
+        body: 'Shorter than 72 hours forces premature action on complex deals; longer than 72 hours lets momentum decay and lets external events hijack the timeline. The window is calibrated to match the half-life of a strategic decision\'s emotional and informational integrity. It is long enough for diligence and short enough to prevent drift.',
+      },
+      {
+        heading: 'The Window as Product Design',
+        body: 'Esoteric Paths caps every blueprint at 72 hours because the tool is not meant to replace your judgment — it is meant to compress your deliberation into a single executable window. The palace gives you the timing signal; the window forces you to treat it as real. A signal without a deadline is just a suggestion.',
+      },
+    ],
+  },
+
+  'why-western-tarot-struggles-with-exact-timing': {
+    slug: 'why-western-tarot-struggles-with-exact-timing',
+    lang: 'en',
+    title: 'Why Western Tarot Struggles with Exact Timing (And How Xiao Liu Ren Solves It)',
+    readTime: '8 min read',
+    excerpt:
+      'Tarot reveals the archetypal structure of a dilemma, but it cannot pinpoint the exact moment to act. Here is why — and how Xiao Liu Ren adds the missing timing layer.',
+    sections: [
+      {
+        heading: 'What Tarot Does Brilliantly',
+        body: 'Tarot is a symbolic mirror. The Major Arcana dramatize the inner architecture of a decision: the Fool as risk, the Emperor as structure, the Hanged Man as forced perspective, the Tower as collapse. Jung recognized these figures as archetypes — recurrent patterns that shape human perception. A skilled reading can tell you what story you are inside, what shadow you are projecting, and what virtue the situation demands. For self-knowledge and narrative clarity, few tools are as efficient.',
+      },
+      {
+        heading: 'The Timing Blind Spot',
+        body: 'Ask a Tarot spread "should I sign the term sheet today?" and the cards may answer with the Emperor, the Chariot, and the Two of Swords. That reading tells you the deal has structure, momentum, and an unresolved choice. It does not tell you whether today is the day. The same spread could describe a deal signed last Tuesday or one that should be signed next quarter. Symbolic systems are temporally underdetermined; they read meaning without reading the clock.',
+      },
+      {
+        heading: 'Why Western Symbolism Avoids the Clock',
+        body: 'Western esoteric traditions largely separate divination from chronology. Astrology has ephemerides, but horary astrology — the art of reading the moment of a question — faded from popular practice. Tarot filled the gap with psychology, not timekeeping. The result is a tool that is profound on "what" and "why" but silent on "when." For high-stakes operators, that silence is expensive. A founder who knows the narrative but misses the window has still missed the window.',
+      },
+      {
+        heading: 'The Xiao Liu Ren Timing Layer',
+        body: '[Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) approaches the same crossroads from the opposite direction. It ignores your inner symbolism and indexes the astronomical moment of the question: lunar month, lunar day, and double-hour. From these three coordinates it produces a three-palace vector — Month, Day, Hour — each landing in one of six kinetic states. The output is not a story; it is a temporal read. Da An means the timing is stable; Liu Lian means it will drag; Su Xi means move now; Kong Wang means the window is hollow. No archetype, no projection — just the texture of the moment.',
+      },
+      {
+        heading: 'How They Complete Each Other',
+        body: 'The two systems are not rivals. Use Tarot to answer "what story am I in?" and [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) to answer "is this the moment?" A founder might pull cards before a negotiation and see the Magician crossed by the Seven of Swords — a warning that the counterparty is performing a trick. Then she casts Xiao Liu Ren and finds Chi Kou at the Hour palace, confirming verbal friction in the immediate window. The cards name the archetype; the palace names the timing. Together they produce a decision you can defend to a board.',
+      },
+      {
+        heading: 'The Standard We Hold',
+        body: 'Esoteric Paths was built because neither tradition alone was enough for the decisions that matter. Tarot without timing is a beautiful map without a "you are here." Timing without narrative is a coordinate without context. The platform keeps the archetypal depth of the West and adds the deterministic temporal precision of the East. The result is a [tactical horary compass](/insights/ontology-of-time-horary-vs-chronometry) — not entertainment, not fatalism, but a reproducible way to align action with the texture of time.',
+      },
+    ],
+  },
+
+  'decision-timing-research-findings': {
+    slug: 'decision-timing-research-findings',
+    lang: 'en',
+    title: 'Decision Timing Research: 10 Findings on When to Act (And 2 That Failed to Replicate)',
+    readTime: '11 min read',
+    excerpt:
+      'Decision timing research shows when to act is measurable, not mystical. Ten findings from memory science, open-loop psychology, and decision theory — plus two that replication reversed.',
+    sections: [
+      {
+        heading: 'Why Timing Deserves Evidence, Not Mysticism',
+        body: 'Most advice on decision timing is either superstition or anecdata. The alternative is to treat timing as a measurable variable and check what the literature actually supports. This digest collects ten findings with named sources and dates, so you can verify each one. It also includes two findings that later failed to replicate, because a list with no reversals is marketing, not research. Every claim here is checkable; none of them require you to believe in anything.',
+      },
+      {
+        heading: 'Finding 1–2: Memory Decays Fastest in the First Day',
+        body: 'Hermann Ebbinghaus tested his own recall of nonsense syllables in 1885 and produced a retention curve showing roughly 42% forgotten after 20 minutes, about 56% after one hour, and about 66% after one day, after which the curve flattens. The material was nonsense syllables, so the numbers should not be transplanted wholesale into real decisions — but the direction is robust. Practical consequence: a decision you do not write down within 24 hours is a decision you will later misremember. Inscription beats intention.',
+      },
+      {
+        heading: 'Finding 3–4: Open Loops Drain Attention Until Closed',
+        body: 'Bluma Zeigarnik reported in 1927 that interrupted tasks are remembered better than completed ones, with later work putting the ratio around 1.9×. The mechanism matters more than the number: unfinished business occupies background attention and consumes resources you cannot spend elsewhere. This explains why deferring a decision feels more exhausting than making it. The remedy is not speed — it is closure. Even an explicit decision to defer, with a written review date, releases the loop in a way that vague postponement does not.',
+      },
+      {
+        heading: 'Finding 5: Work Expands to Fill the Time Available',
+        body: 'C. Northcote Parkinson wrote in a 1955 Economist essay that work expands to fill the time allotted for its completion. Originally a satire on bureaucracy, the principle holds for personal deliberation: an open-ended consideration period will grow until something external interrupts it, usually at a bad moment. Setting a hard cap converts an interruption you suffer into a deadline you choose. This is the core argument for a bounded execution window rather than an open one.',
+      },
+      {
+        heading: 'Finding 6: The Reversal — Ego Depletion Did Not Replicate',
+        body: 'The idea that decision-making depletes a finite willpower resource became enormously popular, then failed a major test. Many Labs 4, a large multi-site replication effort, did not reproduce the ego depletion effect. This matters for timing: the common advice to make important decisions in the morning because your willpower is fresh rests on evidence that is now weak. The stronger argument for acting early in a decision window is opportunity cost — the alternatives you forgo while deliberating — not a drained mental battery.',
+      },
+      {
+        heading: 'Finding 7–8: How Much Information Is Enough',
+        body: 'Jeff Bezos wrote in his 2015 shareholder letter that most decisions should be made with about 70% of the information you wish you had; waiting for 90% is usually too slow. He paired this with a classification: decisions that are irreversible and consequential (Type 1) should be made slowly, while reversible ones (Type 2) should be made fast and pushed down the org. Daniel Kahneman\'s System 1 / System 2 distinction complements this: fast intuitive processing dominates under pressure, so any procedure that forces a deliberate step is a defense against premature commitment.',
+      },
+      {
+        heading: 'Finding 9–10: Two Traps That Distort Timing',
+        body: 'The Barnum effect: Bertram Forer showed in 1949 that people accept vague, universally applicable personality descriptions as uniquely accurate to them. Any timing guidance that feels uncannily right deserves suspicion. The second trap is locus of control, Julian Rotter\'s 1966 construct distinguishing people who believe outcomes follow from their own actions versus external forces. A decision tool is working if it increases your sense of agency; it is harming you if you start depending on the next reading to act at all. Both traps argue for recording predictions and checking them later.',
+      },
+      {
+        heading: 'What the Evidence Supports in Practice',
+        body: 'Three things follow from the findings that survived scrutiny. First, write the decision down within 24 hours, before the forgetting curve does its work. Second, close open loops explicitly — a deferred decision with a review date counts as closed, an open-ended "let me think about it" does not. Third, sort decisions by reversibility and move the reversible ones fast inside a bounded window, while keeping the irreversible ones slow. [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) supplies the timing signal; the [72-hour window](/insights/72-hour-decision-window) supplies the discipline. Neither is necessary for the other to be useful — which is the point of citing sources you can check yourself.',
+      },
+    ],
+  },
+
+  'hiring-decision-timing': {
+    slug: 'hiring-decision-timing',
+    lang: 'en',
+    title: 'Hiring Decision Timing: When to Make the Offer and When to Wait',
+    readTime: '8 min read',
+    excerpt:
+      'Hiring decision timing is the variable most interview processes ignore. Use the three Xiao Liu Ren palaces to read whether this is the moment to extend an offer or hold.',
+    sections: [
+      {
+        heading: 'The Hidden Cost of a Mistimed Offer',
+        body: 'Hiring decision timing rarely appears on scorecards, yet it drives most hiring regret. An offer extended too early, before a candidate has been properly stressed, buys you a fast yes and a slow problem. An offer extended too late loses the candidate to a competitor who moved while you deliberated. The merits of the hire and the moment of the offer are separate variables, and most teams only manage the first one.',
+      },
+      {
+        heading: 'Reading the Three Palaces for a Hire',
+        body: 'Cast at the moment you are genuinely deciding, not after you have already chosen. The Month palace reads the role itself — whether the position is structurally sound. The Day palace reads the candidate\'s current posture — their readiness and their competing options. The Hour palace reads the immediate offer window. Da An means stable and safe to proceed; Su Xi means move quickly before the window closes; Liu Lian means the process will drag and forcing it creates friction; Kong Wang means the role is dissolving and should not be filled yet.',
+      },
+      {
+        heading: 'Four Hiring Scenarios',
+        body: '(1) Extending the offer: Da An or Su Xi at the Hour level favors extending now; Liu Lian predicts a slow yes or a renegotiation. (2) Counter-offers: Chi Kou at the Day level means the candidate is negotiating in bad faith or will re-trade after accepting — get everything in writing. (3) Reference drag: Liu Lian at the Day level predicts delayed references or a stall on comp approval; plan for it rather than being surprised. (4) Role dissolution: Kong Wang at the Month level means the position no longer matches the company\'s shape — do not fill it, rewrite it.',
+      },
+      {
+        heading: 'The 72-Hour Rule for Offers',
+        body: 'Exploding offers are a manipulation tactic, but so is indefinite deliberation. Once you have decided, move inside the [72-hour window](/insights/72-hour-decision-window): the candidate\'s momentum decays just as yours does, and a slow process reads as organizational dysfunction to strong candidates. Conversely, if the palace says wait, wait explicitly — tell the candidate a real date rather than leaving them in the dark, which closes the loop for both of you.',
+      },
+      {
+        heading: 'Combining With Structured Process',
+        body: 'Timing does not replace scorecards, work samples, or structured interviews. It sits on top of them. Run your process to determine who is qualified; use the palace read to determine when to move. A candidate who clears the bar during a Liu Lian stretch is still qualified — you simply expect friction in the closing and plan for it. Keeping the two layers separate is what makes the method falsifiable rather than a way to rationalize a hunch.',
+      },
+      {
+        heading: 'Decision Protocol',
+        body: 'Extend the offer when the role palace is sound and the Hour palace favors advance. Hold when Kong Wang sits at the Month level or when the only pressure is a deadline the candidate manufactured. Never extend an offer on verbal terms when Chi Kou is active — that is the pattern that produces renegotiation after acceptance. For a deeper foundation on reading the palaces, see [Xiao Liu Ren for Founders](/insights/xiao-liu-ren-for-founders).',
+      },
+    ],
+  },
+
+  'term-sheet-timing': {
+    slug: 'term-sheet-timing',
+    lang: 'en',
+    title: 'Term Sheet Timing: When to Sign and When to Walk Away',
+    readTime: '9 min read',
+    excerpt:
+      'Term sheet timing decides more than valuation does. Read the three Xiao Liu Ren palaces to know whether to sign now, negotiate, or walk.',
+    sections: [
+      {
+        heading: 'Timing Is a Term, Not a Detail',
+        body: 'Founders negotiate valuation, liquidation preference, and board seats, then treat the signing date as an afterthought. Term sheet timing is itself a material term. Signing during a strong window preserves your leverage for the next round; signing during a hollow one locks in terms that will be re-traded against you later. The document says what you agreed. The moment determines whether what you agreed survives contact.',
+      },
+      {
+        heading: 'The Three Palaces for a Deal',
+        body: 'The Month palace reads the investor and the capital behind the offer — whether it is structurally real. The Day palace reads your current position: your runway, your leverage, your alternatives. The Hour palace reads the immediate negotiation window. Da An at Month means the money is committed and the terms will hold. Su Xi means move now before the window narrows. Chi Kou means a term will shift after signature unless it is nailed down in writing. Kong Wang means the round is hollow — the lead may not close.',
+      },
+      {
+        heading: 'Four Deal Patterns',
+        body: '(1) Exploding offers: a deadline someone else manufactured is not a palace signal. If Liu Lian or Kong Wang is active, the pressure is a tactic, not timing. (2) Verbal promises: Chi Kou at the Hour level is the classic signature of terms that move after handshake — insist on written confirmation before you stop talking to other investors. (3) Diligence drag: Liu Lian at the Day level predicts a slow close; protect your runway accordingly rather than assuming a four-week close. (4) Walking away: Kong Wang at the Month level with no alternative capital means the round is not real — continuing to negotiate burns months you cannot recover.',
+      },
+      {
+        heading: 'What to Insist on in Writing',
+        body: 'Timing signals do not replace legal review; they tell you where the risk concentrates. Under Chi Kou, concentrate your diligence on the clauses most likely to be re-traded: pro-rata rights, information rights, and any side letters. Under Da An, you can afford standard terms and speed. Under Kong Wang, do not rely on the lead\'s verbal commitment at all — keep the process running with other parties until funds are actually wired.',
+      },
+      {
+        heading: 'The 72-Hour Constraint on Signature',
+        body: 'Once terms are agreed and the palace favors advance, close inside the [72-hour window](/insights/72-hour-decision-window). Deals that sit unsigned accumulate risk: the lead investor\'s internal committee changes, the market moves, or a competing deal in their pipeline takes priority. Momentum in fundraising is not enthusiasm — it is the absence of time for objections to form. Moving fast on a clean read is a structural advantage most founders give away.',
+      },
+      {
+        heading: 'Sign or Walk: The Protocol',
+        body: 'Sign when the Month palace is sound, the Day palace shows you have real alternatives, and the Hour palace favors advance — with every material term in writing. Negotiate harder when Chi Kou is active, because the friction is real and your job is to document it. Walk when Kong Wang sits at the Month level and no alternative capital exists. For the underlying method, see [Xiao Liu Ren for Founders](/insights/xiao-liu-ren-for-founders); for the research behind acting inside a bounded window, see the [decision timing digest](/insights/decision-timing-research-findings).',
+      },
+    ],
+  },
+
+  'product-launch-timing': {
+    slug: 'product-launch-timing',
+    lang: 'en',
+    title: 'Product Launch Timing: How to Pick the Day You Only Get Once',
+    readTime: '8 min read',
+    excerpt:
+      'You get one first impression per launch. Product launch timing turns a calendar guess into a readable decision using the three Xiao Liu Ren palaces.',
+    sections: [
+      {
+        heading: 'The One-Shot Nature of Launches',
+        body: 'You can iterate on a product indefinitely, but you launch once into a given moment. Product launch timing is the decision that most resists A/B testing, because there is no control group for the day you chose. Teams default to shipping when the build is done, which means the most consequential variable is set by engineering velocity rather than by judgment. A readable timing signal fills that gap.',
+      },
+      {
+        heading: 'Reading the Three Palaces for a Launch',
+        body: 'The Month palace reads the market context you are launching into — whether the category is receptive. The Day palace reads your team\'s readiness and the state of the build. The Hour palace reads the immediate reception window. Su Xi at the Hour level is the cleanest go signal: the reception will be fast and favorable. Liu Lian means the launch will be ignored initially and needs sustained push. Chi Kou means expect public criticism or a competitive response. Kong Wang means the launch will land in a vacuum — reschedule rather than heroically ship.',
+      },
+      {
+        heading: 'Four Launch Scenarios',
+        body: '(1) Soft launch or beta: Liu Lian at the Day level is fine here, because a quiet start is the design. (2) Big public launch: wait for Su Xi at the Hour level; the difference between a strong first day and a flat one compounds through press coverage and algorithmic distribution. (3) Launching into a competitor\'s announcement: Chi Kou warns of a direct response — prepare the counter-narrative before you ship. (4) Launching a second product: Kong Wang at the Month level suggests the category has moved on; reposition before spending the launch.',
+      },
+      {
+        heading: 'Timing Inside the 72-Hour Window',
+        body: 'Once the launch window opens, treat the [72-hour window](/insights/72-hour-decision-window) as your commitment period: 0–24 hours to finalize assets and brief the team, 24–48 hours to resolve reversible issues, 48–72 hours to execute the push. Launches that drift past the window lose the coordination that makes a first day land. The deadline is not artificial urgency; it is the period during which your team\'s attention is genuinely aligned.',
+      },
+      {
+        heading: 'When the Read Conflicts With the Roadmap',
+        body: 'This is the hard case: the palace says wait and the board says ship. The resolution is to treat the palace as a signal about quality of reception, not permission to stop working. Use the delay to strengthen the launch package — the press angle, the demo, the onboarding — rather than simply pushing the date. If the read is wrong, you have lost a week of nothing. If it is right, you avoided burning your single first impression on a dead day.',
+      },
+      {
+        heading: 'Launch Protocol',
+        body: 'Launch when the Market palace is receptive and the Hour palace shows Su Xi. Delay when Kong Wang dominates, and use the time to reposition rather than to polish. Prepare a response plan whenever Chi Kou appears, because the friction it indicates is public and fast. For the method behind the palaces, see [Xiao Liu Ren for Founders](/insights/xiao-liu-ren-for-founders); for how timing differs from technical analysis, see the [crypto entry timing](/insights/crypto-entry-timing-without-ta) guide.',
+      },
+    ],
+  },
+
+  'jungian-archetypes-decision-making': {
+    slug: 'jungian-archetypes-decision-making',
+    lang: 'en',
+    title: 'Jungian Archetypes in Decision-Making: A Practical Framework',
+    readTime: '9 min read',
+    excerpt:
+      'Jungian archetypes in decision-making are a lens for what story you are inside — not a personality quiz. Here is the honest version and how to use it.',
+    sections: [
+      {
+        heading: 'What Jung Actually Meant',
+        body: 'Carl Jung used archetype to mean recurring patterns in the collective unconscious — structural tendencies toward certain images and roles, not a fixed list of character types. This distinction matters because the popular twelve-brand-archetype model sold in marketing circles is not Jung\'s framework; it is a later branding tool. If you want the real thing, the operative concepts are far fewer: the Persona, the Shadow, the Anima and Animus, and the Self as the organizing whole. Everything else is commentary.',
+      },
+      {
+        heading: 'The Persona: The Face You Are Negotiating From',
+        body: 'The Persona is the social mask you present. In negotiation, the useful question is not "am I being authentic" but "which Persona is active, and does it serve this room?" A founder presenting the Hero to investors while the situation requires the Caretaker will misread the signals coming back. Naming the Persona you are wearing is the fastest way to notice when it stops fitting.',
+      },
+      {
+        heading: 'The Shadow: What You Refuse to See',
+        body: 'The Shadow holds the traits you disown in yourself and therefore over-attribute to others. In decision-making this produces a specific failure: the counterparty you distrust most intensely is often the one carrying a quality you have refused to integrate. Jung\'s practical instruction was not to eliminate the Shadow but to make it conscious, because an unintegrated Shadow gets projected — and projection is expensive in a negotiation.',
+      },
+      {
+        heading: 'Anima and Animus: The Internal Counterpart',
+        body: 'Jung described Anima and Animus as the contra-sexual soul-image — the internalized counterpart that shapes how you relate to the other. Stripped of its period framing, the usable idea is that everyone carries an internalized model of the other party, built from past relationships rather than from present evidence. Before a difficult conversation, it is worth asking whether you are responding to the person in front of you or to that model.',
+      },
+      {
+        heading: 'Where Archetypes Mislead',
+        body: 'Two traps. First, the Barnum effect: Bertram Forer showed in 1949 that people accept vague descriptions as uniquely accurate, and archetypal language is exceptionally vulnerable to this. Second, archetypes are interpretive and internal, while any deterministic method is external and checkable. When the story and the signal disagree, prefer the signal. Archetypes are a lens for meaning, not a mechanism for prediction.',
+      },
+      {
+        heading: 'Combining Archetype With Timing',
+        body: 'The clean division of labor: archetypes tell you what story you are inside, timing tells you whether to move now. This is precisely the gap that [Western Tarot](/insights/why-western-tarot-struggles-with-exact-timing) and [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) sit on either side of — the archetypal tradition reads meaning but is temporally silent; the horary tradition reads the moment but says nothing about narrative. Use the archetype to understand the situation and the palace to time the action. For the evidence on why acting inside a bounded window matters, see the [decision timing research digest](/insights/decision-timing-research-findings).',
+      },
+    ],
+  },
 };
