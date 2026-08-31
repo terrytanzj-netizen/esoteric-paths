@@ -53,13 +53,13 @@ export default function RootLayout({
       </head>
       <body style={{ backgroundColor: '#050508', color: '#E8E4DA', margin: 0, padding: 0, fontFamily: 'var(--font-body)' }}>
         {children}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-HR8ZF5L8JW" strategy="lazyOnload" />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-H6NXPSL81M" strategy="lazyOnload" />
         <Script id="gtag-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-HR8ZF5L8JW');
+            gtag('config', 'G-H6NXPSL81M');
           `}
         </Script>
       </body>
