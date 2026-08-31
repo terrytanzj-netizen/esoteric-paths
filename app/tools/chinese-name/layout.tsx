@@ -34,6 +34,7 @@ export default function ChineseNameLayout({ children }: { children: React.ReactN
             url: 'https://www.esotericpaths.com/tools/chinese-name',
             applicationCategory: 'LifestyleApplication',
             description: 'Generates authentic Chinese names with pinyin, meaning, Wu Xing element and palace affinity.',
+            operatingSystem: 'Any',
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
             publisher: { '@type': 'Organization', name: 'Esoteric Paths' },
           }),

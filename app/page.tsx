@@ -311,6 +311,7 @@ export default function Page() {
     name: 'Esoteric Paths — Temporal Strategy Matrix',
     description: 'A deterministic Horary Oracle combining classical Chinese Xiao Liu Ren time mechanics with Western archetypal tarot, delivering a personalized 10-page strategic blueprint with a 72-hour execution window.',
     brand: { '@type': 'Brand', name: 'Esoteric Paths' },
+    image: 'https://www.esotericpaths.com/og-image.png',
     offers: {
       '@type': 'Offer',
       price: '19',
@@ -330,10 +331,35 @@ export default function Page() {
     })),
   };
 
+  const orgLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Esoteric Paths',
+    url: 'https://www.esotericpaths.com',
+    logo: 'https://www.esotericpaths.com/og-image.png',
+    sameAs: [
+      'https://www.esotericpaths.com/about',
+    ],
+  };
+
+  const websiteLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Esoteric Paths',
+    url: 'https://www.esotericpaths.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.esotericpaths.com/insights?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
-    <div className="es-root" style={{ maxWidth: '1040px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
+    <div className="es-root" role="main" id="main-content" style={{ maxWidth: '1040px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
 
       {paymentStatus !== 'idle' && (
         <div className="no-print" style={{
@@ -422,7 +448,7 @@ export default function Page() {
 
       <section id="elements" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Engine & Cultural Roots •</span>
-        <h3 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1.5rem 0' }}>Six Palaces — And Why We Don't Bind Them to Wu Xing</h3>
+        <h2 style={{ fontSize: '1.6rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1.5rem 0' }}>Six Palaces — And Why We Don't Bind Them to Wu Xing</h2>
         <div className="es-grid-2" style={{ textAlign: 'left' }}>
           <div style={{ background: '#050508', padding: '1rem', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.15)' }}>
             <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>THE SIX PALACES — THE ENGINE</span>
@@ -443,15 +469,15 @@ export default function Page() {
 
       <section id="authority" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.4rem' }}>• Methodology & Stewardship •</span>
-        <h3 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1rem 0' }}>Why This Reading Is Worth Trusting</h3>
+        <h2 style={{ fontSize: '1.5rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 1rem 0' }}>Why This Reading Is Worth Trusting</h2>
         <div className="es-grid-2" style={{ gap: '1.5rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
-              <h4 style={{ color: '#F4EEDB', fontSize: '1rem', margin: '0 0 0.3rem 0', fontFamily: 'var(--font-display)' }}>Deterministic, Not Vague</h4>
+              <h3 style={{ color: '#F4EEDB', fontSize: '1rem', margin: '0 0 0.3rem 0', fontFamily: 'var(--font-display)' }}>Deterministic, Not Vague</h3>
               <p style={{ color: '#CDC8BC', fontSize: '0.85rem', lineHeight: 1.65, margin: 0 }}>The three palaces are computed from the lunar month, day and hour. Two people casting at the same moment receive the same result. No room for selective interpretation or cold-reading tricks.</p>
             </div>
             <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
-              <h4 style={{ color: '#F4EEDB', fontSize: '1rem', margin: '0 0 0.3rem 0', fontFamily: 'var(--font-display)' }}>Grounded in Two Canons</h4>
+              <h3 style={{ color: '#F4EEDB', fontSize: '1rem', margin: '0 0 0.3rem 0', fontFamily: 'var(--font-display)' }}>Grounded in Two Canons</h3>
               <p style={{ color: '#CDC8BC', fontSize: '0.85rem', lineHeight: 1.65, margin: 0 }}>The framework binds classical Chinese temporal mechanics (Xiao Liu Ren / 小六壬) with Western archetypal narrative (Tarot / Jungian typology). East supplies the when; West supplies the story.</p>
             </div>
           </div>
@@ -507,21 +533,21 @@ export default function Page() {
             {/* 免费预览提示 */}
             <div id="blueprint" className="no-print es-lift reveal" style={{ padding: '1.5rem', backgroundColor: '#0A0A0F', borderRadius: '16px', border: '1px solid rgba(201, 162, 39, 0.3)', marginBottom: '2rem' }}>
               <span style={{ fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.15em' }}>FREE PREVIEW</span>
-              <h3 style={{ fontSize: '1.4rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0.25rem 0 1rem 0' }}>Your Three-Palace Trajectory</h3>
+              <h2 style={{ fontSize: '1.4rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0.25rem 0 1rem 0' }}>Your Three-Palace Trajectory</h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.omen.label})</h4>
+                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.omen.label})</h3>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE — locked</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.omen.label}</h4>
+                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.omen.label}</h3>
                   <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The current pivot is veiled. Unlock to reveal the full reading.</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE — locked</span>
-                  <h4 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.omen.label}</h4>
+                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.omen.label}</h3>
                   <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The decisive vector is veiled. Unlock to reveal the full reading.</p>
                 </div>
               </div>
@@ -550,9 +576,9 @@ export default function Page() {
                 <span style={{ fontSize: '0.75rem', color: '#C9A227', textTransform: 'uppercase', letterSpacing: '0.25em', display: 'block', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
                   ✦ Executive Strategy Blueprint ($19) ✦
                 </span>
-                <h3 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-display)' }}>
+                <h2 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-display)' }}>
                   Unlock Full 10-Page Personal Blueprint & 72h Action Plan
-                </h3>
+                </h2>
                 <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
                   Synthesizes your Month, Day, and Hour palaces into a downloadable 10-page PDF with Methodology, Palace Interactions, 72-Hour Chrono Execution Windows, Resonant Vectors, Major Arcana Synthesis, Executive Guardrails, and Reference Appendix.
                 </p>
@@ -633,7 +659,7 @@ export default function Page() {
       {/* 独立的恢复入口：不依赖起课记录，任何未解锁的付费用户都能找回权限 */}
       {!isVerifiedPaid && (
         <div id="restore" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '16px', padding: '1.5rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-          <h4 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.35rem 0', fontSize: '1.05rem' }}>Already paid? Restore your access</h4>
+          <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.35rem 0', fontSize: '1.05rem' }}>Already paid? Restore your access</h3>
           <p style={{ fontSize: '0.8rem', color: '#8A8678', margin: '0 0 1rem 0', lineHeight: 1.6 }}>
             Paste your Dodo Payment ID — it starts with <code style={{ color: '#C9A227', fontFamily: 'monospace' }}>pay_</code> and is in your receipt email. Access is restored instantly, no new purchase needed.
           </p>
@@ -665,7 +691,7 @@ export default function Page() {
       )}
 
       <div className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', textAlign: 'center', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h4 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h4>
+        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>The Weekly Ephemeris Briefing</h3>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', margin: '0 0 1rem 0' }}>Receive precision temporal vectors every Monday.</p>
         {emailSubscribed ? (
           <div style={{ color: '#C9A227', fontFamily: 'monospace', fontSize: '0.85rem' }}>✦ Subscribed successfully!</div>
@@ -678,7 +704,7 @@ export default function Page() {
       </div>
 
       <div id="insights" className="no-print reveal" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>Strategic Insights</h3>
+        <h2 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>Strategic Insights</h2>
         <p style={{ fontSize: '0.8rem', color: '#8A8678', margin: '0 0 1.5rem 0', lineHeight: 1.6 }}>
           Long-form essays on temporal strategy, classical horary method and the psychology of decision timing.
         </p>
@@ -691,7 +717,7 @@ export default function Page() {
           {EN_ARTICLES.map((art, i) => (
             <Link key={i} href={`/insights/${art.slug}`} className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
               <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{art.readTime}</span>
-              <h4 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.35 }}>{art.title}</h4>
+              <h3 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.35 }}>{art.title}</h3>
               <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>Read →</span>
             </Link>
           ))}
@@ -705,7 +731,7 @@ export default function Page() {
           {ZH_ARTICLES.map((art, i) => (
             <Link key={i} href={`/insights/${art.slug}`} className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.2)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
               <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{art.readTime}</span>
-              <h4 style={{ fontSize: '0.95rem', fontFamily: ZH_SERIF, color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.55, letterSpacing: '0.01em' }}>{art.title}</h4>
+              <h3 style={{ fontSize: '0.95rem', fontFamily: ZH_SERIF, color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.55, letterSpacing: '0.01em' }}>{art.title}</h3>
               <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>阅读 →</span>
             </Link>
           ))}
@@ -718,7 +744,7 @@ export default function Page() {
         <div className="es-insights-grid">
           <Link href="/tools/chinese-name" className="es-lift" style={{ display: 'block', background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.35)', borderRadius: '10px', padding: '1rem', textDecoration: 'none' }}>
             <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>FREE</span>
-            <h4 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.35 }}>Chinese Name Generator</h4>
+            <h3 style={{ fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.3rem 0', lineHeight: 1.35 }}>Chinese Name Generator</h3>
             <p style={{ fontSize: '0.75rem', color: '#CDC8BC', margin: '0 0 0.4rem 0', lineHeight: 1.5 }}>Get an authentic name with pinyin, meaning, element and palace affinity.</p>
             <span style={{ fontSize: '0.7rem', color: '#8A8678', fontFamily: 'monospace' }}>Try →</span>
           </Link>
@@ -726,7 +752,7 @@ export default function Page() {
       </div>
 
       <div id="faq" className="no-print es-lift reveal" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '20px', padding: '2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
-        <h3 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 1.25rem 0' }}>Frequently Asked Questions</h3>
+        <h2 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 1.25rem 0' }}>Frequently Asked Questions</h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
           {FAQ_ITEMS.map((f, i) => (
             <div key={i} style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>

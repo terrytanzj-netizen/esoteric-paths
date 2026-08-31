@@ -75,7 +75,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   };
 
   return (
-      <div className={isZh ? 'reveal es-zh' : 'reveal'} style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)' }}>
+      <div className={isZh ? 'reveal es-zh' : 'reveal'} role="main" id="main-content" style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)' }}>
       <LangSetter lang={isZh ? 'zh-CN' : 'en'} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <Link href="/" style={{ color: '#C9A227', textDecoration: 'none', fontSize: '0.8rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>

@@ -37,7 +37,7 @@ export default function ChineseNamePage() {
   };
 
   return (
-    <div className="es-root" style={{ maxWidth: '860px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
+    <div className="es-root" role="main" id="main-content" style={{ maxWidth: '860px', margin: '0 auto', padding: '2rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 15%, rgba(201, 162, 39, 0.08) 0%, rgba(5, 5, 8, 0.98) 75%), linear-gradient(to bottom, #050508, #020204)', pointerEvents: 'none', zIndex: 0 }} />
 
       <nav className="no-print es-nav" style={{ borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>

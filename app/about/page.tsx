@@ -31,6 +31,8 @@ export default function AboutPage() {
   return (
     <div
       className="reveal"
+      role="main"
+      id="main-content"
       style={{
         maxWidth: '760px',
         margin: '0 auto',
