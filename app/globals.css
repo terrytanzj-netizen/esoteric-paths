@@ -318,7 +318,9 @@ h1, h2, h3, h4 {
 
 @media (max-width: 560px) {
   .es-hero-title { font-size: 2rem; }
-  .es-palace-grid { gap: 0.4rem; }
+  .es-palace-grid { gap: 0.3rem; }
+  .es-palace-cell { padding: 0.55rem 0.15rem; }
+  .es-palace-cell > div:nth-child(2) { font-size: 0.62rem; letter-spacing: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

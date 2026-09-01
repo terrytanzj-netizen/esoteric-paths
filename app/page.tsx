@@ -438,8 +438,8 @@ export default function Page() {
             const active = time.palaceIdx === idx;
             return (
               <div key={p.id} className={`es-palace-cell${active ? ' is-active' : ''}`}>
-                <div style={{ color: active ? '#C9A227' : '#5C584E', fontSize: '1.1rem' }}>{p.symbol}</div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 'bold', color: active ? '#F4EEDB' : '#8A8678', fontFamily: 'var(--font-display)' }}>{p.name.split(' ')[0]}</div>
+                <div style={{ color: active ? '#C9A227' : '#5C584E', fontSize: '1.1rem', fontFamily: '"Apple Symbols","Segoe UI Symbol","Noto Sans Symbols 2","DejaVu Sans",sans-serif', lineHeight: 1, fontWeight: 'normal' }}>{p.symbol}</div>
+                <div style={{ fontSize: '0.78rem', fontWeight: 'bold', color: active ? '#F4EEDB' : '#8A8678', fontFamily: 'var(--font-display)', whiteSpace: 'nowrap', marginTop: '0.2rem', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name.split(' (')[0]}</div>
               </div>
             );
           })}
