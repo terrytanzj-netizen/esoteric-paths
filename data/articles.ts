@@ -13,6 +13,104 @@ export interface Article {
 }
 
 export const ARTICLE_DETAILS: Record<string, Article> = {
+  'complete-xiao-liu-ren-guide-six-palaces': {
+    slug: 'complete-xiao-liu-ren-guide-six-palaces',
+    lang: 'en',
+    title: 'The Complete Xiao Liu Ren Guide: The 6 Temporal Palaces Explained for Modern Decisions',
+    readTime: '12 min read',
+    excerpt:
+      'A complete reference to the six palaces of Xiao Liu Ren — what each one means, how to read the three coordinates, when to use the system, and when not to.',
+    sections: [
+      {
+        heading: 'A Decision-Timing Instrument Older Than Your To-Do List',
+        body: 'Most decision frameworks you have read answer what to do. Pros-and-cons lists, weighted matrices, first-principles reasoning, pre-mortems — all of them treat timing as a footnote, something you handle once the analysis is finished. Xiao Liu Ren 小六壬 is different. It does not tell you what to choose. It tells you when the choosing is structurally favorable and when it is not. It is not astrology and it is not mysticism. It is a deterministic instrument that takes a moment and returns one of six palaces, each carrying a distinct momentum signature. The same moment always returns the same palace. Two people casting at the same instant get the same answer. There is no room for cold reading or selective interpretation. If you have ever felt that the right action at the wrong time cost you more than the wrong action at the right time would have, this is the system built to address that.',
+      },
+      {
+        heading: 'The Six Palaces at a Glance',
+        body: 'Each palace is a tempo, not a verdict. Read them as instructions about what kind of action fits the structural moment you are in. Da An 大安 — the ground holds. Consolidate, do not advance. Use this palace to defend what is already working, document your position, and avoid impulsive risks. Favorable for protecting gains; unfavorable for forcing new moves. Liu Lian 留连 — affairs stall, repeat, circle back. Forcing the issue increases friction. Use the time to audit, gather information, and let the knot loosen itself rather than pulling at it. Su Xi 速喜 — a fast opening. Unexpected positive catalysts arrive quickly: a message, an intro, a deal. The window is brief. Hesitation costs more than a misstep. Send the message, sign the term sheet, make the call today rather than Monday. Chi Kou 赤口 — words become weapons. Arguments escalate, counterparties push back, contracts get renegotiated late at night. Skip the tough conversation, put everything in writing, and wait 72 hours for the friction to pass. Xiao Ji 小吉 — accord. Negotiations settle, partnerships form, goodwill converts into concrete gain. The best palace for anything that needs another party to say yes. Open the dialogue, offer a small concrete win, formalize lightly. Kong Wang 空亡 — the void. The path you are pursuing is empty. Unanswered messages, evaporated intent, lost causes. Not punishment, but information: redirect rather than persist. Suspend the decision and wait for the fog to lift.',
+      },
+      {
+        heading: 'How to Cast and Read the Three Coordinates',
+        body: 'Xiao Liu Ren is calculated from three coordinates: the lunar month, day, and hour. Each coordinate resolves to one of the six palaces. The reading is the sequence of the three, not their sum. The Month palace is the macro origin — the structural background the opportunity arrives against. Read it as the conditions you inherited. The Day palace is the pivot — where the matter currently sits and whether it is moving. Read it as your present position. The Hour palace is the landing — where the thing actually resolves. Read it as the most likely outcome inside the window. The discipline is to read the sequence rather than the average. A clean Month that collapses into an obstructed Hour is a specific warning: the opening is real and the finish is not. A poor start that lands auspiciously is a different animal from a strong start that breaks down, and only the sequence tells you which one you are in.',
+      },
+      {
+        heading: 'The 72-Hour Window',
+        body: 'Every cast is capped at 72 hours. The reason is procedural rather than mystical: situations decay. The counterparty you were reading on Monday has had four conversations since. The price moved. Your own conviction cooled or hardened for reasons unrelated to the analysis. A timing judgment is a snapshot of a specific configuration, and configurations do not hold still. Treat the reading like a weather window for a crossing, not a permanent verdict on the route. Inside 72 hours, act on it. After that, the moment is gone and a fresh cast is required.',
+      },
+      {
+        heading: 'Where This Beats Western Frameworks',
+        body: 'Western strategic frameworks — BCG matrix, Porter’s Five Forces, even pre-mortems — optimize for the choice itself under assumed-stable conditions. They are powerful when the environment is genuinely stable. They are less powerful when the environment is mid-shift and what matters most is tempo. Xiao Liu Ren does not replace those frameworks; it sits in front of them. Before you choose, check the timing. Inside a favorable window your analysis lands cleanly; outside one the same analysis gets distorted by structural drag. That separation — what to do, and when to do it — is the discipline the system was built around.',
+      },
+      {
+        heading: 'When Not to Use It',
+        body: 'Hold off when the decision is reversible and the cost of delay is small. The system is most valuable when the action is hard to reverse and the timing genuinely matters: signing a term sheet, accepting an offer, sending the difficult message, ending a partnership. It is least valuable for routine operational choices where the timing variance is small. Do not cast for whether to send a Slack message. Cast for whether to sign the agreement that the Slack thread is about.',
+      },
+      {
+        heading: 'From Reading to Action',
+        body: 'A reading is only useful if it changes a decision you would otherwise have made. The protocol is short. Inside a Su Xi or Xiao Ji window with codifiable terms, move. Under Da An with nothing being lost, hold. Under Chi Kou, put it in writing and do not sign today. Under Kong Wang, redirect and do not persist. Under Liu Lian, audit and do not accelerate. One rule overrides all of the above: no palace reading justifies a commitment that exists only verbally. Timing tells you when to move. It does not make a bad agreement good.',
+      },
+    ],
+  },
+  'suxi-swift-execution-timing': {
+    slug: 'suxi-swift-execution-timing',
+    lang: 'en',
+    title: 'Su Xi Decoded: Harnessing High-Velocity Windows and Strike-While-Hot Moments',
+    readTime: '8 min read',
+    excerpt:
+      'Su Xi 速喜 is the only Xiao Liu Ren palace where hesitation costs more than a misstep. How to recognize the window, act inside it, and avoid squandering the opening.',
+    sections: [
+      {
+        heading: 'The Only Palace That Punishes Deliberation',
+        body: 'Every other palace in Xiao Liu Ren rewards a specific kind of restraint. Da An rewards holding. Liu Lian rewards auditing. Chi Kou rewards silence. Kong Wang rewards redirection. Su Xi 速喜 is the single palace where the disciplined response is to move faster than you feel comfortable moving. This is counterintuitive and it is why Su Xi is the most misread palace after Da An.',
+      },
+      {
+        heading: 'What Su Xi Actually Marks',
+        body: 'Su Xi marks a brief interval in which favorable external events arrive faster than your internal processing. A reply lands in an hour instead of a week. A deal terms itself overnight because someone else needs closure. A door opens that will not be open tomorrow. The momentum is structural — the configuration of the moment itself favors advance — and it is also perishable. By definition, Su Xi windows last hours to a few days. The fast opening closes fast.',
+      },
+      {
+        heading: 'How to Recognize Su Xi in the Wild',
+        body: 'The palace itself appears in your Day or Hour reading, but you also recognize Su Xi from texture: communications speed up, decisions that were stuck last week suddenly need a response, and you feel pressure that does not feel like your own. That last signal matters. Su Xi pressure is external; anxiety is internal. If the urgency is coming from counterparties and from circumstances rather than from your own doubt, you are in Su Xi territory. If the urgency is your own, you are probably in Chi Kou and the right move is still to wait.',
+      },
+      {
+        heading: 'The Strike-While-Hot Protocol',
+        body: 'Move on the highest-leverage action and consolidate before adding the next variable. Su Xi rewards single-thrust focus. The classic failure mode is to fan out across multiple opportunities the moment the window opens — to send five messages instead of one, to chase three intros instead of one, to start three initiatives instead of closing one. Each individual move may be correct; the breadth dilutes the velocity. Pick the one decisive thrust and execute it before doing anything else. Capture the win in a record, a receipt, or a confirmation while the momentum is still yours. Cement it in writing or public commitment before the window decays. Su Xi openings, unmanaged, do not stay open. They simply transfer to whoever else recognized them.',
+      },
+      {
+        heading: 'The Limits of Su Xi',
+        body: 'Su Xi speed is real but it is not magical. It does not turn a bad deal into a good deal. It does not make a counterparty trustworthy. It does not fix a contract that is missing key terms. If the only thing compelling you to move fast is Su Xi, but the underlying terms are weak, the right move is to slow down and let the window close. Not every Su Xi opening deserves a strike. The system tells you when the moment favors speed; it does not tell you that every speed-favored moment is worth taking. Judgment still sits in front of the timing, not behind it.',
+      },
+    ],
+  },
+  'xiaoji-collaborative-leverage': {
+    slug: 'xiaoji-collaborative-leverage',
+    lang: 'en',
+    title: 'Xiao Ji and the Art of Collaborative Leverage: When Soft Alignment Beats Hard Force',
+    readTime: '8 min read',
+    excerpt:
+      'Xiao Ji 小吉 is the palace of accord — the best Xiao Liu Ren vector for anything that needs another party to say yes. How to identify it, work inside it, and avoid people-pleasing your way into a worse deal.',
+    sections: [
+      {
+        heading: 'The Palace of Getting to Yes',
+        body: 'Xiao Ji 小吉 is the palace in which the other side of the table is also having a good day. Negotiations close cleanly. Partnerships form without dragging. Goodwill converts into concrete gain rather than staying abstract. If you are trying to close a deal, secure a partnership, or get alignment on a strategic move, Xiao Ji is the best palace in the system for that work. It is the only palace where the other party’s cooperation is structurally favored.',
+      },
+      {
+        heading: 'What Xiao Ji Actually Marks',
+        body: 'Xiao Ji marks a moment in which small concessions compound rather than cost. The counterparty who would normally haggle over a 5% delta closes on the number you proposed. The co-founder who has been avoiding the strategic conversation agrees to the meeting. The investor who has been cold suddenly takes the call. None of this is magic. It is timing: the configuration of the moment favors accord because the other party’s own constraints have lined up with yours.',
+      },
+      {
+        heading: 'How to Use Xiao Ji Without Wasting It',
+        body: 'The discipline under Xiao Ji is to ask for something concrete rather than to consolidate vibes. Open the dialogue with a specific proposal — the term sheet, the partnership scope, the strategic decision that has been waiting. Identify the other party’s unstated need before stating your own ask. Xiao Ji rewards reciprocity: offer a small concrete win to build trust, and that reciprocity creates leverage for the ask that follows. Formalize the mutual benefit in a lightweight agreement — specific obligations, bounded scope, written record. Do not leave Xiao Ji alignment in the air. It closes easily and it can drift just as easily.',
+      },
+      {
+        heading: 'The Failure Modes',
+        body: 'Xiao Ji has two characteristic failure modes. The first is passivity: people read Xiao Ji as "everything will work out" and do not push for codification. The window closes, the alignment evaporates, and six weeks later you are back where you started. The second is over-giving: people read Xiao Ji as license to concede, and they people-please their way into a worse deal than the partner would have accepted. The smiling concession becomes the lasting wound. Use Xiao Ji to get to yes; do not use Xiao Ji to give away the thing you were trying to get yes on. Soft alignment does not mean soft terms.',
+      },
+      {
+        heading: 'The Larger Pattern',
+        body: 'In Western strategic frameworks, Xiao Ji corresponds roughly to the conditions under which deal-makers describe a "constructive dynamic" — when the other side has internal momentum that aligns with yours, and the asymmetry between the two parties is small enough that progress feels cheap to both. That condition is rare. Xiao Ji tells you when it is present. Use it deliberately: ask, give something, formalize, and stop before you start conceding what you came in to protect.',
+      },
+    ],
+  },
   'decision-timing-framework-when-to-move': {
     slug: 'decision-timing-framework-when-to-move',
     lang: 'en',

@@ -421,6 +421,9 @@ export function getReportMeta(): ReportMeta {
 }
 
 export const ARTICLES = [
+  { slug: 'complete-xiao-liu-ren-guide-six-palaces', lang: 'en' as const, title: 'The Complete Xiao Liu Ren Guide: The 6 Temporal Palaces Explained for Modern Decisions', readTime: '12 min read' },
+  { slug: 'suxi-swift-execution-timing', lang: 'en' as const, title: 'Su Xi Decoded: Harnessing High-Velocity Windows and Strike-While-Hot Moments', readTime: '8 min read' },
+  { slug: 'xiaoji-collaborative-leverage', lang: 'en' as const, title: 'Xiao Ji and the Art of Collaborative Leverage: When Soft Alignment Beats Hard Force', readTime: '8 min read' },
   { slug: 'decision-timing-framework-when-to-move', lang: 'en' as const, title: 'The Decision Timing Framework: How to Know When to Move (Not Just What)', readTime: '10 min read' },
   { slug: 'accept-job-offer-now-or-wait', lang: 'en' as const, title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
   { slug: 'ontology-of-time-horary-vs-chronometry', lang: 'en' as const, title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
