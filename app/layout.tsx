@@ -20,7 +20,7 @@ export const metadata = {
       'x-default': '/',
     },
   },
-  verification: { other: { 'msvalidate.01': 'AC207B1D1E8A9E60F42B0C335D1DE0D5' } },
+  verification: { other: { 'msvalidate.01': 'AC267B1D1BA9E6EF42E9C335D15EB053' } },
   // OG / Twitter copy is deliberately the same claim as the X bio: the
   // "you don't have a decision problem, you have a timing problem" line.
   // One claim across bio, tweets and share cards is what makes it stick.
