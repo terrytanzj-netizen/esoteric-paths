@@ -13,6 +13,36 @@ export interface Article {
 }
 
 export const ARTICLE_DETAILS: Record<string, Article> = {
+  'decision-timing-framework-when-to-move': {
+    slug: 'decision-timing-framework-when-to-move',
+    lang: 'en',
+    title: 'The Decision Timing Framework: How to Know When to Move (Not Just What)',
+    readTime: '10 min read',
+    excerpt:
+      'Every decision framework answers "what should I do" and ignores when. How to read the six palaces as a tempo instrument — advance, hold, stall, or redirect.',
+    sections: [
+      {
+        heading: 'The Variable Nobody Puts in the Framework',
+        body: 'Every serious decision framework answers the same question: what should I do? Weighted matrices, first-principles reasoning, second-order thinking, pre-mortems — all of them optimize for the choice itself and treat timing as an afterthought, something you handle once the analysis is finished. That is backwards. The same decision made on Tuesday and made three weeks later is not the same decision. The counterparty has moved, your leverage has shifted, the information set has either decayed or sharpened. Most framework failures are not failures of analysis. They are failures of timing: you were right about what, and wrong about when.',
+      },
+      {
+        heading: 'What a Timing System Actually Has to Measure',
+        body: 'For a timing judgment to be useful rather than decorative it has to be deterministic. Not "the vibe feels right" — the same input must produce the same output, or you cannot test it, cannot argue with it, and cannot learn from it. Xiao Liu Ren 小六壬 reduces any moment to six palaces, each carrying a distinct momentum signature: Da An 大安 — the ground holds, consolidate rather than advance. Liu Lian 留连 — affairs drag, forcing increases friction. Su Xi 速喜 — a fast opening, move before it closes. Chi Kou 赤口 — dispute, put it in writing and stay out of the room. Xiao Ji 小吉 — accord, the best palace for anything that needs another party to say yes. Kong Wang 空亡 — void, redirect rather than persist. These are not personality descriptions. They are instructions about tempo.',
+      },
+      {
+        heading: 'Three Coordinates, Not One',
+        body: 'A single palace tells you the flavour of a moment. Three palaces tell you the shape of a decision. The Month palace is the macro origin — the structural background the opportunity arrives against. The Day palace is the pivot — where the matter currently sits and whether it is moving. The Hour palace is the landing — where the thing actually resolves. Read them as a sequence, not a score. A clean Month reading that decays into an obstructed Hour is a specific warning: the opening is real and the finish is not. Reversals matter more than averages. A poor start that lands auspiciously is a different animal from a strong start that collapses, and only the sequence tells you which one you are in.',
+      },
+      {
+        heading: 'Why the Window Expires',
+        body: 'Every cast is capped at 72 hours, and the reason is banal rather than mystical: situations decay. The counterparty you were reading on Monday has had four conversations since. The price moved. Your own conviction cooled or hardened for reasons unrelated to the analysis. A timing judgment is a snapshot of a specific configuration, and configurations do not hold still. Treat a reading like a weather window for a crossing, not a permanent verdict on the route. Inside 72 hours, act on it. After that, re-cast — you are no longer reading the same moment.',
+      },
+      {
+        heading: 'The Protocol',
+        body: 'Move when the Hour palace reads Su Xi or Xiao Ji and the terms are codifiable in writing. Hold when Da An dominates and nothing is being lost by waiting. Do not sign under Chi Kou — put everything in writing and let the dispute cool first. Do not persist under Kong Wang; the void is not an obstacle to push through, it is information that this path is empty. Under Liu Lian, audit rather than accelerate, because the delay is carrying data. One rule overrides all of the above: no palace reading justifies a commitment that exists only verbally. Timing tells you when to move. It does not make a bad agreement good.',
+      },
+    ],
+  },
   'accept-job-offer-now-or-wait': {
     slug: 'accept-job-offer-now-or-wait',
     lang: 'en',

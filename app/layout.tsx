@@ -20,19 +20,22 @@ export const metadata = {
       'x-default': '/',
     },
   },
+  // OG / Twitter copy is deliberately the same claim as the X bio: the
+  // "you don't have a decision problem, you have a timing problem" line.
+  // One claim across bio, tweets and share cards is what makes it stick.
   openGraph: {
     title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
-    description: 'Align your critical crossroads decisions with classical Chinese temporal mechanics and Western archetypal wisdom.',
+    description: "You don't have a decision problem. You have a timing problem. Cast the moment — get a 72-hour execution window.",
     url: 'https://www.esotericpaths.com',
     siteName: 'Esoteric Paths',
     locale: 'en_US',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Esoteric Paths — Xiao Liu Ren × Tarot Horary Matrix' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Esoteric Paths — the six palaces of Xiao Liu Ren in dark alchemical gold' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
-    description: 'Deterministic Horary Oracle combining classical Chinese Xiao Liu Ren with Western archetypal tarot.',
+    title: "You don't have a decision problem. You have a timing problem.",
+    description: 'Cast the moment with Xiao Liu Ren 小六壬 — six palaces, one question, a 72-hour execution window.',
     images: ['/og-image.png'],
   },
 };
