@@ -193,7 +193,7 @@ export default function ChineseNamePage() {
             </div>
           </div>
 
-          <OracleBridge source="chinese_name" palaceHint={result.dominantPalace} />
+          <OracleBridge source="chinese_name" palaceHint={result.dominantPalace} focus={form.focus} />
         </section>
       )}
 
