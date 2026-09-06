@@ -848,4 +848,72 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
     ],
   },
+  'should-i-quit-my-job': {
+    slug: 'should-i-quit-my-job',
+    lang: 'en',
+    title: 'Should I Quit My Job?',
+    readTime: '9 min read',
+    excerpt:
+      'You are asking the question at 2 a.m. because it has been a bad year, or a bad manager, or a bad string of Fridays. Here is how to separate the real signal from the exhaustion — and when the moment is actually right to hand in notice.',
+    sections: [
+      {
+        heading: 'You Are Not Asking a Yes-or-No Question',
+        body: 'Almost everyone who googles "should I quit my job" is not really asking whether to quit. They are asking one of three sharper questions, and only one of the three has "quit" as an answer. (1) Is this place getting worse, or am I getting more tired? (2) Is the exit I am picturing real, or am I romanticizing the unknown? (3) Am I quitting toward something, or away from something? Most resignation disasters come from answering the wrong one. If you are burned out, quitting to escape is a holiday, not a strategy — the burnout follows you into the next job. If you are underpaid, quitting to punish the manager is theater. Only the third question — a concrete, better thing you are moving toward — makes resignation a sound decision rather than a reaction.',
+      },
+      {
+        heading: 'The Test That Filters Out Every Bad Reason',
+        body: 'Write down, in one sentence, what you would do with the first working day after you resign. If the sentence is "rest," "figure things out," or "I will know when I get there," you do not have an exit — you have an escape. If the sentence names a real thing — a company you have already spoken to, a product you are building with a first customer, a role whose posting you could apply to today — then you have an actual option, and the decision is now a timing decision, not a courage decision. The single most useful filter is this: would you still leave if you could not tell anyone about it for six months? If the answer is yes, the motivation is internal and durable. If the answer is no, you are quitting for the audience of people watching, and that audience will not pay your bills.',
+      },
+      {
+        heading: 'Why the Timing Question Gets Skipped',
+        body: 'Every "should I quit" article tells you to make a pros-and-cons list, update your resume, save six months of runway. Good advice, and none of it answers the actual question that is keeping you awake: is this week, this month, this quarter the right moment to move? Job markets are not stable. The same resignation submitted in a hiring-friendly window lands you in interviews within two weeks; submitted into a freeze, it strands you. The role you are leaving has its own momentum — quarters end, projects land, bonuses vest, references are still warm. Resignation is a timing decision wearing the costume of a yes-or-no decision. The people who resign well rarely resign in anger. They resign when the moment is structurally in their favor: market open, runway banked, exit concrete, and the last thing tying them to the old role already done.',
+      },
+      {
+        heading: 'Reading the Moment: What to Check Before You Move',
+        body: 'This is where a structured read of the moment earns its keep. Instead of trusting the 2 a.m. gut, you check the texture of the timing itself on three axes — the background, your current position, and where the landing actually lands. Casting Xiao Liu Ren at the moment you are weighing the decision returns three palaces that map to exactly those three axes. A clean background that collapses into a blocked landing is a specific warning: the opening feels real and the finish will not hold. A stalled background that opens into a fast, favorable landing is a different animal — permission to move precisely because the exit will resolve quickly. The system does not tell you whether your manager is bad. It tells you whether this is the window in which a good exit actually closes. Those are different questions, and the second one is the one everyone forgets to ask.',
+      },
+      {
+        heading: 'The 72-Hour Window and the Re-Cast Rule',
+        body: 'Whatever you decide, treat it as valid for 72 hours — not because the decision expires, but because your situation and the market both move that fast. A colleague resigns and the headcount reshuffles. A competitor posts the exact role you want. The macro mood of the hiring market flips on a jobs report. A reading taken on Monday describes Monday\'s configuration; by Thursday the configuration has already changed. So the protocol is short: decide inside the window, act on what is codifiable (application sent, message to a former manager, runway re-checked), and if the window passes without action, re-cast rather than recycle the old answer. The same gut that could not decide last month is not going to decide this month if you feed it the same stale inputs.',
+      },
+      {
+        heading: 'The One Rule That Overrides Everything',
+        body: 'Never resign on an unverified promise. If your exit depends on a verbal offer, a friend saying "we would love to have you," or an idea you have not shown a single paying human, then you do not have an exit — you have a hope. Timing tells you when to move; it does not make a fragile exit solid. The cleanest resignation in the world has three things in writing: the new role or a concrete runway, the last deliverable at the old job finished, and a reference who knows you are leaving well. When those three are in place and the moment reads open, quit. When any of them is missing, the palace may read open but the ground is not — and the ground wins.',
+      },
+    ],
+  },
+  'should-i-sign-this-contract': {
+    slug: 'should-i-sign-this-contract',
+    lang: 'en',
+    title: 'Should I Sign This Contract?',
+    readTime: '8 min read',
+    excerpt:
+      'Freelance gig, lease, partnership, purchase agreement — the paperwork is in front of you and you cannot tell if the discomfort you feel is real or just normal. Here is how to read a contract decision without a lawyer, and when the timing itself is telling you to wait.',
+    sections: [
+      {
+        heading: 'The Feeling You Cannot Name',
+        body: 'People rarely freeze on a contract because the terms are obviously bad. Obvious bad terms get rejected in minutes. You freeze when the contract is ninety percent fine and you cannot put your finger on the ten percent. That is not irrational — that is your pattern-recognition doing its job without words. The uncomfortable truth about contracts is that almost nobody reads them cold. You read them through the lens of how much you want the thing: the gig you need, the apartment you love, the partnership you pitched for months. That lens bends the text. Before you decide whether to sign, you have to separate the desire for the outcome from the structure of the deal itself. One of those is making the decision. The other should be.',
+      },
+      {
+        heading: 'The Verbal-Agreement Trap',
+        body: 'The single most reliable predictor of a contract regret story is a clause that contradicts what you were told. "They said they would extend it if I perform" — but the contract says one term, no extension. "The budget was supposed to include this" — but the scope section does not. Every time the deal was discussed in a conversation and then written in a document, the document wins, and the document was written by whoever had the stronger incentive. So before you sign, you run one test: list the three things you believe are true about this deal that are not written down. Then ask whether the contract would still feel fair if those three were gone. If yes, sign on the paper as-is. If no, you are not signing a contract — you are signing a memory of a conversation, and memories do not hold up in disputes.',
+      },
+      {
+        heading: 'Why "Good Enough" Contracts Still Need Timing',
+        body: 'Here is the part the standard advice misses. Even a fair contract — one where the terms genuinely work for you — can be a mistake to sign at the wrong moment, because contracts are point-in-time locks. They freeze the relationship at a specific configuration: your leverage, the counterparty\'s need, the market rate, your alternatives. That configuration shifts. If you sign a six-month lockup the week before a better opportunity surfaces, the contract was never bad — the moment was. If you sign a freelance scope while the client is mid-budget-crisis, the signature does not fix the client; it fixes you to the client. Reading the moment before you sign is not superstition. It is asking whether your leverage today is high and rising, or high and about to decay — and a contract signed at peak leverage is a different animal from the same contract signed at the bottom of your leverage curve.',
+      },
+      {
+        heading: 'The Deadline Is a Test, Not a Fact',
+        body: 'A manufactured deadline is the oldest pressure tool in the book, and it works on the most competent people because competent people hate to lose a good deal over hesitation. Before you cave to "we need this by Friday," ask one question: what actually happens to the counterparty if Friday passes? If the answer is "nothing — they will take the same deal next week," the deadline is theater, and you have just been handed information about how they negotiate. If the answer is a real consequence — the role fills, the unit goes to someone else, the rate resets — then the deadline is genuine and you should not waste it. The trick is that you cannot reliably tell the difference from the inside while you want the deal. You need an external read on the moment — whether the pressure you feel is coming from the actual configuration of the deal, or from the manufactured urgency of the room. Those are opposite situations, and they call for opposite actions.',
+      },
+      {
+        heading: 'What a Structured Read of the Moment Returns',
+        body: 'This is exactly the kind of decision where a deterministic read of the timing earns its place, because the contract itself is fixed but the moment is not. Casting Xiao Liu Ren at the moment you hold the signature returns three palaces on the axes that actually matter: the macro background of the deal, your present position in it, and where the thing lands if you sign today. A reading that flags a fast, favorable landing — the classic green light — tells you the configuration of the moment favors signing, which is precisely when a fair contract costs you nothing to commit to. A reading that flags blocked or circling momentum is the external signal that your unease is not paranoia: the deal may be fine, but this is not the window to lock yourself into it. Either way, you now have something firmer than the knot in your stomach to decide from.',
+      },
+      {
+        heading: 'The Sign / Wait / Walk Protocol',
+        body: 'Three moves, and only three. Sign when the terms are fair on paper (not on a memory of a conversation) and the moment reads open — sign fast, in writing, and keep the signed copy. Wait when the terms are workable but the moment reads stalled or contentious: ask for the extension in writing, document your position, and re-read after 72 hours. Walk when either the terms or the reading flags the void — the path the deal is asking you to commit to is empty. Walking is not failure; it is the cheapest form of protection you will ever buy. One rule sits above all three: if the deal needs a verbal promise to feel fair, it is not ready to sign, no matter what the moment says. Timing tells you when to commit. It does not make an unfair paper fair.',
+      },
+    ],
+  },
 };

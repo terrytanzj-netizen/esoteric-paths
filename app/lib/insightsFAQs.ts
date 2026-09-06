@@ -151,6 +151,46 @@ export const INSIGHT_FAQS: Record<string, { faqs: InsightFAQ[]; anchor: InsightA
       },
     ],
   },
+  'should-i-quit-my-job': {
+    anchor: {
+      situation: 'You have had a bad year, or a bad manager, or a bad string of Fridays, and you keep returning to the same question in the middle of the night. You are not sure whether this is real signal or just exhaustion.',
+      cta: 'Cast at the moment you are actually weighing the decision. The reading will tell you whether the current window favors a clean exit — not whether your manager is bad, but whether a good resignation will actually close right now.',
+    },
+    faqs: [
+      {
+        q: 'Should I quit my job if I am burned out?',
+        a: 'Burnout is a reason to change your circumstances, not automatically a reason to resign. The useful question is whether you are leaving toward a concrete thing or away from exhaustion. If you have no concrete exit, quitting to rest is a holiday, not a strategy — the burnout follows you.',
+      },
+      {
+        q: 'How do I know if I am quitting for the right reason?',
+        a: 'Write down what you would do on the first working day after resigning. If the answer is rest or "I will figure it out," you have an escape, not an exit. If it names a real role or a product with a first customer, you have an option, and the decision becomes about timing.',
+      },
+      {
+        q: 'Is there a bad time to quit my job?',
+        a: 'Yes. A resignation submitted into a hiring freeze or at the bottom of your leverage is a different decision than the same resignation in an open market. Cast before you move — a reading that flags stalled or blocked momentum is the signal to bank more runway first.',
+      },
+    ],
+  },
+  'should-i-sign-this-contract': {
+    anchor: {
+      situation: 'The paperwork is in front of you — freelance scope, lease, partnership, purchase agreement. It is ninety percent fine and you cannot name the ten percent. The deadline feels short and the knot in your stomach will not go away.',
+      cta: 'Cast at the moment you hold the signature. The reading separates real unease from manufactured pressure: whether the moment favors signing now, waiting 72 hours, or walking cleanly.',
+    },
+    faqs: [
+      {
+        q: 'Should I sign a contract I have a bad feeling about?',
+        a: 'Name the feeling before you act on it. The most reliable predictor of regret is a clause that contradicts what you were told. List the three things you believe are true about the deal that are not written down — if the contract would not feel fair without them, do not sign.',
+      },
+      {
+        q: 'How long should I wait before signing a contract?',
+        a: 'Treat any read of the moment as valid for 72 hours. If the deadline is genuine, decide fast inside the window. If you read stalled or contentious momentum, ask for the extension in writing and re-read after the window passes. Never sign purely because of a manufactured deadline.',
+      },
+      {
+        q: 'Is it ever better to walk away from a contract?',
+        a: 'Yes. Walking is the cheapest protection you will ever buy. If the deal only feels fair because of a verbal promise, or the moment reads as an empty path, walk — and redirect rather than renegotiate on the same weak ground.',
+      },
+    ],
+  },
 };
 
 export function getInsightFAQs(slug: string) {
