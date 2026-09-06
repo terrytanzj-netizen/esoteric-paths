@@ -7,6 +7,7 @@ import { ARTICLE_DETAILS } from '../data/articles';
 import ReportPDF from './components/ReportPDF';
 import { formatCastTime } from './lib/formatTime';
 import { getLunarParts } from './lib/lunar';
+import { getHook } from './lib/palaceHooks';
 
 // Derive the home page essay list from ARTICLE_DETAILS — the same source the
 // article pages and sitemap read from. Reading data/content.ts here meant every
@@ -543,12 +544,12 @@ export default function Page() {
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE — locked</span>
                   <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.omen.label}</h3>
-                  <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The current pivot is veiled. Unlock to reveal the full reading.</p>
+                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', lineHeight: 1.6, margin: '0.4rem 0 0 0' }}>{getHook(castResult.day.id, 'en') ?? 'The current pivot is veiled. Unlock to reveal the full reading.'}</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE — locked</span>
                   <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.omen.label}</h3>
-                  <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The decisive vector is veiled. Unlock to reveal the full reading.</p>
+                  <p style={{ fontSize: '0.85rem', color: '#CDC8BC', lineHeight: 1.6, margin: '0.4rem 0 0 0' }}>{getHook(castResult.hour.id, 'en') ?? 'The decisive vector is veiled. Unlock to reveal the full reading.'}</p>
                 </div>
               </div>
               <p style={{ fontSize: '0.8rem', color: '#8A8678', marginTop: '1rem', lineHeight: 1.5 }}>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LangSetter from './LangSetter';
 import { ARTICLE_DETAILS } from '../../../data/articles';
+import InsightCTA from '../../components/InsightCTA';
 
 function renderBody(body: string) {
   const parts = body.split(/(\[[^\]]+\]\([^)]+\))/g);
@@ -131,6 +132,8 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             ))}
         </div>
       </div>
+
+      <InsightCTA lang={isZh ? 'zh' : 'en'} />
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', marginBottom: '1rem' }}>
