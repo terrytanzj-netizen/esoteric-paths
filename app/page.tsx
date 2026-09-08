@@ -706,7 +706,10 @@ export default function Page() {
       <div id="insights" className="no-print reveal" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h2 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>Strategic Insights</h2>
         <p style={{ fontSize: '0.8rem', color: '#8A8678', margin: '0 0 1.5rem 0', lineHeight: 1.6 }}>
-          Long-form essays on temporal strategy, classical horary method and the psychology of decision timing.
+          Long-form essays on temporal strategy, classical horary method and the psychology of decision timing.{' '}
+          <Link href="/insights" style={{ color: '#C9A227', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
+            Browse all {ALL_ARTICLES.length} essays →
+          </Link>
         </p>
 
         <div className="es-section-label" style={{ marginBottom: '0.85rem' }}>
