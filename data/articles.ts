@@ -1,6 +1,18 @@
 export interface ArticleSection {
   heading: string;
   body: string;
+  /** 结构化表格：AI 生成的对比表 / 宫位速查表（旧模板无此字段，纯段落直接进 <p> 会糊成一坨） */
+  table?: {
+    headers: string[];
+    rows: string[][];
+  };
+  /** 行动卡：72 小时执行协议等分步骤卡片 */
+  callout?: {
+    label?: string;
+    steps: string[];
+  };
+  /** 要点列表 */
+  bullets?: string[];
 }
 
 export interface Article {
@@ -9,6 +21,8 @@ export interface Article {
   title: string;
   readTime: string;
   excerpt: string;
+  /** 首屏直出结论（GEO）：40–80 词硬答案，供 Perplexity / ChatGPT / AI Overviews 直接引用 */
+  tldr?: string;
   sections: ArticleSection[];
 }
 
@@ -848,71 +862,166 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
     ],
   },
-  'should-i-quit-my-job': {
-    slug: 'should-i-quit-my-job',
+
+  'contract-negotiation-timing': {
+    slug: 'contract-negotiation-timing',
     lang: 'en',
-    title: 'Should I Quit My Job?',
+    title: 'Contract Negotiation Timing: When to Sign and When to Slow the Deal Down',
     readTime: '9 min read',
-    excerpt:
-      'You are asking the question at 2 a.m. because it has been a bad year, or a bad manager, or a bad string of Fridays. Here is how to separate the real signal from the exhaustion — and when the moment is actually right to hand in notice.',
+    excerpt: 'Most negotiation advice tells you what to ask for. This is about when to put the pen down — and how to read whether a deal is structurally ready to be signed.',
+    tldr: 'Contract negotiation timing answers when to sign, not what to sign. In Xiao Liu Ren terms: sign under Xiao Ji or Su Xi, slow down under Liu Lian or Kong Wang, and never sign under Chi Kou without first converting every verbal promise into a written clause. Timing does not replace due diligence — it sequences it.',
     sections: [
       {
-        heading: 'You Are Not Asking a Yes-or-No Question',
-        body: 'Almost everyone who googles "should I quit my job" is not really asking whether to quit. They are asking one of three sharper questions, and only one of the three has "quit" as an answer. (1) Is this place getting worse, or am I getting more tired? (2) Is the exit I am picturing real, or am I romanticizing the unknown? (3) Am I quitting toward something, or away from something? Most resignation disasters come from answering the wrong one. If you are burned out, quitting to escape is a holiday, not a strategy — the burnout follows you into the next job. If you are underpaid, quitting to punish the manager is theater. Only the third question — a concrete, better thing you are moving toward — makes resignation a sound decision rather than a reaction.',
+        heading: 'Why Does Timing Decide More Than Technique at the Signing Table?',
+        body: 'There is no shortage of material on how to negotiate. There is almost nothing on when to close. That gap is expensive, because the same terms signed on Tuesday and signed three weeks later are not the same deal — the counterparty has moved, the market has moved, and the goodwill that was carrying the fragile clauses has decayed. Technique optimises the content of the agreement. Timing determines whether that content survives contact with reality. A deterministic horary reading does not tell you what to ask for. It tells you whether the structural moment favours pressing, waiting, or hardening. That is a different question, and it is the one most deals actually turn on.',
       },
       {
-        heading: 'The Test That Filters Out Every Bad Reason',
-        body: 'Write down, in one sentence, what you would do with the first working day after you resign. If the sentence is "rest," "figure things out," or "I will know when I get there," you do not have an exit — you have an escape. If the sentence names a real thing — a company you have already spoken to, a product you are building with a first customer, a role whose posting you could apply to today — then you have an actual option, and the decision is now a timing decision, not a courage decision. The single most useful filter is this: would you still leave if you could not tell anyone about it for six months? If the answer is yes, the motivation is internal and durable. If the answer is no, you are quitting for the audience of people watching, and that audience will not pay your bills.',
+        heading: 'What Does Each Palace Mean When You Are About to Sign?',
+        body: 'Read the six palaces as instructions about the signing window, not as verdicts on the deal. The same contract can be a good contract signed in the wrong palace and a good contract signed in the right one.',
+        table: {
+          headers: ['Palace', 'What it means at the table', 'The move'],
+          rows: [
+            ['Da An 大安', 'Terms are stable and defensible. Ground holds.', 'Sign, or lock the current draft against further erosion.'],
+            ['Liu Lian 留连', 'Something circles — the same clause keeps returning.', 'Do not sign. Audit the recurring clause; it is the real issue.'],
+            ['Su Xi 速喜', 'A fast opening. The counterparty is motivated right now.', 'Move today. Windows like this compress without warning.'],
+            ['Chi Kou 赤口', 'Dispute energy. Verbal promises exceed written terms.', 'Freeze oral commitments. Convert everything into text first.'],
+            ['Xiao Ji 小吉', 'Accord. Goodwill is convertible into signatures.', 'Formalise. This is the cleanest window to close.'],
+            ['Kong Wang 空亡', 'Void. Intent is quietly evaporating.', 'Do not sign. Redirect, or let it lapse.'],
+          ],
+        },
       },
       {
-        heading: 'Why the Timing Question Gets Skipped',
-        body: 'Every "should I quit" article tells you to make a pros-and-cons list, update your resume, save six months of runway. Good advice, and none of it answers the actual question that is keeping you awake: is this week, this month, this quarter the right moment to move? Job markets are not stable. The same resignation submitted in a hiring-friendly window lands you in interviews within two weeks; submitted into a freeze, it strands you. The role you are leaving has its own momentum — quarters end, projects land, bonuses vest, references are still warm. Resignation is a timing decision wearing the costume of a yes-or-no decision. The people who resign well rarely resign in anger. They resign when the moment is structurally in their favor: market open, runway banked, exit concrete, and the last thing tying them to the old role already done.',
+        heading: 'How Do You Slow a Deal Down Without Losing It?',
+        body: 'The fear behind every premature signature is that asking for time kills the deal. It rarely does. What kills deals is unexplained silence. Delay that is framed as process reads as professionalism; delay that is framed as hesitation reads as weakness. The distinction is entirely in how you name it.',
+        bullets: [
+          'Name the mechanism, not the doubt: "We are running standard legal risk calibration" is process. "We are not sure" is doubt.',
+          'Always attach a date. Open-ended delay feels like a stall; a 72-hour window feels like diligence.',
+          'Keep something moving. Return a marked-up draft rather than nothing, so the counterparty sees progress rather than silence.',
+          'Never slow down only the clauses that favour you. Selective delay signals exactly where you intend to fight.',
+        ],
       },
       {
-        heading: 'Reading the Moment: What to Check Before You Move',
-        body: 'This is where a structured read of the moment earns its keep. Instead of trusting the 2 a.m. gut, you check the texture of the timing itself on three axes — the background, your current position, and where the landing actually lands. Casting Xiao Liu Ren at the moment you are weighing the decision returns three palaces that map to exactly those three axes. A clean background that collapses into a blocked landing is a specific warning: the opening feels real and the finish will not hold. A stalled background that opens into a fast, favorable landing is a different animal — permission to move precisely because the exit will resolve quickly. The system does not tell you whether your manager is bad. It tells you whether this is the window in which a good exit actually closes. Those are different questions, and the second one is the one everyone forgets to ask.',
+        heading: 'The 72-Hour Contract Timing Protocol',
+        body: 'When a reading lands on Chi Kou or Liu Lian at a signing node, run this. It converts a bad timing window into a defensive one instead of a lost one.',
+        callout: {
+          label: '72-Hour Contract Timing Protocol',
+          steps: [
+            '0–24h — Freeze oral commitments. Route every substantive statement to email. Pull the last two weeks of messages and list every promise that never made it into the draft.',
+            '24–48h — Run a premortem with counsel. Assume the agreement is litigated 18 months from now: which clause gets weaponised first? Replace qualitative language ("reasonable efforts", "timely consultation") with dated, measurable obligations.',
+            '48–72h — Send the hardened draft and watch the reaction. Professional pushback means the counterparty is merely sharp. Emotional resistance or accusations of distrust mean the hidden agenda just surfaced — and you now have it on the record.',
+          ],
+        },
       },
       {
-        heading: 'The 72-Hour Window and the Re-Cast Rule',
-        body: 'Whatever you decide, treat it as valid for 72 hours — not because the decision expires, but because your situation and the market both move that fast. A colleague resigns and the headcount reshuffles. A competitor posts the exact role you want. The macro mood of the hiring market flips on a jobs report. A reading taken on Monday describes Monday\'s configuration; by Thursday the configuration has already changed. So the protocol is short: decide inside the window, act on what is codifiable (application sent, message to a former manager, runway re-checked), and if the window passes without action, re-cast rather than recycle the old answer. The same gut that could not decide last month is not going to decide this month if you feed it the same stale inputs.',
-      },
-      {
-        heading: 'The One Rule That Overrides Everything',
-        body: 'Never resign on an unverified promise. If your exit depends on a verbal offer, a friend saying "we would love to have you," or an idea you have not shown a single paying human, then you do not have an exit — you have a hope. Timing tells you when to move; it does not make a fragile exit solid. The cleanest resignation in the world has three things in writing: the new role or a concrete runway, the last deliverable at the old job finished, and a reference who knows you are leaving well. When those three are in place and the moment reads open, quit. When any of them is missing, the palace may read open but the ground is not — and the ground wins.',
+        heading: 'What If the Timing Signal Contradicts Your Diligence?',
+        body: 'Then diligence wins. Always. A favourable palace is a statement about momentum, never about solvency, and no timing signal rescues a counterparty who cannot perform. Treat the reading as a likelihood ratio applied to a prior you have already established from audited numbers — this is the same discipline described in the [decision timing framework](/insights/decision-timing-framework-when-to-move). If the two conflict, the correct conclusion is that your prior is weak and needs more work, not that the signal overrides it. For the specific case of dispute energy at the table, see [Chi Kou and the architecture of bad faith](/insights/chi-kou-dispute-architecture-bad-faith), and for the funding-specific version, [term sheet timing](/insights/term-sheet-timing).',
       },
     ],
   },
-  'should-i-sign-this-contract': {
-    slug: 'should-i-sign-this-contract',
+
+  'strategic-delay-tactics': {
+    slug: 'strategic-delay-tactics',
     lang: 'en',
-    title: 'Should I Sign This Contract?',
+    title: 'Strategic Delay: When Waiting Is the More Aggressive Move',
     readTime: '8 min read',
-    excerpt:
-      'Freelance gig, lease, partnership, purchase agreement — the paperwork is in front of you and you cannot tell if the discomfort you feel is real or just normal. Here is how to read a contract decision without a lawyer, and when the timing itself is telling you to wait.',
+    excerpt: 'Delay has a bad reputation because most of it is avoidance. Here is how to tell the difference — and how to wait in a way that compounds rather than decays.',
+    tldr: 'Strategic delay is the deliberate withholding of action inside a window where action is structurally punished. It is justified only when waiting produces new information or new leverage. It becomes decay the moment it merely avoids discomfort. The test: if waiting changes what you will know or what you can demand, it is strategy.',
     sections: [
       {
-        heading: 'The Feeling You Cannot Name',
-        body: 'People rarely freeze on a contract because the terms are obviously bad. Obvious bad terms get rejected in minutes. You freeze when the contract is ninety percent fine and you cannot put your finger on the ten percent. That is not irrational — that is your pattern-recognition doing its job without words. The uncomfortable truth about contracts is that almost nobody reads them cold. You read them through the lens of how much you want the thing: the gig you need, the apartment you love, the partnership you pitched for months. That lens bends the text. Before you decide whether to sign, you have to separate the desire for the outcome from the structure of the deal itself. One of those is making the decision. The other should be.',
+        heading: 'Is Waiting Ever a Strategy, or Just Avoidance Wearing a Suit?',
+        body: 'Most delay inside companies is avoidance with better vocabulary. "Let us revisit next quarter" usually means nobody wants to own the decision. But there is a genuinely aggressive form of waiting, and confusing the two is how organisations lose both momentum and optionality. The distinction is mechanical, not psychological: delay is strategic when the passage of time changes your position, and it is avoidance when the passage of time only changes your comfort. If you cannot name what you will know in three weeks that you do not know today, you are not waiting. You are hiding.',
       },
       {
-        heading: 'The Verbal-Agreement Trap',
-        body: 'The single most reliable predictor of a contract regret story is a clause that contradicts what you were told. "They said they would extend it if I perform" — but the contract says one term, no extension. "The budget was supposed to include this" — but the scope section does not. Every time the deal was discussed in a conversation and then written in a document, the document wins, and the document was written by whoever had the stronger incentive. So before you sign, you run one test: list the three things you believe are true about this deal that are not written down. Then ask whether the contract would still feel fair if those three were gone. If yes, sign on the paper as-is. If no, you are not signing a contract — you are signing a memory of a conversation, and memories do not hold up in disputes.',
+        heading: 'What Are the Three Kinds of Delay?',
+        body: 'Only one of the three is worth running. Learning which one you are in takes about thirty seconds of honesty.',
+        table: {
+          headers: ['Type', 'What time produces', 'Verdict'],
+          rows: [
+            ['Incubation', 'New information: a quarter closes, a reference calls back, a lawsuit settles.', 'Run it. This is real strategy.'],
+            ['Leverage', 'Asymmetry: their runway shortens faster than yours, their alternatives expire.', 'Run it, but set an expiry date.'],
+            ['Decay', 'Nothing except relief from having to decide.', 'Kill it. Decide now or delegate the decision.'],
+          ],
+        },
       },
       {
-        heading: 'Why "Good Enough" Contracts Still Need Timing',
-        body: 'Here is the part the standard advice misses. Even a fair contract — one where the terms genuinely work for you — can be a mistake to sign at the wrong moment, because contracts are point-in-time locks. They freeze the relationship at a specific configuration: your leverage, the counterparty\'s need, the market rate, your alternatives. That configuration shifts. If you sign a six-month lockup the week before a better opportunity surfaces, the contract was never bad — the moment was. If you sign a freelance scope while the client is mid-budget-crisis, the signature does not fix the client; it fixes you to the client. Reading the moment before you sign is not superstition. It is asking whether your leverage today is high and rising, or high and about to decay — and a contract signed at peak leverage is a different animal from the same contract signed at the bottom of your leverage curve.',
+        heading: 'How Do You Delay Without Looking Weak?',
+        body: 'In negotiation, unexplained waiting is read as weakness; framed waiting is read as discipline. The counterparty fills silence with their own narrative, so you must supply the narrative first.',
+        bullets: [
+          'Attach the delay to an external fact — an audit cycle, a board calendar, a regulatory window — never to your own uncertainty.',
+          'State what you are doing while waiting. "We are completing diligence on X" is strength. "We will get back to you" is drift.',
+          'Set the return date before you leave the room, and hit it early.',
+          'Keep issuing small deliverables. Momentum perceived is momentum granted.',
+        ],
       },
       {
-        heading: 'The Deadline Is a Test, Not a Fact',
-        body: 'A manufactured deadline is the oldest pressure tool in the book, and it works on the most competent people because competent people hate to lose a good deal over hesitation. Before you cave to "we need this by Friday," ask one question: what actually happens to the counterparty if Friday passes? If the answer is "nothing — they will take the same deal next week," the deadline is theater, and you have just been handed information about how they negotiate. If the answer is a real consequence — the role fills, the unit goes to someone else, the rate resets — then the deadline is genuine and you should not waste it. The trick is that you cannot reliably tell the difference from the inside while you want the deal. You need an external read on the moment — whether the pressure you feel is coming from the actual configuration of the deal, or from the manufactured urgency of the room. Those are opposite situations, and they call for opposite actions.',
+        heading: 'The 72-Hour Delay Protocol',
+        body: 'When a reading returns Liu Lian (stalling) or Kong Wang (void), the instruction is not "do nothing". It is "do not push the primary line while running these three checks".',
+        callout: {
+          label: '72-Hour Delay Protocol',
+          steps: [
+            '0–24h — Write down exactly what you expect to know at the end of the window. If the list is empty, abandon the delay and decide today.',
+            '24–48h — Push only on secondary fronts: references, technical validation, parallel options. Never the primary ask. Forcing the main line inside Liu Lian increases friction without increasing yield.',
+            '48–72h — Re-read the moment. If the palace has moved, act immediately. If it has not, and your information list is still empty, the delay has become decay — escalate or delegate.',
+          ],
+        },
       },
       {
-        heading: 'What a Structured Read of the Moment Returns',
-        body: 'This is exactly the kind of decision where a deterministic read of the timing earns its place, because the contract itself is fixed but the moment is not. Casting Xiao Liu Ren at the moment you hold the signature returns three palaces on the axes that actually matter: the macro background of the deal, your present position in it, and where the thing lands if you sign today. A reading that flags a fast, favorable landing — the classic green light — tells you the configuration of the moment favors signing, which is precisely when a fair contract costs you nothing to commit to. A reading that flags blocked or circling momentum is the external signal that your unease is not paranoia: the deal may be fine, but this is not the window to lock yourself into it. Either way, you now have something firmer than the knot in your stomach to decide from.',
+        heading: 'When Does Delay Turn Into Decay?',
+        body: 'The failure mode is always the same: the window that was justified by one specific piece of missing information stays open long after that information arrives. Guard against it by writing the exit condition before you enter the delay. The related failure is waiting under Kong Wang on a path that is already empty — persistence there is not patience, it is sunk cost. See [Liu Lian and the discipline of staying](/insights/liu-lian-discipline-of-staying) for the constructive version, and [Kong Wang and strategic retreat](/insights/kong-wang-emptiness-strategic-retreat) for when the correct move is to stop rather than wait. The reason all of this is capped at 72 hours is explained in [the decision window article](/insights/72-hour-decision-window).',
+      },
+    ],
+  },
+
+  'founder-conflict-framework': {
+    slug: 'founder-conflict-framework',
+    lang: 'en',
+    title: 'Founder Conflict Framework: Timing the Conversation You Keep Avoiding',
+    readTime: '9 min read',
+    excerpt: 'Most co-founder blow-ups are not communication failures. They are a right conversation held inside the wrong window. Here is how to diagnose and time it.',
+    tldr: 'Founder conflict is usually a timing problem disguised as a communication problem. Diagnose the conflict type first — equity, effort, direction, or values — then raise it inside a window that carries settlement energy rather than dispute energy. Pre-commit to a written outcome before the conversation begins.',
+    sections: [
+      {
+        heading: 'Why Do Founder Conflicts Stay Unaddressed for So Long?',
+        body: 'Because the cost of raising it feels immediate and certain, while the cost of not raising it feels distant and probabilistic. So it gets deferred quarter after quarter, until it surfaces during a fundraise, a key hire, or a personal crisis — the three moments when it does maximum damage. The avoidance is rational at the level of the individual week and catastrophic at the level of the company. What breaks the deadlock is not a better communication technique. It is a defensible reason to believe this particular week is the right week.',
       },
       {
-        heading: 'The Sign / Wait / Walk Protocol',
-        body: 'Three moves, and only three. Sign when the terms are fair on paper (not on a memory of a conversation) and the moment reads open — sign fast, in writing, and keep the signed copy. Wait when the terms are workable but the moment reads stalled or contentious: ask for the extension in writing, document your position, and re-read after 72 hours. Walk when either the terms or the reading flags the void — the path the deal is asking you to commit to is empty. Walking is not failure; it is the cheapest form of protection you will ever buy. One rule sits above all three: if the deal needs a verbal promise to feel fair, it is not ready to sign, no matter what the moment says. Timing tells you when to commit. It does not make an unfair paper fair.',
+        heading: 'What Kind of Conflict Is It Actually?',
+        body: 'Four types, and they do not respond to the same intervention. Misdiagnosing the type is why so many founder conversations go in circles — you are resolving an effort problem using equity language, or a values problem using process language.',
+        table: {
+          headers: ['Type', 'Surface symptom', 'Underlying question', 'Wrong move'],
+          rows: [
+            ['Equity', 'Resentment about split or vesting.', 'Does the split still match contribution?', 'Renegotiating in the middle of a raise.'],
+            ['Effort', 'One founder feels they are carrying the load.', 'Are roles and standards actually agreed?', 'Complaining instead of redefining the role.'],
+            ['Direction', 'Disagreement on market, product, or exit.', 'Do we want the same company?', 'Splitting the difference on strategy.'],
+            ['Values', 'Loss of trust, not disagreement on facts.', 'Can this person still be trusted with the keys?', 'Treating a trust problem as a process problem.'],
+          ],
+        },
+      },
+      {
+        heading: 'How Do You Raise It Without Triggering a Fight?',
+        body: 'The conversation is won or lost in the first ninety seconds, and the single biggest determinant is whether the other person feels ambushed. Ambush is a timing failure, not a tone failure.',
+        bullets: [
+          'Announce the topic, not the conclusion: tell them what you want to discuss at least a day ahead.',
+          'Separate the observation from the interpretation. "You missed three board deadlines" is data. "You do not care" is a story.',
+          'Bring the written version. A one-page summary prevents the conversation from being relitigated later.',
+          'Never open the conversation inside dispute energy if you can wait 48 hours. Settlement windows exist and they are worth using.',
+        ],
+      },
+      {
+        heading: 'The 72-Hour Conversation Protocol',
+        body: 'Run this before and during any high-stakes co-founder conversation. It converts a volatile exchange into a structured one with a recorded outcome.',
+        callout: {
+          label: '72-Hour Conversation Protocol',
+          steps: [
+            '0–24h — Write the one-page summary: the specific behaviour, the impact, and the single ask. If you cannot fit the ask in one sentence, the conversation is not ready.',
+            '24–48h — Time it. Read the moment and prefer a settlement window. Announce the topic, confirm a time, and agree that the output will be written.',
+            '48–72h — Hold it, then write the outcome the same day. Unwritten agreements between founders are not agreements; they are two different memories.',
+          ],
+        },
+      },
+      {
+        heading: 'When Should You Bring in a Third Party?',
+        body: 'Earlier than most founders do, and specifically when the conflict is values-based rather than factual. Mediation is not an admission of failure; it is a way of preventing a resolvable disagreement from becoming an unresolvable one. If either party has stopped assuming good faith, the window for a private fix has closed. For the constructive side of alignment, see [Xiao Ji and collaborative leverage](/insights/xiaoji-collaborative-leverage); for the destructive pattern, [Chi Kou and bad faith architecture](/insights/chi-kou-dispute-architecture-bad-faith). The general method for finding the right moment to act is in [the decision timing framework](/insights/decision-timing-framework-when-to-move).',
       },
     ],
   },

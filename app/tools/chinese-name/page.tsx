@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { generateChineseNames, NameGeneratorInput, ChineseNameReading } from '../../../data/chineseNames';
-import OracleBridge from '../../components/OracleBridge';
 
 const FOCUS_OPTIONS: { value: NameGeneratorInput['focus']; label: string }[] = [
   { value: 'career', label: 'Career & Leadership' },
@@ -192,8 +191,6 @@ export default function ChineseNamePage() {
               </button>
             </div>
           </div>
-
-          <OracleBridge source="chinese_name" palaceHint={result.dominantPalace} focus={form.focus} />
         </section>
       )}
 

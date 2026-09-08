@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LangSetter from './LangSetter';
 import { ARTICLE_DETAILS } from '../../../data/articles';
-import InsightCTA from '../../components/InsightCTA';
-import { getInsightFAQs } from '../../lib/insightsFAQs';
 
 function renderBody(body: string) {
   const parts = body.split(/(\[[^\]]+\]\([^)]+\))/g);
@@ -63,38 +61,23 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   if (!article) notFound();
 
   const isZh = article.lang === 'zh';
-  const faqBundle = !isZh ? getInsightFAQs(params.slug) : undefined;
 
-  const articleLd: any = {
+  const articleLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
-    description: article.excerpt,
+    description: article.tldr || article.excerpt,
     inLanguage: isZh ? 'zh-CN' : 'en-US',
     author: { '@type': 'Organization', name: 'Esoteric Paths' },
     publisher: { '@type': 'Organization', name: 'Esoteric Paths' },
     datePublished: '2026-08-01',
     mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.esotericpaths.com/insights/${article.slug}` },
   };
-  const faqLd = faqBundle
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqBundle.faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
-      }
-    : null;
 
   return (
       <div className={isZh ? 'reveal es-zh' : 'reveal'} role="main" id="main-content" style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)' }}>
       <LangSetter lang={isZh ? 'zh-CN' : 'en'} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
-      {faqLd && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
-      )}
       <Link href="/" style={{ color: '#C9A227', textDecoration: 'none', fontSize: '0.8rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
         ← {isZh ? '返回起卦' : 'Back to Oracle'}
       </Link>
@@ -105,69 +88,70 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       <h1 style={{ fontSize: '2.2rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.4rem 0 1rem 0', lineHeight: 1.2, textShadow: '0 0 24px rgba(201,162,39,0.18)' }}>
         {article.title}
       </h1>
-      <p style={{ fontSize: '1rem', color: '#C9A227', fontStyle: 'italic', lineHeight: 1.6, marginBottom: '2.5rem', borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
+      <p style={{ fontSize: '1rem', color: '#C9A227', fontStyle: 'italic', lineHeight: 1.6, marginBottom: article.tldr ? '1.5rem' : '2.5rem', borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
         {article.excerpt}
       </p>
 
-      {faqBundle && (
-        <>
-          <aside
-            aria-label="Reader anchor"
-            style={{
-              background: 'linear-gradient(180deg, rgba(201,162,39,0.08) 0%, rgba(201,162,39,0.02) 100%)',
-              border: '1px solid rgba(201,162,39,0.35)',
-              borderRadius: '12px',
-              padding: '1.25rem 1.4rem',
-              marginBottom: '2rem',
-            }}
-          >
-            <span style={{ display: 'block', fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '0.5rem' }}>
-              If you are here right now
-            </span>
-            <p style={{ fontSize: '0.95rem', color: '#F4EEDB', lineHeight: 1.65, margin: '0 0 0.8rem 0' }}>
-              {faqBundle.anchor.situation}
-            </p>
-            <p style={{ fontSize: '0.85rem', color: '#CDC8BC', lineHeight: 1.6, margin: 0, fontStyle: 'italic' }}>
-              {faqBundle.anchor.cta}
-            </p>
-          </aside>
-
-          <details
-            style={{
-              background: '#0A0A0F',
-              border: '1px solid rgba(201,162,39,0.25)',
-              borderRadius: '10px',
-              padding: '1rem 1.25rem',
-              marginBottom: '2rem',
-              cursor: 'pointer',
-            }}
-          >
-            <summary style={{ fontSize: '0.9rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', cursor: 'pointer', listStyle: 'none' }}>
-              Frequently asked about this decision →
-            </summary>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-              {faqBundle.faqs.map((f, i) => (
-                <div key={i} style={{ borderLeft: '2px solid #C9A227', paddingLeft: '0.9rem' }}>
-                  <p style={{ fontSize: '0.9rem', color: '#F4EEDB', fontFamily: 'var(--font-display)', margin: '0 0 0.35rem 0', lineHeight: 1.4 }}>
-                    {f.q}
-                  </p>
-                  <p style={{ fontSize: '0.82rem', color: '#CDC8BC', lineHeight: 1.65, margin: 0 }}>
-                    {f.a}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </details>
-        </>
+      {article.tldr && (
+        <div style={{ margin: '0 0 2.5rem 0', padding: '1.2rem 1.4rem', borderLeft: '3px solid #C9A227', background: 'rgba(201,162,39,0.06)', borderRadius: '0 6px 6px 0' }}>
+          <div style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C9A227', fontFamily: 'monospace', marginBottom: '0.6rem' }}>
+            {isZh ? '核心结论' : 'TL;DR — Direct Answer'}
+          </div>
+          <p style={{ margin: 0, fontSize: '0.95rem', color: '#F4EEDB', lineHeight: 1.75 }}>{article.tldr}</p>
+        </div>
       )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
         {article.sections.map((section, i) => (
           <section key={i}>
             <h2 style={{ fontSize: '1.35rem', fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.6rem 0' }}>
-              {i + 1}. {section.heading}
+              {section.heading}
             </h2>
             <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: 0 }}>{renderBody(section.body)}</p>
+
+            {section.table && (
+              <div style={{ overflowX: 'auto', margin: '1.3rem 0' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem' }}>
+                  <thead>
+                    <tr>
+                      {section.table.headers.map((h, hi) => (
+                        <th key={hi} style={{ textAlign: 'left', padding: '0.7rem 0.9rem', borderBottom: '1px solid rgba(201,162,39,0.4)', color: '#C9A227', fontFamily: 'var(--font-display)', fontWeight: 500, whiteSpace: 'nowrap' }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {section.table.rows.map((row, ri) => (
+                      <tr key={ri}>
+                        {row.map((cell, ci) => (
+                          <td key={ci} style={{ padding: '0.7rem 0.9rem', borderBottom: '1px solid rgba(201,162,39,0.12)', color: '#CDC8BC', lineHeight: 1.6, verticalAlign: 'top' }}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {section.bullets && (
+              <ul style={{ margin: '1.1rem 0', paddingLeft: '1.2rem', color: '#CDC8BC', fontSize: '0.92rem', lineHeight: 1.8 }}>
+                {section.bullets.map((b, bi) => (
+                  <li key={bi} style={{ marginBottom: '0.55rem' }}>{b}</li>
+                ))}
+              </ul>
+            )}
+
+            {section.callout && (
+              <div style={{ margin: '1.5rem 0', padding: '1.2rem 1.4rem', border: '1px solid rgba(201,162,39,0.35)', borderRadius: '6px', background: 'rgba(201,162,39,0.05)' }}>
+                {section.callout.label && (
+                  <div style={{ fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C9A227', fontFamily: 'monospace', marginBottom: '0.8rem' }}>{section.callout.label}</div>
+                )}
+                <ol style={{ margin: 0, paddingLeft: '1.2rem', color: '#E8E4DA', fontSize: '0.92rem', lineHeight: 1.85 }}>
+                  {section.callout.steps.map((s, si) => (
+                    <li key={si} style={{ marginBottom: '0.5rem' }}>{s}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
           </section>
         ))}
       </div>
@@ -200,8 +184,6 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             ))}
         </div>
       </div>
-
-      <InsightCTA lang={isZh ? 'zh' : 'en'} />
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
         <p style={{ fontSize: '0.85rem', color: '#8A8678', marginBottom: '1rem' }}>
