@@ -767,6 +767,12 @@ export default function Page() {
       </div>
 
       <footer style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
+        <nav style={{ display: 'flex', gap: '1.4rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '0.9rem' }}>
+          <Link href="/insights" style={{ color: '#8A8678', textDecoration: 'none' }}>Insights</Link>
+          <Link href="/about" style={{ color: '#8A8678', textDecoration: 'none' }}>About</Link>
+          <Link href="/privacy" style={{ color: '#8A8678', textDecoration: 'none' }}>Privacy</Link>
+          <Link href="/disclaimer" style={{ color: '#8A8678', textDecoration: 'none' }}>Disclaimer</Link>
+        </nav>
         © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
       </footer>
 
