@@ -143,7 +143,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       </div>
 
       {/* PAGE 02 — METHODOLOGY */}
-      <PageWrap pageNum={2} title="Methodology: The Three-Palace Horary Engine (三宫起课原理)">
+      <PageWrap pageNum={2} title="Methodology: The Three-Palace Time Engine (三宫起课原理)">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
             Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries its own omen quality — auspicious, delayed, or obstructed — together with a psychological posture and a strategic directive. The Hour palace is the decisive vector: the active edge of the moment, and the palace on which the matter lands.
@@ -435,7 +435,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           <span style={pageTagStyle}>PAGE 10 / 10</span>
           <h2 style={{ fontSize: '2rem', color: cream, fontFamily: 'var(--font-display)', margin: '1rem 0 1rem 0' }}>✦ Esoteric Paths</h2>
           <p style={{ color: parchment, fontSize: '0.95rem', maxWidth: '420px', margin: '0 auto 2rem auto', lineHeight: 1.6 }}>
-            Deterministic Horary Infrastructure bridging classical Chinese temporal mechanics with Western archetypal psychology.
+            Deterministic Decision-Timing Engine — classical Chinese time mechanics, cross-read with Western archetypal psychology.
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.8rem', color: muted, fontFamily: 'monospace' }}>
             <span>esotericpaths.com</span>

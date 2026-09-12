@@ -74,7 +74,7 @@ export default function DisclaimerPage() {
           letterSpacing: '0.2em',
         }}
       >
-        ← Back to Oracle
+        ← Back to the Matrix
       </Link>
 
       <span
@@ -121,7 +121,7 @@ export default function DisclaimerPage() {
           <h2 style={H2}>1. What This Service Is</h2>
           <p style={P}>
             Esoteric Paths is a decision-support framework. You state a real question, the system maps
-            it to a time coordinate using a classical Chinese horary method (Xiao Liu Ren), pairs that
+            it to a time coordinate using a classical Chinese time-mechanics method (Xiao Liu Ren), pairs that
             coordinate with an archetypal layer drawn from the Major Arcana, and returns a structured
             reading with a bounded 72-hour action window.
           </p>
@@ -216,7 +216,7 @@ export default function DisclaimerPage() {
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
         <Link href="/" className="es-btn es-btn--gold" style={{ padding: '0.85rem 2.2rem', fontSize: '0.85rem' }}>
-          Cast Your Oracle →
+          Run Your Timing Read →
         </Link>
       </div>
 
@@ -231,7 +231,7 @@ export default function DisclaimerPage() {
           marginTop: '3rem',
         }}
       >
-        © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure. All rights reserved.
       </footer>
     </div>
   );

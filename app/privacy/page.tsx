@@ -52,7 +52,7 @@ export default function PrivacyPage() {
           letterSpacing: '0.2em',
         }}
       >
-        ← Back to Oracle
+        ← Back to the Matrix
       </Link>
 
       <span
@@ -206,7 +206,7 @@ export default function PrivacyPage() {
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
         <Link href="/" className="es-btn es-btn--gold" style={{ padding: '0.85rem 2.2rem', fontSize: '0.85rem' }}>
-          Cast Your Oracle →
+          Run Your Timing Read →
         </Link>
       </div>
 
@@ -221,7 +221,7 @@ export default function PrivacyPage() {
           marginTop: '3rem',
         }}
       >
-        © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure. All rights reserved.
       </footer>
     </div>
   );

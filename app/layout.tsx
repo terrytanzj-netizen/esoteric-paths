@@ -4,9 +4,9 @@ import Script from 'next/script';
 
 export const metadata = {
   metadataBase: new URL('https://www.esotericpaths.com'),
-  title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
-  description: 'Deterministic Horary Oracle combining classical Chinese Xiao Liu Ren time mechanics with Western archetypal tarot for high-stakes business and life decisions.',
-  keywords: ['Xiao Liu Ren', 'Horary Divination', 'Tarot Timing', 'Chinese Astrology', 'Business Decision Oracle', 'Jungian Archetypes'],
+  title: 'Esoteric Paths | Decision Timing for High-Stakes Calls',
+  description: 'Deterministic decision-timing engine for founders. Cast the moment, read the six palaces, get a 72-hour execution window for term sheets, hires and negotiations.',
+  keywords: ['Decision Timing', 'Strategic Timing Framework', 'Business Decision Framework', 'Negotiation Timing', 'Xiao Liu Ren', 'Founder Decision Support', '72-Hour Decision Window'],
   authors: [{ name: 'Esoteric Paths' }],
   // Declared through the metadata API rather than hand-written <link> tags in
   // <head>: tags in the shared layout leak onto every route and CANNOT be
@@ -25,7 +25,7 @@ export const metadata = {
   // "you don't have a decision problem, you have a timing problem" line.
   // One claim across bio, tweets and share cards is what makes it stick.
   openGraph: {
-    title: 'Esoteric Paths | Xiao Liu Ren × Tarot Horary Matrix',
+    title: 'Esoteric Paths | Decision Timing for High-Stakes Calls',
     description: "You don't have a decision problem. You have a timing problem. Cast the moment — get a 72-hour execution window.",
     url: 'https://www.esotericpaths.com',
     siteName: 'Esoteric Paths',

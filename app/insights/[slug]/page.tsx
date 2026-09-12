@@ -79,7 +79,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       <LangSetter lang={isZh ? 'zh-CN' : 'en'} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
       <Link href="/" style={{ color: '#C9A227', textDecoration: 'none', fontSize: '0.8rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-        ← {isZh ? '返回起卦' : 'Back to Oracle'}
+        ← {isZh ? '返回起卦' : 'Back to the Matrix'}
       </Link>
 
       <span style={{ display: 'block', fontSize: '0.75rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em', marginTop: '2rem' }}>
@@ -190,12 +190,12 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           {isZh ? '想针对你自己的决策做一次推演？' : 'Want a personalized reading for your own decision?'}
         </p>
         <Link href="/" className="es-btn es-btn--gold" style={{ padding: '0.85rem 2.2rem', fontSize: '0.85rem' }}>
-          {isZh ? '起一课 →' : 'Cast Your Oracle →'}
+          {isZh ? '起一课 →' : 'Run Your Timing Read →'}
         </Link>
       </div>
 
       <footer style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', marginTop: '3rem' }}>
-        © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure. All rights reserved.
       </footer>
     </div>
   );

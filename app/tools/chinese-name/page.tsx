@@ -43,7 +43,7 @@ export default function ChineseNamePage() {
       <nav className="no-print es-nav" style={{ borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <Link href="/" className="es-brand" style={{ textDecoration: 'none' }}>✦ ESOTERIC PATHS</Link>
         <div className="es-nav-links">
-          <Link href="/" className="es-nav-link">Oracle</Link>
+          <Link href="/" className="es-nav-link">Cast</Link>
           <Link href="/#insights" className="es-nav-link">Insights</Link>
           <Link href="/tools/chinese-name" className="es-nav-link" style={{ color: '#C9A227' }}>Chinese Name</Link>
         </div>
@@ -184,7 +184,7 @@ export default function ChineseNamePage() {
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/" className="es-btn es-btn--gold" style={{ padding: '0.85rem 1.75rem', fontSize: '0.85rem' }}>
-                Cast Your Oracle →
+                Run Your Timing Read →
               </Link>
               <button onClick={handleShare} className="es-btn es-btn--ghost" style={{ padding: '0.85rem 1.25rem', fontSize: '0.85rem' }}>
                 🜔 Share on X
@@ -213,7 +213,7 @@ export default function ChineseNamePage() {
       </section>
 
       <footer style={{ textAlign: 'center', fontSize: '0.75rem', color: '#5C584E', fontFamily: 'monospace', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1.5rem', position: 'relative', zIndex: 2 }}>
-        © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure. All rights reserved.
       </footer>
     </div>
   );

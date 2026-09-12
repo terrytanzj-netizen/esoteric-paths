@@ -5,14 +5,14 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'About | Esoteric Paths',
   description:
-    'The story behind Esoteric Paths — bridging ancient Chinese horary mechanics and Western archetypal psychology into a tactical decision compass.',
+    'The story behind Esoteric Paths — building a decision-timing instrument for founders: Chinese Xiao Liu Ren time mechanics, cross-read with Western archetypal psychology.',
   alternates: {
     canonical: 'https://www.esotericpaths.com/about',
   },
   openGraph: {
     title: 'About | Esoteric Paths',
     description:
-      'The story behind Esoteric Paths — bridging ancient Chinese horary mechanics and Western archetypal psychology into a tactical decision compass.',
+      'The story behind Esoteric Paths — building a decision-timing instrument for founders: Chinese Xiao Liu Ren time mechanics, cross-read with Western archetypal psychology.',
     url: 'https://www.esotericpaths.com/about',
     type: 'article',
     locale: 'en_US',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'About | Esoteric Paths',
     description:
-      'The story behind Esoteric Paths — bridging ancient Chinese horary mechanics and Western archetypal psychology into a tactical decision compass.',
+      'The story behind Esoteric Paths — building a decision-timing instrument for founders: Chinese Xiao Liu Ren time mechanics, cross-read with Western archetypal psychology.',
     images: ['/og-image.png'],
   },
 };
@@ -54,7 +54,7 @@ export default function AboutPage() {
           letterSpacing: '0.2em',
         }}
       >
-        ← Back to Oracle
+        ← Back to the Matrix
       </Link>
 
       <span
@@ -93,7 +93,7 @@ export default function AboutPage() {
           paddingLeft: '1rem',
         }}
       >
-        Bridging Ancient Chinese Horary Mechanics and Western Archetypal Psychology.
+        A Decision-Timing Instrument for High-Stakes Calls.
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -102,14 +102,14 @@ export default function AboutPage() {
             1. The Dilemma: Why Most Timing Tools Fail
           </h2>
           <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: 0 }}>
-            For centuries, seekers and decision-makers in the West have turned to Tarot and archetypal divination to navigate critical crossroads. Yet anyone who has ever consulted the cards for a high-stakes business negotiation, capital allocation, or career pivot encounters the same fatal bottleneck:{' '}
+            For centuries, decision-makers in the West have turned to Tarot and archetypal frameworks to navigate critical crossroads. Yet anyone who has ever consulted the cards for a high-stakes business negotiation, capital allocation, or career pivot encounters the same fatal bottleneck:{' '}
             <strong style={{ color: '#F4EEDB' }}>Western symbolic mirrors struggle with exact timing.</strong>
           </p>
           <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: '1rem 0 0 0' }}>
             Cards reveal the subconscious architecture of a dilemma, but they cannot tell you whether to execute at dawn or retreat until the next planetary ingress.
           </p>
           <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: '1rem 0 0 0' }}>
-            On the other side of the hemisphere lies <strong style={{ color: '#F4EEDB' }}>Xiao Liu Ren (小六壬)</strong> — an ancient Chinese horary divination system codified during the Three Kingdoms era. Unlike card-pulling, Xiao Liu Ren does not rely on subjective intuition. It operates like a deterministic clockwork matrix: converting the exact coordinates of time (Month, Day, Hour) into dynamic kinetic vectors — <em>Da An, Liu Lian, Su Xi, Chi Kou, Xiao Ji, and Kong Wang</em>.
+            On the other side of the hemisphere lies <strong style={{ color: '#F4EEDB' }}>Xiao Liu Ren (小六壬)</strong> — a Chinese time-mechanics system codified during the Three Kingdoms era. Unlike card-pulling, Xiao Liu Ren does not rely on subjective intuition. It operates like a deterministic clockwork matrix: converting the exact coordinates of time (Month, Day, Hour) into dynamic kinetic vectors — <em>Da An, Liu Lian, Su Xi, Chi Kou, Xiao Ji, and Kong Wang</em>.
           </p>
         </section>
 
@@ -134,7 +134,7 @@ export default function AboutPage() {
           </ul>
           <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: '1rem 0 0 0' }}>
             We did not build this as an entertainment fortune-telling booth. We built it as a{' '}
-            <strong style={{ color: '#F4EEDB' }}>tactical horary compass</strong> for founders, creators, and individuals navigating volatile, high-friction inflection points.
+            <strong style={{ color: '#F4EEDB' }}>decision-timing instrument</strong> for founders, creators, and individuals navigating volatile, high-friction inflection points.
           </p>
         </section>
 
@@ -147,13 +147,13 @@ export default function AboutPage() {
           </p>
           <ul style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: '1rem 0 0 0', paddingLeft: '1.2rem' }}>
             <li>
-              <strong>Deterministic Mathematics Over Superstition</strong>: Our horary calculations follow strict classical chronomancy formulas. There are no vague fortune-cookie generalities — only precise phase alignments.
+              <strong>Deterministic Mathematics Over Superstition</strong>: Our calculations follow strict classical chronomancy formulas. There are no vague fortune-cookie generalities — only precise phase alignments.
             </li>
             <li>
               <strong>Empirical Observation</strong>: Every guidance archetype has been stress-tested against real-world scenario playbooks: negotiations, boundary defense, contract reviews, and resource preservation.
             </li>
             <li>
-              <strong>The Sovereign Executive Principle</strong>: We reject fatalism. Horary astrology does not dictate your destiny; it provides a meteorological report of temporal currents. If the Hour Palace indicates <em>Chi Kou (Sharp Friction)</em>, you do not surrender — you fortify your contracts and refuse oral promises.
+              <strong>The Sovereign Executive Principle</strong>: We reject fatalism. A timing read does not dictate your destiny; it provides a meteorological report of temporal currents. If the Hour Palace indicates <em>Chi Kou (Sharp Friction)</em>, you do not surrender — you fortify your contracts and refuse oral promises.
             </li>
           </ul>
         </section>
@@ -195,7 +195,7 @@ export default function AboutPage() {
             6. Contact
           </h2>
           <p style={{ fontSize: '0.95rem', color: '#CDC8BC', lineHeight: 1.75, margin: 0 }}>
-            Have questions, academic inquiries, or feedback regarding the horary matrix? Reach the editorial team at{' '}
+            Have questions, academic inquiries, or feedback regarding the timing matrix? Reach the editorial team at{' '}
             <a href="mailto:terrytanzj@esotericpaths.com" style={{ color: '#C9A227', textDecoration: 'none' }}>
               terrytanzj@esotericpaths.com
             </a>
@@ -220,7 +220,7 @@ export default function AboutPage() {
 
       <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(201,162,39,0.2)', textAlign: 'center' }}>
         <Link href="/" className="es-btn es-btn--gold" style={{ padding: '0.85rem 2.2rem', fontSize: '0.85rem' }}>
-          Cast Your Oracle →
+          Run Your Timing Read →
         </Link>
       </div>
 
@@ -235,7 +235,7 @@ export default function AboutPage() {
           marginTop: '3rem',
         }}
       >
-        © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure. All rights reserved.
       </footer>
     </div>
   );

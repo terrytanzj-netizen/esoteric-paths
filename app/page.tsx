@@ -309,7 +309,8 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: 'Esoteric Paths — Temporal Strategy Matrix',
-    description: 'A deterministic Horary Oracle combining classical Chinese Xiao Liu Ren time mechanics with Western archetypal tarot, delivering a personalized 10-page strategic blueprint with a 72-hour execution window.',
+    category: 'Business Decision Support Software',
+    description: 'A deterministic decision-timing engine. Combines classical Chinese Xiao Liu Ren time mechanics with Western archetypal framing to deliver a personalized strategic blueprint with a 72-hour execution window.',
     brand: { '@type': 'Brand', name: 'Esoteric Paths' },
     image: 'https://www.esotericpaths.com/og-image.png',
     offers: {
@@ -335,8 +336,19 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Esoteric Paths',
+    description: 'Decision-timing infrastructure for founders and operators. Deterministic Xiao Liu Ren time mechanics, cross-read with Western archetypal psychology, delivered as a 72-hour execution window.',
     url: 'https://www.esotericpaths.com',
     logo: 'https://www.esotericpaths.com/og-image.png',
+    knowsAbout: [
+      'Decision Timing',
+      'Strategic Timing',
+      'Negotiation Timing',
+      'Hiring Decisions',
+      'Term Sheet Timing',
+      'Xiao Liu Ren Time Mechanics',
+      'Jungian Archetypes',
+      'Founder Decision Support',
+    ],
     sameAs: [
       'https://www.esotericpaths.com/about',
     ],
@@ -346,6 +358,7 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Esoteric Paths',
+    description: 'Decision timing for high-stakes calls: term sheets, hires, negotiations and exits.',
     url: 'https://www.esotericpaths.com',
     potentialAction: {
       '@type': 'SearchAction',
@@ -403,7 +416,7 @@ export default function Page() {
       <nav className="no-print es-nav" style={{ borderBottom: '1px solid rgba(201,162,39,0.2)', paddingBottom: '1rem', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span className="es-brand">✦ ESOTERIC PATHS</span>
         <div className="es-nav-links">
-          <a className="es-nav-link" href="#oracle" style={{ color: '#C9A227' }}>Oracle</a>
+          <a className="es-nav-link" href="#cast" style={{ color: '#C9A227' }}>Cast</a>
           <a className="es-nav-link" href="#elements">Matrix</a>
           <a className="es-nav-link" href="#blueprint">Blueprint</a>
           <a className="es-nav-link" href="#insights">Insights</a>
@@ -415,14 +428,14 @@ export default function Page() {
       <header className="no-print reveal" style={{ textAlign: 'center', marginBottom: '2.5rem', position: 'relative', zIndex: 2 }}>
         <span style={{ fontSize: '0.75rem', color: '#C9A227', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Xiao Liu Ren × Tarot Matrix</span>
         <h1 className="es-hero-title" style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.4rem 0', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>TEMPORAL STRATEGY MATRIX</h1>
-        <p style={{ fontSize: '0.95rem', color: '#8A8678', maxWidth: '600px', margin: '0 auto' }}>Align critical decisions with classical temporal mechanics and Western archetypal wisdom.</p>
+        <p style={{ fontSize: '0.95rem', color: '#8A8678', maxWidth: '600px', margin: '0 auto' }}>A deterministic timing engine for term sheets, hires, negotiations and exits — read the moment, act inside a 72-hour window.</p>
         <div className="es-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
       </header>
 
       <div className="no-print reveal" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem 1.5rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         {[
-          'Corporate Metaphysical Advisor',
-          'Practitioner · Chinese Horary Timing',
+          'Decision Timing Advisor',
+          'Practitioner · Xiao Liu Ren Time Mechanics',
         ].map((cred, i) => (
           <span key={i} style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.18em', border: '1px solid rgba(201,162,39,0.25)', borderRadius: '999px', padding: '0.4rem 0.9rem' }}>
             ✦ {cred}
@@ -490,23 +503,23 @@ export default function Page() {
               <div>
                 <p style={{ color: '#F4EEDB', fontSize: '0.85rem', fontWeight: 'bold', margin: 0, fontFamily: 'var(--font-display)' }}>Terry Tan</p>
                 <p style={{ color: '#8A8678', fontSize: '0.7rem', margin: 0, fontFamily: 'monospace', lineHeight: 1.5 }}>
-                  Corporate Metaphysical Advisor
+                  Decision Timing Advisor
                 </p>
               </div>
             </div>
           </div>
         </div>
         <p style={{ fontSize: '0.7rem', color: '#5C584E', fontFamily: 'monospace', lineHeight: 1.6, marginTop: '1.5rem', textAlign: 'center', borderTop: '1px solid rgba(201,162,39,0.1)', paddingTop: '1rem' }}>
-          Credentials are listed in a personal capacity. Esoteric Paths is not endorsed by, affiliated with, or representing any temple, religious body, or association.
+          Credentials are listed in a personal capacity. Esoteric Paths is not endorsed by, affiliated with, or representing any institution, professional body, or association.
         </p>
       </section>
 
-      <div id="oracle" className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+      <div id="cast" className="print-area" style={{ background: '#0A0A0F', border: '1px solid rgba(201,162,39,0.3)', borderRadius: '20px', padding: '2.2rem', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
           <form onSubmit={handleCast} className="no-print" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <label style={{ fontSize: '0.8rem', color: '#C9A227', fontFamily: 'monospace', textTransform: 'uppercase' }}>Inquire Your Decision Crossroads</label>
             <input type="text" required value={question} onChange={e => setQuestion(e.target.value)} placeholder="e.g., Should I execute the contract renegotiation this week?" className="es-input" style={{ padding: '1rem' }} />
             <button type="submit" className="es-btn es-btn--gold" style={{ padding: '1.1rem', fontSize: '0.9rem' }} disabled={isCasting}>
-              {isCasting ? (<span className="es-casting"><span className="es-glyph-spin">☉</span> Consulting the spheres…</span>) : 'Cast Horary Oracle →'}
+              {isCasting ? (<span className="es-casting"><span className="es-glyph-spin">☉</span> Computing the window…</span>) : 'Run the Timing Matrix →'}
             </button>
           </form>
 
@@ -706,7 +719,7 @@ export default function Page() {
       <div id="insights" className="no-print reveal" style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
         <h2 style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0 0 0.4rem 0' }}>Strategic Insights</h2>
         <p style={{ fontSize: '0.8rem', color: '#8A8678', margin: '0 0 1.5rem 0', lineHeight: 1.6 }}>
-          Long-form essays on temporal strategy, classical horary method and the psychology of decision timing.{' '}
+          Long-form essays on decision timing, temporal strategy and the psychology of when to act.{' '}
           <Link href="/insights" style={{ color: '#C9A227', textDecoration: 'underline', textUnderlineOffset: '3px' }}>
             Browse all {ALL_ARTICLES.length} essays →
           </Link>
@@ -773,7 +786,7 @@ export default function Page() {
           <Link href="/privacy" style={{ color: '#8A8678', textDecoration: 'none' }}>Privacy</Link>
           <Link href="/disclaimer" style={{ color: '#8A8678', textDecoration: 'none' }}>Disclaimer</Link>
         </nav>
-        © Esoteric Paths. Deterministic Horary Infrastructure. All rights reserved.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure. All rights reserved.
       </footer>
 
     </div>

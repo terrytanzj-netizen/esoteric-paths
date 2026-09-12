@@ -167,7 +167,7 @@ export default function InsightsIndex() {
           letterSpacing: '0.2em',
         }}
       >
-        ← Back to Oracle
+        ← Back to the Matrix
       </Link>
 
       <span
@@ -206,7 +206,7 @@ export default function InsightsIndex() {
           paddingLeft: '1rem',
         }}
       >
-        Long-form essays on temporal strategy, classical horary method and the psychology of decision timing — written
+        Long-form essays on decision timing, temporal strategy and the psychology of when to act — written
         for people whose decisions carry real cost.
       </p>
 
@@ -274,7 +274,7 @@ export default function InsightsIndex() {
           textAlign: 'center',
         }}
       >
-        © Esoteric Paths. Deterministic Horary Infrastructure.
+        © Esoteric Paths. Deterministic Decision-Timing Infrastructure.
       </div>
     </div>
   );
