@@ -181,21 +181,21 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
     ],
   },
-  'ontology-of-time-horary-vs-chronometry': {
-    slug: 'ontology-of-time-horary-vs-chronometry',
+  'ontology-of-time-time-mechanics-vs-chronometry': {
+    slug: 'ontology-of-time-time-mechanics-vs-chronometry',
     lang: 'en',
-    title: 'The Ontology of Time: Ancient Horary vs Western Chronometry',
+    title: 'The Ontology of Time: Chinese Time Mechanics vs Western Chronometry',
     readTime: '7 min read',
     excerpt:
-      'Why classical horary timekeeping and modern chronometry answer different questions — and how to use both without confusing them.',
+      'Why classical Chinese timekeeping and modern chronometry answer different questions — and how to use both without confusing them.',
     sections: [
       {
         heading: 'Two Models of Time',
-        body: 'Western chronometry measures time as a uniform, reversible coordinate: 14:32 is 14:32 regardless of context. Horary systems treat the moment of inquiry as qualitatively loaded — the same clock reading produces a different palace depending on the lunar day and the half-hour band. One model is for scheduling; the other is for reading the texture of a decision moment. They are not competitors.',
+        body: 'Western chronometry measures time as a uniform, reversible coordinate: 14:32 is 14:32 regardless of context. Chinese time-mechanics systems treat the moment of inquiry as qualitatively loaded — the same clock reading produces a different palace depending on the lunar day and the half-hour band. One model is for scheduling; the other is for reading the texture of a decision moment. They are not competitors.',
       },
       {
-        heading: 'Horary as a Decision Filter',
-        body: 'Use chronometry to plan execution and horary to filter which decisions deserve execution now. When you are uncertain whether to act, the palace vector compresses ambiguity into a single actionable signal: preserve, wait, advance, secure, collaborate, or reset. This is the ontology most operators actually need under ambiguity.',
+        heading: 'Time-mechanics as a Decision Filter',
+        body: 'Use chronometry to plan execution and time-mechanics to filter which decisions deserve execution now. When you are uncertain whether to act, the palace vector compresses ambiguity into a single actionable signal: preserve, wait, advance, secure, collaborate, or reset. This is the ontology most operators actually need under ambiguity.',
       },
       {
         heading: 'When Chronometry Fails',
@@ -203,7 +203,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Synthesis',
-        body: 'Deploy both. Let chronometry govern the plan and horary govern the trigger. The Esoteric Paths matrix exists to make that synthesis deterministic rather than intuitive — a reproducible read you can defend to a board.',
+        body: 'Deploy both. Let chronometry govern the plan and time-mechanics govern the trigger. The Esoteric Paths matrix exists to make that synthesis deterministic rather than intuitive — a reproducible read you can defend to a board.',
       },
     ],
   },
@@ -264,17 +264,17 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
      EN — sourced / classical register
      ============================================================ */
 
-  'horse-mounted-oracle-origins-xiao-liu-ren': {
-    slug: 'horse-mounted-oracle-origins-xiao-liu-ren',
+  'horse-mounted-time-mechanics read-origins-xiao-liu-ren': {
+    slug: 'horse-mounted-time-mechanics read-origins-xiao-liu-ren',
     lang: 'en',
-    title: 'The Oracle at the Saddle: What Xiao Liu Ren Actually Is — and Is Not',
+    title: 'At the Saddle: What Xiao Liu Ren Actually Is — and Is Not',
     readTime: '9 min read',
     excerpt:
-      'Attributed to Zhuge Liang, absent from the classical canon, and structurally more interesting than either fact suggests. An honest genealogy of the horse-mounted oracle.',
+      'Attributed to Zhuge Liang, absent from the classical canon, and structurally more interesting than either fact suggests. An honest genealogy of the horse-mounted method.',
     sections: [
       {
         heading: 'An Honest Starting Point',
-        body: 'Xiao Liu Ren (小六壬) is usually introduced as the divination system Zhuge Liang used on horseback — hence its popular name, Ma Qian Ke (马前课), the lesson taken before the horse. Almost none of that survives scrutiny. The attribution is a folk tradition rather than a textual one, and the earliest substantial descriptions appear not in Han or Three Kingdoms sources but in late imperial almanacs of the Tong Shu (通书) tradition, most notably the Yu Xia Ji (玉匣记), a calendrical compendium circulating under the name of the Daoist figure Xu Xun from the Ming period onward. If you were hoping for a two-thousand-year-old state secret, the paperwork does not exist. What exists instead is better suited to our purpose: a compact, fully deterministic procedure whose internal logic can be examined line by line.',
+        body: 'Xiao Liu Ren (小六壬) is usually introduced as the time-mechanics system Zhuge Liang used on horseback — hence its popular name, Ma Qian Ke (马前课), the lesson taken before the horse. Almost none of that survives scrutiny. The attribution is a folk tradition rather than a textual one, and the earliest substantial descriptions appear not in Han or Three Kingdoms sources but in late imperial almanacs of the Tong Shu (通书) tradition, most notably the Yu Xia Ji (玉匣记), a calendrical compendium circulating under the name of the Daoist figure Xu Xun from the Ming period onward. If you were hoping for a two-thousand-year-old state secret, the paperwork does not exist. What exists instead is better suited to our purpose: a compact, fully deterministic procedure whose internal logic can be examined line by line.',
       },
       {
         heading: 'The Great Liu Ren and Its Small Cousin',
@@ -290,7 +290,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'What Survives the Demotion',
-        body: 'Strip away the attribution to Zhuge Liang and you lose a legend. Strip away the claim that the palaces predict outcomes and you lose a promise that was never supportable. What remains is a temporal indexing device: a way of giving a decision moment a determinate address, so that the deliberation attached to it can be recorded, revisited, and compared against what actually happened. That is the use made of it here. The palaces are not an oracle speaking about your future; they are a coordinate system for your own reasoning. And a coordinate system is judged by whether it helps you navigate, not by who is supposed to have invented it.',
+        body: 'Strip away the attribution to Zhuge Liang and you lose a legend. Strip away the claim that the palaces predict outcomes and you lose a promise that was never supportable. What remains is a temporal indexing device: a way of giving a decision moment a determinate address, so that the deliberation attached to it can be recorded, revisited, and compared against what actually happened. That is the use made of it here. The palaces are not an time-mechanics read speaking about your future; they are a coordinate system for your own reasoning. And a coordinate system is judged by whether it helps you navigate, not by who is supposed to have invented it.',
       },
     ],
   },
@@ -519,7 +519,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'What Xiao Liu Ren Is — and Is Not',
-        body: 'Xiao Liu Ren is a Chinese horary method attributed in folk tradition to Zhuge Liang and later systematized by Li Chunfeng of the Tang court. It is a trimmed descendant of Da Liu Ren (大六壬), one of the three cosmic board systems of classical Chinese statecraft. The calculation is fully deterministic: it indexes the lunar month, day, and double-hour of the inquiry and walks a cycle of six palaces. There is no intuition in the arithmetic and no entropy in the output — given the same moment, two people produce the same palaces. What that determinism gives you is not prophecy but a shared, defensible coordinate for a decision moment, in the same spirit that a Gantt chart is a shared coordinate for a sequence.',
+        body: 'Xiao Liu Ren is a Chinese time-mechanics method attributed in folk tradition to Zhuge Liang and later systematized by Li Chunfeng of the Tang court. It is a trimmed descendant of Da Liu Ren (大六壬), one of the three cosmic board systems of classical Chinese statecraft. The calculation is fully deterministic: it indexes the lunar month, day, and double-hour of the inquiry and walks a cycle of six palaces. There is no intuition in the arithmetic and no entropy in the output — given the same moment, two people produce the same palaces. What that determinism gives you is not prophecy but a shared, defensible coordinate for a decision moment, in the same spirit that a Gantt chart is a shared coordinate for a sequence.',
       },
       {
         heading: 'The Three Palaces: Month, Day, Hour',
@@ -535,7 +535,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Why This Complements Your Models',
-        body: 'Xiao Liu Ren answers a question your spreadsheet cannot: is this the moment? Your financial model governs what is feasible; horary governs when feasibility should be triggered. Treated as a filter rather than an oracle, it compresses ambiguity into one actionable signal — preserve, wait, advance, secure, collaborate, reset — that you can defend to a co-founder or a board. The Esoteric Paths matrix exists to make that synthesis reproducible rather than intuitive, the same way a forecast model makes a revenue call defensible rather than a hunch. Use it to time the trigger; keep your models for everything else.',
+        body: 'Xiao Liu Ren answers a question your spreadsheet cannot: is this the moment? Your financial model governs what is feasible; time-mechanics governs when feasibility should be triggered. Treated as a filter rather than an time-mechanics read, it compresses ambiguity into one actionable signal — preserve, wait, advance, secure, collaborate, reset — that you can defend to a co-founder or a board. The Esoteric Paths matrix exists to make that synthesis reproducible rather than intuitive, the same way a forecast model makes a revenue call defensible rather than a hunch. Use it to time the trigger; keep your models for everything else.',
       },
     ],
   },
@@ -546,7 +546,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
     title: 'How to Time a Crypto Entry Without Technical Analysis',
     readTime: '8 min read',
     excerpt:
-      'Why TA tells you where price has been, but not whether this is your moment — and how a horary read adds the missing temporal filter.',
+      'Why TA tells you where price has been, but not whether this is your moment — and how a time-mechanics read adds the missing temporal filter.',
     sections: [
       {
         heading: 'What TA Actually Measures',
@@ -554,7 +554,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'The Temporal Layer',
-        body: 'Horary systems treat the moment of inquiry as qualitatively loaded. In [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders), the Month palace reads the macro trend, the Day palace reads the current pivot, and the Hour palace reads the immediate execution window. A bullish chart with Kong Wang (空亡) at the Hour palace is a warning that the immediate window is hollow — the move may happen, but not cleanly for you. A bearish chart with Su Xi (速喜) can mark a short-term bounce worth scalping. The read is not against your indicators; it sits on top of them as a timing filter.',
+        body: 'Chinese time-mechanics systems treat the moment of inquiry as qualitatively loaded. In [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders), the Month palace reads the macro trend, the Day palace reads the current pivot, and the Hour palace reads the immediate execution window. A bullish chart with Kong Wang (空亡) at the Hour palace is a warning that the immediate window is hollow — the move may happen, but not cleanly for you. A bearish chart with Su Xi (速喜) can mark a short-term bounce worth scalping. The read is not against your indicators; it sits on top of them as a timing filter.',
       },
       {
         heading: 'Four Crypto-Specific Patterns',
@@ -566,11 +566,11 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Risk Management Still Wins',
-        body: 'No timing system replaces position sizing and stop losses. A horary read compresses ambiguity; it does not eliminate risk. Use it to decide whether today is the day, then size the trade as if the read were irrelevant. The traders who survive are the ones who manage the downside, not the ones who predict the top.',
+        body: 'No timing system replaces position sizing and stop losses. A time-mechanics read compresses ambiguity; it does not eliminate risk. Use it to decide whether today is the day, then size the trade as if the read were irrelevant. The traders who survive are the ones who manage the downside, not the ones who predict the top.',
       },
       {
         heading: 'Why Founders and Funds Care',
-        body: 'For individual traders, this is an edge in timing. For DAO treasuries, venture funds, and founders holding treasury assets, it is a way to de-bias large moves. Treasury sales have market impact; timing them badly destroys months of runway. A reproducible [temporal read](/insights/ontology-of-time-horary-vs-chronometry) gives the operator a defensible reason to act or wait, which is often more valuable than the move itself.',
+        body: 'For individual traders, this is an edge in timing. For DAO treasuries, venture funds, and founders holding treasury assets, it is a way to de-bias large moves. Treasury sales have market impact; timing them badly destroys months of runway. A reproducible [temporal read](/insights/ontology-of-time-time-mechanics-vs-chronometry) gives the operator a defensible reason to act or wait, which is often more valuable than the move itself.',
       },
     ],
   },
@@ -578,7 +578,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
   'xiao-liu-ren-vs-i-ching': {
     slug: 'xiao-liu-ren-vs-i-ching',
     lang: 'en',
-    title: 'Xiao Liu Ren vs I Ching: Which Divination System for Business Decisions?',
+    title: 'Xiao Liu Ren vs I Ching: Which Time-Mechanics System for Business Decisions?',
     readTime: '8 min read',
     excerpt:
       'Both systems answer "what is the shape of this moment?" — but they differ in speed, structure, and the kind of decisions they serve best.',
@@ -663,7 +663,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Why Western Symbolism Avoids the Clock',
-        body: 'Western esoteric traditions largely separate divination from chronology. Astrology has ephemerides, but horary astrology — the art of reading the moment of a question — faded from popular practice. Tarot filled the gap with psychology, not timekeeping. The result is a tool that is profound on "what" and "why" but silent on "when." For high-stakes operators, that silence is expensive. A founder who knows the narrative but misses the window has still missed the window.',
+        body: 'Western esoteric traditions largely separate divination from chronology. Astrology has ephemerides, but moment-reading — the art of reading the moment of a question — faded from popular practice. Tarot filled the gap with psychology, not timekeeping. The result is a tool that is profound on "what" and "why" but silent on "when." For high-stakes operators, that silence is expensive. A founder who knows the narrative but misses the window has still missed the window.',
       },
       {
         heading: 'The Xiao Liu Ren Timing Layer',
@@ -675,7 +675,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'The Standard We Hold',
-        body: 'Esoteric Paths was built because neither tradition alone was enough for the decisions that matter. Tarot without timing is a beautiful map without a "you are here." Timing without narrative is a coordinate without context. The platform keeps the archetypal depth of the West and adds the deterministic temporal precision of the East. The result is a [tactical horary compass](/insights/ontology-of-time-horary-vs-chronometry) — not entertainment, not fatalism, but a reproducible way to align action with the texture of time.',
+        body: 'Esoteric Paths was built because neither tradition alone was enough for the decisions that matter. Tarot without timing is a beautiful map without a "you are here." Timing without narrative is a coordinate without context. The platform keeps the archetypal depth of the West and adds the deterministic temporal precision of the East. The result is a [tactical time-mechanics compass](/insights/ontology-of-time-time-mechanics-vs-chronometry) — not entertainment, not fatalism, but a reproducible way to align action with the texture of time.',
       },
     ],
   },
@@ -858,7 +858,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Combining Archetype With Timing',
-        body: 'The clean division of labor: archetypes tell you what story you are inside, timing tells you whether to move now. This is precisely the gap that [Western Tarot](/insights/why-western-tarot-struggles-with-exact-timing) and [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) sit on either side of — the archetypal tradition reads meaning but is temporally silent; the horary tradition reads the moment but says nothing about narrative. Use the archetype to understand the situation and the palace to time the action. For the evidence on why acting inside a bounded window matters, see the [decision timing research digest](/insights/decision-timing-research-findings).',
+        body: 'The clean division of labor: archetypes tell you what story you are inside, timing tells you whether to move now. This is precisely the gap that [Western Tarot](/insights/why-western-tarot-struggles-with-exact-timing) and [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) sit on either side of — the archetypal tradition reads meaning but is temporally silent; the time-mechanics tradition reads the moment but says nothing about narrative. Use the archetype to understand the situation and the palace to time the action. For the evidence on why acting inside a bounded window matters, see the [decision timing research digest](/insights/decision-timing-research-findings).',
       },
     ],
   },
@@ -873,7 +873,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
     sections: [
       {
         heading: 'Why Does Timing Decide More Than Technique at the Signing Table?',
-        body: 'There is no shortage of material on how to negotiate. There is almost nothing on when to close. That gap is expensive, because the same terms signed on Tuesday and signed three weeks later are not the same deal — the counterparty has moved, the market has moved, and the goodwill that was carrying the fragile clauses has decayed. Technique optimises the content of the agreement. Timing determines whether that content survives contact with reality. A deterministic horary reading does not tell you what to ask for. It tells you whether the structural moment favours pressing, waiting, or hardening. That is a different question, and it is the one most deals actually turn on.',
+        body: 'There is no shortage of material on how to negotiate. There is almost nothing on when to close. That gap is expensive, because the same terms signed on Tuesday and signed three weeks later are not the same deal — the counterparty has moved, the market has moved, and the goodwill that was carrying the fragile clauses has decayed. Technique optimises the content of the agreement. Timing determines whether that content survives contact with reality. A deterministic time-mechanics reading does not tell you what to ask for. It tells you whether the structural moment favours pressing, waiting, or hardening. That is a different question, and it is the one most deals actually turn on.',
       },
       {
         heading: 'What Does Each Palace Mean When You Are About to Sign?',
