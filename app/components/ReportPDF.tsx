@@ -28,7 +28,7 @@ function isValidCastResult(value: any): value is ReportPDFProps['castResult'] {
   if (!value || typeof value !== 'object') return false;
   const required = ['question', 'month', 'day', 'hour', 'time'];
   if (!required.every(k => typeof value[k] === 'object' || typeof value[k] === 'string')) return false;
-  // `omen` is checked too: the report reads `hour.omen.label` on the cover, so a
+  // `signal` is checked too: the report reads `hour.signal.label` on the cover, so a
   // palace object missing it would throw while rendering a paid deliverable.
   return ['month', 'day', 'hour'].every(k => {
     const p = value[k];
@@ -37,8 +37,8 @@ function isValidCastResult(value: any): value is ReportPDFProps['castResult'] {
       typeof p === 'object' &&
       typeof p.name === 'string' &&
       typeof p.symbol === 'string' &&
-      !!p.omen &&
-      typeof p.omen.label === 'string'
+      !!p.signal &&
+      typeof p.signal.label === 'string'
     );
   });
 }
@@ -103,7 +103,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <div className="pdf-page" style={{ justifyContent: 'space-between' }}>
         <div>
           <div style={{ textAlign: 'center', color: gold, letterSpacing: '0.5em', fontSize: '0.95rem', marginBottom: '1.2rem' }}>✦ &nbsp; 🜔 &nbsp; ✦</div>
-          <span style={pageTagStyle}>CONFIDENTIAL EXECUTIVE ORACLE</span>
+          <span style={pageTagStyle}>CONFIDENTIAL EXECUTIVE BRIEF</span>
           <h1 style={{ fontSize: '2.6rem', color: cream, fontFamily: 'var(--font-display)', margin: '0.6rem 0 1rem 0', lineHeight: 1.1 }}>
             Temporal Strategy Matrix
           </h1>
@@ -113,7 +113,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         </div>
 
         <div className="print-card" style={{ padding: '2rem', borderRadius: '16px', backgroundColor: '#050508', border: `1px solid ${gold}` }}>
-          <span style={labelStyle}>Querent Query</span>
+          <span style={labelStyle}>Decision Query</span>
           <p style={{ fontSize: '1.35rem', color: cream, fontFamily: 'var(--font-display)', margin: '0.5rem 0 1.5rem 0', lineHeight: 1.4 }}>
             “{question}”
           </p>
@@ -131,14 +131,14 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
               {hour.name}
             </div>
             <div>
-              <span style={{ color: muted, display: 'block' }}>OMEN</span>
-              {hour.omen.label}
+              <span style={{ color: muted, display: 'block' }}>SIGNAL</span>
+              {hour.signal.label}
             </div>
           </div>
         </div>
 
         <div style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>
-          Prepared by Esoteric Paths • esotericpaths.com • For querent use only.
+          Prepared by Esoteric Paths • esotericpaths.com • For client use only.
         </div>
       </div>
 
@@ -146,7 +146,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <PageWrap pageNum={2} title="Methodology: The Three-Palace Time Engine (三宫起课原理)">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-            Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries its own omen quality — auspicious, delayed, or obstructed — together with a psychological posture and a strategic directive. The Hour palace is the decisive vector: the active edge of the moment, and the palace on which the matter lands.
+            Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries its own signal quality — auspicious, delayed, or obstructed — together with a psychological posture and a strategic directive. The Hour palace is the decisive vector: the active edge of the moment, and the palace on which the matter lands.
           </p>
           <div className="print-card" style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.4)` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
@@ -170,9 +170,9 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           <div style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.2)` }}>
             <span style={labelStyle}>Your Cast Coordinates</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', marginTop: '0.8rem', fontSize: '0.85rem', color: parchment }}>
-              <div><strong style={{ color: gold }}>Month:</strong> {month.symbol} {month.name} — {month.omen.label}</div>
-              <div><strong style={{ color: gold }}>Day:</strong> {day.symbol} {day.name} — {day.omen.label}</div>
-              <div><strong style={{ color: gold }}>Hour:</strong> {hour.symbol} {hour.name} — {hour.omen.label}</div>
+              <div><strong style={{ color: gold }}>Month:</strong> {month.symbol} {month.name} — {month.signal.label}</div>
+              <div><strong style={{ color: gold }}>Day:</strong> {day.symbol} {day.name} — {day.signal.label}</div>
+              <div><strong style={{ color: gold }}>Hour:</strong> {hour.symbol} {hour.name} — {hour.signal.label}</div>
               <div><strong style={{ color: gold }}>Active Archetype:</strong> {hour.jungianArchetype}</div>
             </div>
           </div>
@@ -187,17 +187,17 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
             <span style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{month.symbol} {month.name} ({month.omen.label})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{month.symbol} {month.name} ({month.signal.label})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{month.desc}</p>
           </div>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
             <span style={{ fontSize: '0.75rem', color: muted, fontFamily: 'monospace' }}>DAY PALACE (Current Pivot)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{day.symbol} {day.name} ({day.omen.label})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{day.symbol} {day.name} ({day.signal.label})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{day.desc}</p>
           </div>
           <div className="print-card" style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid #C9A227' }}>
             <span style={{ fontSize: '0.75rem', color: gold, fontFamily: 'monospace', fontWeight: 'bold' }}>HOUR PALACE (Decisive Vector)</span>
-            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{hour.symbol} {hour.name} ({hour.omen.label})</h4>
+            <h4 style={{ fontSize: '1.2rem', color: cream, margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{hour.symbol} {hour.name} ({hour.signal.label})</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0 }}>{hour.desc}</p>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {month.name.split(' ')[0]} to {day.name.split(' ')[0]}
               </h4>
               <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.55, margin: 0 }}>
-                The macro origin reads {month.omen.label} on {month.name.split(' ')[0]}; the current pivot reads {day.omen.label} on {day.name.split(' ')[0]}.
+                The macro origin reads {month.signal.label} on {month.name.split(' ')[0]}; the current pivot reads {day.signal.label} on {day.name.split(' ')[0]}.
                 {getOmenShiftLabel(month, day)}
               </p>
             </div>
@@ -230,7 +230,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {day.name.split(' ')[0]} to {hour.name.split(' ')[0]}
               </h4>
               <p style={{ color: parchment, fontSize: '0.85rem', lineHeight: 1.55, margin: 0 }}>
-                The current pivot hands momentum to the decisive vector, which reads {hour.omen.label} on {hour.name.split(' ')[0]}.
+                The current pivot hands momentum to the decisive vector, which reads {hour.signal.label} on {hour.name.split(' ')[0]}.
                 {getOmenShiftLabel(day, hour)}
               </p>
             </div>
@@ -277,7 +277,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <PageWrap pageNum={6} title="Sixfold Resonance Matrix (六维共振矩阵)">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
           <div className="print-card" style={cardStyle}>
-            <span style={labelStyle}>Palace Omen</span>
+            <span style={labelStyle}>Palace Signal</span>
             <h4 style={{ color: gold, fontSize: '1.3rem', margin: '0.4rem 0', fontFamily: 'var(--font-display)' }}>{vector.omenLabel}</h4>
             <p style={{ fontSize: '0.85rem', color: parchment, margin: 0, lineHeight: 1.5 }}>
               {vector.omenNote}
@@ -387,7 +387,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(201,162,39,0.3)' }}>
                   <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Palace</th>
-                  <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Omen</th>
+                  <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Signal</th>
                   <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Core Directive</th>
                   <th style={{ textAlign: 'left', padding: '0.4rem 0' }}>Domain</th>
                 </tr>
@@ -396,7 +396,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {PALACES.map(p => (
                   <tr key={p.id} style={{ borderBottom: '1px solid rgba(201,162,39,0.1)' }}>
                     <td style={{ padding: '0.4rem 0', color: cream }}>{p.symbol} {p.name.split('(')[0]}</td>
-                    <td style={{ padding: '0.4rem 0', color: p.omen.quality === 'auspicious' ? gold : parchment }}>{p.omen.label}</td>
+                    <td style={{ padding: '0.4rem 0', color: p.signal.quality === 'auspicious' ? gold : parchment }}>{p.signal.label}</td>
                     <td style={{ padding: '0.4rem 0' }}>{p.advice}</td>
                     <td style={{ padding: '0.4rem 0' }}>{p.domain.split(',')[0]}</td>
                   </tr>
@@ -408,7 +408,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
           <div className="print-card" style={{ ...cardStyle, padding: '1rem' }}>
             <span style={labelStyle}>Wu Xing — Cultural Reference Only</span>
             <p style={{ color: muted, fontSize: '0.75rem', lineHeight: 1.55, margin: '0.5rem 0 0 0' }}>
-              Wu Xing (五行) is an independent cosmological framework. It is reproduced below for orientation only — the six-palace engine on the preceding pages does not derive from it. Which element each palace belongs to is disputed between schools, so this system judges palaces on their own omen quality instead.
+              Wu Xing (五行) is an independent cosmological framework. It is reproduced below for orientation only — the six-palace engine on the preceding pages does not derive from it. Which element each palace belongs to is disputed between schools, so this system judges palaces on their own signal quality instead.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginTop: '0.8rem', fontSize: '0.8rem', color: parchment }}>
               {Object.entries(WUXING_CYCLE).map(([el, rel]) => (

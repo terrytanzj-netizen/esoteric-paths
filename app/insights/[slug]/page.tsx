@@ -74,10 +74,21 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
     mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.esotericpaths.com/insights/${article.slug}` },
   };
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.esotericpaths.com' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://www.esotericpaths.com/insights' },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `https://www.esotericpaths.com/insights/${article.slug}` },
+    ],
+  };
+
   return (
       <div className={isZh ? 'reveal es-zh' : 'reveal'} role="main" id="main-content" style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem 4rem 1.5rem', background: '#050508', minHeight: '100vh', color: '#E8E4DA', fontFamily: 'var(--font-body)' }}>
       <LangSetter lang={isZh ? 'zh-CN' : 'en'} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       <Link href="/" style={{ color: '#C9A227', textDecoration: 'none', fontSize: '0.8rem', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
         ← {isZh ? '返回起卦' : 'Back to the Matrix'}
       </Link>

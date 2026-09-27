@@ -20,8 +20,8 @@ const ZH_ARTICLES = ALL_ARTICLES.filter((a) => a.lang === 'zh');
 const ZH_SERIF = "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'SimSun', 'STSong', serif";
 
 // Accepts casts saved before the Wu Xing decoupling. Older records carry a
-// `wuxing` string but no `omen` object; as long as `id` matches a known palace
-// we re-hydrate the omen from PALACES below, so a paying customer never loses
+// `wuxing` string but no `signal` object; as long as `id` matches a known palace
+// we re-hydrate the signal from PALACES below, so a paying customer never loses
 // a report simply because we shipped a model change.
 function isValidCastResult(value: any): boolean {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -33,7 +33,7 @@ function isValidCastResult(value: any): boolean {
   });
 }
 
-// Fill in any field a persisted cast is missing (notably `omen`, added when the
+// Fill in any field a persisted cast is missing (notably `signal`, added when the
 // palaces were decoupled from Wu Xing) from the canonical PALACES table.
 function hydrateCastResult(value: any): any | null {
   if (!isValidCastResult(value)) return null;
@@ -99,8 +99,10 @@ const STATIC_STARS = [
 ];
 
 const FAQ_ITEMS = [
+  { q: 'What kind of tool is this?', a: 'A deterministic decision-timing engine for business and career calls. It computes three palaces from the lunar month, day and hour of the moment you are deciding in, then returns a scoped 72-hour execution window. Same input, same output — no intuition, no cold reading, no prediction of outcomes.' },
+
   { q: 'How deterministic is the reading?', a: 'The palace calculation is fully deterministic — the same moment always yields the same three palaces. Strategic interpretation is where judgment is applied.' },
-  { q: 'What exactly do I get for $19?', a: 'A downloadable 10-page PDF: methodology, your three-palace trajectory, palace interaction narrative, a personalized 72-hour action plan, five-dimensional resonant vectors, Major Arcana synthesis, executive guardrails, and reference appendix.' },
+  { q: 'What exactly do I get for $19?', a: 'A downloadable 9-page PDF: methodology, your three-palace trajectory, palace interaction narrative, a personalized 72-hour action plan, five-dimensional resonant vectors, Major Arcana synthesis, executive guardrails, and reference appendix.' },
   { q: 'Is this financial or legal advice?', a: 'No. Esoteric Paths is a decision-clarity instrument. All binding terms must be codified in written contracts.' },
   { q: 'How is my payment data handled?', a: 'Payments are processed by Dodo Payments (PCI-DSS compliant). We never store your card details.' },
 ];
@@ -228,9 +230,9 @@ export default function Page() {
           items: [{ item_id: 'master_blueprint', item_name: 'Master Blueprint' }],
         });
         setPaymentStatus('unlocked');
-        setPaymentMessage('Payment verified. Your 10-page blueprint is unlocked.');
+        setPaymentMessage('Payment verified. Your 9-page blueprint is unlocked.');
         safeSet('esoteric_payment_id', pId);
-        if (!silent) alert('🎉 Verified! Full 10-page blueprint is unlocked.');
+        if (!silent) alert('🎉 Verified! Full 9-page blueprint is unlocked.');
         return true;
       } else {
         setPaymentStatus('error');
@@ -354,6 +356,17 @@ export default function Page() {
     ],
   };
 
+  const softwareLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Esoteric Paths — Temporal Strategy Matrix',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web browser',
+    description: 'Deterministic decision-timing engine: cast the moment you are deciding in, read the six palaces, act inside a 72-hour execution window.',
+    url: 'https://www.esotericpaths.com',
+    offers: { '@type': 'Offer', price: '19', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+  };
+
   const websiteLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -373,6 +386,7 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }} />
 
       {paymentStatus !== 'idle' && (
         <div className="no-print" style={{
@@ -468,7 +482,7 @@ export default function Page() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontSize: '0.8rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
               <div>大安 Auspicious</div><div>留连 Delayed</div><div>速喜 Auspicious</div><div>赤口 Obstructed</div><div>小吉 Auspicious</div><div>空亡 Obstructed</div>
             </div>
-            <p style={{ fontSize: '0.75rem', color: '#8A8678', margin: '0.7rem 0 0 0', lineHeight: 1.55 }}>Every reading is derived from these six omen qualities alone.</p>
+            <p style={{ fontSize: '0.75rem', color: '#8A8678', margin: '0.7rem 0 0 0', lineHeight: 1.55 }}>Every reading is derived from these six signal qualities alone.</p>
           </div>
           <div style={{ background: '#050508', padding: '1.0rem', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.15)' }}>
             <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>WU XING MATRIX — REFERENCE ONLY</span>
@@ -550,22 +564,22 @@ export default function Page() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px solid rgba(201, 162, 39, 0.2)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>MONTH PALACE (Macro Origin)</span>
-                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.omen.label})</h3>
+                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>{castResult.month.symbol} {castResult.month.name} ({castResult.month.signal.label})</h3>
                   <p style={{ fontSize: '0.85rem', color: '#CDC8BC', margin: 0 }}>{castResult.month.desc}</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>DAY PALACE — locked</span>
-                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.omen.label}</h3>
+                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.day.signal.label}</h3>
                   <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The current pivot is veiled. Unlock to reveal the full reading.</p>
                 </div>
                 <div style={{ padding: '1.25rem', backgroundColor: '#050508', borderRadius: '12px', border: '1px dashed rgba(201, 162, 39, 0.25)' }}>
                   <span style={{ fontSize: '0.75rem', color: '#8A8678', fontFamily: 'monospace' }}>HOUR PALACE — locked</span>
-                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.omen.label}</h3>
+                  <h3 style={{ fontSize: '1.2rem', color: '#F4EEDB', margin: '0.3rem 0', fontFamily: 'var(--font-display)' }}>🔒 {castResult.hour.signal.label}</h3>
                   <p style={{ fontSize: '0.82rem', color: '#6f6b5f', margin: 0, fontStyle: 'italic' }}>The decisive vector is veiled. Unlock to reveal the full reading.</p>
                 </div>
               </div>
               <p style={{ fontSize: '0.8rem', color: '#8A8678', marginTop: '1rem', lineHeight: 1.5 }}>
-                Unlock the full 10-page report to reveal your Day and Hour palaces, the 72-hour action plan, resonant vectors, tarot synthesis, and executive guardrails.
+                Unlock the full 9-page report to reveal your Day and Hour palaces, the 72-hour action plan, resonant vectors, tarot synthesis, and executive guardrails.
               </p>
             </div>
 
@@ -593,7 +607,7 @@ export default function Page() {
                   Unlock Full 10-Page Personal Blueprint & 72h Action Plan
                 </h2>
                 <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
-                  Synthesizes your Month, Day, and Hour palaces into a downloadable 10-page PDF with Methodology, Palace Interactions, 72-Hour Chrono Execution Windows, Resonant Vectors, Major Arcana Synthesis, Executive Guardrails, and Reference Appendix.
+                  Synthesizes your Month, Day, and Hour palaces into a downloadable 9-page PDF with Methodology, Palace Interactions, 72-Hour Chrono Execution Windows, Resonant Vectors, Major Arcana Synthesis, Executive Guardrails, and Reference Appendix.
                 </p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', maxWidth: '560px', margin: '0 auto 1.5rem auto', textAlign: 'left' }}>
@@ -607,7 +621,7 @@ export default function Page() {
                   </div>
                   <div style={{ borderLeft: '2px solid #C9A227', paddingLeft: '1rem' }}>
                     <p style={{ fontSize: '0.70rem', color: '#C9A227', fontFamily: 'monospace', margin: '0 0 0.35rem 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>✦ Immediate</p>
-                    <p style={{ fontSize: '0.78rem', color: '#CDC8BC', lineHeight: 1.5, margin: 0 }}>The full 10-page blueprint unlocks the moment payment clears — no waiting, no email loop.</p>
+                    <p style={{ fontSize: '0.78rem', color: '#CDC8BC', lineHeight: 1.5, margin: 0 }}>The full 9-page blueprint unlocks the moment payment clears — no waiting, no email loop.</p>
                   </div>
                 </div>
                 

@@ -1,4 +1,4 @@
-// The six palaces are judged on their OWN omen quality — the traditional
+// The six palaces are judged on their OWN signal quality — the traditional
 // auspicious / delayed / obstructed reading that is the core of Xiao Liu Ren.
 //
 // They are deliberately NOT bound to Wu Xing (五行). Which element each palace
@@ -10,7 +10,7 @@
 // reference in the appendix only; nothing in the engine reads it.
 export type OmenQuality = 'auspicious' | 'delayed' | 'obstructed';
 
-export interface Omen {
+export interface Signal {
   quality: OmenQuality;
   /** Momentum weight, -2 (blocked) .. +2 (flowing). Drives the flow diagnosis. */
   charge: number;
@@ -26,7 +26,7 @@ export interface Palace {
   symbol: string;
   /** Cultural association only. NOT used by any calculation — see note above. */
   wuxing: string;
-  omen: Omen;
+  signal: Signal;
   desc: string;
   advice: string;
   direction: string;
@@ -52,7 +52,7 @@ export const PALACES: Palace[] = [
     name: 'Da An (大安)',
     symbol: '☩',
     wuxing: 'Wood (木)',
-    omen: {
+    signal: {
       quality: 'auspicious',
       charge: 2,
       label: 'Auspicious (吉)',
@@ -81,7 +81,7 @@ export const PALACES: Palace[] = [
     name: 'Liu Lian (留连)',
     symbol: '☿',
     wuxing: 'Water (水)',
-    omen: {
+    signal: {
       quality: 'delayed',
       charge: -1,
       label: 'Delayed (迟)',
@@ -110,7 +110,7 @@ export const PALACES: Palace[] = [
     name: 'Su Xi (速喜)',
     symbol: '☉',
     wuxing: 'Fire (火)',
-    omen: {
+    signal: {
       quality: 'auspicious',
       charge: 2,
       label: 'Auspicious (吉)',
@@ -139,7 +139,7 @@ export const PALACES: Palace[] = [
     name: 'Chi Kou (赤口)',
     symbol: '☌',
     wuxing: 'Metal (金)',
-    omen: {
+    signal: {
       quality: 'obstructed',
       charge: -2,
       label: 'Obstructed (凶)',
@@ -168,7 +168,7 @@ export const PALACES: Palace[] = [
     name: 'Xiao Ji (小吉)',
     symbol: '♃',
     wuxing: 'Water (水)',
-    omen: {
+    signal: {
       quality: 'auspicious',
       charge: 2,
       label: 'Auspicious (吉)',
@@ -197,7 +197,7 @@ export const PALACES: Palace[] = [
     name: 'Kong Wang (空亡)',
     symbol: '♄',
     wuxing: 'Earth (土)',
-    omen: {
+    signal: {
       quality: 'obstructed',
       charge: -2,
       label: 'Obstructed (凶)',
@@ -244,11 +244,11 @@ export interface PalaceFlow {
 export type OmenShift = 'rising' | 'falling' | 'holding';
 
 /**
- * How the omen quality moves from one palace to the next, judged on the
+ * How the signal quality moves from one palace to the next, judged on the
  * palaces' own charge values rather than on any Wu Xing cycle.
  */
 export function getOmenShift(from: Palace, to: Palace): OmenShift {
-  const delta = to.omen.charge - from.omen.charge;
+  const delta = to.signal.charge - from.signal.charge;
   if (delta > 0) return 'rising';
   if (delta < 0) return 'falling';
   return 'holding';
@@ -258,31 +258,31 @@ export function getOmenShift(from: Palace, to: Palace): OmenShift {
 export function getOmenShiftLabel(from: Palace, to: Palace): string {
   const shift = getOmenShift(from, to);
   if (shift === 'rising') {
-    return ` The tide turns in your favour: the reading lifts from ${from.omen.label} toward ${to.omen.label}, so resistance encountered early is not the final word.`;
+    return ` The tide turns in your favour: the reading lifts from ${from.signal.label} toward ${to.signal.label}, so resistance encountered early is not the final word.`;
   }
   if (shift === 'falling') {
-    return ` The tide turns against you: the reading drops from ${from.omen.label} toward ${to.omen.label}, so early ease should not be mistaken for a settled outcome.`;
+    return ` The tide turns against you: the reading drops from ${from.signal.label} toward ${to.signal.label}, so early ease should not be mistaken for a settled outcome.`;
   }
-  return ` The signal holds steady at ${to.omen.label}, confirming rather than changing what came before.`;
+  return ` The signal holds steady at ${to.signal.label}, confirming rather than changing what came before.`;
 }
 
 export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceFlow {
   const short = (p: Palace) => p.name.split(' ')[0];
-  const origin = month.omen.quality;
-  const pivot = day.omen.quality;
-  const outcome = hour.omen.quality;
+  const origin = month.signal.quality;
+  const pivot = day.signal.quality;
+  const outcome = hour.signal.quality;
 
   // All three coordinates landing on ONE palace is the rarest configuration
   // the system produces — roughly 1 cast in 36. Nothing is qualified or mixed.
-  // Match on the palace itself, not merely on its omen quality: three
+  // Match on the palace itself, not merely on its signal quality: three
   // DIFFERENT auspicious palaces is a strong reading, but it is not this.
   if (month.id === day.id && day.id === hour.id) {
     const all =
       outcome === 'auspicious'
-        ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The reading is not qualified by any counter-current: ${hour.omen.note} Act with conviction and do not second-guess the window.`
+        ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The reading is not qualified by any counter-current: ${hour.signal.note} Act with conviction and do not second-guess the window.`
         : outcome === 'obstructed'
-          ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The system is not describing bad luck; it is describing a closed path: ${hour.omen.note} Take the signal seriously and redirect rather than persist.`
-          : `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. Nothing ripens inside 72 hours: ${hour.omen.note} Any move made now will need re-making later, so the efficient choice is to wait and re-cast.`;
+          ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The system is not describing bad luck; it is describing a closed path: ${hour.signal.note} Take the signal seriously and redirect rather than persist.`
+          : `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. Nothing ripens inside 72 hours: ${hour.signal.note} Any move made now will need re-making later, so the efficient choice is to wait and re-cast.`;
     return { transition: 'Uniform Signal', narrative: all, tone: outcome === 'auspicious' ? 'accelerating' : outcome === 'obstructed' ? 'reset' : 'stable' };
   }
 
@@ -290,7 +290,7 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
   if (outcome === 'obstructed') {
     return {
       transition: 'Terminal Obstruction',
-      narrative: `The matter lands on ${short(hour)} (${hour.omen.label}) — ${hour.omen.note} Whatever the opening promised, the decisive vector closes against it. Treat this as a stop signal: contain exposure, put everything in writing, and re-cast after the window rather than pushing through it.`,
+      narrative: `The matter lands on ${short(hour)} (${hour.signal.label}) — ${hour.signal.note} Whatever the opening promised, the decisive vector closes against it. Treat this as a stop signal: contain exposure, put everything in writing, and re-cast after the window rather than pushing through it.`,
       tone: 'friction',
     };
   }
@@ -298,7 +298,7 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
   if (outcome === 'delayed') {
     return {
       transition: 'Open Loop',
-      narrative: `The matter lands on ${short(hour)} (${hour.omen.label}) — ${hour.omen.note} Nothing resolves cleanly inside this window. That is not failure but unfinished business: use the 72 hours to gather position rather than to close, and expect the file to reopen.`,
+      narrative: `The matter lands on ${short(hour)} (${hour.signal.label}) — ${hour.signal.note} Nothing resolves cleanly inside this window. That is not failure but unfinished business: use the 72 hours to gather position rather than to close, and expect the file to reopen.`,
       tone: 'stable',
     };
   }
@@ -307,7 +307,7 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
   if (origin === 'obstructed' || origin === 'delayed') {
     return {
       transition: 'Reversal',
-      narrative: `The opening reads ${month.omen.label} on ${short(month)}, yet the matter lands auspiciously on ${short(hour)}. This is a reversal: a poor start that does not predict a poor finish. The instinct to abandon early is the thing to resist here — the window improves as it runs.`,
+      narrative: `The opening reads ${month.signal.label} on ${short(month)}, yet the matter lands auspiciously on ${short(hour)}. This is a reversal: a poor start that does not predict a poor finish. The instinct to abandon early is the thing to resist here — the window improves as it runs.`,
       tone: 'accelerating',
     };
   }
@@ -315,7 +315,7 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
   if (pivot === 'obstructed' || pivot === 'delayed') {
     return {
       transition: 'Late Breakthrough',
-      narrative: `A clean opening on ${short(month)} passes through a difficult middle on ${short(day)} (${day.omen.label}) before landing auspiciously on ${short(hour)}. Expect the obstruction to arrive mid-window and to be temporary. Do not renegotiate the whole plan because of it.`,
+      narrative: `A clean opening on ${short(month)} passes through a difficult middle on ${short(day)} (${day.signal.label}) before landing auspiciously on ${short(hour)}. Expect the obstruction to arrive mid-window and to be temporary. Do not renegotiate the whole plan because of it.`,
       tone: 'accelerating',
     };
   }
@@ -339,8 +339,8 @@ export interface ResonantVector {
 
 export function getResonantVector(hour: Palace): ResonantVector {
   return {
-    omenLabel: hour.omen.label,
-    omenNote: hour.omen.note,
+    omenLabel: hour.signal.label,
+    omenNote: hour.signal.note,
     color: hour.color,
     numbers: hour.numbers,
     direction: hour.direction,

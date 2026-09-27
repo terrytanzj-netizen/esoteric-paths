@@ -333,7 +333,7 @@ h1, h2, h3, h4 {
   .reveal { animation: none; }
 }
 
-/* ============ PRINT (10-page executive blueprint) ============ */
+/* ============ PRINT (9-page executive blueprint) ============ */
 @media print {
   @page {
     size: A4 portrait;
