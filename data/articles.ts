@@ -45,7 +45,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'How to Cast and Read the Three Coordinates',
-        body: 'Xiao Liu Ren is calculated from three coordinates: the lunar month, day, and hour. Each coordinate resolves to one of the six palaces. The reading is the sequence of the three, not their sum. The Month palace is the macro origin — the structural background the opportunity arrives against. Read it as the conditions you inherited. The Day palace is the pivot — where the matter currently sits and whether it is moving. Read it as your present position. The Hour palace is the landing — where the thing actually resolves. Read it as the most likely outcome inside the window. The discipline is to read the sequence rather than the average. A clean Month that collapses into an obstructed Hour is a specific warning: the opening is real and the finish is not. A poor start that lands auspiciously is a different animal from a strong start that breaks down, and only the sequence tells you which one you are in.',
+        body: 'Xiao Liu Ren is calculated from three coordinates: the lunar month, day, and hour. Each coordinate resolves to one of the six palaces. The reading is the sequence of the three, not their sum. The Month palace is the macro origin — the structural background the opportunity arrives against. Read it as the conditions you inherited. The Day palace is the pivot — where the matter currently sits and whether it is moving. Read it as your present position. The Hour palace is the landing — where the thing actually resolves. Read it as the most likely outcome inside the window. The discipline is to read the sequence rather than the average. A clean Month that collapses into an blocked Hour is a specific warning: the opening is real and the finish is not. A poor start that lands favourably is a different animal from a strong start that breaks down, and only the sequence tells you which one you are in.',
       },
       {
         heading: 'The 72-Hour Window',
@@ -143,7 +143,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Three Coordinates, Not One',
-        body: 'A single palace tells you the flavour of a moment. Three palaces tell you the shape of a decision. The Month palace is the macro origin — the structural background the opportunity arrives against. The Day palace is the pivot — where the matter currently sits and whether it is moving. The Hour palace is the landing — where the thing actually resolves. Read them as a sequence, not a score. A clean Month reading that decays into an obstructed Hour is a specific warning: the opening is real and the finish is not. Reversals matter more than averages. A poor start that lands auspiciously is a different animal from a strong start that collapses, and only the sequence tells you which one you are in.',
+        body: 'A single palace tells you the flavour of a moment. Three palaces tell you the shape of a decision. The Month palace is the macro origin — the structural background the opportunity arrives against. The Day palace is the pivot — where the matter currently sits and whether it is moving. The Hour palace is the landing — where the thing actually resolves. Read them as a sequence, not a score. A clean Month reading that decays into an blocked Hour is a specific warning: the opening is real and the finish is not. Reversals matter more than averages. A poor start that lands favourably is a different animal from a strong start that collapses, and only the sequence tells you which one you are in.',
       },
       {
         heading: 'Why the Window Expires',
@@ -264,8 +264,8 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
      EN — sourced / classical register
      ============================================================ */
 
-  'horse-mounted-time-mechanics read-origins-xiao-liu-ren': {
-    slug: 'horse-mounted-time-mechanics read-origins-xiao-liu-ren',
+  'horse-mounted-time-mechanics-origins-xiao-liu-ren': {
+    slug: 'horse-mounted-time-mechanics-origins-xiao-liu-ren',
     lang: 'en',
     title: 'At the Saddle: What Xiao Liu Ren Actually Is — and Is Not',
     readTime: '9 min read',
@@ -663,7 +663,7 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       },
       {
         heading: 'Why Western Symbolism Avoids the Clock',
-        body: 'Western esoteric traditions largely separate divination from chronology. Astrology has ephemerides, but moment-reading — the art of reading the moment of a question — faded from popular practice. Tarot filled the gap with psychology, not timekeeping. The result is a tool that is profound on "what" and "why" but silent on "when." For high-stakes operators, that silence is expensive. A founder who knows the narrative but misses the window has still missed the window.',
+        body: 'Western esoteric traditions largely separate interpretation from chronology. Astrology has ephemerides, but moment-reading — the art of reading the moment of a question — faded from popular practice. Tarot filled the gap with psychology, not timekeeping. The result is a tool that is profound on "what" and "why" but silent on "when." For high-stakes operators, that silence is expensive. A founder who knows the narrative but misses the window has still missed the window.',
       },
       {
         heading: 'The Xiao Liu Ren Timing Layer',

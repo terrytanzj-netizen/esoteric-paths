@@ -1,5 +1,5 @@
 // The six palaces are judged on their OWN signal quality — the traditional
-// auspicious / delayed / obstructed reading that is the core of Xiao Liu Ren.
+// favourable / delayed / blocked reading that is the core of Xiao Liu Ren.
 //
 // They are deliberately NOT bound to Wu Xing (五行). Which element each palace
 // belongs to is contested between schools (Xiao Ji is called Wood by some and
@@ -8,10 +8,10 @@
 // — it produced self-contradictions such as two Water palaces pointing at two
 // different compass directions. Wu Xing is kept as standalone cultural
 // reference in the appendix only; nothing in the engine reads it.
-export type OmenQuality = 'auspicious' | 'delayed' | 'obstructed';
+export type SignalQuality = 'favourable' | 'delayed' | 'blocked';
 
 export interface Signal {
-  quality: OmenQuality;
+  quality: SignalQuality;
   /** Momentum weight, -2 (blocked) .. +2 (flowing). Drives the flow diagnosis. */
   charge: number;
   /** Short bilingual label shown in the UI. */
@@ -53,9 +53,9 @@ export const PALACES: Palace[] = [
     symbol: '☩',
     wuxing: 'Wood (木)',
     signal: {
-      quality: 'auspicious',
+      quality: 'favourable',
       charge: 2,
-      label: 'Auspicious (吉)',
+      label: 'Stability (安)',
       note: 'The palace of stillness and safety. Undertakings hold their ground; nothing is lost, but nothing moves quickly either. Favourable for defending a position, not for forcing one.',
     },
     desc: 'Grounded, safe, and favors steady preservation over aggressive expansion. Temporal momentum is structurally stable.',
@@ -111,9 +111,9 @@ export const PALACES: Palace[] = [
     symbol: '☉',
     wuxing: 'Fire (火)',
     signal: {
-      quality: 'auspicious',
+      quality: 'favourable',
       charge: 2,
-      label: 'Auspicious (吉)',
+      label: 'Acceleration (速)',
       note: 'The palace of immediate good news. Things arrive quickly — messages, people, approvals. Momentum is high but perishable: the window rewards speed over thoroughness.',
     },
     desc: 'Swift breakthroughs and unexpected positive catalysts. High execution velocity.',
@@ -140,9 +140,9 @@ export const PALACES: Palace[] = [
     symbol: '☌',
     wuxing: 'Metal (金)',
     signal: {
-      quality: 'obstructed',
+      quality: 'blocked',
       charge: -2,
-      label: 'Obstructed (凶)',
+      label: 'Contention (争)',
       note: 'The palace of dispute. Words become weapons — arguments, accusations, formal complaints. The traditional remedy is documentary, not verbal: put it in writing and stay out of the room.',
     },
     desc: 'Sharp misunderstandings, vocal disputes, or structural pushback from counterparties.',
@@ -169,9 +169,9 @@ export const PALACES: Palace[] = [
     symbol: '♃',
     wuxing: 'Water (水)',
     signal: {
-      quality: 'auspicious',
+      quality: 'favourable',
       charge: 2,
-      label: 'Auspicious (吉)',
+      label: 'Advantage (吉)',
       note: 'The palace of accord. Negotiations settle, partnerships form, goodwill converts into concrete gain. Best palace for anything requiring the other side to say yes.',
     },
     desc: 'Cooperative progress, mutual benefit, and harmony achieved through partnerships.',
@@ -198,9 +198,9 @@ export const PALACES: Palace[] = [
     symbol: '♄',
     wuxing: 'Earth (土)',
     signal: {
-      quality: 'obstructed',
+      quality: 'blocked',
       charge: -2,
-      label: 'Obstructed (凶)',
+      label: 'Null (空)',
       note: 'The palace of void. What is pursued does not materialise — lost causes, unanswered messages, evaporated intent. Read it as a reset, not a punishment: this path is empty, choose another.',
     },
     desc: 'Dissolution of expectations, lost causes, or a complete cycle system reset.',
@@ -275,19 +275,19 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
   // All three coordinates landing on ONE palace is the rarest configuration
   // the system produces — roughly 1 cast in 36. Nothing is qualified or mixed.
   // Match on the palace itself, not merely on its signal quality: three
-  // DIFFERENT auspicious palaces is a strong reading, but it is not this.
+  // DIFFERENT favourable palaces is a strong reading, but it is not this.
   if (month.id === day.id && day.id === hour.id) {
     const all =
-      outcome === 'auspicious'
+      outcome === 'favourable'
         ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The reading is not qualified by any counter-current: ${hour.signal.note} Act with conviction and do not second-guess the window.`
-        : outcome === 'obstructed'
+        : outcome === 'blocked'
           ? `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. The system is not describing bad luck; it is describing a closed path: ${hour.signal.note} Take the signal seriously and redirect rather than persist.`
           : `All three coordinates fall on ${short(hour)} — the rarest configuration the system produces, roughly one cast in thirty-six. Nothing ripens inside 72 hours: ${hour.signal.note} Any move made now will need re-making later, so the efficient choice is to wait and re-cast.`;
-    return { transition: 'Uniform Signal', narrative: all, tone: outcome === 'auspicious' ? 'accelerating' : outcome === 'obstructed' ? 'reset' : 'stable' };
+    return { transition: 'Uniform Signal', narrative: all, tone: outcome === 'favourable' ? 'accelerating' : outcome === 'blocked' ? 'reset' : 'stable' };
   }
 
   // The Hour palace is decisive — it is where the matter lands.
-  if (outcome === 'obstructed') {
+  if (outcome === 'blocked') {
     return {
       transition: 'Terminal Obstruction',
       narrative: `The matter lands on ${short(hour)} (${hour.signal.label}) — ${hour.signal.note} Whatever the opening promised, the decisive vector closes against it. Treat this as a stop signal: contain exposure, put everything in writing, and re-cast after the window rather than pushing through it.`,
@@ -303,8 +303,8 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
     };
   }
 
-  // Outcome is auspicious — describe how we got there.
-  if (origin === 'obstructed' || origin === 'delayed') {
+  // Outcome is favourable — describe how we got there.
+  if (origin === 'blocked' || origin === 'delayed') {
     return {
       transition: 'Reversal',
       narrative: `The opening reads ${month.signal.label} on ${short(month)}, yet the matter lands auspiciously on ${short(hour)}. This is a reversal: a poor start that does not predict a poor finish. The instinct to abandon early is the thing to resist here — the window improves as it runs.`,
@@ -312,7 +312,7 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
     };
   }
 
-  if (pivot === 'obstructed' || pivot === 'delayed') {
+  if (pivot === 'blocked' || pivot === 'delayed') {
     return {
       transition: 'Late Breakthrough',
       narrative: `A clean opening on ${short(month)} passes through a difficult middle on ${short(day)} (${day.signal.label}) before landing auspiciously on ${short(hour)}. Expect the obstruction to arrive mid-window and to be temporary. Do not renegotiate the whole plan because of it.`,
@@ -322,7 +322,7 @@ export function getPalaceFlow(month: Palace, day: Palace, hour: Palace): PalaceF
 
   return {
     transition: 'Confirmed Ascent',
-    narrative: `The reading holds auspicious from ${short(month)} through ${short(day)} and lands on ${short(hour)}. Conditions support the undertaking at every stage. The risk here is not obstruction but complacency — a favourable window still expires in 72 hours.`,
+    narrative: `The reading stays favourable from ${short(month)} through ${short(day)} and lands on ${short(hour)}. Conditions support the undertaking at every stage. The risk here is not obstruction but complacency — a favourable window still expires in 72 hours.`,
     tone: 'accelerating',
   };
 }
@@ -426,10 +426,10 @@ export const ARTICLES = [
   { slug: 'xiaoji-collaborative-leverage', lang: 'en' as const, title: 'Xiao Ji and the Art of Collaborative Leverage: When Soft Alignment Beats Hard Force', readTime: '8 min read' },
   { slug: 'decision-timing-framework-when-to-move', lang: 'en' as const, title: 'The Decision Timing Framework: How to Know When to Move (Not Just What)', readTime: '10 min read' },
   { slug: 'accept-job-offer-now-or-wait', lang: 'en' as const, title: 'Should I Accept the Job Offer Now or Wait?', readTime: '8 min read' },
-  { slug: 'ontology-of-time-horary-vs-chronometry', lang: 'en' as const, title: 'The Ontology of Time: Ancient Horary vs Western Chronometry', readTime: '7 min read' },
+  { slug: 'ontology-of-time-time-mechanics-vs-chronometry', lang: 'en' as const, title: 'The Ontology of Time: Chinese Time Mechanics vs Western Chronometry', readTime: '7 min read' },
   { slug: 'xiao-liu-ren-vs-tarot-archetypes', lang: 'en' as const, title: 'Xiao Liu Ren vs. Western Tarot Archetypes', readTime: '6 min read' },
   { slug: 'da-an-strategic-preservation', lang: 'en' as const, title: 'Da An Decoded: Strategic Preservation in Volatile Markets', readTime: '5 min read' },
-  { slug: 'horse-mounted-oracle-origins-xiao-liu-ren', lang: 'en' as const, title: 'The Oracle at the Saddle: What Xiao Liu Ren Actually Is — and Is Not', readTime: '9 min read' },
+  { slug: 'horse-mounted-time-mechanics-origins-xiao-liu-ren', lang: 'en' as const, title: 'At the Saddle: What Xiao Liu Ren Actually Is — and Is Not', readTime: '9 min read' },
   { slug: 'kong-wang-emptiness-strategic-retreat', lang: 'en' as const, title: 'Kong Wang and the Strategic Uses of Emptiness', readTime: '9 min read' },
   { slug: 'chi-kou-dispute-architecture-bad-faith', lang: 'en' as const, title: 'Chi Kou: The Palace of Dispute and the Case for Writing Things Down', readTime: '10 min read' },
   { slug: 'liu-lian-discipline-of-staying', lang: 'en' as const, title: 'Liu Lian: The Discipline of Staying', readTime: '10 min read' },
@@ -438,7 +438,7 @@ export const ARTICLES = [
   { slug: 'zh-why-72-hours', lang: 'zh' as const, title: '为什么是 72 小时：一个决策窗口的时间心理学依据', readTime: '11 分钟' },
   { slug: 'xiao-liu-ren-for-founders', lang: 'en' as const, title: 'Xiao Liu Ren for Founders: A Practical Guide', readTime: '9 min read' },
   { slug: 'crypto-entry-timing-without-ta', lang: 'en' as const, title: 'How to Time a Crypto Entry Without Technical Analysis', readTime: '8 min read' },
-  { slug: 'xiao-liu-ren-vs-i-ching', lang: 'en' as const, title: 'Xiao Liu Ren vs I Ching: Which Divination System for Business Decisions?', readTime: '8 min read' },
+  { slug: 'xiao-liu-ren-vs-i-ching', lang: 'en' as const, title: 'Xiao Liu Ren vs I Ching: Which Time-Mechanics System for Business Decisions?', readTime: '8 min read' },
   { slug: '72-hour-decision-window', lang: 'en' as const, title: 'The 72-Hour Decision Window: Why We Cap Action After a Cast', readTime: '7 min read' },
   { slug: 'why-western-tarot-struggles-with-exact-timing', lang: 'en' as const, title: 'Why Western Tarot Struggles with Exact Timing (And How Xiao Liu Ren Solves It)', readTime: '8 min read' },
   { slug: 'decision-timing-research-findings', lang: 'en' as const, title: 'Decision Timing Research: 10 Findings on When to Act (And 2 That Failed to Replicate)', readTime: '11 min read' },

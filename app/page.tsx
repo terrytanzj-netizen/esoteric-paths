@@ -480,7 +480,7 @@ export default function Page() {
           <div style={{ background: '#050508', padding: '1rem', borderRadius: '10px', border: '1px solid rgba(201,162,39,0.15)' }}>
             <span style={{ fontSize: '0.7rem', color: '#C9A227', fontFamily: 'monospace', display: 'block', marginBottom: '0.4rem' }}>THE SIX PALACES — THE ENGINE</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', fontSize: '0.8rem', color: '#CDC8BC', fontFamily: 'monospace' }}>
-              <div>大安 Auspicious</div><div>留连 Delayed</div><div>速喜 Auspicious</div><div>赤口 Obstructed</div><div>小吉 Auspicious</div><div>空亡 Obstructed</div>
+              <div>大安 Stability</div><div>留连 Delay</div><div>速喜 Acceleration</div><div>赤口 Contention</div><div>小吉 Advantage</div><div>空亡 Null</div>
             </div>
             <p style={{ fontSize: '0.75rem', color: '#8A8678', margin: '0.7rem 0 0 0', lineHeight: 1.55 }}>Every reading is derived from these six signal qualities alone.</p>
           </div>
@@ -551,7 +551,7 @@ export default function Page() {
                 </button>
                 {isVerifiedPaid && (
                   <button onClick={handlePrintPDF} className="es-btn es-btn--gold" style={{ padding: '0.85rem 1.75rem', fontSize: '0.85rem' }}>
-                    📥 Export 10-Page Executive PDF
+                    📥 Export 9-Page Executive PDF
                   </button>
                 )}
               </div>
@@ -604,7 +604,7 @@ export default function Page() {
                   ✦ Executive Strategy Blueprint ($19) ✦
                 </span>
                 <h2 style={{ fontSize: '1.45rem', color: '#F4EEDB', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-display)' }}>
-                  Unlock Full 10-Page Personal Blueprint & 72h Action Plan
+                  Unlock Full 9-Page Personal Blueprint & 72h Action Plan
                 </h2>
                 <p style={{ fontSize: '0.85rem', color: '#8A8678', lineHeight: '1.6', margin: '0 auto 1.5rem auto', maxWidth: '520px' }}>
                   Synthesizes your Month, Day, and Hour palaces into a downloadable 9-page PDF with Methodology, Palace Interactions, 72-Hour Chrono Execution Windows, Resonant Vectors, Major Arcana Synthesis, Executive Guardrails, and Reference Appendix.

@@ -146,7 +146,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
       <PageWrap pageNum={2} title="Methodology: The Three-Palace Time Engine (三宫起课原理)">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <p style={{ color: parchment, fontSize: '0.9rem', lineHeight: 1.7, margin: 0 }}>
-            Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries its own signal quality — auspicious, delayed, or obstructed — together with a psychological posture and a strategic directive. The Hour palace is the decisive vector: the active edge of the moment, and the palace on which the matter lands.
+            Xiao Liu Ren (小六壬) reads time as a layered coordinate rather than a static backdrop. The system maps the lunar month, solar day, and bi-hourly period onto six palaces. Each palace carries its own signal quality — stable, delayed, accelerating, contested, favourable or null — together with a psychological posture and a strategic directive. The Hour palace is the decisive vector: the active edge of the moment, and the palace on which the matter lands.
           </p>
           <div className="print-card" style={{ ...cardStyle, borderColor: `rgba(201, 162, 39, 0.4)` }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
@@ -396,7 +396,7 @@ export default function ReportPDF({ castResult }: ReportPDFProps) {
                 {PALACES.map(p => (
                   <tr key={p.id} style={{ borderBottom: '1px solid rgba(201,162,39,0.1)' }}>
                     <td style={{ padding: '0.4rem 0', color: cream }}>{p.symbol} {p.name.split('(')[0]}</td>
-                    <td style={{ padding: '0.4rem 0', color: p.signal.quality === 'auspicious' ? gold : parchment }}>{p.signal.label}</td>
+                    <td style={{ padding: '0.4rem 0', color: p.signal.quality === 'favourable' ? gold : parchment }}>{p.signal.label}</td>
                     <td style={{ padding: '0.4rem 0' }}>{p.advice}</td>
                     <td style={{ padding: '0.4rem 0' }}>{p.domain.split(',')[0]}</td>
                   </tr>

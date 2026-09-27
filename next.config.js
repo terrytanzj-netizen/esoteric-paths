@@ -18,6 +18,21 @@ const nextConfig = {
         destination: '/insights/jungian-archetypes-decision-making',
         statusCode: 301,
       },
+
+      // Slugs broken by the 2026-09-27 terminology refactor. The batch replace
+      // rewrote "oracle"/"horary" inside slug fields, so both URLs started
+      // returning 404 while still being listed in sitemap.xml. Exact-match 301
+      // so any signal they earned transfers to the live pages.
+      {
+        source: '/insights/horse-mounted-oracle-origins-xiao-liu-ren',
+        destination: '/insights/horse-mounted-time-mechanics-origins-xiao-liu-ren',
+        statusCode: 301,
+      },
+      {
+        source: '/insights/ontology-of-time-horary-vs-chronometry',
+        destination: '/insights/ontology-of-time-time-mechanics-vs-chronometry',
+        statusCode: 301,
+      },
     ];
   },
 };
