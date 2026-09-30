@@ -35,6 +35,11 @@ export const metadata: Metadata = {
 // under "Further Essays" — a new article can never silently disappear here.
 const GROUPS: { label: string; blurb: string; match: string[] }[] = [
   {
+    label: 'Decision Timing in the News',
+    blurb: 'Real deals, dissected for their timing — what founders and acquirers actually chose, and why they chose the moment.',
+    match: ['apollo-jnj-depuy-timing', 'orion180-dual-class-ipo-timing', 'unicredit-commerzbank-timing', 'spac-sequel-timing-signal'],
+  },
+  {
     label: 'The Six Palaces',
     blurb: 'Palace-by-palace mechanics — what each temporal state actually means when you have to act.',
     match: ['da-an', 'liu-lian', 'suxi', 'xiaoji', 'kong-wang', 'chi-kou', 'six-palaces', 'horse-mounted'],
@@ -69,6 +74,13 @@ const GROUPS: { label: string; blurb: string; match: string[] }[] = [
     ],
   },
 ];
+
+const NEWS_SLUGS = new Set([
+  'apollo-jnj-depuy-timing',
+  'orion180-dual-class-ipo-timing',
+  'unicredit-commerzbank-timing',
+  'spac-sequel-timing-signal',
+]);
 
 export default function InsightsIndex() {
   const all = Object.values(ARTICLE_DETAILS);
@@ -118,6 +130,25 @@ export default function InsightsIndex() {
         textDecoration: 'none',
       }}
     >
+      {NEWS_SLUGS.has(a.slug) && (
+        <span
+          style={{
+            display: 'inline-block',
+            fontSize: '0.6rem',
+            fontWeight: 600,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#050508',
+            background: '#C9A227',
+            borderRadius: '3px',
+            padding: '0.15rem 0.45rem',
+            marginBottom: '0.55rem',
+            fontFamily: 'monospace',
+          }}
+        >
+          In the news
+        </span>
+      )}
       <span style={{ fontSize: '0.65rem', color: '#C9A227', fontFamily: 'monospace' }}>{a.readTime}</span>
       <h3
         style={{
