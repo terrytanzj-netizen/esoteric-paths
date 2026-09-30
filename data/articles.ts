@@ -23,6 +23,8 @@ export interface Article {
   excerpt: string;
   /** 首屏直出结论（GEO）：40–80 词硬答案，供 Perplexity / ChatGPT / AI Overviews 直接引用 */
   tldr?: string;
+  /** 发布日期（YYYY-MM-DD）。时事文用于向搜索引擎传递新鲜度；长青文可省略，回退默认值 */
+  datePublished?: string;
   sections: ArticleSection[];
 }
 
@@ -859,6 +861,60 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
       {
         heading: 'Combining Archetype With Timing',
         body: 'The clean division of labor: archetypes tell you what story you are inside, timing tells you whether to move now. This is precisely the gap that [Western Tarot](/insights/why-western-tarot-struggles-with-exact-timing) and [Xiao Liu Ren](/insights/xiao-liu-ren-for-founders) sit on either side of — the archetypal tradition reads meaning but is temporally silent; the time-mechanics tradition reads the moment but says nothing about narrative. Use the archetype to understand the situation and the palace to time the action. For the evidence on why acting inside a bounded window matters, see the [decision timing research digest](/insights/decision-timing-research-findings).',
+      },
+    ],
+  },
+
+  'apollo-jnj-depuy-timing': {
+    slug: 'apollo-jnj-depuy-timing',
+    lang: 'en',
+    title: 'Why J&J Moved on Orthopedics Now: The Timing Logic Behind a $20B Decision',
+    readTime: '9 min read',
+    excerpt: 'Johnson & Johnson waited almost a year between announcing a DePuy Synthes separation and opening sale talks with Apollo. That pause was not hesitation — it was the timing decision. Here is what it teaches about sequencing a large, hard-to-reverse move.',
+    tldr: 'J&J announced in October 2025 that it would separate its orthopedics business by 2027, then went quiet — and in September 2026, sale talks with Apollo surfaced at a reported $20B valuation. The quiet interval was not drift: it was the company converting a tax-free spinoff into a sale option while a steady-but-mediocre asset (1.1% growth) still carried full-cycle pricing. The lesson is that large, hard-to-reverse decisions are rarely about the choice itself — they are about opening the decision at the moment when every available path is still live.',
+    datePublished: '2026-09-30',
+    sections: [
+      {
+        heading: 'The Quiet That Was Actually a Decision',
+        body: 'In October 2025, Johnson & Johnson said it would separate DePuy Synthes, its orthopedics business, into an independent company within 18 to 24 months — and specified that it would explore "multiple separation paths." Then, for the better part of a year, almost nothing public happened. That interval is easy to misread as stalled execution. It was the opposite. It was the company holding a decision open on purpose. In September 2026, sale talks with Apollo Global Management surfaced, reportedly near $20 billion, with at least one other private-equity bidder circling. The spinoff had quietly become an auction. The one-year gap was not the company failing to act. It was the company buying the one thing a separation this size cannot be rushed into: the ability to choose, at the last possible moment, between two paths that were both still live.',
+      },
+      {
+        heading: 'The Numbers That Forced the Timing',
+        body: 'DePuy Synthes recorded roughly $9.3 billion in 2025 revenue but grew only 1.1% in a year when Johnson & Johnson as a whole grew about 6%. CFO Joseph Wolk described the business as "a steady grower, but not outperforming." That phrasing is the entire thesis. A business that is steady but not outperforming is not a candidate for an urgent fire sale — but it is also not a business you want to own while its growth gap widens. The longer J&J held it, the more the narrative hardened into "slowly shrinking relative to the portfolio." Acting inside the window where the asset could still be priced as a stable, cash-generative franchise, rather than as a declining one, was the timing call. The discipline is not to sell at the top. It is to sell before the story you are telling buyers stops being believable.',
+        table: {
+          headers: ['Signal', 'What it says about timing'],
+          rows: [
+            ['1.1% orthopedics growth vs 6% company growth', 'The gap is the clock. Relative underperformance compounds into a pricing problem if held too long.'],
+            ['"Steady grower, but not outperforming"', 'Management is framing the asset for sale while it still reads as stable, not declining.'],
+            ['$9.3B revenue, ~10% of total', 'Large enough to matter, small enough to exit cleanly. The sweet spot for a carve-out.'],
+            ['Announced separation 18–24 months earlier', 'A pre-committed deadline creates urgency for buyers without looking desperate.'],
+            ['Multiple PE bidders interested', 'The window was opened wide enough to turn a spinoff into a competitive process.'],
+          ],
+        },
+      },
+      {
+        heading: 'Spinoff or Sale: Why Keeping Both Paths Live Was the Move',
+        body: 'J&J stated from the start that it would weigh a tax-free share distribution against an outright sale, choosing "whichever route produces the greater value." That is not indecision. It is optionality, and optionality has a price: you must keep both mechanisms warm for months, which is expensive in management attention and separation costs (J&J booked $377 million in separation-related costs in the first half of the year alone). The payoff is that a competing sale process — a real Apollo bid, another PE circling — re-prices the spinoff alternative upward. The buyer is not just bidding against other buyers. It is bidding against the shareholder-value baseline of "we could also just hand this to our own investors tax-free." Every large separation works this way: the credible threat of the alternative path is what disciplines the price on the chosen one.',
+      },
+      {
+        heading: 'Why This Is a Timing Problem, Not a Valuation Problem',
+        body: 'The reported $20 billion is striking for a reason nobody in the coverage spelled out: it lands almost exactly on what J&J paid to assemble the franchise — about $19.7 billion for Synthes in 2012, on top of the 1998 DePuy deal. A decade-plus of inflation, a changed asset base, and the figure still roughly round-trips. That is not a coincidence. It is what happens when a business grows 1.1% a year inside a company growing 6%: the market prices the franchise, not the momentum. Which is precisely why timing, not valuation, is the binding constraint. Hold it another two years and the round-trip becomes a write-down. A deterministic timing framework would read this as the moment where the structural background still supports an orderly exit — and where every quarter of delay converts optionality into decay. The choice of what to do was never the hard part. The hard part was choosing the window in which the choice still had teeth.',
+      },
+      {
+        heading: 'What Founders and Operators Can Take From This',
+        body: 'The Apollo–J&J talks are a $20 billion case study in a discipline that costs far less at startup scale but works identically. The move was not the sale. The move was the sequencing: pre-commit publicly to a decision deadline, then hold the door open while multiple paths stay live, and act only when the alternative paths have finished pricing each other. Applied to your own hard-to-reverse calls — an exit, a key hire, a pricing change — the checklist is the same three items every time.',
+        callout: {
+          label: '72-Hour Decision-Opening Protocol',
+          steps: [
+            '0–24h — Name the two live paths and write the trigger that would switch you from one to the other. If you cannot name a second path, you do not have a timing problem; you have a one-option problem, and that is a different failure.',
+            '24–48h — Set a public or semi-public deadline for the decision and let it be known. The deadline does the work of converting drift into urgency without you having to perform urgency.',
+            '48–72h — Compare the paths against the trigger, not against your mood. Act on whichever path the trigger selects. A decision timed by a pre-written trigger beats a decision timed by fatigue.',
+          ],
+        },
+      },
+      {
+        heading: 'The Deeper Read: When the Quiet Interval Is the Strategy',
+        body: 'Most observers treat the gap between a public announcement and an eventual transaction as dead air — time the company spent "working on it." The J&J case shows the gap can be the entire point. It is the interval in which a spinoff is quietly converted into an auction, in which "steady grower" is converted into a defensible price, and in which the buyer is forced to bid against a path the seller still owns. The next time you watch a company announce a big separation and then go silent, do not ask what is taking so long. Ask what the silence is buying. For the underlying framework on separating what to do from when to do it, see [the decision timing framework](/insights/decision-timing-framework-when-to-move). For the negotiation-specific version of the same discipline, [contract negotiation timing](/insights/contract-negotiation-timing).',
       },
     ],
   },

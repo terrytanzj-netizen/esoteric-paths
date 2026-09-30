@@ -70,7 +70,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
     inLanguage: isZh ? 'zh-CN' : 'en-US',
     author: { '@type': 'Organization', name: 'Esoteric Paths' },
     publisher: { '@type': 'Organization', name: 'Esoteric Paths' },
-    datePublished: '2026-08-01',
+    datePublished: article.datePublished || '2026-08-01',
     mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.esotericpaths.com/insights/${article.slug}` },
   };
 
