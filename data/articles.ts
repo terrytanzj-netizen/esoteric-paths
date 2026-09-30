@@ -919,6 +919,88 @@ export const ARTICLE_DETAILS: Record<string, Article> = {
     ],
   },
 
+
+  'orion180-dual-class-ipo-timing': {
+    slug: 'orion180-dual-class-ipo-timing',
+    lang: 'en',
+    title: 'Orion180 Went Public With 93.9% Voting Control: What the Founder Traded for the Timing',
+    readTime: '8 min read',
+    excerpt: 'Orion180 priced its IPO the week its financials inflected from a loss to a $13.2M profit. The founder kept 93.9% of the vote through super-voting shares. Both moves are the same decision — sequencing control and timing around a single window.',
+    tldr: 'Orion180, the second-largest E&S homeowners insurer in the US, priced a $240M IPO at $12 on September 18, 2026 — the exact quarter its net income swung from a $3M loss to a $13.2M profit. Founder Kenneth Gregg kept 93.9% of voting power through Class B shares carrying ten votes each while owning only about 60.5% of the equity. The dual-class structure and the timing are not separate choices: both are ways of controlling the window. The float lets him raise public capital at the moment the book proved it could price; the super-voting structure lets him make the hard calls afterward without re-litigating them with a new shareholder base.',
+    datePublished: '2026-09-30',
+    sections: [
+      {
+        heading: 'The IPO Priced on the Exact Quarter the Numbers Turned',
+        body: 'Orion180 Insurance, a Florida home- and flood-insurer founded in 2018, priced 20 million Class A shares at $12 on September 18, 2026, raising roughly $240 million before fees on Nasdaq under the ticker OIG. The timing was not arbitrary. In the first half of 2026 the company posted about $13.2 million of net income on $80.1 million of revenue — against a net loss of roughly $3 million on $50.4 million in the prior-year period. The book inflected from loss to profit in the precise window the roadshow launched. You do not take a property insurer public in the middle of a catastrophe season without a story that has already turned. The financial inflection was the story, and it was the only quarter it could be told.',
+      },
+      {
+        heading: 'The Governance Trade the Market Punishes on Purpose',
+        body: 'The larger story is the structure. After the offering, Orion180 has two classes of stock: Class A with one vote per share, and Class B with ten votes per share. Kenneth Gregg, the founder and CEO, is the sole holder of the Class B shares — which gives him 93.9% of the voting power (93.4% if the underwriters exercise their full option) while he owns only about 60.5% of the outstanding equity. The company will be a "controlled company" under Nasdaq rules, exempt from parts of the independence requirements. This is a deliberate, disclosed trade. Public capital is taken in, but board-level control stays concentrated in one person. The market knows how to price this: dual-class companies often trade at a governance discount, some index providers and large asset managers maintain one-share-one-vote policies, and activist pressure — which depends on being able to replace a board — is structurally harder.',
+      },
+      {
+        heading: 'Two Levers, One Decision',
+        body: 'Look at the float and the structure together and they stop looking like two decisions. They are one decision with two levers, both pointed at the same thing: keeping control of the window. The float lets Orion180 raise growth capital at the single moment the market will credit the book for its inflection — not a quarter earlier, when it was still losing money, and not a quarter later, when the comparison base gets harder. The super-voting structure lets Gregg absorb that new capital without handing a newly assembled shareholder base the power to reverse the strategy the moment results wobble. He is buying both the cash and the license to keep steering. The price is the governance discount the market will assign, and the restricted pool of one-share-one-vote buyers. Every founder facing an IPO makes some version of this same calculus — how much control do I give up, and at what moment do I stop being able to choose.',
+      },
+      {
+        heading: 'The Timing Read',
+        body: 'Orion180 is a clean case study in sequencing a hard-to-reverse move. The company did not go public when it was bigger, or when it was more proven, or when it had more history. It went public the quarter the numbers crossed zero, because that was the moment the story could command a price and the founder could still dictate terms. The lesson for any founder: the decision to take outside capital is never just about the money. It is about whether you are doing it at the moment when you can still set the terms, and whether the structure you accept keeps you in the driver\'s seat after the money arrives. If you cannot answer both of those with "yes" at the same time, the timing is not right — no matter how much the bank wants to run the deal.',
+      },
+    ],
+  },
+  'spac-sequel-timing-signal': {
+    slug: 'spac-sequel-timing-signal',
+    lang: 'en',
+    title: 'Why Sponsors Launched Sequel SPACs Before Their First Ones Found a Target: The Fee Signal',
+    readTime: '7 min read',
+    excerpt: 'In early September 2026, five blank-check companies filed to go public in a week — and two of them were "II" sequels from sponsors whose first SPACs had not yet found a deal. That timing pattern is a signal, and it points at fees, not deal flow.',
+    tldr: 'In September 2026, five blank-check companies filed S-1s within days of each other, and the two most revealing were sequels: Bluerock Acquisition Corp. II and Southport Acquisition Corp. II, both from sponsors whose first vehicles had not completed a combination. Launching a second shell before the first one has found a target is not a bet on a wave of companies wanting to go public — it is a bet on sponsor fee economics. The timing is the tell. A founder evaluating a SPAC, or any financial vehicle, should read the sponsor\'s prior-vehicle returns, not the size of the new trust. The moment a repeat sponsor shows up before the first deal clears is the moment to ask what exactly is being sold.',
+    datePublished: '2026-09-30',
+    sections: [
+      {
+        heading: 'A Wave That Was Actually a Trickle',
+        body: 'The headline on the September SPAC market looks like a revival: five blank-check companies filed registration statements within days of each other in early September 2026. The underlying data says the opposite. Month-to-date, only three SPAC IPOs priced for about $500 million in total — against eight IPOs for $1.25 billion over the first 21 days of August. The twelve-month average is around 17 per month. September was not a SPAC wave; it was a cooling market with a burst of filing activity. The distinction matters, because the two things read from very different places. A wave means private companies are hungry for a public listing. A trickle with a filing burst means something else is moving — and the filers themselves tell you what.',
+      },
+      {
+        heading: 'The Sequel That Gave the Game Away',
+        body: 'Of the five filers, two were sequels: Bluerock Acquisition Corp. II and Southport Acquisition Corp. II. Bluerock\'s first vehicle raised $172.5 million in December 2025 and, as of mid-2026, still had no announced target. Southport\'s original 2021-vintage SPAC did complete a combination — it became Angel Studios — but the point stands. A sponsor who launches a numbered successor before the first shell has found a deal is not responding to a surge of private companies wanting to list. They are responding to the fact that SPAC capital remains available to a sponsor regardless of whether the prior vehicle delivered. The sponsor earns fees and carries the promote on the second shell whether or not the first one ever closes a deal. That is not a signal of demand for public listings. That is a signal of demand for sponsor economics.',
+      },
+      {
+        heading: 'How to Read the Sponsor, Not the Trust',
+        body: 'When you evaluate a SPAC — or, for that matter, any financial vehicle where a sponsor earns fees on the structure itself — the question to ask is not how big the new trust is. It is what the sponsor\'s prior vehicles actually returned. After the 2020–2021 wave of more than 600 blank-check companies, there are now three years of de-SPAC performance data to price a sponsor against. A sequel filing before the first deal clears is the single clearest tell: the sponsor is selling their fee stream, not their ability to find and close a good company. The same discipline applies to founders who are pitched a SPAC as an exit. Look at the sponsor\'s track record of completed combinations and post-merger performance — not the size of the blank check, not the roster of names on the board, not the sponsor\'s marketing. The timing of a sequel tells you more than the prospectus does.',
+      },
+      {
+        heading: 'The Timing Read',
+        body: 'The SPAC sequel pattern is a timing signal in disguise. A repeat sponsor re-entering the market before their first deal has cleared is doing so at the moment the fee is most available to them — not at the moment the market needs them. Reading timing this way generalizes. When someone in a transaction — a sponsor, a banker, a broker — is paid on the structure rather than the outcome, their incentive is to move early and often, and their calendar will show it. The party who understands this reads the other side\'s timing as a signal of their incentive, and prices the deal accordingly. In September 2026, the SPAC market\'s timing said the same thing twice: the filings were real, the wave was not, and the sequels were the clearest admission of what was actually being sold.',
+      },
+    ],
+  },
+  'unicredit-commerzbank-timing': {
+    slug: 'unicredit-commerzbank-timing',
+    lang: 'en',
+    title: 'How UniCredit Walked a Hostile Bid to the Brink of Control: The Timing of a Two-Year Creep',
+    readTime: '9 min read',
+    excerpt: 'Andrea Orcel did not launch a hostile takeover. He built a stake from 2024 to just under 50%, staying below every legal trigger, until Berlin ran out of blocking moves. The deal is a masterclass in sequencing around thresholds.',
+    tldr: 'UniCredit\'s move on Commerzbank was not a takeover bid — it was a two-year timing operation. Starting in 2024, CEO Andrea Orcel built a stake quietly, crossed the 30% threshold that German law attaches to a mandatory offer, and by September 2026 held nearly 50% while the German government — a 13.3% shareholder since the 2009 bailout — was forced to admit it could no longer block the deal. Berlin then shifted from fighting to negotiating conditions: keep the listing, keep the Frankfurt headquarters, keep lending to Germany\'s Mittelstand, protect 40,000 jobs. The lesson is that a hostile move is won not at the moment of the final bid, but in the sequencing of thresholds — each one crossed before the counterparty had a legal move to make.',
+    datePublished: '2026-09-30',
+    sections: [
+      {
+        heading: 'A Takeover That Was Never Announced as One',
+        body: 'UniCredit\'s pursuit of Commerzbank began in 2024, and for most of that time there was no takeover bid to speak of — just a position being built. Andrea Orcel, UniCredit\'s CEO, accumulated shares discreetly, catching both the bank and the German government off guard. By July 2026 the Italian lender reported owning 47.59% of Commerzbank, and by September it held close to the 50% mark. This is the defining feature of the whole campaign: Orcel never needed to announce a hostile takeover, because he engineered the ownership before the political and legal machinery could mobilize against it. The bid was not the event. The build-up was the event.',
+      },
+      {
+        heading: 'The Thresholds Were the Strategy',
+        body: 'German law attaches a mandatory offer to crossing 30% of a listed company — before that line, an acquirer can keep buying without offering to buy the whole company. Orcel used this threshold like a checkpoint rather than a boundary. He built to just under the triggers, crossed the ones that mattered at the moment they could no longer be contested, and converted a regulatory constraint into a sequencing advantage. Each threshold crossed removed one more legal lever from Berlin\'s hands. By the time the government could respond, the response available to it had already shrunk. This is the deepest lesson of the campaign: in a contested acquisition, the counterparty\'s legal options are themselves a resource, and you win by exhausting them in the right order — before you ever force the final vote.',
+      },
+      {
+        heading: 'The Moment Berlin Stopped Fighting',
+        body: 'On September 14, 2026, German Finance Minister Lars Klingbeil sat down with Orcel in Berlin — and the framing of the government\'s own statement said everything. "We continue to disapprove of a procedure that is aggressive and hostile, but now we\'re in another phase," a ministry spokesperson said. "The point is finding the best solution for both banks." That sentence marks the transition from resistance to negotiation, and it happened only after UniCredit\'s stake made resistance futile. Berlin\'s remaining asks are all about preservation, not prevention: keep Commerzbank listed, keep the headquarters in Frankfurt, keep lending to the small and medium-sized businesses that are Germany\'s economic spine, and protect the more than 40,000 employees. A combination would create a bank with more than €1.3 trillion in assets across the euro zone\'s two largest economies. The government\'s own 13.3% stake — a relic of the 2009 bailout — turned out to be the last chip it could play, and it played it as a negotiating position, not a veto.',
+      },
+      {
+        heading: 'The Timing Read',
+        body: 'UniCredit is the clearest possible demonstration that the decisive move in a hard negotiation is not the final offer — it is the sequence in which you remove the other side\'s options. Orcel won by never letting Berlin choose the moment of confrontation. Every threshold was crossed before the government had a legal move to make, until the only move left was to negotiate terms instead of block the deal. The same logic applies at any scale: whether you are pushing a term sheet, a price negotiation, or a contested acquisition, the counterparty\'s legal and procedural options are finite, and they expire in a predictable order. The party who understands that order — and crosses each line before the other side can use it — controls not just the outcome, but the moment at which the outcome becomes inevitable.',
+      },
+    ],
+  },
   'contract-negotiation-timing': {
     slug: 'contract-negotiation-timing',
     lang: 'en',
