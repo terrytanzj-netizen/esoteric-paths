@@ -116,6 +116,7 @@ export default function Page() {
   const [emailInput, setEmailInput] = useState('');
   const [emailSubscribed, setEmailSubscribed] = useState(false);
   const [castResult, setCastResult] = useState<any>(null);
+  const [castNotice, setCastNotice] = useState<string>('');
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'verifying' | 'unlocked' | 'needs-id' | 'error'>('idle');
   const [paymentMessage, setPaymentMessage] = useState('');
 
@@ -255,6 +256,23 @@ export default function Page() {
   const handleCast = (e: React.FormEvent) => {
     e.preventDefault();
     if (!question.trim()) return;
+    const norm = question.trim().toLowerCase();
+    const prevRaw = safeGet('last_user_cast');
+    if (prevRaw) {
+      try {
+        const prev = JSON.parse(prevRaw);
+        if (prev && typeof prev.question === 'string' && prev.question.trim().toLowerCase() === norm && prev.time) {
+          const elapsed = Date.now() - new Date(prev.time).getTime();
+          const HOURS = 72 * 60 * 60 * 1000;
+          if (elapsed < HOURS) {
+            setCastResult(hydrateCastResult(prev));
+            setCastNotice('You already cast on this exact question within the last 72 hours. The reading is unchanged — commit to the decision instead of re-rolling.');
+            setIsCasting(false);
+            return;
+          }
+        }
+      } catch { /* ignore malformed history */ }
+    }
     setIsCasting(true);
     setTimeout(() => {
       const now = new Date();
@@ -276,6 +294,7 @@ export default function Page() {
         hour_palace: newResult.hour?.id,
       });
       safeSet('last_user_cast', JSON.stringify(newResult));
+      setCastNotice('');
       setIsCasting(false);
     }, 1200);
   };
@@ -443,6 +462,7 @@ export default function Page() {
         <span style={{ fontSize: '0.75rem', color: '#C9A227', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'monospace' }}>Xiao Liu Ren × Tarot Matrix</span>
         <h1 className="es-hero-title" style={{ fontFamily: 'var(--font-display)', color: '#F4EEDB', margin: '0.4rem 0', textShadow: '0 0 30px rgba(201, 162, 39, 0.2)' }}>TEMPORAL STRATEGY MATRIX</h1>
         <p style={{ fontSize: '0.95rem', color: '#8A8678', maxWidth: '600px', margin: '0 auto' }}>A deterministic timing engine for term sheets, hires, negotiations and exits — read the moment, act inside a 72-hour window.</p>
+        <p style={{ fontSize: '0.82rem', color: '#6f6b5f', maxWidth: '560px', margin: '0.7rem auto 0 auto', lineHeight: 1.6 }}>It does not predict outcomes. It removes the emotional fog from an irreversible moment — a programmatic sandbox that breaks groupthink and forces a calm, committed read of when to move.</p>
         <div className="es-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
       </header>
 
@@ -536,6 +556,12 @@ export default function Page() {
               {isCasting ? (<span className="es-casting"><span className="es-glyph-spin">☉</span> Computing the window…</span>) : 'Run the Timing Matrix →'}
             </button>
           </form>
+
+          {castNotice && (
+            <div className="no-print" style={{ marginTop: '1rem', padding: '0.85rem 1rem', background: 'rgba(201,162,39,0.08)', border: '1px solid rgba(201,162,39,0.35)', borderRadius: '8px', color: '#F4EEDB', fontSize: '0.82rem', lineHeight: 1.6 }}>
+              {castNotice}
+            </div>
+          )}
 
         {isValidCastResult(castResult) && (
           <div style={{ marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
